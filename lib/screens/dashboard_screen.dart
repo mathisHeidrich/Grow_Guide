@@ -1,3 +1,5 @@
+import '../providers/time_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -93,7 +95,7 @@ class DashboardScreen extends ConsumerWidget {
     if (plant.measurementHistory.isNotEmpty) {
       final lastLog = plant.measurementHistory.last;
       final hoursSinceLast =
-          DateTime.now().difference(lastLog.timestamp).inHours;
+          ref.watch(timeProvider).difference(lastLog.timestamp).inHours;
       final isPhOut = lastLog.ph < 5.5 || lastLog.ph > 6.3;
 
       if (hoursSinceLast >= 96 || isPhOut) {
@@ -138,7 +140,7 @@ class DashboardScreen extends ConsumerWidget {
 
     String lastCheckText = 'Letzter Check: Nie';
     if (plant.measurementHistory.isNotEmpty) {
-      final days = DateTime.now()
+      final days = ref.watch(timeProvider)
           .difference(plant.measurementHistory.last.timestamp)
           .inDays;
       if (days == 0) {

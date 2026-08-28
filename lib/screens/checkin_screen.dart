@@ -1,3 +1,5 @@
+import '../providers/time_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -56,7 +58,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       final db = ref.read(databaseProvider).isar;
       await db.writeTxn(() async {
         final newEntry = LogEntry()
-          ..timestamp = DateTime.now()
+          ..timestamp = ref.read(timeProvider)
           ..ph = _inputPh!
           ..ec = _inputEc!
           ..ppfd = _inputPpfd;
