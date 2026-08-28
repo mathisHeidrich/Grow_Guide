@@ -47,7 +47,7 @@ class DashboardScreen extends ConsumerWidget {
             itemCount: activePlants.length + (archivedCount > 0 ? 1 : 0),
             itemBuilder: (context, index) {
               if (index < activePlants.length) {
-                return _buildPlantCard(context, activePlants[index]);
+                return _buildPlantCard(context, ref, activePlants[index]);
               } else {
                 return _buildArchiveButton(context, archivedCount);
               }
@@ -87,7 +87,7 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPlantCard(BuildContext context, Plant plant) {
+  Widget _buildPlantCard(BuildContext context, WidgetRef ref, Plant plant) {
     // Determine card status based on measurement history
     Color btnColor = AppColors.growGreen;
     String btnText = 'Check ok';
