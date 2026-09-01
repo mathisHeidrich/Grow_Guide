@@ -13,6 +13,12 @@ class MockDatabaseService extends DatabaseService {
 
   @override
   Future<void> init() async {
+    // Close existing instance if it exists before we try to delete files
+    final existingInstance = Isar.getInstance('test_instance');
+    if (existingInstance != null) {
+      await existingInstance.close();
+    }
+
     final dir = await getTemporaryDirectory();
     final isarDir = Directory('${dir.path}/isar_test_env');
     
