@@ -2,6 +2,7 @@ import '../models/plant.dart';
 
 enum TestScenarioType {
   onboarding,
+  earlyVeg,
   midVeg,
   harvestReady,
 }
@@ -28,6 +29,26 @@ class TestScenario {
           description: 'Frische Installation ohne Pflanzen.',
           startTime: DateTime(2024, 1, 1),
           plants: [],
+        ),
+        TestScenario(
+          type: TestScenarioType.earlyVeg,
+          title: 'Frisch Gekeimt (Veg Tag 1)',
+          description: 'Samen ist gekeimt und frisch im Eimer (Wurzeln noch nicht im Wasser).',
+          startTime: DateTime(2024, 1, 5),
+          plants: [
+            Plant()
+              ..name = 'Royal Gorilla'
+              ..currentPhase = PlantPhase.veg
+              ..currentDayInPhase = 1
+              ..waterVolumeLiters = 10.0
+              ..nutrientBrand = NutrientBrand.cannaAqua
+              ..type = PlantType.photo
+              ..lampWattage = 150
+              ..lampType = 'LED'
+              ..plantsUnderLamp = 1
+              ..rootsReachedWater = false
+              ..measurementHistory = [],
+          ],
         ),
         TestScenario(
           type: TestScenarioType.midVeg,
