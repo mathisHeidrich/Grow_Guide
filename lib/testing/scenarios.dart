@@ -2,6 +2,7 @@ import '../models/plant.dart';
 
 enum TestScenarioType {
   onboarding,
+  seedAdded,
   earlyVeg,
   midVeg,
   harvestReady,
@@ -13,6 +14,7 @@ class TestScenario {
   final String description;
   final DateTime startTime;
   final List<Plant> plants;
+  final bool hasCompletedOnboarding;
 
   TestScenario({
     required this.type,
@@ -20,6 +22,7 @@ class TestScenario {
     required this.description,
     required this.startTime,
     required this.plants,
+    this.hasCompletedOnboarding = true,
   });
 
   static List<TestScenario> get all => [
@@ -29,6 +32,27 @@ class TestScenario {
           description: 'Frische Installation ohne Pflanzen.',
           startTime: DateTime(2024, 1, 1),
           plants: [],
+          hasCompletedOnboarding: false,
+        ),
+        TestScenario(
+          type: TestScenarioType.seedAdded,
+          title: 'Samen hinzugefügt',
+          description: 'Ein Samen wurde hinzugefügt, aber die Keimung noch nicht gestartet.',
+          startTime: DateTime(2024, 1, 2),
+          plants: [
+            Plant()
+              ..name = 'Royal Gorilla'
+              ..currentPhase = PlantPhase.germination
+              ..currentDayInPhase = 0
+              ..waterVolumeLiters = 10.0
+              ..nutrientBrand = NutrientBrand.cannaAqua
+              ..type = PlantType.photo
+              ..lampWattage = 150
+              ..lampType = 'LED'
+              ..plantsUnderLamp = 1
+              ..rootsReachedWater = false
+              ..measurementHistory = [],
+          ],
         ),
         TestScenario(
           type: TestScenarioType.earlyVeg,

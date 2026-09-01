@@ -32,7 +32,7 @@ class MockDatabaseService extends DatabaseService {
     // Seed the database with scenario data
     await isar.writeTxn(() async {
       // Default settings
-      await isar.appSettings.put(AppSettings());
+      await isar.appSettings.put(AppSettings()..hasCompletedOnboarding = scenario.hasCompletedOnboarding);
 
       // Plants for the scenario
       if (scenario.plants.isNotEmpty) {
