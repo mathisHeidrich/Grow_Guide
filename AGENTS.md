@@ -22,28 +22,29 @@
 - **DOMAIN:** "Grow Guide" - A highly guided, step-by-step tutorial app for cannabis cultivation (specifically Deep Water Culture / DWC). The app actively guides users through all life cycle phases: onboarding, germination, veg, flower, drying, curing, and archived.
 - **UI/THEMING:** Dark mode by default (Scaffold: `#121212`, Cards: `#1E1E1E`, Primary: `#00E676`). Use `Theme.of(context)` rather than hardcoded colors where possible.
   
-  # CRITICAL RULES - MUST FOLLOW
+# CRITICAL RULES - MUST FOLLOW
 
-## RESPONSES
+## 1. BRANCHING (MANDATORY INITIAL STEP)
+- **NEVER COMMIT TO MASTER:** Agents must never make direct code changes on the `master` or `main` branch.
+- **ALWAYS CREATE A BRANCH FIRST:** Before doing *any* work (planning, coding, or fixing), you must create a new branch (e.g., `feature/ui-update`, `fix/login-bug`, `chore/update-docs`).
 
-- Keep responses concise and to the point - unless the user asks otherwise
+## 2. APP FEATURES & UI/UX (PLANNING REQUIRED)
+When the user requests changes or additions to the App itself (UI, UX, new features, screens, database models):
+- **PLAN FIRST:** You must create or update a markdown plan in `.agents/plans/` detailing the exact changes. Include as much information as possible.
+- **WAIT FOR APPROVAL:** You must pause and explicitly ask the user for approval on the plan.
+- **IMPLEMENT AFTER APPROVAL:** Only after the user confirms the plan are you allowed to modify Dart files or implement the code.
+- **Never assume design, tech stack or features.** Always ask clarifying questions.
 
-## PLANNING MODE
+## 3. PROJECT STUFF (NO PLAN REQUIRED)
+When the user requests changes to meta-project files, documentation (like `AGENTS.md`), or simple configuration tweaks:
+- You do **NOT** need to create a plan in `.agents/plans/`.
+- You can implement these changes directly on your feature branch without asking for prior plan approval.
 
-- Always ask clarifying questions
-- Never assume design, tech stack or features
-- Use deep-dive sub-agents to assist with research
-- Use deep-dive sub-agents to review the different aspects of your plan before presenting to the user
+## 4. IMPLEMENTATION & TEAMWORK
+- **USE SUB-AGENTS:** Never implement features yourself when possible. Identify changes from the plan that can be implemented in parallel, and use sub-agents to implement the features efficiently. Act as a coordinator only.
+- **COMMIT FREQUENTLY:** Make a commit immediately after each logical change or step. Do not wait until the very end.
+- **QUALITY CHECKS:** After completing features (large or small), always run commands like lint, type check and build to check code quality.
+- **CODE REVIEW:** Use a sub-agent to search for dead code, unneeded complexity, or duplicate functionality in the whole codebase.
 
-## CHANGE / EDIT MODE
-
-- Never implement features yourself when possible - use sub-agents!
-- Identify changes from the plan that can be implemented in parallel, and use sub-agents to implement the features efficiently
-- When using sub-agents to implement features, act as a coordinator only
-- Use the best model for the task - premium models for complex tasks (like coding) and mid-tier models for simpler tasks, like documentation
-- After completing features (large or small), always run commands like lint, type check and next build to check code quality. also use a sub agent to search for dead code, unneeded complexity or duplicate functionality in the whole codebase.
-- allways update the plan files in .agents/plans/  include as much information as you can into the plans. 
-
-
-
-
+## 5. RESPONSES
+- Keep responses concise and to the point - unless the user asks otherwise.
