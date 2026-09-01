@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
 
@@ -76,6 +77,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     if (_plant == null) return const Scaffold(body: Center(child: CircularProgressIndicator()));
 
     return Scaffold(
@@ -86,19 +88,19 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           
           children: [
             _buildSlide(
-              title: 'Pflanzen-Gesundheit',
-              text: 'Schau dir die Pflanze an. Hängen die Blätter extrem schlaff? Gibt es braune Flecken oder rollen sich die Blattspitzen stark ein?',
+              title: l10n.checkinHealthTitle,
+              text: l10n.checkinHealthDesc,
               icon: Icons.eco,
-              nextButtonText: 'Sieht gut aus',
+              nextButtonText: l10n.checkinHealthNext,
               onNext: _nextPage,
             ),
             _buildMeasurementSlide(), // Station 2: Messen
             _buildLampSlide(),
             _buildSlide(
-              title: 'Check-In Abschließen',
-              text: 'Du hast alle Stationen für heute erledigt. Deine Pflanze ist versorgt.',
+              title: l10n.checkinFinishTitle,
+              text: l10n.checkinFinishDesc,
               icon: Icons.check_circle,
-              nextButtonText: 'Check-In Speichern',
+              nextButtonText: l10n.checkinFinishNext,
               onNext: _completeCheckin,
               showBack: true,
             ),
@@ -109,6 +111,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   }
 
   Widget _buildMeasurementSlide() {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -119,7 +122,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           const Icon(Icons.science, size: 80, color: AppColors.growGreen),
           const SizedBox(height: 24),
           Text(
-            'Messwerte eintragen',
+            l10n.checkinMeasureTitle,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -128,13 +131,13 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           ),
           const SizedBox(height: 16),
           TextFormField(
-            decoration: const InputDecoration(labelText: 'pH-Wert (z.B. 5.8)', border: OutlineInputBorder()),
+            decoration: InputDecoration(labelText: l10n.checkinPhLabel, border: const OutlineInputBorder()),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: (val) => _inputPh = double.tryParse(val.replaceAll(',', '.')),
           ),
           const SizedBox(height: 16),
           TextFormField(
-            decoration: const InputDecoration(labelText: 'EC-Wert (z.B. 1.2)', border: OutlineInputBorder()),
+            decoration: InputDecoration(labelText: l10n.checkinEcLabel, border: const OutlineInputBorder()),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: (val) => _inputEc = double.tryParse(val.replaceAll(',', '.')),
           ),
@@ -151,7 +154,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                   onPressed: _previousPage,
-                  child: const Text('Zurück'),
+                  child: Text(l10n.checkinBack),
                 ),
               ),
               const SizedBox(width: 16),
@@ -169,12 +172,12 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                     if (_inputPh != null && _inputEc != null) {
                       _nextPage();
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bitte Werte eintragen')));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.checkinValuesRequired)));
                     }
                   },
-                  child: const Text(
-                    'Werte speichern',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  child: Text(
+                    l10n.checkinSaveValues,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -194,6 +197,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     required VoidCallback onNext,
     bool showBack = false,
   }) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -233,7 +237,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
                     onPressed: _previousPage,
-                    child: const Text('Zurück'),
+                    child: Text(l10n.checkinBack),
                   ),
                 ),
               if (showBack) const SizedBox(width: 16),
@@ -261,6 +265,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     );
   }
   Widget _buildLampSlide() {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -271,7 +276,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           const Icon(Icons.lightbulb, size: 80, color: AppColors.growGreen),
           const SizedBox(height: 32),
           Text(
-            'Lampenabstand prüfen',
+            l10n.checkinLampTitle,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -280,7 +285,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           ),
           const SizedBox(height: 24),
           Text(
-            'Miss den Abstand von der Pflanzenspitze zur Lampe. LED-Panels sollten ca. 30-40 cm entfernt sein.',
+            l10n.checkinLampDesc,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
@@ -295,7 +300,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             ),
             icon: const Icon(Icons.camera_alt),
-            label: Text(_inputPpfd != null ? 'Neu Messen (PPFD: ${_inputPpfd!.toStringAsFixed(0)})' : 'PPFD Messen'),
+            label: Text(_inputPpfd != null ? l10n.checkinMeasurePpfdAgain(_inputPpfd!.toStringAsFixed(0)) : l10n.checkinMeasurePpfd),
             onPressed: () async {
               final result = await context.push<double>('/ppfd_meter');
               if (result != null) {
@@ -318,7 +323,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                   onPressed: _previousPage,
-                  child: const Text('Zurück'),
+                  child: Text(l10n.checkinBack),
                 ),
               ),
               const SizedBox(width: 16),
@@ -332,9 +337,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                   onPressed: _nextPage,
-                  child: const Text(
-                    'Abstand passt',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  child: Text(
+                    l10n.checkinLampNext,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import '../providers/time_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,10 +15,11 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final db = ref.watch(databaseProvider).isar;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meine DWC Pflanzen'),
+        title: Text(l10n.dashboardTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.add, size: 32),
@@ -59,6 +61,7 @@ class DashboardScreen extends ConsumerWidget {
   }
 
   Widget _buildEmptyState(BuildContext context, int archivedCount) {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -67,12 +70,12 @@ class DashboardScreen extends ConsumerWidget {
               size: 80, color: AppColors.textSecondary),
           const SizedBox(height: 24),
           Text(
-            'Dein Zelt ist leer.',
+            l10n.dashboardEmptyTitle,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 12),
           Text(
-            'Drücke das + um eine Pflanze hinzuzufügen.',
+            l10n.dashboardEmptyText,
             style: Theme.of(context)
                 .textTheme
                 .bodyLarge
@@ -88,9 +91,10 @@ class DashboardScreen extends ConsumerWidget {
   }
 
   Widget _buildPlantCard(BuildContext context, WidgetRef ref, Plant plant) {
+    final l10n = AppLocalizations.of(context)!;
     // Determine card status based on measurement history
     Color btnColor = AppColors.growGreen;
-    String btnText = 'Check ok';
+    String btnText = l10n.plantStatusCheckOk;
 
     if (plant.measurementHistory.isNotEmpty) {
       final lastLog = plant.measurementHistory.last;
@@ -100,55 +104,55 @@ class DashboardScreen extends ConsumerWidget {
 
       if (hoursSinceLast >= 96 || isPhOut) {
         btnColor = AppColors.errorRed;
-        btnText = 'Check dringend nötig';
+        btnText = l10n.plantStatusCheckUrgent;
       } else if (hoursSinceLast >= 48) {
         btnColor = AppColors.warningAmber;
-        btnText = 'Check empfohlen';
+        btnText = l10n.plantStatusCheckRecommended;
       }
     } else {
       // No checks yet
       btnColor = AppColors.errorRed;
-      btnText = 'Erster Check nötig';
+      btnText = l10n.plantStatusFirstCheckNeeded;
     }
 
     String phaseText = '';
     switch (plant.currentPhase) {
       case PlantPhase.onboarding:
-        phaseText = 'Onboarding';
+        phaseText = l10n.phaseOnboarding;
         break;
       case PlantPhase.germination:
-        phaseText = 'Keimung';
+        phaseText = l10n.phaseGermination;
         break;
       case PlantPhase.veg:
-        phaseText = 'Wachstum (Tag ${plant.currentDayInPhase})';
+        phaseText = l10n.phaseVeg(plant.currentDayInPhase);
         break; // Could calculate weeks later
       case PlantPhase.flower:
-        phaseText = 'Blüte (Tag ${plant.currentDayInPhase})';
+        phaseText = l10n.phaseFlower(plant.currentDayInPhase);
         break;
       case PlantPhase.drying:
-        phaseText = 'Trocknung';
+        phaseText = l10n.phaseDrying;
         break;
       case PlantPhase.curing:
-        phaseText = 'Curing';
+        phaseText = l10n.phaseCuring;
         break;
       case PlantPhase.archived:
-        phaseText = 'Archiviert';
+        phaseText = l10n.phaseArchived;
         break;
     }
 
     String brandText = plant.nutrientBrand.toString().split('.').last;
 
-    String lastCheckText = 'Letzter Check: Nie';
+    String lastCheckText = l10n.lastCheckNever;
     if (plant.measurementHistory.isNotEmpty) {
       final days = ref.watch(timeProvider)
           .difference(plant.measurementHistory.last.timestamp)
           .inDays;
       if (days == 0) {
-        lastCheckText = 'Letzter Check: heute';
+        lastCheckText = l10n.lastCheckToday;
       } else if (days == 1) {
-        lastCheckText = 'Letzter Check: gestern';
+        lastCheckText = l10n.lastCheckYesterday;
       } else {
-        lastCheckText = 'Letzter Check: vor $days Tagen';
+        lastCheckText = l10n.lastCheckDaysAgo(days);
       }
     }
 
@@ -168,7 +172,7 @@ class DashboardScreen extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      '${plant.name} • ${plant.waterVolumeLiters.toInt()} L Eimer',
+                      l10n.plantBucketText(plant.name, plant.waterVolumeLiters.toInt()),
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold),
                       overflow: TextOverflow.ellipsis,
@@ -226,6 +230,7 @@ class DashboardScreen extends ConsumerWidget {
 
   Widget _buildArchiveButton(BuildContext context, int archivedCount,
       {bool centered = false}) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: EdgeInsets.only(top: centered ? 0 : 24, bottom: 24),
       child: ElevatedButton(
@@ -239,8 +244,8 @@ class DashboardScreen extends ConsumerWidget {
         onPressed: () => context.go('/archive'),
         child: Text(
           centered
-              ? 'Ernte-Archiv ansehen ($archivedCount erfolgreiche Grows)'
-              : 'Ernte-Archiv ($archivedCount Grows)',
+              ? l10n.dashboardArchiveButtonCenter(archivedCount)
+              : l10n.dashboardArchiveButton(archivedCount),
           style: const TextStyle(fontSize: 16),
           textAlign: TextAlign.center,
         ),

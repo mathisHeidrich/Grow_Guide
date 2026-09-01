@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/light_source.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/ppfd_provider.dart';
 
 class PpfdMeterScreen extends ConsumerStatefulWidget {
@@ -37,15 +38,16 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen> with WidgetsB
   }
 
   void _showCalibrationDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Kalibrierung'),
+          title: Text(l10n.ppfdCalibrationTitle),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Nutze einen echten PAR-Meter, um den Wert abzugleichen. Ändere den Multiplikator, bis die Werte übereinstimmen.'),
+              Text(l10n.ppfdCalibrationDesc),
               const SizedBox(height: 16),
               Consumer(
                 builder: (context, ref, child) {
@@ -63,7 +65,7 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen> with WidgetsB
               Consumer(
                 builder: (context, ref, child) {
                   final factor = ref.watch(calibrationFactorProvider);
-                  return Text('Faktor: ${factor.toStringAsFixed(2)}x');
+                  return Text(l10n.ppfdCalibrationFactor(factor.toStringAsFixed(2)));
                 }
               )
             ],
@@ -71,7 +73,7 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen> with WidgetsB
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Fertig'),
+              child: Text(l10n.ppfdCalibrationDone),
             ),
           ],
         );
@@ -81,13 +83,14 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen> with WidgetsB
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final ppfdStream = ref.watch(ppfdStreamProvider);
     final selectedLight = ref.watch(selectedLightSourceProvider);
 
     return Scaffold(
       backgroundColor: Colors.black, // Dark background
       appBar: AppBar(
-        title: const Text('PPFD Meter'),
+        title: Text(l10n.ppfdTitle),
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         actions: [
@@ -110,14 +113,14 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen> with WidgetsB
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.white30),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.info_outline, color: Colors.white, size: 32),
-                  SizedBox(width: 16),
+                  const Icon(Icons.info_outline, color: Colors.white, size: 32),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: Text(
-                      'Bitte lege ein Stück 80g Druckerpapier als Diffusor über die Frontkamera (oben am Bildschirmrand).',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      l10n.ppfdInstruction,
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ],
@@ -134,7 +137,7 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen> with WidgetsB
                 dropdownColor: Colors.grey[900],
                 style: const TextStyle(color: Colors.white, fontSize: 18),
                 decoration: InputDecoration(
-                  labelText: 'Leuchtmittel',
+                  labelText: l10n.ppfdLightSourceLabel,
                   labelStyle: const TextStyle(color: Colors.white54),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.white30),
@@ -174,15 +177,15 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen> with WidgetsB
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      'μmol/m²/s',
-                      style: TextStyle(color: Colors.white70, fontSize: 24),
+                    Text(
+                      l10n.ppfdUnit,
+                      style: const TextStyle(color: Colors.white70, fontSize: 24),
                     ),
                   ],
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (err, stack) => Text('Fehler: $err', style: const TextStyle(color: Colors.red)),
+              error: (err, stack) => Text(l10n.ppfdError(err.toString()), style: const TextStyle(color: Colors.red)),
             ),
 
             const Spacer(),
@@ -206,9 +209,9 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen> with WidgetsB
                     final currentValue = ref.read(ppfdStreamProvider).valueOrNull ?? 0.0;
                     Navigator.of(context).pop(currentValue); // Return value to check-in flow
                   },
-                  child: const Text(
-                    'Messwert übernehmen',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  child: Text(
+                    l10n.ppfdTakeValue,
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

@@ -1,0 +1,284 @@
+{
+  "@@locale": "de",
+  "appTitle": "Grow Guide",
+  "onboardingTitle1": "Growen ohne Erde. Ohne Raten.",
+  "onboardingText1": "Willkommen bei deinem DWC-Companion. Vergiss Erde, Schädlinge und Gießkannen. Wir züchten in sprudelndem Wasser – schneller, sauberer und mit massiven Erträgen.",
+  "onboardingTitle2": "Deine tägliche 5-Minuten Routine",
+  "onboardingText2": "Kein Vorwissen nötig. Unser täglicher, bilderbasierter Check-In Wizard nimmt dich jeden Tag an die Hand. Er sagt dir genau, wo du hinsehen musst, und schützt dich vor Anfängerfehlern.",
+  "onboardingTitle3": "Nie wieder überdüngen",
+  "onboardingText3": "Du gibst nur deine Messwerte (pH/EC) ein – unsere smarte Rezept-Engine berechnet dir wie ein Thermomix exakt auf den Milliliter genau, was du ins Wasser mischen musst.",
+  "onboardingNextButton": "Weiter",
+  "onboardingStartButton": "Loslegen",
+  "onboardingFinalTitle": "Lass uns starten!",
+  "onboardingFinalText": "Hast du dein Zelt schon aufgebaut, oder brauchst du Hilfe beim Schrauben und Verkabeln?",
+  "onboardingTentSetupButton": "Zelt gemeinsam aufbauen",
+  "onboardingDashboardButton": "Zelt steht! Zum Dashboard",
+  "dashboardTitle": "Meine DWC Pflanzen",
+  "dashboardEmptyTitle": "Dein Zelt ist leer.",
+  "dashboardEmptyText": "Drücke das + um eine Pflanze hinzuzufügen.",
+  "dashboardArchiveButtonCenter": "Ernte-Archiv ansehen ({count} erfolgreiche Grows)",
+  "@dashboardArchiveButtonCenter": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardArchiveButton": "Ernte-Archiv ({count} Grows)",
+  "@dashboardArchiveButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "plantStatusCheckOk": "Check ok",
+  "plantStatusCheckUrgent": "Check dringend nötig",
+  "plantStatusCheckRecommended": "Check empfohlen",
+  "plantStatusFirstCheckNeeded": "Erster Check nötig",
+  "phaseOnboarding": "Onboarding",
+  "phaseGermination": "Keimung",
+  "phaseVeg": "Wachstum (Tag {day})",
+  "@phaseVeg": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "phaseFlower": "Blüte (Tag {day})",
+  "@phaseFlower": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "phaseDrying": "Trocknung",
+  "phaseCuring": "Curing",
+  "phaseArchived": "Archiviert",
+  "lastCheckNever": "Letzter Check: Nie",
+  "lastCheckToday": "Letzter Check: heute",
+  "lastCheckYesterday": "Letzter Check: gestern",
+  "lastCheckDaysAgo": "Letzter Check: vor {days} Tagen",
+  "@lastCheckDaysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "plantBucketText": "{name} • {liters} L Eimer",
+  "@plantBucketText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "liters": {
+        "type": "int"
+      }
+    }
+  },
+  "addPlantTitle": "Neue Pflanze anlegen",
+  "addPlantSection1": "1. Pflanzenname / Eimerbezeichnung",
+  "addPlantNameLabel": "Name deiner Pflanze oder des Eimers",
+  "addPlantRequired": "Pflichtfeld",
+  "addPlantSection2": "2. Reservoirvolumen (in Litern)",
+  "addPlantVolumeDesc": "Wie viel Liter Wasser fasst dein Eimer im Betrieb?",
+  "addPlantCustomLiters": "Individuell (z.B. 18.5 L)",
+  "addPlantSection3": "3. Wahl der Düngermarke",
+  "addPlantBrandDesc": "Welche Nährstofflinie nutzt du für diese Pflanze?",
+  "addPlantSection4": "4. Pflanzen-Genetik",
+  "addPlantTypeDesc": "Um welchen Pflanzentyp handelt es sich?",
+  "addPlantTypePhoto": "Photo (Photoperiodisch)",
+  "addPlantTypeAuto": "Auto (Autoflowering)",
+  "addPlantSection5": "5. Beleuchtungs- & Lampen-Daten",
+  "addPlantLampDesc": "Deine Beleuchtungs-Daten (für exakte Abstandsempfehlungen)",
+  "addPlantLampType": "Lampentyp:",
+  "addPlantLampWattage": "Wattzahl:",
+  "addPlantLampCustomWattage": "Individuell (z.B. 240 W)",
+  "addPlantLampCount": "Anzahl Pflanzen unter Lampe:",
+  "addPlantLampCustomCount": "Individuell (z.B. 6)",
+  "addPlantSection6": "6. Aktueller Start-Stand & Tag",
+  "addPlantPhaseDesc": "In welcher Phase & an welchem Tag befindet sich die Pflanze heute?",
+  "addPlantPhaseGermination": "Keimling / Steckling",
+  "addPlantPhaseVeg": "Vegetation",
+  "addPlantPhaseFlower": "Blütephase",
+  "addPlantCurrentDay": "Aktueller Tag in dieser Phase (z.B. 1)",
+  "addPlantSubmit": "Pflanze im Dashboard anlegen",
+  "checkinHealthTitle": "Pflanzen-Gesundheit",
+  "checkinHealthDesc": "Schau dir die Pflanze an. Hängen die Blätter extrem schlaff? Gibt es braune Flecken oder rollen sich die Blattspitzen stark ein?",
+  "checkinHealthNext": "Sieht gut aus",
+  "checkinFinishTitle": "Check-In Abschließen",
+  "checkinFinishDesc": "Du hast alle Stationen für heute erledigt. Deine Pflanze ist versorgt.",
+  "checkinFinishNext": "Check-In Speichern",
+  "checkinMeasureTitle": "Messwerte eintragen",
+  "checkinPhLabel": "pH-Wert (z.B. 5.8)",
+  "checkinEcLabel": "EC-Wert (z.B. 1.2)",
+  "checkinBack": "Zurück",
+  "checkinSaveValues": "Werte speichern",
+  "checkinValuesRequired": "Bitte Werte eintragen",
+  "checkinLampTitle": "Lampenabstand prüfen",
+  "checkinLampDesc": "Miss den Abstand von der Pflanzenspitze zur Lampe. LED-Panels sollten ca. 30-40 cm entfernt sein.",
+  "checkinMeasurePpfd": "PPFD Messen",
+  "checkinMeasurePpfdAgain": "Neu Messen (PPFD: {ppfd})",
+  "checkinLampNext": "Abstand passt",
+  "germinationTitle1": "Das Wasserglas & Die Steinwolle",
+  "germinationDesc1": "Fülle ein Glas mit handwarmem Wasser und lass deinen Samen sanft hineinfallen.\n\nLege deinen Steinwollwürfel in Wasser (pH 5.5). Er muss 24h einweichen!",
+  "germinationNext1": "Erledigt & Weiter",
+  "germinationTitle2": "Die Dunkelheit",
+  "germinationDesc2": "Cannabis-Samen sind Dunkelkeimer. Stelle das Glas an einen warmen, absolut dunklen Ort.",
+  "germinationNext2": "Ab in den Schrank",
+  "germinationTitle3": "Der Warteraum",
+  "germinationDesc3": "Lass den Samen nun für 12 bis 24 Stunden im Wasser ruhen. Wir warten darauf, dass sich die Schale öffnet.",
+  "germinationNext3": "Wurzel prüfen",
+  "germinationTitle4": "Der Wurzel-Check",
+  "germinationDesc4": "Hol das Glas aus dem Schrank. Ist die Samenschale aufgeplatzt und zeigt sich eine kleine, weiße Wurzelspitze?",
+  "germinationNext4": "Wurzel ist da!",
+  "germinationAlt4": "Noch geschlossen",
+  "germinationTitle5": "Geduld!",
+  "germinationDesc5": "Manche Samen brauchen bis zu 48 Stunden. Stelle das Glas wieder in den Schrank und schau morgen noch mal rein.",
+  "germinationNext5": "Wurzel prüfen",
+  "germinationTitle6": "Einzug in die Steinwolle",
+  "germinationDesc6": "Setze den Samen etwa 1-2 cm tief in das Pflanzloch deines eingeweichten Steinwollwürfels.\n\nWichtig: Wurzelspitze nach unten!",
+  "germinationNext6": "Samen ist eingepflanzt",
+  "germinationTitle7": "Netztopf & Blähton",
+  "germinationDesc7": "Spüle deinen Blähton gut ab. Setze den Steinwollwürfel in den Netztopf und fülle ihn mit Blähton auf.",
+  "germinationNext7": "Im Netztopf gesichert",
+  "germinationTitle8": "DWC-Start & Klima",
+  "germinationDesc8": "Hänge den Netztopf in deinen DWC-Eimer.\n\n1. Keine Nährstoffe: Nur reines pH-Wasser.\n2. Pumpe voll an!\n3. Sanftes Licht (18h) bei 24°C.",
+  "germinationNext8": "Keimung abschließen",
+  "tentIntroTitle": "Wissen & Hardware gecheckt!",
+  "tentIntroDesc": "Du weißt jetzt alles Wichtige über Hardware und Wasser.\n\nAls Nächstes bauen wir gemeinsam dein Zelt auf. Hast du es schon komplett aufgebaut und willst direkt ins Dashboard, oder sollen wir Schritt für Schritt durchgehen?",
+  "tentIntroNext": "Zelt gemeinsam aufbauen",
+  "tentIntroSkip": "Zelt steht! Zum Dashboard",
+  "tentTitle1": "Station 1: Standort & Fundament",
+  "tentDesc1": "Bevor du das Zelt aufbaust, wähle den richtigen Ort! Dein Zelt braucht Zugang zu Frischluft und ein Fenster in der Nähe für die Abluft.\n\nWenn dein Boden kalt ist, lege unbedingt eine Isolationsmatte unter das Zelt. Vergiss die wasserdichte Einlegewanne nicht!",
+  "tentNext1": "Zelt steht & ist isoliert",
+  "tentTitle2": "Station 2: Abluft & Geruchskontrolle",
+  "tentDesc2": "Hänge den Aktivkohlefilter (AKF) ganz oben unter die Zeltdecke. Verbinde ihn absolut luftdicht mit dem Rohrventilator und führe den Abluftschlauch nach draußen.\n\nNutze Schlauchschellen oder starkes Panzertape!",
+  "tentNext2": "Abluft hängt bombensicher",
+  "tentTitle3": "Station 3: Die Sonne (Licht & Kabel)",
+  "tentDesc3": "Bringe nun deine Grow-Lampe mittig im Zelt an. Nutze dafür stufenlos verstellbare Seilzugratschen. Führe das Stromkabel der Lampe sauber nach außen.",
+  "tentNext3": "Lampe hängt",
+  "tentTitle4": "Station 4: Der Wind (Umluft)",
+  "tentDesc4": "Klemme deine Ventilatoren an die seitlichen Zeltstangen. Ideal sind zwei Stück: Einer bläst später über das Blätterdach, der andere sorgt unterhalb der Blätter für Zirkulation.",
+  "tentNext4": "Ventilatoren montiert",
+  "tentTitle5": "Station 5: DWC Eimer & Schläuche",
+  "tentDesc5": "Platziere deine leeren DWC-Eimer mittig unter der Lampe. Führe die leeren Luftschläuche durch die ganz unteren Zeltöffnungen nach draußen zur Luftpumpe. Schläuche nicht knicken!",
+  "tentNext5": "Eimer positioniert",
+  "tentTitle6": "Station 6: Strom & Luftpumpe",
+  "tentDesc6": "⚠️ DIE WICHTIGSTE REGEL!\nWasser und Strom vertragen sich nicht.\n\n1. Steckdosen NIEMALS auf den Zeltboden legen!\n2. Die Luftpumpe MUSS außerhalb des Zelts und physisch höher stehen als der Wasserspiegel im Eimer.",
+  "tentNext6": "Verstanden & geprüft",
+  "tentTitle7": "Station 7: Steuerung & Zeitschaltuhren",
+  "tentDesc7": "Verbinde jetzt alles mit dem Strom:\n\n1. Lampe: In die Zeitschaltuhr (noch nicht einstellen).\n2. Abluft & Umluft: Dauerstrom.\n3. Luftpumpe: Zwingend Dauerstrom (24/7).",
+  "tentNext7": "Alles verkabelt",
+  "tentTitle8": "Station 8: Unterdruck & Lichtlecks",
+  "tentDesc8": "Der letzte Test! Schließe das Zelt.\n\n1. Unterdruck-Check: Ziehen sich die Zeltwände nach innen? Perfekt!\n2. Lichtleck-Check: Licht im Zimmer aus. Dringt irgendwo starkes Licht aus dem Zelt? Klette unnötige Öffnungen zu.",
+  "tentNext8": "Setup abgeschlossen!",
+  "@checkinMeasurePpfdAgain": {
+    "placeholders": {
+      "ppfd": {
+        "type": "String"
+      }
+    }
+  },
+  "ppfdTitle": "PPFD Meter",
+  "ppfdCalibrationTitle": "Kalibrierung",
+  "ppfdCalibrationDesc": "Nutze einen echten PAR-Meter, um den Wert abzugleichen. Ändere den Multiplikator, bis die Werte übereinstimmen.",
+  "ppfdCalibrationFactor": "Faktor: {factor}x",
+  "ppfdCalibrationDone": "Fertig",
+  "ppfdInstruction": "Bitte lege ein Stück 80g Druckerpapier als Diffusor über die Frontkamera (oben am Bildschirmrand).",
+  "ppfdLightSourceLabel": "Leuchtmittel",
+  "ppfdUnit": "μmol/m²/s",
+  "ppfdError": "Fehler: {err}",
+  "ppfdTakeValue": "Messwert übernehmen",
+  "@ppfdCalibrationFactor": {
+    "placeholders": {
+      "factor": {
+        "type": "String"
+      }
+    }
+  },
+  "@ppfdError": {
+    "placeholders": {
+      "err": {
+        "type": "String"
+      }
+    }
+  },
+  "hardwareAdvisorTitle": "Hardware-Ratgeber",
+  "hardwareAcquired": "Hab ich besorgt!",
+  "hardwareHaveIt": "Besitze ich",
+  "hardwareCatLight": "Licht & Klima",
+  "hardwareCatDwc": "Das Herzstück (DWC)",
+  "hardwareCatWater": "Wasser & Messen",
+  "hardwareCatAccessories": "Zubehör",
+  "hw_grow_tentTitle": "Grow-Zelt",
+  "hw_grow_tentDesc": "Warum brauche ich das? Ein lichtdichtes Zelt sorgt für das perfekte Klima und schützt vor Störlicht.",
+  "hw_ledTitle": "LED-Pflanzenlampe",
+  "hw_ledDesc": "Warum brauche ich das? Cannabis liebt Licht! Ohne starke Lampe gibt es keine fetten Buds.",
+  "hw_exhaustTitle": "Abluft-Ventilator",
+  "hw_exhaustDesc": "Warum brauche ich das? Erneuert die Luft im Zelt und transportiert Hitze sowie Feuchtigkeit nach draußen.",
+  "hw_carbon_filterTitle": "Aktivkohlefilter (AKF)",
+  "hw_carbon_filterDesc": "Warum brauche ich das? Cannabis stinkt gewaltig. Der Filter neutralisiert den Geruch zu 100%.",
+  "hw_circulation_fanTitle": "Umluft-Ventilator",
+  "hw_circulation_fanDesc": "Warum brauche ich das? Sorgt für dicke Stängel und verhindert Schimmel in den Blüten.",
+  "hw_thermo_hygroTitle": "Thermo-/Hygrometer",
+  "hw_thermo_hygroDesc": "Warum brauche ich das? Zur Überwachung von Temperatur und Luftfeuchtigkeit.",
+  "hw_humidifierTitle": "Luftbefeuchter / Entfeuchter",
+  "hw_humidifierDesc": "Warum brauche ich das? Zur exakten Kontrolle der Luftfeuchtigkeit (VPD).",
+  "hw_dwc_bucketTitle": "DWC-Eimer / Wassertank",
+  "hw_dwc_bucketDesc": "Warum brauche ich das? Das neue Zuhause deiner Wurzeln!",
+  "hw_net_potTitle": "Netztopf",
+  "hw_net_potDesc": "Warum brauche ich das? Hält den Blähton und gibt den Wurzeln Halt.",
+  "hw_air_pumpTitle": "Luftpumpe & Ausströmerstein",
+  "hw_air_pumpDesc": "Warum brauche ich das? Sauerstoff ist Leben! Ohne Blubberblasen ertrinken die Wurzeln.",
+  "hw_clay_pebblesTitle": "Blähton & Anzuchtwürfel",
+  "hw_clay_pebblesDesc": "Warum brauche ich das? Steriles Medium statt Erde.",
+  "hw_second_bucketTitle": "Zweiter DWC-Eimer",
+  "hw_second_bucketDesc": "Warum brauche ich das? Erleichtert den Wasserwechsel enorm.",
+  "hw_second_bucketProTip": "Pro-Tipp: Für den schnellen 2-Eimer-Wechsel-Trick in der Vegi-Phase.",
+  "hw_chillerTitle": "Durchlaufkühler (Water Chiller)",
+  "hw_chillerDesc": "Warum brauche ich das? Kühlt das Wasser auf perfekte 18-20°C.",
+  "hw_hydro_nutesTitle": "Hydrokultur-Dünger",
+  "hw_hydro_nutesDesc": "Warum brauche ich das? Spezieller Dünger für DWC.",
+  "hw_ph_dropsTitle": "pH-Messtropfen oder Gerät",
+  "hw_ph_dropsDesc": "Warum brauche ich das? Der pH-Wert entscheidet, ob die Pflanze Nährstoffe aufnimmt.",
+  "hw_ph_dropsProTip": "Pro-Tipp: Billige Stifte sind ungenau, Tropfen sind für Anfänger sicherer.",
+  "hw_ec_meterTitle": "EC/TDS-Messgerät",
+  "hw_ec_meterDesc": "Warum brauche ich das? Zeigt dir genau an, wie viel Dünger im Wasser ist.",
+  "hw_ph_downTitle": "pH-Korrekturmittel",
+  "hw_ph_downDesc": "Warum brauche ich das? Um den pH-Wert auf magische 5.8 zu senken.",
+  "hw_ph_downProTip": "Pro-Tipp: Nutze zwingend anorganische Säuren (z.B. Phosphorsäure) für pH-Down.",
+  "hw_calibration_fluidTitle": "Kalibrierflüssigkeit",
+  "hw_calibration_fluidDesc": "Warum brauche ich das? Um deine Messgeräte zu eichen.",
+  "hw_water_pumpTitle": "Elektrische Mini-Tauchpumpe",
+  "hw_water_pumpDesc": "Warum brauche ich das? Pumpt das Wasser aus dem Eimer.",
+  "hw_water_pumpProTip": "Pro-Tipp: Erleichtert den Wasserwechsel enorm.",
+  "hw_ro_systemTitle": "Umkehrosmose-Anlage",
+  "hw_ro_systemDesc": "Warum brauche ich das? Filtert alle Salze aus dem Leitungswasser.",
+  "hw_ro_systemProTip": "Pro-Tipp: Bei extrem hartem Leitungswasser.",
+  "hw_timerTitle": "Zeitschaltuhr",
+  "hw_timerDesc": "Warum brauche ich das? Steuert das Licht automatisch (z.B. 18h an, 6h aus).",
+  "hw_scissorsTitle": "Ernteschere",
+  "hw_scissorsDesc": "Warum brauche ich das? Für die Maniküre der Buds.",
+  "hw_loupeTitle": "Taschenmikroskop / Lupe",
+  "hw_loupeDesc": "Warum brauche ich das? Um den perfekten Erntezeitpunkt (Trichome) zu bestimmen.",
+  "waterGuideTitle": "Wasser-Masterclass",
+  "waterGuideChap1Title": "Die Regeln des Wasserwechsels",
+  "waterGuideChap1Desc": "Pflanzen scheiden Toxine aus und Salze stauen sich an (EC-Creep). Ein wöchentlicher Wechsel stabilisiert den pH-Wert und die Nährstoffaufnahme.\n\nNutze den 2-Eimer-Wechsel-Trick in der Vegi oder eine kleine Tauchpumpe.",
+  "waterGuideChap2Title": "Dein Leitungswasser (Der Start-EC)",
+  "waterGuideChap2Desc": "Wie hart ist dein Leitungswasser? Suche online nach 'Wasserwerte [Dein Wohnort]', um den Bericht deines Versorgers zu finden, und prüfe den Grund-EC-Wert (ohne Dünger).",
+  "waterGuideEc0_2": "EC 0.0 - 0.2 (Sehr weich)",
+  "waterGuideEc0_2Desc": "Nahezu salzfrei. Du MUSST CalMag (Calcium/Magnesium) hinzufügen, bis der EC ca. 0.4 erreicht, bevor der Hauptdünger beigemischt wird.",
+  "waterGuideEc0_4": "EC 0.2 - 0.4 (Perfektes Wasser)",
+  "waterGuideEc0_4Desc": "Jackpot! Das ideale Leitungswasser. Kein zusätzliches CalMag nötig.",
+  "waterGuideEc0_7": "EC 0.5 - 0.7 (Hartes Wasser)",
+  "waterGuideEc0_7Desc": "Viel Calcium. Kein CalMag nutzen! Nutze speziellen Hard-Water-Dünger und wechsle den Tank strikt wöchentlich.\n\nPro-Tipp: Wenn nur Magnesium fehlt, füge reines Bittersalz (0,1-0,3 g/L) hinzu.",
+  "waterGuideEcHard": "EC > 0.7 (Sehr hart / Salzig)",
+  "waterGuideEcHardDesc": "Ungeeignet für DWC! Zwingend aufbereiten.\n\nAchte im Wasserbericht auch auf Natrium (< 50 mg/L) und Chlorid (< 70 mg/L).",
+  "waterGuideChap3Title": "Wasser aufbereiten",
+  "waterGuideChap3Desc": "• Der Cut-Trick: Mische hartes Wasser 50/50 mit destilliertem Wasser.\n• Tischfilter (Brita) bringen nichts für den EC-Wert.\n• Umkehrosmose: Die beste Langzeitlösung.\n• Chlor ausgasen: Leitungswasser 24-48h abstehen lassen, bevor man es benutzt!",
+  "waterGuideNext": "Verstanden, weiter!"
+}

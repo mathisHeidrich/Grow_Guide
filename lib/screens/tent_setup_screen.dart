@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/app_settings.dart';
 
 class TentSetupScreen extends ConsumerStatefulWidget {
@@ -34,6 +35,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
       final settings = await db.appSettings.get(1);
       if (settings != null) {
         settings.hasCompletedTentSetup = true;
+        settings.hasCompletedOnboarding = true;
         await db.appSettings.put(settings);
       }
     });
@@ -44,73 +46,75 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(
         child: PageView(
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(), // Force using buttons
           children: [
+            _buildIntroSlide(),
             _buildSlide(
-              title: 'Station 1: Standort & Fundament',
-              text: 'Bevor du das Zelt aufbaust, wähle den richtigen Ort! Dein Zelt braucht Zugang zu Frischluft und ein Fenster in der Nähe für die Abluft.\n\nWenn dein Boden kalt ist, lege unbedingt eine Isolationsmatte unter das Zelt. Vergiss die wasserdichte Einlegewanne nicht!',
+              title: l10n.tentTitle1,
+              text: l10n.tentDesc1,
               icon: Icons.place,
-              nextButtonText: 'Zelt steht & ist isoliert',
+              nextButtonText: l10n.tentNext1,
               onNext: _nextPage,
             ),
             _buildSlide(
-              title: 'Station 2: Abluft & Geruchskontrolle',
-              text: 'Hänge den Aktivkohlefilter (AKF) ganz oben unter die Zeltdecke. Verbinde ihn absolut luftdicht mit dem Rohrventilator und führe den Abluftschlauch nach draußen.\n\nNutze Schlauchschellen oder starkes Panzertape!',
+              title: l10n.tentTitle2,
+              text: l10n.tentDesc2,
               icon: Icons.air,
-              nextButtonText: 'Abluft hängt bombensicher',
+              nextButtonText: l10n.tentNext2,
               onNext: _nextPage,
               showBack: true,
             ),
             _buildSlide(
-              title: 'Station 3: Die Sonne (Licht & Kabel)',
-              text: 'Bringe nun deine Grow-Lampe mittig im Zelt an. Nutze dafür stufenlos verstellbare Seilzugratschen. Führe das Stromkabel der Lampe sauber nach außen.',
+              title: l10n.tentTitle3,
+              text: l10n.tentDesc3,
               icon: Icons.lightbulb,
-              nextButtonText: 'Lampe hängt',
+              nextButtonText: l10n.tentNext3,
               onNext: _nextPage,
               showBack: true,
             ),
             _buildSlide(
-              title: 'Station 4: Der Wind (Umluft)',
-              text: 'Klemme deine Ventilatoren an die seitlichen Zeltstangen. Ideal sind zwei Stück: Einer bläst später über das Blätterdach, der andere sorgt unterhalb der Blätter für Zirkulation.',
+              title: l10n.tentTitle4,
+              text: l10n.tentDesc4,
               icon: Icons.cyclone,
-              nextButtonText: 'Ventilatoren montiert',
+              nextButtonText: l10n.tentNext4,
               onNext: _nextPage,
               showBack: true,
             ),
             _buildSlide(
-              title: 'Station 5: DWC Eimer & Schläuche',
-              text: 'Platziere deine leeren DWC-Eimer mittig unter der Lampe. Führe die leeren Luftschläuche durch die ganz unteren Zeltöffnungen nach draußen zur Luftpumpe. Schläuche nicht knicken!',
+              title: l10n.tentTitle5,
+              text: l10n.tentDesc5,
               icon: Icons.water,
-              nextButtonText: 'Eimer positioniert',
+              nextButtonText: l10n.tentNext5,
               onNext: _nextPage,
               showBack: true,
             ),
             _buildSlide(
-              title: 'Station 6: Strom & Luftpumpe',
-              text: '⚠️ DIE WICHTIGSTE REGEL!\nWasser und Strom vertragen sich nicht.\n\n1. Steckdosen NIEMALS auf den Zeltboden legen!\n2. Die Luftpumpe MUSS außerhalb des Zelts und physisch höher stehen als der Wasserspiegel im Eimer.',
+              title: l10n.tentTitle6,
+              text: l10n.tentDesc6,
               icon: Icons.warning,
               iconColor: const Color(0xFFFF5252),
-              nextButtonText: 'Verstanden & geprüft',
+              nextButtonText: l10n.tentNext6,
               onNext: _nextPage,
               showBack: true,
             ),
             _buildSlide(
-              title: 'Station 7: Steuerung & Zeitschaltuhren',
-              text: 'Verbinde jetzt alles mit dem Strom:\n\n1. Lampe: In die Zeitschaltuhr (noch nicht einstellen).\n2. Abluft & Umluft: Dauerstrom.\n3. Luftpumpe: Zwingend Dauerstrom (24/7).',
+              title: l10n.tentTitle7,
+              text: l10n.tentDesc7,
               icon: Icons.timer,
-              nextButtonText: 'Alles verkabelt',
+              nextButtonText: l10n.tentNext7,
               onNext: _nextPage,
               showBack: true,
             ),
             _buildSlide(
-              title: 'Station 8: Unterdruck & Lichtlecks',
-              text: 'Der letzte Test! Schließe das Zelt.\n\n1. Unterdruck-Check: Ziehen sich die Zeltwände nach innen? Perfekt!\n2. Lichtleck-Check: Licht im Zimmer aus. Dringt irgendwo starkes Licht aus dem Zelt? Klette unnötige Öffnungen zu.',
+              title: l10n.tentTitle8,
+              text: l10n.tentDesc8,
               icon: Icons.check_circle,
-              nextButtonText: 'Setup abgeschlossen!',
+              nextButtonText: l10n.tentNext8,
               onNext: _completeSetup,
               showBack: true,
             ),
@@ -129,6 +133,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
     required VoidCallback onNext,
     bool showBack = false,
   }) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -170,7 +175,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
                       ),
                     ),
                     onPressed: _previousPage,
-                    child: const Text('Zurück'),
+                    child: Text(l10n.checkinBack),
                   ),
                 ),
               if (showBack) const SizedBox(width: 16),
@@ -193,6 +198,72 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 24),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildIntroSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Spacer(),
+          const Icon(Icons.handyman, size: 120, color: Color(0xFF00E676)),
+          const SizedBox(height: 48),
+          Text(
+            l10n.tentIntroTitle,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          Text(
+            l10n.tentIntroDesc,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.white70,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const Spacer(),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF1E1E1E), // Secondary button
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: const BorderSide(color: Color(0xFF00E676)),
+              ),
+            ),
+            onPressed: _nextPage,
+            child: Text(
+              l10n.tentIntroNext,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF00E676),
+              foregroundColor: Colors.black,
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            onPressed: _completeSetup,
+            child: Text(
+              l10n.tentIntroSkip,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(height: 24),
         ],

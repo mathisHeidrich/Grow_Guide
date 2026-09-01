@@ -11,6 +11,8 @@ import 'screens/germination_wizard_screen.dart';
 import 'models/plant.dart';
 import 'models/app_settings.dart';
 import 'screens/ppfd_meter_screen.dart';
+import 'screens/hardware_advisor_screen.dart';
+import 'screens/water_guide_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final db = ref.watch(databaseProvider).isar;
@@ -20,9 +22,13 @@ final routerProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) async {
       final settings = await db.appSettings.get(1);
       final hasCompletedOnboarding = settings?.hasCompletedOnboarding ?? false;
-      // final hasCompletedTentSetup = settings?.hasCompletedTentSetup ?? false;
+      
+      final isAllowedPath = state.uri.path == '/onboarding' || 
+                            state.uri.path == '/hardware_advisor' || 
+                            state.uri.path == '/water_guide' || 
+                            state.uri.path == '/tent_setup';
 
-      if (!hasCompletedOnboarding && state.uri.path != '/onboarding' && state.uri.path != '/tent_setup') {
+      if (!hasCompletedOnboarding && !isAllowedPath) {
         return '/onboarding';
       }
       return null;
@@ -31,6 +37,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/onboarding',
         builder: (context, state) => const AppOnboardingScreen(),
+      ),
+      GoRoute(
+        path: '/hardware_advisor',
+        builder: (context, state) => const HardwareAdvisorScreen(),
+      ),
+      GoRoute(
+        path: '/water_guide',
+        builder: (context, state) => const WaterGuideScreen(),
       ),
       GoRoute(
         path: '/tent_setup',

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../providers/database_provider.dart';
-import '../models/app_settings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppOnboardingScreen extends ConsumerStatefulWidget {
   const AppOnboardingScreen({super.key});
@@ -21,27 +20,9 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
     );
   }
 
-  Future<void> _completeOnboarding(bool goTentSetup) async {
-    final db = ref.read(databaseProvider).isar;
-    await db.writeTxn(() async {
-      final settings = await db.appSettings.get(1);
-      if (settings != null) {
-        settings.hasCompletedOnboarding = true;
-        await db.appSettings.put(settings);
-      }
-    });
-
-    if (!mounted) return;
-
-    if (goTentSetup) {
-      context.go('/tent_setup');
-    } else {
-      context.go('/');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(
         child: PageView(
@@ -49,21 +30,21 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
           
           children: [
             _buildSlide(
-              title: 'Growen ohne Erde. Ohne Raten.',
-              text: 'Willkommen bei deinem DWC-Companion. Vergiss Erde, Schädlinge und Gießkannen. Wir züchten in sprudelndem Wasser – schneller, sauberer und mit massiven Erträgen.',
-              buttonText: 'Weiter',
+              title: l10n.onboardingTitle1,
+              text: l10n.onboardingText1,
+              buttonText: l10n.onboardingNextButton,
               onButtonPressed: _nextPage,
             ),
             _buildSlide(
-              title: 'Deine tägliche 5-Minuten Routine',
-              text: 'Kein Vorwissen nötig. Unser täglicher, bilderbasierter Check-In Wizard nimmt dich jeden Tag an die Hand. Er sagt dir genau, wo du hinsehen musst, und schützt dich vor Anfängerfehlern.',
-              buttonText: 'Weiter',
+              title: l10n.onboardingTitle2,
+              text: l10n.onboardingText2,
+              buttonText: l10n.onboardingNextButton,
               onButtonPressed: _nextPage,
             ),
             _buildSlide(
-              title: 'Nie wieder überdüngen',
-              text: 'Du gibst nur deine Messwerte (pH/EC) ein – unsere smarte Rezept-Engine berechnet dir wie ein Thermomix exakt auf den Milliliter genau, was du ins Wasser mischen musst.',
-              buttonText: 'Loslegen',
+              title: l10n.onboardingTitle3,
+              text: l10n.onboardingText3,
+              buttonText: l10n.onboardingStartButton,
               onButtonPressed: _nextPage,
             ),
             _buildFinalSlide(),
@@ -128,6 +109,7 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
   }
 
   Widget _buildFinalSlide() {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -138,7 +120,7 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
           const Icon(Icons.handyman, size: 120, color: Color(0xFF00E676)),
           const SizedBox(height: 48),
           Text(
-            'Lass uns starten!',
+            l10n.onboardingFinalTitle,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -147,30 +129,13 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
           ),
           const SizedBox(height: 24),
           Text(
-            'Hast du dein Zelt schon aufgebaut, oder brauchst du Hilfe beim Schrauben und Verkabeln?',
+            "Bevor wir loslegen, schauen wir uns an, was du für deinen Grow brauchst.",
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
             textAlign: TextAlign.center,
           ),
           const Spacer(),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1E1E1E), // Secondary button
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: Color(0xFF00E676)),
-              ),
-            ),
-            onPressed: () => _completeOnboarding(true),
-            child: const Text(
-              'Zelt gemeinsam aufbauen',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(height: 16),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF00E676),
@@ -180,9 +145,9 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            onPressed: () => _completeOnboarding(false),
+            onPressed: () => context.go('/hardware_advisor'),
             child: const Text(
-              'Zelt steht! Zum Dashboard',
+              "Weiter zum Hardware-Ratgeber",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),

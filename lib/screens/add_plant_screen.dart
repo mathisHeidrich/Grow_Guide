@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
 
@@ -80,8 +81,9 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('Neue Pflanze anlegen')),
+      appBar: AppBar(title: Text(l10n.addPlantTitle)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Form(
@@ -89,19 +91,19 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSectionTitle('1. Pflanzenname / Eimerbezeichnung'),
+              _buildSectionTitle(l10n.addPlantSection1),
               TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Name deiner Pflanze oder des Eimers',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.addPlantNameLabel,
+                  border: const OutlineInputBorder(),
                 ),
-                validator: (val) => val == null || val.isEmpty ? 'Pflichtfeld' : null,
+                validator: (val) => val == null || val.isEmpty ? l10n.addPlantRequired : null,
                 onSaved: (val) => _name = val!,
               ),
               const SizedBox(height: 32),
 
-              _buildSectionTitle('2. Reservoirvolumen (in Litern)'),
-              const Text('Wie viel Liter Wasser fasst dein Eimer im Betrieb?', style: TextStyle(color: AppColors.textSecondary)),
+              _buildSectionTitle(l10n.addPlantSection2),
+              Text(l10n.addPlantVolumeDesc, style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               Wrap(
                 spacing: 8,
@@ -125,9 +127,9 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               const SizedBox(height: 8),
               TextFormField(
                 controller: _customWaterController,
-                decoration: const InputDecoration(
-                  labelText: 'Individuell (z.B. 18.5 L)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.addPlantCustomLiters,
+                  border: const OutlineInputBorder(),
                 ),
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 onChanged: (val) {
@@ -136,8 +138,8 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               ),
               const SizedBox(height: 32),
 
-              _buildSectionTitle('3. Wahl der Düngermarke'),
-              const Text('Welche Nährstofflinie nutzt du für diese Pflanze?', style: TextStyle(color: AppColors.textSecondary)),
+              _buildSectionTitle(l10n.addPlantSection3),
+              Text(l10n.addPlantBrandDesc, style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               Column(
                 children: NutrientBrand.values.map((brand) {
@@ -159,14 +161,14 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               ),
               const SizedBox(height: 32),
 
-              _buildSectionTitle('4. Pflanzen-Genetik'),
-              const Text('Um welchen Pflanzentyp handelt es sich?', style: TextStyle(color: AppColors.textSecondary)),
+              _buildSectionTitle(l10n.addPlantSection4),
+              Text(l10n.addPlantTypeDesc, style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               Row(
                 children: [
                   Expanded(
                     child: ChoiceChip(
-                      label: const Center(child: Text('Photo (Photoperiodisch)')),
+                      label: Center(child: Text(l10n.addPlantTypePhoto)),
                       selected: _plantType == PlantType.photo,
                       selectedColor: AppColors.growGreen,
                       onSelected: (val) => setState(() => _plantType = PlantType.photo),
@@ -175,7 +177,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: ChoiceChip(
-                      label: const Center(child: Text('Auto (Autoflowering)')),
+                      label: Center(child: Text(l10n.addPlantTypeAuto)),
                       selected: _plantType == PlantType.auto,
                       selectedColor: AppColors.growGreen,
                       onSelected: (val) => setState(() => _plantType = PlantType.auto),
@@ -185,10 +187,10 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               ),
               const SizedBox(height: 32),
 
-              _buildSectionTitle('5. Beleuchtungs- & Lampen-Daten'),
-              const Text('Deine Beleuchtungs-Daten (für exakte Abstandsempfehlungen)', style: TextStyle(color: AppColors.textSecondary)),
+              _buildSectionTitle(l10n.addPlantSection5),
+              Text(l10n.addPlantLampDesc, style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
-              const Text('Lampentyp:', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.addPlantLampType, style: const TextStyle(fontWeight: FontWeight.bold)),
               Wrap(
                 spacing: 8,
                 children: ['LED', 'NDL', 'CMH'].map((t) => ChoiceChip(
@@ -199,7 +201,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                 )).toList(),
               ),
               const SizedBox(height: 16),
-              const Text('Wattzahl:', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.addPlantLampWattage, style: const TextStyle(fontWeight: FontWeight.bold)),
               Wrap(
                 spacing: 8,
                 children: _wattageOptions.map((w) => ChoiceChip(
@@ -214,9 +216,9 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               const SizedBox(height: 8),
               TextFormField(
                 controller: _customWattageController,
-                decoration: const InputDecoration(
-                  labelText: 'Individuell (z.B. 240 W)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.addPlantLampCustomWattage,
+                  border: const OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
                 onChanged: (val) {
@@ -224,7 +226,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                 },
               ),
               const SizedBox(height: 16),
-              const Text('Anzahl Pflanzen unter Lampe:', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.addPlantLampCount, style: const TextStyle(fontWeight: FontWeight.bold)),
               Wrap(
                 spacing: 8,
                 children: _plantsOptions.map((p) => ChoiceChip(
@@ -239,9 +241,9 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               const SizedBox(height: 8),
               TextFormField(
                 controller: _customPlantsController,
-                decoration: const InputDecoration(
-                  labelText: 'Individuell (z.B. 6)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.addPlantLampCustomCount,
+                  border: const OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
                 onChanged: (val) {
@@ -250,27 +252,27 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               ),
               const SizedBox(height: 32),
 
-              _buildSectionTitle('6. Aktueller Start-Stand & Tag'),
-              const Text('In welcher Phase & an welchem Tag befindet sich die Pflanze heute?', style: TextStyle(color: AppColors.textSecondary)),
+              _buildSectionTitle(l10n.addPlantSection6),
+              Text(l10n.addPlantPhaseDesc, style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
                 children: [
                   ChoiceChip(
-                    label: const Text('Keimling / Steckling'),
+                    label: Text(l10n.addPlantPhaseGermination),
                     selected: _currentPhase == PlantPhase.germination,
                     selectedColor: AppColors.growGreen,
                     onSelected: (val) => setState(() => _currentPhase = PlantPhase.germination),
                   ),
                   ChoiceChip(
-                    label: const Text('Vegetation'),
+                    label: Text(l10n.addPlantPhaseVeg),
                     selected: _currentPhase == PlantPhase.veg,
                     selectedColor: AppColors.growGreen,
                     onSelected: (val) => setState(() => _currentPhase = PlantPhase.veg),
                   ),
                   ChoiceChip(
-                    label: const Text('Blütephase'),
+                    label: Text(l10n.addPlantPhaseFlower),
                     selected: _currentPhase == PlantPhase.flower,
                     selectedColor: AppColors.growGreen,
                     onSelected: (val) => setState(() => _currentPhase = PlantPhase.flower),
@@ -280,12 +282,12 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _dayInPhaseController,
-                decoration: const InputDecoration(
-                  labelText: 'Aktueller Tag in dieser Phase (z.B. 1)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: l10n.addPlantCurrentDay,
+                  border: const OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
-                validator: (val) => val == null || val.isEmpty ? 'Pflichtfeld' : null,
+                validator: (val) => val == null || val.isEmpty ? l10n.addPlantRequired : null,
               ),
               const SizedBox(height: 48),
 
@@ -299,7 +301,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
                   onPressed: _savePlant,
-                  child: const Text('Pflanze im Dashboard anlegen', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  child: Text(l10n.addPlantSubmit, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ),
               const SizedBox(height: 24),

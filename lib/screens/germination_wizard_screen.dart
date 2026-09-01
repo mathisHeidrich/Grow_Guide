@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
 
@@ -68,6 +69,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     if (_plant == null) return const Scaffold(body: Center(child: CircularProgressIndicator()));
 
     // Simple implementation of the germination flow
@@ -79,73 +81,73 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
           
           children: [
             _buildSlide(
-              title: 'Das Wasserglas & Die Steinwolle',
-              text: 'Fülle ein Glas mit handwarmem Wasser und lass deinen Samen sanft hineinfallen.\n\nLege deinen Steinwollwürfel in Wasser (pH 5.5). Er muss 24h einweichen!',
+              title: l10n.germinationTitle1,
+              text: l10n.germinationDesc1,
               icon: Icons.local_drink,
-              nextButtonText: 'Erledigt & Weiter',
+              nextButtonText: l10n.germinationNext1,
               onNext: _nextPage,
             ),
             _buildSlide(
-              title: 'Die Dunkelheit',
-              text: 'Cannabis-Samen sind Dunkelkeimer. Stelle das Glas an einen warmen, absolut dunklen Ort.',
+              title: l10n.germinationTitle2,
+              text: l10n.germinationDesc2,
               icon: Icons.nightlight_round,
-              nextButtonText: 'Ab in den Schrank',
+              nextButtonText: l10n.germinationNext2,
               onNext: _nextPage,
               showBack: true,
             ),
             _buildSlide(
-              title: 'Der Warteraum',
-              text: 'Lass den Samen nun für 12 bis 24 Stunden im Wasser ruhen. Wir warten darauf, dass sich die Schale öffnet.',
+              title: l10n.germinationTitle3,
+              text: l10n.germinationDesc3,
               icon: Icons.hourglass_empty,
-              nextButtonText: 'Wurzel prüfen',
+              nextButtonText: l10n.germinationNext5,
               onNext: _nextPage,
               showBack: true,
             ),
             // Wurzel Check (Index 3)
             _buildSlide(
-              title: 'Der Wurzel-Check',
-              text: 'Hol das Glas aus dem Schrank. Ist die Samenschale aufgeplatzt und zeigt sich eine kleine, weiße Wurzelspitze?',
+              title: l10n.germinationTitle4,
+              text: l10n.germinationDesc4,
               icon: Icons.search,
-              nextButtonText: 'Wurzel ist da!',
+              nextButtonText: l10n.germinationNext4,
               onNext: () => _jumpToPage(5), // Skip wait screens
               showBack: true,
-              altButtonText: 'Noch geschlossen',
+              altButtonText: l10n.germinationAlt4,
               onAlt: () => _jumpToPage(4),
             ),
             // Geduld! (Index 4)
             _buildSlide(
-              title: 'Geduld!',
-              text: 'Manche Samen brauchen bis zu 48 Stunden. Stelle das Glas wieder in den Schrank und schau morgen noch mal rein.',
+              title: l10n.germinationTitle5,
+              text: l10n.germinationDesc5,
               icon: Icons.timelapse,
-              nextButtonText: 'Wurzel prüfen',
+              nextButtonText: l10n.germinationNext5,
               onNext: () => _jumpToPage(3),
               showBack: true,
             ),
             // Einzug in die Steinwolle (Index 5)
             _buildSlide(
-              title: 'Einzug in die Steinwolle',
-              text: 'Setze den Samen etwa 1-2 cm tief in das Pflanzloch deines eingeweichten Steinwollwürfels.\n\nWichtig: Wurzelspitze nach unten!',
+              title: l10n.germinationTitle6,
+              text: l10n.germinationDesc6,
               icon: Icons.eco,
-              nextButtonText: 'Samen ist eingepflanzt',
+              nextButtonText: l10n.germinationNext6,
               onNext: _nextPage,
               showBack: true,
               onBack: () => _jumpToPage(3),
             ),
             // Netztopf (Index 6)
             _buildSlide(
-              title: 'Netztopf & Blähton',
-              text: 'Spüle deinen Blähton gut ab. Setze den Steinwollwürfel in den Netztopf und fülle ihn mit Blähton auf.',
+              title: l10n.germinationTitle7,
+              text: l10n.germinationDesc7,
               icon: Icons.kitchen,
-              nextButtonText: 'Im Netztopf gesichert',
+              nextButtonText: l10n.germinationNext7,
               onNext: _nextPage,
               showBack: true,
             ),
             // Finale (Index 7)
             _buildSlide(
-              title: 'DWC-Start & Klima',
-              text: 'Hänge den Netztopf in deinen DWC-Eimer.\n\n1. Keine Nährstoffe: Nur reines pH-Wasser.\n2. Pumpe voll an!\n3. Sanftes Licht (18h) bei 24°C.',
+              title: l10n.germinationTitle8,
+              text: l10n.germinationDesc8,
               icon: Icons.wb_sunny,
-              nextButtonText: 'Keimung abschließen',
+              nextButtonText: l10n.germinationNext8,
               onNext: _completeGermination,
               showBack: true,
             ),
@@ -166,6 +168,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
     String? altButtonText,
     VoidCallback? onAlt,
   }) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -218,7 +221,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
                     onPressed: onBack ?? _previousPage,
-                    child: const Text('Zurück'),
+                    child: Text(l10n.checkinBack),
                   ),
                 ),
               if (showBack) const SizedBox(width: 16),
