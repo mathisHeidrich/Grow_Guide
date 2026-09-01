@@ -60,14 +60,19 @@ const PlantSchema = CollectionSchema(
       name: r'plantsUnderLamp',
       type: IsarType.long,
     ),
-    r'type': PropertySchema(
+    r'rootsReachedWater': PropertySchema(
       id: 8,
+      name: r'rootsReachedWater',
+      type: IsarType.bool,
+    ),
+    r'type': PropertySchema(
+      id: 9,
       name: r'type',
       type: IsarType.byte,
       enumMap: _PlanttypeEnumValueMap,
     ),
     r'waterVolumeLiters': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'waterVolumeLiters',
       type: IsarType.double,
     )
@@ -124,8 +129,9 @@ void _plantSerialize(
   writer.writeString(offsets[5], object.name);
   writer.writeByte(offsets[6], object.nutrientBrand.index);
   writer.writeLong(offsets[7], object.plantsUnderLamp);
-  writer.writeByte(offsets[8], object.type.index);
-  writer.writeDouble(offsets[9], object.waterVolumeLiters);
+  writer.writeBool(offsets[8], object.rootsReachedWater);
+  writer.writeByte(offsets[9], object.type.index);
+  writer.writeDouble(offsets[10], object.waterVolumeLiters);
 }
 
 Plant _plantDeserialize(
@@ -154,9 +160,10 @@ Plant _plantDeserialize(
       _PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offsets[6])] ??
           NutrientBrand.cannaAqua;
   object.plantsUnderLamp = reader.readLong(offsets[7]);
-  object.type = _PlanttypeValueEnumMap[reader.readByteOrNull(offsets[8])] ??
+  object.rootsReachedWater = reader.readBool(offsets[8]);
+  object.type = _PlanttypeValueEnumMap[reader.readByteOrNull(offsets[9])] ??
       PlantType.photo;
-  object.waterVolumeLiters = reader.readDouble(offsets[9]);
+  object.waterVolumeLiters = reader.readDouble(offsets[10]);
   return object;
 }
 
@@ -192,9 +199,11 @@ P _plantDeserializeProp<P>(
     case 7:
       return (reader.readLong(offset)) as P;
     case 8:
+      return (reader.readBool(offset)) as P;
+    case 9:
       return (_PlanttypeValueEnumMap[reader.readByteOrNull(offset)] ??
           PlantType.photo) as P;
-    case 9:
+    case 10:
       return (reader.readDouble(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -993,6 +1002,16 @@ extension PlantQueryFilter on QueryBuilder<Plant, Plant, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> rootsReachedWaterEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'rootsReachedWater',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterFilterCondition> typeEqualTo(
       PlantType value) {
     return QueryBuilder.apply(this, (query) {
@@ -1206,6 +1225,18 @@ extension PlantQuerySortBy on QueryBuilder<Plant, Plant, QSortBy> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterSortBy> sortByRootsReachedWater() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'rootsReachedWater', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> sortByRootsReachedWaterDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'rootsReachedWater', Sort.desc);
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterSortBy> sortByType() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'type', Sort.asc);
@@ -1328,6 +1359,18 @@ extension PlantQuerySortThenBy on QueryBuilder<Plant, Plant, QSortThenBy> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterSortBy> thenByRootsReachedWater() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'rootsReachedWater', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> thenByRootsReachedWaterDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'rootsReachedWater', Sort.desc);
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterSortBy> thenByType() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'type', Sort.asc);
@@ -1398,6 +1441,12 @@ extension PlantQueryWhereDistinct on QueryBuilder<Plant, Plant, QDistinct> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QDistinct> distinctByRootsReachedWater() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'rootsReachedWater');
+    });
+  }
+
   QueryBuilder<Plant, Plant, QDistinct> distinctByType() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'type');
@@ -1464,6 +1513,12 @@ extension PlantQueryProperty on QueryBuilder<Plant, Plant, QQueryProperty> {
   QueryBuilder<Plant, int, QQueryOperations> plantsUnderLampProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'plantsUnderLamp');
+    });
+  }
+
+  QueryBuilder<Plant, bool, QQueryOperations> rootsReachedWaterProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'rootsReachedWater');
     });
   }
 

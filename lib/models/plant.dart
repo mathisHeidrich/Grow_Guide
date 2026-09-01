@@ -31,6 +31,8 @@ class Plant {
   
   // Background tracking
   List<LogEntry> measurementHistory = [];
+  
+  bool rootsReachedWater = false;
 }
 
 @embedded

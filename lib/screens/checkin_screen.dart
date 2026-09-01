@@ -89,12 +89,15 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               physics: const NeverScrollableScrollPhysics(),
               
               children: [
+                if (_plant!.currentPhase == PlantPhase.veg && !_plant!.rootsReachedWater)
+                  _buildWateringSlide(),
                 _buildSlide(
                   title: l10n.checkinHealthTitle,
                   text: l10n.checkinHealthDesc,
                   icon: Icons.eco,
                   nextButtonText: l10n.checkinHealthNext,
                   onNext: _nextPage,
+                  showBack: _plant!.currentPhase == PlantPhase.veg && !_plant!.rootsReachedWater,
                 ),
                 _buildMeasurementSlide(), // Station 2: Messen
                 _buildLampSlide(),
@@ -118,6 +121,79 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildWateringSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Spacer(),
+          const Icon(Icons.water_drop, size: 80, color: Colors.blueAccent),
+          const SizedBox(height: 32),
+          Text(
+            l10n.checkinWateringTitle,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          Text(
+            l10n.checkinWateringDesc,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.white70,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  side: const BorderSide(color: Colors.white54),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+                onPressed: _nextPage,
+                child: Text(l10n.checkinWateringRootsNotReached),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.growGreen,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+                onPressed: () async {
+                  final db = ref.read(databaseProvider).isar;
+                  await db.writeTxn(() async {
+                    _plant!.rootsReachedWater = true;
+                    await db.plants.put(_plant!);
+                  });
+                  if (mounted) {
+                    setState(() {});
+                    _nextPage();
+                  }
+                },
+                child: Text(
+                  l10n.checkinWateringRootsReached,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+        ],
       ),
     );
   }
