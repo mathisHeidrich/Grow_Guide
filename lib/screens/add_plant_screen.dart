@@ -31,7 +31,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
   int? _plantsUnderLamp = 1;
   final _customPlantsController = TextEditingController();
 
-  PlantPhase _currentPhase = PlantPhase.veg;
+  PlantPhase _currentPhase = PlantPhase.germination;
   final _dayInPhaseController = TextEditingController(text: '1');
 
   final List<double> _volumeOptions = [10.0, 15.0, 20.0, 25.0, 30.0];

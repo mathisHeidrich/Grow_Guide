@@ -82,27 +82,39 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          
+        child: Stack(
           children: [
-            _buildSlide(
-              title: l10n.checkinHealthTitle,
-              text: l10n.checkinHealthDesc,
-              icon: Icons.eco,
-              nextButtonText: l10n.checkinHealthNext,
-              onNext: _nextPage,
+            PageView(
+              controller: _pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              
+              children: [
+                _buildSlide(
+                  title: l10n.checkinHealthTitle,
+                  text: l10n.checkinHealthDesc,
+                  icon: Icons.eco,
+                  nextButtonText: l10n.checkinHealthNext,
+                  onNext: _nextPage,
+                ),
+                _buildMeasurementSlide(), // Station 2: Messen
+                _buildLampSlide(),
+                _buildSlide(
+                  title: l10n.checkinFinishTitle,
+                  text: l10n.checkinFinishDesc,
+                  icon: Icons.check_circle,
+                  nextButtonText: l10n.checkinFinishNext,
+                  onNext: _completeCheckin,
+                  showBack: true,
+                ),
+              ],
             ),
-            _buildMeasurementSlide(), // Station 2: Messen
-            _buildLampSlide(),
-            _buildSlide(
-              title: l10n.checkinFinishTitle,
-              text: l10n.checkinFinishDesc,
-              icon: Icons.check_circle,
-              nextButtonText: l10n.checkinFinishNext,
-              onNext: _completeCheckin,
-              showBack: true,
+            Positioned(
+              top: 16,
+              right: 16,
+              child: IconButton(
+                icon: const Icon(Icons.close, color: Colors.white54, size: 32),
+                onPressed: () => context.go('/'),
+              ),
             ),
           ],
         ),

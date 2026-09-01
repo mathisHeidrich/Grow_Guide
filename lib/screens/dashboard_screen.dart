@@ -96,7 +96,12 @@ class DashboardScreen extends ConsumerWidget {
     Color btnColor = AppColors.growGreen;
     String btnText = l10n.plantStatusCheckOk;
 
-    if (plant.measurementHistory.isNotEmpty) {
+    if (plant.currentPhase == PlantPhase.germination) {
+      btnColor = AppColors.growGreen;
+      btnText = plant.currentDayInPhase == 1 
+          ? l10n.dashboardStartGermination 
+          : l10n.dashboardCheckRoot;
+    } else if (plant.measurementHistory.isNotEmpty) {
       final lastLog = plant.measurementHistory.last;
       final hoursSinceLast =
           ref.watch(timeProvider).difference(lastLog.timestamp).inHours;
