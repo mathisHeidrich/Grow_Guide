@@ -230,7 +230,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               Wrap(
                 spacing: 8,
                 children: _plantsOptions.map((p) => ChoiceChip(
-                  label: Text(p == 4 ? '4+' : '$p'),
+                  label: Text('$p'),
                   selected: _plantsUnderLamp == p,
                   selectedColor: AppColors.growGreen,
                   onSelected: (val) {
