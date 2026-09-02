@@ -102,30 +102,45 @@ class DashboardScreen extends ConsumerWidget {
           ? l10n.dashboardStartGermination 
           : l10n.dashboardCheckRoot;
     } else {
-      int hoursSinceLast = 0;
-      if (plant.measurementHistory.isNotEmpty) {
-        hoursSinceLast = ref.watch(timeProvider).difference(plant.measurementHistory.last.timestamp).inHours;
+      bool isOverdue = false;
+      bool isWarning = false;
+
+      if (plant.measurementHistory.isEmpty) {
+        if (plant.currentDayInPhase > 1) {
+          isOverdue = true; 
+        }
       } else {
-        if (plant.currentDayInPhase == 1) {
-          hoursSinceLast = 0;
+        final now = ref.watch(timeProvider);
+        final last = plant.measurementHistory.last.timestamp;
+        
+        final daysDiff = DateTime(now.year, now.month, now.day)
+            .difference(DateTime(last.year, last.month, last.day))
+            .inDays;
+        final hoursSinceLast = now.difference(last).inHours;
+        
+        bool isNextDayTriggered(int targetDays) {
+          return daysDiff >= targetDays && (hoursSinceLast >= 12 || daysDiff > targetDays);
+        }
+
+        if (!plant.rootsReachedWater) {
+          if (isNextDayTriggered(1)) {
+            isOverdue = true;
+          }
         } else {
-          hoursSinceLast = (plant.currentDayInPhase - 1) * 24;
+          if (isNextDayTriggered(4)) {
+            isOverdue = true;
+          } else if (isNextDayTriggered(1)) {
+            isWarning = true;
+          }
         }
       }
 
-      if (!plant.rootsReachedWater) {
-        if (hoursSinceLast >= 24) {
-          btnColor = AppColors.errorRed;
-          btnText = l10n.plantStatusOverdue;
-        }
-      } else {
-        if (hoursSinceLast >= 96) {
-          btnColor = AppColors.errorRed;
-          btnText = l10n.plantStatusOverdue;
-        } else if (hoursSinceLast >= 24) {
-          btnColor = AppColors.warningAmber;
-          btnText = l10n.plantStatusCheckRecommended;
-        }
+      if (isOverdue) {
+        btnColor = AppColors.errorRed;
+        btnText = l10n.plantStatusOverdue;
+      } else if (isWarning) {
+        btnColor = AppColors.warningAmber;
+        btnText = l10n.plantStatusCheckRecommended;
       }
     }
 
