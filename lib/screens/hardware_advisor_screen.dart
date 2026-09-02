@@ -84,6 +84,12 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         icon: Icons.scatter_plot,
       ),
       _HardwareItemData(
+        title: l10n.hw_starter_cubesTitle,
+        description: l10n.hw_starter_cubesDesc,
+        isRequired: true,
+        icon: Icons.crop_square,
+      ),
+      _HardwareItemData(
         title: l10n.hw_hydro_nutesTitle,
         description: l10n.hw_hydro_nutesDesc,
         isRequired: true,
@@ -108,6 +114,12 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         isRequired: true,
         proTip: l10n.hw_ph_downProTip,
         icon: Icons.arrow_downward,
+      ),
+      _HardwareItemData(
+        title: l10n.hw_ph_upTitle,
+        description: l10n.hw_ph_upDesc,
+        isRequired: true,
+        icon: Icons.arrow_upward,
       ),
       _HardwareItemData(
         title: l10n.hw_timerTitle,
@@ -144,16 +156,21 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
       _HardwareItemData(
         title: l10n.hw_scissorsTitle,
         description: l10n.hw_scissorsDesc,
-        isRequired: false,
+        isRequired: true,
         icon: Icons.cut,
       ),
       _HardwareItemData(
         title: l10n.hw_loupeTitle,
         description: l10n.hw_loupeDesc,
-        isRequired: false,
+        isRequired: true,
         icon: Icons.search,
       ),
     ];
+
+    items.sort((a, b) {
+      if (a.isRequired == b.isRequired) return 0;
+      return a.isRequired ? -1 : 1;
+    });
 
     return Scaffold(
       backgroundColor: const Color(0xFF121212),
@@ -229,20 +246,55 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                   ),
                 ],
                 const Spacer(),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF00E676),
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: const Color(0xFF00E676),
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: const BorderSide(color: Color(0xFF00E676), width: 2),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (_pageController.page != null && _pageController.page!.toInt() > 0) {
+                            _pageController.previousPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          } else {
+                            if (context.canPop()) {
+                              context.pop();
+                            }
+                          }
+                        },
+                        child: const Icon(Icons.arrow_back),
+                      ),
                     ),
-                  ),
-                  onPressed: () => _nextPage(items.length),
-                  child: Text(
-                    index == items.length - 1 ? 'Weiter zur Wasser-Masterclass' : 'Weiter',
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      flex: 3,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF00E676),
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        onPressed: () => _nextPage(items.length),
+                        child: Text(
+                          index == items.length - 1 ? 'Weiter zur Wasser-Masterclass' : 'Weiter',
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 24),
               ],
