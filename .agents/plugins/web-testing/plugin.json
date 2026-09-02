@@ -1,0 +1,4 @@
+{
+  "name": "Web UI Testing MCP",
+  "description": "Provides Puppeteer-based browser automation tools for autonomously testing Flutter Web Apps."
+}
