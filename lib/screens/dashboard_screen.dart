@@ -104,8 +104,9 @@ class DashboardScreen extends ConsumerWidget {
         btnText = l10n.dashboardStartGermination;
       } else {
         final now = ref.watch(timeProvider);
-        final elapsedHours = plant.phaseStartDate != null 
-            ? now.difference(plant.phaseStartDate!).inHours 
+        final referenceDate = plant.lastGerminationCheck ?? plant.phaseStartDate;
+        final elapsedHours = referenceDate != null 
+            ? now.difference(referenceDate).inHours 
             : 0;
             
         if (elapsedHours < 12) {

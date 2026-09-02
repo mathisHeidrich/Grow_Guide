@@ -38,46 +38,51 @@ const PlantSchema = CollectionSchema(
       name: r'lampWattage',
       type: IsarType.long,
     ),
-    r'measurementHistory': PropertySchema(
+    r'lastGerminationCheck': PropertySchema(
       id: 4,
+      name: r'lastGerminationCheck',
+      type: IsarType.dateTime,
+    ),
+    r'measurementHistory': PropertySchema(
+      id: 5,
       name: r'measurementHistory',
       type: IsarType.objectList,
       target: r'LogEntry',
     ),
     r'name': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'name',
       type: IsarType.string,
     ),
     r'nutrientBrand': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'nutrientBrand',
       type: IsarType.byte,
       enumMap: _PlantnutrientBrandEnumValueMap,
     ),
     r'phaseStartDate': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'phaseStartDate',
       type: IsarType.dateTime,
     ),
     r'plantsUnderLamp': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'plantsUnderLamp',
       type: IsarType.long,
     ),
     r'rootsReachedWater': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'rootsReachedWater',
       type: IsarType.bool,
     ),
     r'type': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'type',
       type: IsarType.byte,
       enumMap: _PlanttypeEnumValueMap,
     ),
     r'waterVolumeLiters': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'waterVolumeLiters',
       type: IsarType.double,
     )
@@ -125,19 +130,20 @@ void _plantSerialize(
   writer.writeBool(offsets[1], object.germinationStarted);
   writer.writeString(offsets[2], object.lampType);
   writer.writeLong(offsets[3], object.lampWattage);
+  writer.writeDateTime(offsets[4], object.lastGerminationCheck);
   writer.writeObjectList<LogEntry>(
-    offsets[4],
+    offsets[5],
     allOffsets,
     LogEntrySchema.serialize,
     object.measurementHistory,
   );
-  writer.writeString(offsets[5], object.name);
-  writer.writeByte(offsets[6], object.nutrientBrand.index);
-  writer.writeDateTime(offsets[7], object.phaseStartDate);
-  writer.writeLong(offsets[8], object.plantsUnderLamp);
-  writer.writeBool(offsets[9], object.rootsReachedWater);
-  writer.writeByte(offsets[10], object.type.index);
-  writer.writeDouble(offsets[11], object.waterVolumeLiters);
+  writer.writeString(offsets[6], object.name);
+  writer.writeByte(offsets[7], object.nutrientBrand.index);
+  writer.writeDateTime(offsets[8], object.phaseStartDate);
+  writer.writeLong(offsets[9], object.plantsUnderLamp);
+  writer.writeBool(offsets[10], object.rootsReachedWater);
+  writer.writeByte(offsets[11], object.type.index);
+  writer.writeDouble(offsets[12], object.waterVolumeLiters);
 }
 
 Plant _plantDeserialize(
@@ -154,23 +160,24 @@ Plant _plantDeserialize(
   object.id = id;
   object.lampType = reader.readString(offsets[2]);
   object.lampWattage = reader.readLong(offsets[3]);
+  object.lastGerminationCheck = reader.readDateTimeOrNull(offsets[4]);
   object.measurementHistory = reader.readObjectList<LogEntry>(
-        offsets[4],
+        offsets[5],
         LogEntrySchema.deserialize,
         allOffsets,
         LogEntry(),
       ) ??
       [];
-  object.name = reader.readString(offsets[5]);
+  object.name = reader.readString(offsets[6]);
   object.nutrientBrand =
-      _PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offsets[6])] ??
+      _PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offsets[7])] ??
           NutrientBrand.cannaAqua;
-  object.phaseStartDate = reader.readDateTimeOrNull(offsets[7]);
-  object.plantsUnderLamp = reader.readLong(offsets[8]);
-  object.rootsReachedWater = reader.readBool(offsets[9]);
-  object.type = _PlanttypeValueEnumMap[reader.readByteOrNull(offsets[10])] ??
+  object.phaseStartDate = reader.readDateTimeOrNull(offsets[8]);
+  object.plantsUnderLamp = reader.readLong(offsets[9]);
+  object.rootsReachedWater = reader.readBool(offsets[10]);
+  object.type = _PlanttypeValueEnumMap[reader.readByteOrNull(offsets[11])] ??
       PlantType.photo;
-  object.waterVolumeLiters = reader.readDouble(offsets[11]);
+  object.waterVolumeLiters = reader.readDouble(offsets[12]);
   return object;
 }
 
@@ -191,6 +198,8 @@ P _plantDeserializeProp<P>(
     case 3:
       return (reader.readLong(offset)) as P;
     case 4:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 5:
       return (reader.readObjectList<LogEntry>(
             offset,
             LogEntrySchema.deserialize,
@@ -198,21 +207,21 @@ P _plantDeserializeProp<P>(
             LogEntry(),
           ) ??
           []) as P;
-    case 5:
-      return (reader.readString(offset)) as P;
     case 6:
+      return (reader.readString(offset)) as P;
+    case 7:
       return (_PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offset)] ??
           NutrientBrand.cannaAqua) as P;
-    case 7:
-      return (reader.readDateTimeOrNull(offset)) as P;
     case 8:
-      return (reader.readLong(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 9:
-      return (reader.readBool(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 10:
+      return (reader.readBool(offset)) as P;
+    case 11:
       return (_PlanttypeValueEnumMap[reader.readByteOrNull(offset)] ??
           PlantType.photo) as P;
-    case 11:
+    case 12:
       return (reader.readDouble(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -636,6 +645,79 @@ extension PlantQueryFilter on QueryBuilder<Plant, Plant, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'lampWattage',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition>
+      lastGerminationCheckIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'lastGerminationCheck',
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition>
+      lastGerminationCheckIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'lastGerminationCheck',
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> lastGerminationCheckEqualTo(
+      DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'lastGerminationCheck',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition>
+      lastGerminationCheckGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'lastGerminationCheck',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition>
+      lastGerminationCheckLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'lastGerminationCheck',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> lastGerminationCheckBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'lastGerminationCheck',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -1223,6 +1305,18 @@ extension PlantQuerySortBy on QueryBuilder<Plant, Plant, QSortBy> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterSortBy> sortByLastGerminationCheck() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastGerminationCheck', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> sortByLastGerminationCheckDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastGerminationCheck', Sort.desc);
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1369,6 +1463,18 @@ extension PlantQuerySortThenBy on QueryBuilder<Plant, Plant, QSortThenBy> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterSortBy> thenByLastGerminationCheck() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastGerminationCheck', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> thenByLastGerminationCheckDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'lastGerminationCheck', Sort.desc);
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -1480,6 +1586,12 @@ extension PlantQueryWhereDistinct on QueryBuilder<Plant, Plant, QDistinct> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QDistinct> distinctByLastGerminationCheck() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'lastGerminationCheck');
+    });
+  }
+
   QueryBuilder<Plant, Plant, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1552,6 +1664,13 @@ extension PlantQueryProperty on QueryBuilder<Plant, Plant, QQueryProperty> {
   QueryBuilder<Plant, int, QQueryOperations> lampWattageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'lampWattage');
+    });
+  }
+
+  QueryBuilder<Plant, DateTime?, QQueryOperations>
+      lastGerminationCheckProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'lastGerminationCheck');
     });
   }
 

@@ -36,8 +36,9 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
       
       if (_plant!.germinationStarted) {
         final now = ref.read(timeProvider);
-        final elapsedHours = _plant!.phaseStartDate != null
-            ? now.difference(_plant!.phaseStartDate!).inHours
+        final referenceDate = _plant!.lastGerminationCheck ?? _plant!.phaseStartDate;
+        final elapsedHours = referenceDate != null
+            ? now.difference(referenceDate).inHours
             : 0;
             
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -80,6 +81,18 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
     await db.writeTxn(() async {
       _plant!.germinationStarted = true;
       _plant!.phaseStartDate = ref.read(timeProvider);
+      await db.plants.put(_plant!);
+    });
+
+    if (mounted) context.go('/');
+  }
+
+  Future<void> _markRootChecked() async {
+    if (_plant == null) return;
+    
+    final db = ref.read(databaseProvider).isar;
+    await db.writeTxn(() async {
+      _plant!.lastGerminationCheck = ref.read(timeProvider);
       await db.plants.put(_plant!);
     });
 
@@ -153,7 +166,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
                   text: l10n.germinationDesc5,
                   icon: Icons.timelapse,
                   nextButtonText: l10n.germinationToDashboard,
-                  onNext: () => context.go('/'),
+                  onNext: _markRootChecked,
                   showBack: true,
                   onBack: () => _jumpToPage(4),
                 ),

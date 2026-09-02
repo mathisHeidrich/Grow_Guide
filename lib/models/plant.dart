@@ -43,6 +43,7 @@ class Plant {
   bool rootsReachedWater = false;
   
   bool germinationStarted = false;
+  DateTime? lastGerminationCheck;
 }
 
 @embedded
