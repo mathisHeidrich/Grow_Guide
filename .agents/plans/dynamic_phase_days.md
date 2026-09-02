@@ -8,7 +8,7 @@ Wir müssen uns merken, **wann** eine Phase gestartet wurde, anstatt nur die sta
 
 ### Änderungen am Datenbank-Modell (`Plant`)
 - **[NEU]** Feld `DateTime? phaseStartDate`: Speichert den genauen Zeitpunkt, an dem die aktuelle Phase (z.B. Vegi oder Blüte) begonnen hat.
-- **[ÄNDERUNG]** Das Feld `currentDayInPhase` ignorieren/löschen wir aus der DB und ersetzen es durch eine Methode, die den Tag live berechnet. Da Isar keine dynamischen Felder out-of-the-box in Abfragen mag (wenn man nicht danach filtert, ist es egal), ignorieren wir das Feld in Isar per `@ignore` oder entfernen es, und machen eine Funktion `int getDayInPhase(DateTime now)`.
+- **[ÄNDERUNG]** Das Feld `currentDayInPhase` ignorieren/löschen wir aus der DB und ersetzen es durch eine Methode, die den Tag live berechnet. Da Drift dynamische Getter unterstützt, ignorieren wir das Feld einfach in der Datenbanktabelle, und machen eine Funktion `int getDayInPhase(DateTime now)`.
 
 ```dart
 int getDayInPhase(DateTime now) {

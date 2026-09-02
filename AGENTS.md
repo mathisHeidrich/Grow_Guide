@@ -18,7 +18,7 @@
 - **TEAMWORK / SUBAGENTS:** If a task can be parallelized, invoke subagents using the `branch` or `share` workspace mode so they can work on separate branches simultaneously.
 
 ## Project Knowledge & Architecture
-- **TECH STACK:** Flutter, Riverpod (State Management & Dependency Injection), Isar (Local Database), GoRouter (Navigation).
+- **TECH STACK:** Flutter, Riverpod (State Management & Dependency Injection), Drift (SQLite Local Database), GoRouter (Navigation).
 - **DOMAIN:** "Grow Guide" - A highly guided, step-by-step tutorial app for cannabis cultivation (specifically Deep Water Culture / DWC). The app actively guides users through all life cycle phases: onboarding, germination, veg, flower, drying, curing, and archived.
 - **UI/THEMING:** Dark mode by default (Scaffold: `#121212`, Cards: `#1E1E1E`, Primary: `#00E676`). Use `Theme.of(context)` rather than hardcoded colors where possible.
   

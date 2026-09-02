@@ -61,6 +61,6 @@ Die Reihenfolge der Karten sollte einer logischen Aufbau-Reihenfolge folgen.
 ## 4. TECHNISCHER UNTERBAU
 
 *   **UI-Komponente:** Umsetzung mittels `PageView.builder` für performantes Swiping der einzelnen Karten.
-*   **Keine Checkliste:** Das Isar-Modell `HardwareItem` (Speicherung des "Abgehakt"-Status) entfällt, da es sich rein um ein Info-Erlebnis handelt.
+*   **Keine Checkliste:** Das Drift-Modell `HardwareItem` (Speicherung des "Abgehakt"-Status) entfällt, da es sich rein um ein Info-Erlebnis handelt.
 *   **Lokalisierung:** Texte werden via `app_de.arb` eingebunden.
 *   **Flow:** Nach der letzten Karte erscheint ein Button "Weiter zur Wasser-Masterclass".
