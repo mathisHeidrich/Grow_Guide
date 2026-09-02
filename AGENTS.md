@@ -44,7 +44,7 @@ When the user requests changes to meta-project files, documentation (like `AGENT
 - **USE SUB-AGENTS:** Never implement features yourself when possible. Identify changes from the plan that can be implemented in parallel, and use sub-agents to implement the features efficiently. Act as a coordinator only.
 - **COMMIT FREQUENTLY:** Make a commit immediately after each logical change or step. Do not wait until the very end.
 - **QUALITY CHECKS:** After completing features (large or small), always run commands like lint, type check and build to check code quality.
-- **AUTOMATED UI TESTING:** Always test UI/App changes autonomously in a sub-agent using the web-testing plugin (Puppeteer MCP). Run a background session (`flutter run -d web-server --web-renderer html --web-port 8080`) and trigger hot reload ('r') between code changes instead of restarting the server.
+- **AUTOMATED TESTING:** Always test UI/App changes autonomously in a sub-agent using the web-testing plugin (Puppeteer MCP). Run a background session (`flutter run -d web-server --web-renderer html --web-port 8080`) and trigger hot reload ('r') between code changes instead of restarting the server.
 - **CODE REVIEW:** Use a sub-agent to search for dead code, unneeded complexity, or duplicate functionality in the whole codebase.
 
 ## 5. RESPONSES
