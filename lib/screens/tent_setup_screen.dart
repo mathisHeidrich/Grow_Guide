@@ -56,6 +56,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle1,
               text: l10n.tentDesc1,
+              tipText: l10n.tentTip1,
               icon: Icons.place,
               nextButtonText: l10n.tentNext1,
               onNext: _nextPage,
@@ -63,7 +64,8 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle2,
               text: l10n.tentDesc2,
-              icon: Icons.air,
+              tipText: l10n.tentTip2,
+              icon: Icons.filter_alt,
               nextButtonText: l10n.tentNext2,
               onNext: _nextPage,
               showBack: true,
@@ -71,7 +73,8 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle3,
               text: l10n.tentDesc3,
-              icon: Icons.lightbulb,
+              tipText: l10n.tentTip3,
+              icon: Icons.air,
               nextButtonText: l10n.tentNext3,
               onNext: _nextPage,
               showBack: true,
@@ -79,7 +82,8 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle4,
               text: l10n.tentDesc4,
-              icon: Icons.cyclone,
+              tipText: l10n.tentTip4,
+              icon: Icons.lightbulb,
               nextButtonText: l10n.tentNext4,
               onNext: _nextPage,
               showBack: true,
@@ -87,7 +91,8 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle5,
               text: l10n.tentDesc5,
-              icon: Icons.water,
+              tipText: l10n.tentTip5,
+              icon: Icons.cyclone,
               nextButtonText: l10n.tentNext5,
               onNext: _nextPage,
               showBack: true,
@@ -95,8 +100,8 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle6,
               text: l10n.tentDesc6,
-              icon: Icons.warning,
-              iconColor: const Color(0xFFFF5252),
+              tipText: l10n.tentTip6,
+              icon: Icons.delete,
               nextButtonText: l10n.tentNext6,
               onNext: _nextPage,
               showBack: true,
@@ -104,7 +109,9 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle7,
               text: l10n.tentDesc7,
-              icon: Icons.timer,
+              tipText: l10n.tentTip7,
+              icon: Icons.bubble_chart,
+              iconColor: const Color(0xFFFF5252), // warning color for safety tip
               nextButtonText: l10n.tentNext7,
               onNext: _nextPage,
               showBack: true,
@@ -112,8 +119,28 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle8,
               text: l10n.tentDesc8,
-              icon: Icons.check_circle,
+              tipText: l10n.tentTip8,
+              icon: Icons.warning,
+              iconColor: const Color(0xFFFF5252), // warning color for safety tip
               nextButtonText: l10n.tentNext8,
+              onNext: _nextPage,
+              showBack: true,
+            ),
+            _buildSlide(
+              title: l10n.tentTitle9,
+              text: l10n.tentDesc9,
+              tipText: l10n.tentTip9,
+              icon: Icons.timer,
+              nextButtonText: l10n.tentNext9,
+              onNext: _nextPage,
+              showBack: true,
+            ),
+            _buildSlide(
+              title: l10n.tentTitle10,
+              text: l10n.tentDesc10,
+              tipText: l10n.tentTip10,
+              icon: Icons.check_circle,
+              nextButtonText: l10n.tentNext10,
               onNext: _completeSetup,
               showBack: true,
             ),
@@ -126,6 +153,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
   Widget _buildSlide({
     required String title,
     required String text,
+    String? tipText,
     required IconData icon,
     Color iconColor = const Color(0xFF00E676),
     required String nextButtonText,
@@ -158,6 +186,22 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
                 ),
             textAlign: TextAlign.center,
           ),
+          if (tipText != null) ...[
+            const SizedBox(height: 24),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1E1E1E),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: const Color(0xFF00E676).withOpacity(0.3)),
+              ),
+              child: Text(
+                tipText,
+                style: const TextStyle(color: Color(0xFF00E676)),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
           const Spacer(),
           Row(
             children: [
@@ -234,12 +278,11 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
           const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1E1E1E), // Secondary button
-              foregroundColor: Colors.white,
+              backgroundColor: const Color(0xFF00E676),
+              foregroundColor: Colors.black,
               padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: Color(0xFF00E676)),
               ),
             ),
             onPressed: _nextPage,
@@ -251,11 +294,12 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
           const SizedBox(height: 16),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00E676),
-              foregroundColor: Colors.black,
+              backgroundColor: const Color(0xFF1E1E1E), // Secondary button
+              foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
+                side: const BorderSide(color: Color(0xFF00E676)),
               ),
             ),
             onPressed: _completeSetup,
