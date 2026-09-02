@@ -37,6 +37,7 @@
   "plantStatusCheckRecommended": "Check empfohlen",
   "plantStatusFirstCheckNeeded": "Erster Check nötig",
   "dashboardStartGermination": "Keimung starten",
+  "dashboardWaitGermination": "Warten (12-24h)",
   "dashboardCheckRoot": "Wurzel prüfen",
   "phaseOnboarding": "Onboarding",
   "phaseGermination": "Keimung",

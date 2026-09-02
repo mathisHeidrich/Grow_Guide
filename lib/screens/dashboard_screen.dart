@@ -99,10 +99,23 @@ class DashboardScreen extends ConsumerWidget {
     final currentDayInPhase = plant.getDayInPhase(ref.watch(timeProvider));
 
     if (plant.currentPhase == PlantPhase.germination) {
-      btnColor = AppColors.growGreen;
-      btnText = currentDayInPhase == 1 
-          ? l10n.dashboardStartGermination 
-          : l10n.dashboardCheckRoot;
+      if (!plant.germinationStarted) {
+        btnColor = AppColors.growGreen;
+        btnText = l10n.dashboardStartGermination;
+      } else {
+        final now = ref.watch(timeProvider);
+        final elapsedHours = plant.phaseStartDate != null 
+            ? now.difference(plant.phaseStartDate!).inHours 
+            : 0;
+            
+        if (elapsedHours < 12) {
+          btnColor = AppColors.growGreen;
+          btnText = l10n.dashboardWaitGermination;
+        } else {
+          btnColor = AppColors.growGreen;
+          btnText = l10n.dashboardCheckRoot;
+        }
+      }
     } else {
       bool isOverdue = false;
       bool isWarning = false;

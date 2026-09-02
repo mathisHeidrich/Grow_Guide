@@ -23,56 +23,61 @@ const PlantSchema = CollectionSchema(
       type: IsarType.byte,
       enumMap: _PlantcurrentPhaseEnumValueMap,
     ),
-    r'lampType': PropertySchema(
+    r'germinationStarted': PropertySchema(
       id: 1,
+      name: r'germinationStarted',
+      type: IsarType.bool,
+    ),
+    r'lampType': PropertySchema(
+      id: 2,
       name: r'lampType',
       type: IsarType.string,
     ),
     r'lampWattage': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'lampWattage',
       type: IsarType.long,
     ),
     r'measurementHistory': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'measurementHistory',
       type: IsarType.objectList,
       target: r'LogEntry',
     ),
     r'name': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'name',
       type: IsarType.string,
     ),
     r'nutrientBrand': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'nutrientBrand',
       type: IsarType.byte,
       enumMap: _PlantnutrientBrandEnumValueMap,
     ),
     r'phaseStartDate': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'phaseStartDate',
       type: IsarType.dateTime,
     ),
     r'plantsUnderLamp': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'plantsUnderLamp',
       type: IsarType.long,
     ),
     r'rootsReachedWater': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'rootsReachedWater',
       type: IsarType.bool,
     ),
     r'type': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'type',
       type: IsarType.byte,
       enumMap: _PlanttypeEnumValueMap,
     ),
     r'waterVolumeLiters': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'waterVolumeLiters',
       type: IsarType.double,
     )
@@ -117,21 +122,22 @@ void _plantSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeByte(offsets[0], object.currentPhase.index);
-  writer.writeString(offsets[1], object.lampType);
-  writer.writeLong(offsets[2], object.lampWattage);
+  writer.writeBool(offsets[1], object.germinationStarted);
+  writer.writeString(offsets[2], object.lampType);
+  writer.writeLong(offsets[3], object.lampWattage);
   writer.writeObjectList<LogEntry>(
-    offsets[3],
+    offsets[4],
     allOffsets,
     LogEntrySchema.serialize,
     object.measurementHistory,
   );
-  writer.writeString(offsets[4], object.name);
-  writer.writeByte(offsets[5], object.nutrientBrand.index);
-  writer.writeDateTime(offsets[6], object.phaseStartDate);
-  writer.writeLong(offsets[7], object.plantsUnderLamp);
-  writer.writeBool(offsets[8], object.rootsReachedWater);
-  writer.writeByte(offsets[9], object.type.index);
-  writer.writeDouble(offsets[10], object.waterVolumeLiters);
+  writer.writeString(offsets[5], object.name);
+  writer.writeByte(offsets[6], object.nutrientBrand.index);
+  writer.writeDateTime(offsets[7], object.phaseStartDate);
+  writer.writeLong(offsets[8], object.plantsUnderLamp);
+  writer.writeBool(offsets[9], object.rootsReachedWater);
+  writer.writeByte(offsets[10], object.type.index);
+  writer.writeDouble(offsets[11], object.waterVolumeLiters);
 }
 
 Plant _plantDeserialize(
@@ -144,26 +150,27 @@ Plant _plantDeserialize(
   object.currentPhase =
       _PlantcurrentPhaseValueEnumMap[reader.readByteOrNull(offsets[0])] ??
           PlantPhase.onboarding;
+  object.germinationStarted = reader.readBool(offsets[1]);
   object.id = id;
-  object.lampType = reader.readString(offsets[1]);
-  object.lampWattage = reader.readLong(offsets[2]);
+  object.lampType = reader.readString(offsets[2]);
+  object.lampWattage = reader.readLong(offsets[3]);
   object.measurementHistory = reader.readObjectList<LogEntry>(
-        offsets[3],
+        offsets[4],
         LogEntrySchema.deserialize,
         allOffsets,
         LogEntry(),
       ) ??
       [];
-  object.name = reader.readString(offsets[4]);
+  object.name = reader.readString(offsets[5]);
   object.nutrientBrand =
-      _PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offsets[5])] ??
+      _PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offsets[6])] ??
           NutrientBrand.cannaAqua;
-  object.phaseStartDate = reader.readDateTimeOrNull(offsets[6]);
-  object.plantsUnderLamp = reader.readLong(offsets[7]);
-  object.rootsReachedWater = reader.readBool(offsets[8]);
-  object.type = _PlanttypeValueEnumMap[reader.readByteOrNull(offsets[9])] ??
+  object.phaseStartDate = reader.readDateTimeOrNull(offsets[7]);
+  object.plantsUnderLamp = reader.readLong(offsets[8]);
+  object.rootsReachedWater = reader.readBool(offsets[9]);
+  object.type = _PlanttypeValueEnumMap[reader.readByteOrNull(offsets[10])] ??
       PlantType.photo;
-  object.waterVolumeLiters = reader.readDouble(offsets[10]);
+  object.waterVolumeLiters = reader.readDouble(offsets[11]);
   return object;
 }
 
@@ -178,10 +185,12 @@ P _plantDeserializeProp<P>(
       return (_PlantcurrentPhaseValueEnumMap[reader.readByteOrNull(offset)] ??
           PlantPhase.onboarding) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 2:
-      return (reader.readLong(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 3:
+      return (reader.readLong(offset)) as P;
+    case 4:
       return (reader.readObjectList<LogEntry>(
             offset,
             LogEntrySchema.deserialize,
@@ -189,21 +198,21 @@ P _plantDeserializeProp<P>(
             LogEntry(),
           ) ??
           []) as P;
-    case 4:
-      return (reader.readString(offset)) as P;
     case 5:
+      return (reader.readString(offset)) as P;
+    case 6:
       return (_PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offset)] ??
           NutrientBrand.cannaAqua) as P;
-    case 6:
-      return (reader.readDateTimeOrNull(offset)) as P;
     case 7:
-      return (reader.readLong(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 8:
-      return (reader.readBool(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 9:
+      return (reader.readBool(offset)) as P;
+    case 10:
       return (_PlanttypeValueEnumMap[reader.readByteOrNull(offset)] ??
           PlantType.photo) as P;
-    case 10:
+    case 11:
       return (reader.readDouble(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -386,6 +395,16 @@ extension PlantQueryFilter on QueryBuilder<Plant, Plant, QFilterCondition> {
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> germinationStartedEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'germinationStarted',
+        value: value,
       ));
     });
   }
@@ -1168,6 +1187,18 @@ extension PlantQuerySortBy on QueryBuilder<Plant, Plant, QSortBy> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterSortBy> sortByGerminationStarted() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'germinationStarted', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> sortByGerminationStartedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'germinationStarted', Sort.desc);
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterSortBy> sortByLampType() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'lampType', Sort.asc);
@@ -1287,6 +1318,18 @@ extension PlantQuerySortThenBy on QueryBuilder<Plant, Plant, QSortThenBy> {
   QueryBuilder<Plant, Plant, QAfterSortBy> thenByCurrentPhaseDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'currentPhase', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> thenByGerminationStarted() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'germinationStarted', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> thenByGerminationStartedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'germinationStarted', Sort.desc);
     });
   }
 
@@ -1418,6 +1461,12 @@ extension PlantQueryWhereDistinct on QueryBuilder<Plant, Plant, QDistinct> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QDistinct> distinctByGerminationStarted() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'germinationStarted');
+    });
+  }
+
   QueryBuilder<Plant, Plant, QDistinct> distinctByLampType(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1485,6 +1534,12 @@ extension PlantQueryProperty on QueryBuilder<Plant, Plant, QQueryProperty> {
   QueryBuilder<Plant, PlantPhase, QQueryOperations> currentPhaseProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'currentPhase');
+    });
+  }
+
+  QueryBuilder<Plant, bool, QQueryOperations> germinationStartedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'germinationStarted');
     });
   }
 

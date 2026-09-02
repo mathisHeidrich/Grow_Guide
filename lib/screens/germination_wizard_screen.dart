@@ -33,9 +33,19 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
     final plant = await db.plants.get(widget.plantId);
     if (mounted && plant != null) {
       setState(() => _plant = plant);
-      if (_plant!.getDayInPhase(ref.read(timeProvider)) >= 2) {
+      
+      if (_plant!.germinationStarted) {
+        final now = ref.read(timeProvider);
+        final elapsedHours = _plant!.phaseStartDate != null
+            ? now.difference(_plant!.phaseStartDate!).inHours
+            : 0;
+            
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          _pageController.jumpToPage(4);
+          if (elapsedHours < 12) {
+            _pageController.jumpToPage(3);
+          } else {
+            _pageController.jumpToPage(4);
+          }
         });
       }
     }
@@ -68,6 +78,8 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
     
     final db = ref.read(databaseProvider).isar;
     await db.writeTxn(() async {
+      _plant!.germinationStarted = true;
+      _plant!.phaseStartDate = ref.read(timeProvider);
       await db.plants.put(_plant!);
     });
 

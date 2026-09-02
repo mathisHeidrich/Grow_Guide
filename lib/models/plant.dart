@@ -41,6 +41,8 @@ class Plant {
   List<LogEntry> measurementHistory = [];
   
   bool rootsReachedWater = false;
+  
+  bool germinationStarted = false;
 }
 
 @embedded
