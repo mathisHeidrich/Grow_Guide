@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../providers/time_provider.dart';
+
 import '../providers/database_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/plant.dart';
@@ -31,7 +33,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
     final plant = await db.plants.get(widget.plantId);
     if (mounted && plant != null) {
       setState(() => _plant = plant);
-      if (_plant!.currentDayInPhase >= 2) {
+      if (_plant!.getDayInPhase(ref.read(timeProvider)) >= 2) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _pageController.jumpToPage(4);
         });
@@ -66,7 +68,6 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
     
     final db = ref.read(databaseProvider).isar;
     await db.writeTxn(() async {
-      _plant!.currentDayInPhase = 2;
       await db.plants.put(_plant!);
     });
 
@@ -79,7 +80,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
     final db = ref.read(databaseProvider).isar;
     await db.writeTxn(() async {
       _plant!.currentPhase = PlantPhase.veg;
-      _plant!.currentDayInPhase = 1;
+      _plant!.phaseStartDate = ref.read(timeProvider);
       await db.plants.put(_plant!);
     });
 

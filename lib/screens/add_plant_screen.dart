@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../providers/time_provider.dart';
+
 import '../providers/database_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/plant.dart';
@@ -58,10 +60,13 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
     int finalPlants = _plantsUnderLamp ?? int.tryParse(_customPlantsController.text) ?? 1;
     int finalDay = int.tryParse(_dayInPhaseController.text) ?? 1;
 
+    final now = ref.read(timeProvider);
+    final phaseStart = now.subtract(Duration(days: finalDay - 1));
+
     final newPlant = Plant()
       ..name = _name
       ..currentPhase = _currentPhase
-      ..currentDayInPhase = finalDay
+      ..phaseStartDate = phaseStart
       ..waterVolumeLiters = finalVolume
       ..nutrientBrand = _nutrientBrand
       ..type = _plantType

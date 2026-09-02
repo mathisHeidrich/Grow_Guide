@@ -17,43 +17,43 @@ const PlantSchema = CollectionSchema(
   name: r'Plant',
   id: 3202799289401311532,
   properties: {
-    r'currentDayInPhase': PropertySchema(
-      id: 0,
-      name: r'currentDayInPhase',
-      type: IsarType.long,
-    ),
     r'currentPhase': PropertySchema(
-      id: 1,
+      id: 0,
       name: r'currentPhase',
       type: IsarType.byte,
       enumMap: _PlantcurrentPhaseEnumValueMap,
     ),
     r'lampType': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'lampType',
       type: IsarType.string,
     ),
     r'lampWattage': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'lampWattage',
       type: IsarType.long,
     ),
     r'measurementHistory': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'measurementHistory',
       type: IsarType.objectList,
       target: r'LogEntry',
     ),
     r'name': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'name',
       type: IsarType.string,
     ),
     r'nutrientBrand': PropertySchema(
-      id: 6,
+      id: 5,
       name: r'nutrientBrand',
       type: IsarType.byte,
       enumMap: _PlantnutrientBrandEnumValueMap,
+    ),
+    r'phaseStartDate': PropertySchema(
+      id: 6,
+      name: r'phaseStartDate',
+      type: IsarType.dateTime,
     ),
     r'plantsUnderLamp': PropertySchema(
       id: 7,
@@ -116,18 +116,18 @@ void _plantSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeLong(offsets[0], object.currentDayInPhase);
-  writer.writeByte(offsets[1], object.currentPhase.index);
-  writer.writeString(offsets[2], object.lampType);
-  writer.writeLong(offsets[3], object.lampWattage);
+  writer.writeByte(offsets[0], object.currentPhase.index);
+  writer.writeString(offsets[1], object.lampType);
+  writer.writeLong(offsets[2], object.lampWattage);
   writer.writeObjectList<LogEntry>(
-    offsets[4],
+    offsets[3],
     allOffsets,
     LogEntrySchema.serialize,
     object.measurementHistory,
   );
-  writer.writeString(offsets[5], object.name);
-  writer.writeByte(offsets[6], object.nutrientBrand.index);
+  writer.writeString(offsets[4], object.name);
+  writer.writeByte(offsets[5], object.nutrientBrand.index);
+  writer.writeDateTime(offsets[6], object.phaseStartDate);
   writer.writeLong(offsets[7], object.plantsUnderLamp);
   writer.writeBool(offsets[8], object.rootsReachedWater);
   writer.writeByte(offsets[9], object.type.index);
@@ -141,24 +141,24 @@ Plant _plantDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Plant();
-  object.currentDayInPhase = reader.readLong(offsets[0]);
   object.currentPhase =
-      _PlantcurrentPhaseValueEnumMap[reader.readByteOrNull(offsets[1])] ??
+      _PlantcurrentPhaseValueEnumMap[reader.readByteOrNull(offsets[0])] ??
           PlantPhase.onboarding;
   object.id = id;
-  object.lampType = reader.readString(offsets[2]);
-  object.lampWattage = reader.readLong(offsets[3]);
+  object.lampType = reader.readString(offsets[1]);
+  object.lampWattage = reader.readLong(offsets[2]);
   object.measurementHistory = reader.readObjectList<LogEntry>(
-        offsets[4],
+        offsets[3],
         LogEntrySchema.deserialize,
         allOffsets,
         LogEntry(),
       ) ??
       [];
-  object.name = reader.readString(offsets[5]);
+  object.name = reader.readString(offsets[4]);
   object.nutrientBrand =
-      _PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offsets[6])] ??
+      _PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offsets[5])] ??
           NutrientBrand.cannaAqua;
+  object.phaseStartDate = reader.readDateTimeOrNull(offsets[6]);
   object.plantsUnderLamp = reader.readLong(offsets[7]);
   object.rootsReachedWater = reader.readBool(offsets[8]);
   object.type = _PlanttypeValueEnumMap[reader.readByteOrNull(offsets[9])] ??
@@ -175,15 +175,13 @@ P _plantDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLong(offset)) as P;
-    case 1:
       return (_PlantcurrentPhaseValueEnumMap[reader.readByteOrNull(offset)] ??
           PlantPhase.onboarding) as P;
-    case 2:
+    case 1:
       return (reader.readString(offset)) as P;
-    case 3:
+    case 2:
       return (reader.readLong(offset)) as P;
-    case 4:
+    case 3:
       return (reader.readObjectList<LogEntry>(
             offset,
             LogEntrySchema.deserialize,
@@ -191,11 +189,13 @@ P _plantDeserializeProp<P>(
             LogEntry(),
           ) ??
           []) as P;
-    case 5:
+    case 4:
       return (reader.readString(offset)) as P;
-    case 6:
+    case 5:
       return (_PlantnutrientBrandValueEnumMap[reader.readByteOrNull(offset)] ??
           NutrientBrand.cannaAqua) as P;
+    case 6:
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 7:
       return (reader.readLong(offset)) as P;
     case 8:
@@ -337,60 +337,6 @@ extension PlantQueryWhere on QueryBuilder<Plant, Plant, QWhereClause> {
 }
 
 extension PlantQueryFilter on QueryBuilder<Plant, Plant, QFilterCondition> {
-  QueryBuilder<Plant, Plant, QAfterFilterCondition> currentDayInPhaseEqualTo(
-      int value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'currentDayInPhase',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Plant, Plant, QAfterFilterCondition>
-      currentDayInPhaseGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'currentDayInPhase',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Plant, Plant, QAfterFilterCondition> currentDayInPhaseLessThan(
-    int value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'currentDayInPhase',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Plant, Plant, QAfterFilterCondition> currentDayInPhaseBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'currentDayInPhase',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
   QueryBuilder<Plant, Plant, QAfterFilterCondition> currentPhaseEqualTo(
       PlantPhase value) {
     return QueryBuilder.apply(this, (query) {
@@ -949,6 +895,75 @@ extension PlantQueryFilter on QueryBuilder<Plant, Plant, QFilterCondition> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> phaseStartDateIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'phaseStartDate',
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> phaseStartDateIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'phaseStartDate',
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> phaseStartDateEqualTo(
+      DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'phaseStartDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> phaseStartDateGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'phaseStartDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> phaseStartDateLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'phaseStartDate',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterFilterCondition> phaseStartDateBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'phaseStartDate',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterFilterCondition> plantsUnderLampEqualTo(
       int value) {
     return QueryBuilder.apply(this, (query) {
@@ -1141,18 +1156,6 @@ extension PlantQueryObject on QueryBuilder<Plant, Plant, QFilterCondition> {
 extension PlantQueryLinks on QueryBuilder<Plant, Plant, QFilterCondition> {}
 
 extension PlantQuerySortBy on QueryBuilder<Plant, Plant, QSortBy> {
-  QueryBuilder<Plant, Plant, QAfterSortBy> sortByCurrentDayInPhase() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentDayInPhase', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Plant, Plant, QAfterSortBy> sortByCurrentDayInPhaseDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentDayInPhase', Sort.desc);
-    });
-  }
-
   QueryBuilder<Plant, Plant, QAfterSortBy> sortByCurrentPhase() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'currentPhase', Sort.asc);
@@ -1213,6 +1216,18 @@ extension PlantQuerySortBy on QueryBuilder<Plant, Plant, QSortBy> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterSortBy> sortByPhaseStartDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'phaseStartDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> sortByPhaseStartDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'phaseStartDate', Sort.desc);
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterSortBy> sortByPlantsUnderLamp() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'plantsUnderLamp', Sort.asc);
@@ -1263,18 +1278,6 @@ extension PlantQuerySortBy on QueryBuilder<Plant, Plant, QSortBy> {
 }
 
 extension PlantQuerySortThenBy on QueryBuilder<Plant, Plant, QSortThenBy> {
-  QueryBuilder<Plant, Plant, QAfterSortBy> thenByCurrentDayInPhase() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentDayInPhase', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Plant, Plant, QAfterSortBy> thenByCurrentDayInPhaseDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentDayInPhase', Sort.desc);
-    });
-  }
-
   QueryBuilder<Plant, Plant, QAfterSortBy> thenByCurrentPhase() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'currentPhase', Sort.asc);
@@ -1347,6 +1350,18 @@ extension PlantQuerySortThenBy on QueryBuilder<Plant, Plant, QSortThenBy> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QAfterSortBy> thenByPhaseStartDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'phaseStartDate', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Plant, Plant, QAfterSortBy> thenByPhaseStartDateDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'phaseStartDate', Sort.desc);
+    });
+  }
+
   QueryBuilder<Plant, Plant, QAfterSortBy> thenByPlantsUnderLamp() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'plantsUnderLamp', Sort.asc);
@@ -1397,12 +1412,6 @@ extension PlantQuerySortThenBy on QueryBuilder<Plant, Plant, QSortThenBy> {
 }
 
 extension PlantQueryWhereDistinct on QueryBuilder<Plant, Plant, QDistinct> {
-  QueryBuilder<Plant, Plant, QDistinct> distinctByCurrentDayInPhase() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'currentDayInPhase');
-    });
-  }
-
   QueryBuilder<Plant, Plant, QDistinct> distinctByCurrentPhase() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'currentPhase');
@@ -1435,6 +1444,12 @@ extension PlantQueryWhereDistinct on QueryBuilder<Plant, Plant, QDistinct> {
     });
   }
 
+  QueryBuilder<Plant, Plant, QDistinct> distinctByPhaseStartDate() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'phaseStartDate');
+    });
+  }
+
   QueryBuilder<Plant, Plant, QDistinct> distinctByPlantsUnderLamp() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'plantsUnderLamp');
@@ -1464,12 +1479,6 @@ extension PlantQueryProperty on QueryBuilder<Plant, Plant, QQueryProperty> {
   QueryBuilder<Plant, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
-    });
-  }
-
-  QueryBuilder<Plant, int, QQueryOperations> currentDayInPhaseProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'currentDayInPhase');
     });
   }
 
@@ -1507,6 +1516,12 @@ extension PlantQueryProperty on QueryBuilder<Plant, Plant, QQueryProperty> {
   QueryBuilder<Plant, NutrientBrand, QQueryOperations> nutrientBrandProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'nutrientBrand');
+    });
+  }
+
+  QueryBuilder<Plant, DateTime?, QQueryOperations> phaseStartDateProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'phaseStartDate');
     });
   }
 

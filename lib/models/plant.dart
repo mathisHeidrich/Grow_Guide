@@ -15,7 +15,15 @@ class Plant {
   @enumerated
   late PlantPhase currentPhase;
   
-  late int currentDayInPhase;
+  DateTime? phaseStartDate;
+  
+  int getDayInPhase(DateTime now) {
+    if (phaseStartDate == null) return 1;
+    final start = DateTime(phaseStartDate!.year, phaseStartDate!.month, phaseStartDate!.day);
+    final current = DateTime(now.year, now.month, now.day);
+    return current.difference(start).inDays + 1;
+  }
+
   late double waterVolumeLiters;
   
   @enumerated

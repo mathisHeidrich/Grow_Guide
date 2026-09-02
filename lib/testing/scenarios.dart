@@ -43,7 +43,7 @@ class TestScenario {
             Plant()
               ..name = 'Royal Gorilla'
               ..currentPhase = PlantPhase.germination
-              ..currentDayInPhase = 0
+              ..phaseStartDate = DateTime(2024, 1, 2)
               ..waterVolumeLiters = 10.0
               ..nutrientBrand = NutrientBrand.cannaAqua
               ..type = PlantType.photo
@@ -63,7 +63,7 @@ class TestScenario {
             Plant()
               ..name = 'Royal Gorilla'
               ..currentPhase = PlantPhase.veg
-              ..currentDayInPhase = 1
+              ..phaseStartDate = DateTime(2024, 1, 5)
               ..waterVolumeLiters = 10.0
               ..nutrientBrand = NutrientBrand.cannaAqua
               ..type = PlantType.photo
@@ -83,7 +83,7 @@ class TestScenario {
             Plant()
               ..name = 'White Widow Auto'
               ..currentPhase = PlantPhase.veg
-              ..currentDayInPhase = 14
+              ..phaseStartDate = DateTime(2024, 1, 2)
               ..waterVolumeLiters = 10.0
               ..nutrientBrand = NutrientBrand.cannaAqua
               ..type = PlantType.auto
@@ -102,7 +102,7 @@ class TestScenario {
             Plant()
               ..name = 'Amnesia Haze'
               ..currentPhase = PlantPhase.flower
-              ..currentDayInPhase = 60
+              ..phaseStartDate = DateTime(2024, 1, 11)
               ..waterVolumeLiters = 15.0
               ..nutrientBrand = NutrientBrand.ta
               ..type = PlantType.photo

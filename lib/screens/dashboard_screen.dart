@@ -95,10 +95,12 @@ class DashboardScreen extends ConsumerWidget {
     // Determine card status based on measurement history
     Color btnColor = AppColors.growGreen;
     String btnText = l10n.plantStatusAllOk;
+    
+    final currentDayInPhase = plant.getDayInPhase(ref.watch(timeProvider));
 
     if (plant.currentPhase == PlantPhase.germination) {
       btnColor = AppColors.growGreen;
-      btnText = plant.currentDayInPhase == 1 
+      btnText = currentDayInPhase == 1 
           ? l10n.dashboardStartGermination 
           : l10n.dashboardCheckRoot;
     } else {
@@ -106,7 +108,7 @@ class DashboardScreen extends ConsumerWidget {
       bool isWarning = false;
 
       if (plant.measurementHistory.isEmpty) {
-        if (plant.currentDayInPhase > 1) {
+        if (currentDayInPhase > 1) {
           isOverdue = true; 
         }
       } else {
@@ -153,10 +155,10 @@ class DashboardScreen extends ConsumerWidget {
         phaseText = l10n.phaseGermination;
         break;
       case PlantPhase.veg:
-        phaseText = l10n.phaseVeg(plant.currentDayInPhase);
+        phaseText = l10n.phaseVeg(currentDayInPhase);
         break; // Could calculate weeks later
       case PlantPhase.flower:
-        phaseText = l10n.phaseFlower(plant.currentDayInPhase);
+        phaseText = l10n.phaseFlower(currentDayInPhase);
         break;
       case PlantPhase.drying:
         phaseText = l10n.phaseDrying;
