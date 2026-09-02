@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:drift/drift.dart' as drift;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/time_provider.dart';
@@ -29,8 +30,8 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
   }
 
   Future<void> _loadPlant() async {
-    final db = ref.read(databaseProvider).isar;
-    final plant = await db.plants.get(widget.plantId);
+    final db = ref.read(databaseProvider).db;
+    final plant = await (db.select(db.plants)..where((tbl) => tbl.id.equals(widget.plantId))).getSingleOrNull();
     if (mounted && plant != null) {
       setState(() => _plant = plant);
       
@@ -77,12 +78,12 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
   Future<void> _finishPart1() async {
     if (_plant == null) return;
     
-    final db = ref.read(databaseProvider).isar;
-    await db.writeTxn(() async {
-      _plant!.germinationStarted = true;
-      _plant!.phaseStartDate = ref.read(timeProvider);
-      await db.plants.put(_plant!);
-    });
+    final db = ref.read(databaseProvider).db;
+    final updatedPlant = _plant!.copyWith(
+      germinationStarted: true,
+      phaseStartDate: drift.Value(ref.read(timeProvider)),
+    );
+    await db.update(db.plants).replace(updatedPlant);
 
     if (mounted) context.go('/');
   }
@@ -90,11 +91,11 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
   Future<void> _markRootChecked() async {
     if (_plant == null) return;
     
-    final db = ref.read(databaseProvider).isar;
-    await db.writeTxn(() async {
-      _plant!.lastGerminationCheck = ref.read(timeProvider);
-      await db.plants.put(_plant!);
-    });
+    final db = ref.read(databaseProvider).db;
+    final updatedPlant = _plant!.copyWith(
+      lastGerminationCheck: drift.Value(ref.read(timeProvider)),
+    );
+    await db.update(db.plants).replace(updatedPlant);
 
     if (mounted) context.go('/');
   }
@@ -102,12 +103,12 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
   Future<void> _completeGermination() async {
     if (_plant == null) return;
     
-    final db = ref.read(databaseProvider).isar;
-    await db.writeTxn(() async {
-      _plant!.currentPhase = PlantPhase.veg;
-      _plant!.phaseStartDate = ref.read(timeProvider);
-      await db.plants.put(_plant!);
-    });
+    final db = ref.read(databaseProvider).db;
+    final updatedPlant = _plant!.copyWith(
+      currentPhase: PlantPhase.veg,
+      phaseStartDate: drift.Value(ref.read(timeProvider)),
+    );
+    await db.update(db.plants).replace(updatedPlant);
 
     if (mounted) context.go('/');
   }

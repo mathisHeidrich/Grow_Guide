@@ -1,4 +1,5 @@
 import '../providers/time_provider.dart';
+import 'package:drift/drift.dart' as drift;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,7 @@ import '../providers/database_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
+
 
 class CheckinScreen extends ConsumerStatefulWidget {
   final int plantId;
@@ -31,8 +33,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   }
 
   Future<void> _loadPlant() async {
-    final db = ref.read(databaseProvider).isar;
-    final plant = await db.plants.get(widget.plantId);
+    final db = ref.read(databaseProvider).db;
+    final plant = await (db.select(db.plants)..where((tbl) => tbl.id.equals(widget.plantId))).getSingleOrNull();
     if (mounted && plant != null) {
       setState(() => _plant = plant);
     }
@@ -56,20 +58,16 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     if (_plant == null) return;
     
     if (_inputPh != null && _inputEc != null) {
-      final db = ref.read(databaseProvider).isar;
-      await db.writeTxn(() async {
-        final newEntry = LogEntry()
-          ..timestamp = ref.read(timeProvider)
-          ..ph = _inputPh!
-          ..ec = _inputEc!
-          ..ppfd = _inputPpfd;
-        
-        final history = _plant!.measurementHistory.toList();
-        history.add(newEntry);
-        _plant!.measurementHistory = history;
-        
-        await db.plants.put(_plant!);
-      });
+      final db = ref.read(databaseProvider).db;
+      await db.into(db.logEntries).insert(
+        LogEntriesCompanion.insert(
+          plantId: _plant!.id,
+          timestamp: ref.read(timeProvider),
+          ph: _inputPh!,
+          ec: _inputEc!,
+          ppfd: _inputPpfd != null ? drift.Value(_inputPpfd!) : const drift.Value.absent(),
+        ),
+      );
     }
 
     if (mounted) context.go('/');
@@ -175,13 +173,13 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 ),
                 onPressed: () async {
-                  final db = ref.read(databaseProvider).isar;
-                  await db.writeTxn(() async {
-                    _plant!.rootsReachedWater = true;
-                    await db.plants.put(_plant!);
-                  });
+                  final db = ref.read(databaseProvider).db;
+                  final updatedPlant = _plant!.copyWith(rootsReachedWater: true);
+                  await db.update(db.plants).replace(updatedPlant);
                   if (mounted) {
-                    setState(() {});
+                    setState(() {
+                      _plant = updatedPlant;
+                    });
                     _nextPage();
                   }
                 },

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../models/app_settings.dart';
 
 class TentSetupScreen extends ConsumerStatefulWidget {
   const TentSetupScreen({super.key});
@@ -30,15 +29,15 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
   }
 
   Future<void> _completeSetup() async {
-    final db = ref.read(databaseProvider).isar;
-    await db.writeTxn(() async {
-      final settings = await db.appSettings.get(1);
-      if (settings != null) {
-        settings.hasCompletedTentSetup = true;
-        settings.hasCompletedOnboarding = true;
-        await db.appSettings.put(settings);
-      }
-    });
+    final db = ref.read(databaseProvider).db;
+    final settings = await (db.select(db.appSettingsTable)..where((tbl) => tbl.id.equals(1))).getSingleOrNull();
+    if (settings != null) {
+      final updatedSettings = settings.copyWith(
+        hasCompletedTentSetup: true,
+        hasCompletedOnboarding: true,
+      );
+      await db.update(db.appSettingsTable).replace(updatedSettings);
+    }
 
     if (!mounted) return;
     context.go('/'); // Go to dashboard

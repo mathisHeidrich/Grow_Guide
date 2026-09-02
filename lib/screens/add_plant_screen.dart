@@ -7,6 +7,7 @@ import '../providers/database_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
+import 'package:drift/drift.dart' as drift;
 
 class AddPlantScreen extends ConsumerStatefulWidget {
   const AddPlantScreen({super.key});
@@ -53,7 +54,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
 
-    final db = ref.read(databaseProvider).isar;
+    final db = ref.read(databaseProvider).db;
 
     double finalVolume = _waterVolume ?? double.tryParse(_customWaterController.text) ?? 20.0;
     int finalWattage = _lampWattage ?? int.tryParse(_customWattageController.text) ?? 200;
@@ -63,21 +64,17 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
     final now = ref.read(timeProvider);
     final phaseStart = now.subtract(Duration(days: finalDay - 1));
 
-    final newPlant = Plant()
-      ..name = _name
-      ..currentPhase = _currentPhase
-      ..phaseStartDate = phaseStart
-      ..waterVolumeLiters = finalVolume
-      ..nutrientBrand = _nutrientBrand
-      ..type = _plantType
-      ..lampType = _lampType
-      ..lampWattage = finalWattage
-      ..plantsUnderLamp = finalPlants
-      ..measurementHistory = [];
-
-    await db.writeTxn(() async {
-      await db.plants.put(newPlant);
-    });
+    await db.into(db.plants).insert(PlantsCompanion.insert(
+      name: _name,
+      currentPhase: _currentPhase,
+      phaseStartDate: drift.Value(phaseStart),
+      waterVolumeLiters: finalVolume,
+      nutrientBrand: _nutrientBrand,
+      type: _plantType,
+      lampType: _lampType,
+      lampWattage: finalWattage,
+      plantsUnderLamp: finalPlants,
+    ));
 
     if (mounted) {
       context.go('/');

@@ -9,18 +9,17 @@ import 'screens/add_plant_screen.dart';
 import 'screens/checkin_screen.dart';
 import 'screens/germination_wizard_screen.dart';
 import 'models/plant.dart';
-import 'models/app_settings.dart';
 import 'screens/ppfd_meter_screen.dart';
 import 'screens/hardware_advisor_screen.dart';
 import 'screens/water_guide_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final db = ref.watch(databaseProvider).isar;
+  final db = ref.watch(databaseProvider).db;
 
   return GoRouter(
     initialLocation: '/',
     redirect: (context, state) async {
-      final settings = await db.appSettings.get(1);
+      final settings = await (db.select(db.appSettingsTable)..where((tbl) => tbl.id.equals(1))).getSingleOrNull();
       final hasCompletedOnboarding = settings?.hasCompletedOnboarding ?? false;
       
       final isAllowedPath = state.uri.path == '/onboarding' || 
@@ -64,14 +63,23 @@ final routerProvider = Provider<GoRouter>((ref) {
           final id = int.tryParse(state.pathParameters['id'] ?? '');
           if (id == null) return const DashboardScreen();
           
-          final plant = db.plants.getSync(id);
-          if (plant == null) return const DashboardScreen();
-          
-          if (plant.currentPhase == PlantPhase.germination || plant.currentPhase == PlantPhase.onboarding) {
-            return GerminationWizardScreen(plantId: id);
-          }
-          
-          return CheckinScreen(plantId: id);
+          return FutureBuilder<Plant?>(
+            future: (db.select(db.plants)..where((tbl) => tbl.id.equals(id))).getSingleOrNull(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Scaffold(body: Center(child: CircularProgressIndicator()));
+              }
+              
+              final plant = snapshot.data;
+              if (plant == null) return const DashboardScreen();
+              
+              if (plant.currentPhase == PlantPhase.germination || plant.currentPhase == PlantPhase.onboarding) {
+                return GerminationWizardScreen(plantId: id);
+              }
+              
+              return CheckinScreen(plantId: id);
+            },
+          );
         },
       ),
       GoRoute(

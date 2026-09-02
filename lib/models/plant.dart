@@ -1,55 +1,14 @@
-import 'package:isar/isar.dart';
+export '../database/tables.dart';
+export '../database/database.dart' show Plant, LogEntry, PlantsCompanion, LogEntriesCompanion;
 
-part 'plant.g.dart';
+// removed unused import
+import '../database/database.dart';
 
-enum PlantPhase { onboarding, germination, veg, flower, drying, curing, archived }
-enum NutrientBrand { cannaAqua, ta, advancedNutrients, plagron }
-enum PlantType { photo, auto }
-
-@collection
-class Plant {
-  Id id = Isar.autoIncrement;
-  
-  late String name;
-  
-  @enumerated
-  late PlantPhase currentPhase;
-  
-  DateTime? phaseStartDate;
-  
+extension PlantExtensions on Plant {
   int getDayInPhase(DateTime now) {
     if (phaseStartDate == null) return 1;
     final start = DateTime(phaseStartDate!.year, phaseStartDate!.month, phaseStartDate!.day);
     final current = DateTime(now.year, now.month, now.day);
     return current.difference(start).inDays + 1;
   }
-
-  late double waterVolumeLiters;
-  
-  @enumerated
-  late NutrientBrand nutrientBrand;
-  
-  @enumerated
-  late PlantType type;
-  
-  // Hardware specifics
-  late int lampWattage;
-  late String lampType; // LED, NDL
-  late int plantsUnderLamp;
-  
-  // Background tracking
-  List<LogEntry> measurementHistory = [];
-  
-  bool rootsReachedWater = false;
-  
-  bool germinationStarted = false;
-  DateTime? lastGerminationCheck;
-}
-
-@embedded
-class LogEntry {
-  late DateTime timestamp;
-  late double ph;
-  late double ec;
-  double? ppfd;
 }

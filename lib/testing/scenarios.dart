@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import '../models/plant.dart';
 
 enum TestScenarioType {
@@ -13,7 +14,7 @@ class TestScenario {
   final String title;
   final String description;
   final DateTime startTime;
-  final List<Plant> plants;
+  final List<PlantsCompanion> plants;
   final bool hasCompletedOnboarding;
 
   TestScenario({
@@ -40,18 +41,18 @@ class TestScenario {
           description: 'Ein Samen wurde hinzugefügt, aber die Keimung noch nicht gestartet.',
           startTime: DateTime(2024, 1, 2),
           plants: [
-            Plant()
-              ..name = 'Royal Gorilla'
-              ..currentPhase = PlantPhase.germination
-              ..phaseStartDate = DateTime(2024, 1, 2)
-              ..waterVolumeLiters = 10.0
-              ..nutrientBrand = NutrientBrand.cannaAqua
-              ..type = PlantType.photo
-              ..lampWattage = 150
-              ..lampType = 'LED'
-              ..plantsUnderLamp = 1
-              ..rootsReachedWater = false
-              ..measurementHistory = [],
+            PlantsCompanion.insert(
+              name: 'Royal Gorilla',
+              currentPhase: PlantPhase.germination,
+              phaseStartDate: Value(DateTime(2024, 1, 2)),
+              waterVolumeLiters: 10.0,
+              nutrientBrand: NutrientBrand.cannaAqua,
+              type: PlantType.photo,
+              lampWattage: 150,
+              lampType: 'LED',
+              plantsUnderLamp: 1,
+              rootsReachedWater: const Value(false),
+            ),
           ],
         ),
         TestScenario(
@@ -60,18 +61,18 @@ class TestScenario {
           description: 'Samen ist gekeimt und frisch im Eimer (Wurzeln noch nicht im Wasser).',
           startTime: DateTime(2024, 1, 5),
           plants: [
-            Plant()
-              ..name = 'Royal Gorilla'
-              ..currentPhase = PlantPhase.veg
-              ..phaseStartDate = DateTime(2024, 1, 5)
-              ..waterVolumeLiters = 10.0
-              ..nutrientBrand = NutrientBrand.cannaAqua
-              ..type = PlantType.photo
-              ..lampWattage = 150
-              ..lampType = 'LED'
-              ..plantsUnderLamp = 1
-              ..rootsReachedWater = false
-              ..measurementHistory = [],
+            PlantsCompanion.insert(
+              name: 'Royal Gorilla',
+              currentPhase: PlantPhase.veg,
+              phaseStartDate: Value(DateTime(2024, 1, 5)),
+              waterVolumeLiters: 10.0,
+              nutrientBrand: NutrientBrand.cannaAqua,
+              type: PlantType.photo,
+              lampWattage: 150,
+              lampType: 'LED',
+              plantsUnderLamp: 1,
+              rootsReachedWater: const Value(false),
+            ),
           ],
         ),
         TestScenario(
@@ -80,17 +81,17 @@ class TestScenario {
           description: 'Eine Pflanze (White Widow) in Woche 2 der Vegetationsphase.',
           startTime: DateTime(2024, 1, 15),
           plants: [
-            Plant()
-              ..name = 'White Widow Auto'
-              ..currentPhase = PlantPhase.veg
-              ..phaseStartDate = DateTime(2024, 1, 2)
-              ..waterVolumeLiters = 10.0
-              ..nutrientBrand = NutrientBrand.cannaAqua
-              ..type = PlantType.auto
-              ..lampWattage = 150
-              ..lampType = 'LED'
-              ..plantsUnderLamp = 1
-              ..measurementHistory = [],
+            PlantsCompanion.insert(
+              name: 'White Widow Auto',
+              currentPhase: PlantPhase.veg,
+              phaseStartDate: Value(DateTime(2024, 1, 2)),
+              waterVolumeLiters: 10.0,
+              nutrientBrand: NutrientBrand.cannaAqua,
+              type: PlantType.auto,
+              lampWattage: 150,
+              lampType: 'LED',
+              plantsUnderLamp: 1,
+            ),
           ],
         ),
         TestScenario(
@@ -99,17 +100,17 @@ class TestScenario {
           description: 'Pflanze am Ende der Blüte, wartet auf die Ernte.',
           startTime: DateTime(2024, 3, 10),
           plants: [
-            Plant()
-              ..name = 'Amnesia Haze'
-              ..currentPhase = PlantPhase.flower
-              ..phaseStartDate = DateTime(2024, 1, 11)
-              ..waterVolumeLiters = 15.0
-              ..nutrientBrand = NutrientBrand.ta
-              ..type = PlantType.photo
-              ..lampWattage = 300
-              ..lampType = 'LED'
-              ..plantsUnderLamp = 2
-              ..measurementHistory = [],
+            PlantsCompanion.insert(
+              name: 'Amnesia Haze',
+              currentPhase: PlantPhase.flower,
+              phaseStartDate: Value(DateTime(2024, 1, 11)),
+              waterVolumeLiters: 15.0,
+              nutrientBrand: NutrientBrand.ta,
+              type: PlantType.photo,
+              lampWattage: 300,
+              lampType: 'LED',
+              plantsUnderLamp: 2,
+            ),
           ],
         ),
       ];

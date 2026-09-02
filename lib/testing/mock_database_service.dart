@@ -1,10 +1,8 @@
-import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:drift/drift.dart';
 import '../services/database.dart';
-import '../models/plant.dart';
-import '../models/app_settings.dart';
+import '../database/database.dart';
+import '../database/connection.dart';
 import 'scenarios.dart';
-import 'dart:io';
 
 class MockDatabaseService extends DatabaseService {
   final TestScenario scenario;
@@ -13,37 +11,17 @@ class MockDatabaseService extends DatabaseService {
 
   @override
   Future<void> init() async {
-    // Close existing instance if it exists before we try to delete files
-    final existingInstance = Isar.getInstance('test_instance');
-    if (existingInstance != null) {
-      await existingInstance.close();
-    }
-
-    final dir = await getTemporaryDirectory();
-    final isarDir = Directory('${dir.path}/isar_test_env');
-    
-    // Wipe previous test data
-    if (await isarDir.exists()) {
-      await isarDir.delete(recursive: true);
-    }
-    await isarDir.create();
-
-    // Open a fresh Isar instance
-    isar = await Isar.open(
-      [PlantSchema, AppSettingsSchema],
-      directory: isarDir.path,
-      name: 'test_instance', // specific name to avoid collision
-    );
+    db = AppDatabase.forTesting(openMemoryConnection());
 
     // Seed the database with scenario data
-    await isar.writeTxn(() async {
-      // Default settings
-      await isar.appSettings.put(AppSettings()..hasCompletedOnboarding = scenario.hasCompletedOnboarding);
+    await db.into(db.appSettingsTable).insert(
+      AppSettingsTableCompanion.insert(
+        hasCompletedOnboarding: Value(scenario.hasCompletedOnboarding),
+      ),
+    );
 
-      // Plants for the scenario
-      if (scenario.plants.isNotEmpty) {
-        await isar.plants.putAll(scenario.plants);
-      }
-    });
+    for (final plantCompanion in scenario.plants) {
+      await db.into(db.plants).insert(plantCompanion);
+    }
   }
 }
