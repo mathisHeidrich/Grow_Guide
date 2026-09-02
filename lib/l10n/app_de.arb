@@ -297,4 +297,7 @@
   "waterGuideChap3Title": "Wasser aufbereiten",
   "waterGuideChap3Desc": "• Der Cut-Trick: Mische hartes Wasser 50/50 mit destilliertem Wasser.\n• Tischfilter (Brita) bringen nichts für den EC-Wert.\n• Umkehrosmose: Die beste Langzeitlösung.\n• Chlor ausgasen: Leitungswasser 24-48h abstehen lassen, bevor man es benutzt!",
   "waterGuideNext": "Verstanden, weiter!"
+  ,"plantStatusAllOk": "Alles im grünen Bereich",
+  "plantStatusCheckRecommended": "Check-in empfohlen",
+  "plantStatusOverdue": "Check-in überfällig!"
 }

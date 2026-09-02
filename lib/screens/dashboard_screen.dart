@@ -27,8 +27,8 @@ class DashboardScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: FutureBuilder<List<Plant>>(
-        future: db.plants.where().findAll(),
+      body: StreamBuilder<List<Plant>>(
+        stream: db.plants.where().watch(fireImmediately: true),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -94,30 +94,39 @@ class DashboardScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     // Determine card status based on measurement history
     Color btnColor = AppColors.growGreen;
-    String btnText = l10n.plantStatusCheckOk;
+    String btnText = l10n.plantStatusAllOk;
 
     if (plant.currentPhase == PlantPhase.germination) {
       btnColor = AppColors.growGreen;
       btnText = plant.currentDayInPhase == 1 
           ? l10n.dashboardStartGermination 
           : l10n.dashboardCheckRoot;
-    } else if (plant.measurementHistory.isNotEmpty) {
-      final lastLog = plant.measurementHistory.last;
-      final hoursSinceLast =
-          ref.watch(timeProvider).difference(lastLog.timestamp).inHours;
-      final isPhOut = lastLog.ph < 5.5 || lastLog.ph > 6.3;
-
-      if (hoursSinceLast >= 96 || isPhOut) {
-        btnColor = AppColors.errorRed;
-        btnText = l10n.plantStatusCheckUrgent;
-      } else if (hoursSinceLast >= 48) {
-        btnColor = AppColors.warningAmber;
-        btnText = l10n.plantStatusCheckRecommended;
-      }
     } else {
-      // No checks yet
-      btnColor = AppColors.errorRed;
-      btnText = l10n.plantStatusFirstCheckNeeded;
+      int hoursSinceLast = 0;
+      if (plant.measurementHistory.isNotEmpty) {
+        hoursSinceLast = ref.watch(timeProvider).difference(plant.measurementHistory.last.timestamp).inHours;
+      } else {
+        if (plant.currentDayInPhase == 1) {
+          hoursSinceLast = 0;
+        } else {
+          hoursSinceLast = (plant.currentDayInPhase - 1) * 24;
+        }
+      }
+
+      if (!plant.rootsReachedWater) {
+        if (hoursSinceLast >= 24) {
+          btnColor = AppColors.errorRed;
+          btnText = l10n.plantStatusOverdue;
+        }
+      } else {
+        if (hoursSinceLast >= 96) {
+          btnColor = AppColors.errorRed;
+          btnText = l10n.plantStatusOverdue;
+        } else if (hoursSinceLast >= 24) {
+          btnColor = AppColors.warningAmber;
+          btnText = l10n.plantStatusCheckRecommended;
+        }
+      }
     }
 
     String phaseText = '';
