@@ -21,6 +21,8 @@ class CheckinScreen extends ConsumerStatefulWidget {
 class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   final PageController _pageController = PageController();
   Plant? _plant;
+  bool? _initialRootsNotReached;
+  bool? _tempRootsInWater;
   
   double? _inputPh;
   double? _inputEc;
@@ -36,7 +38,10 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     final db = ref.read(databaseProvider).db;
     final plant = await (db.select(db.plants)..where((tbl) => tbl.id.equals(widget.plantId))).getSingleOrNull();
     if (mounted && plant != null) {
-      setState(() => _plant = plant);
+      setState(() {
+        _plant = plant;
+        _initialRootsNotReached ??= _plant!.currentPhase == PlantPhase.veg && !_plant!.rootsReachedWater;
+      });
     }
   }
 
@@ -87,17 +92,22 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               physics: const NeverScrollableScrollPhysics(),
               
               children: [
-                if (_plant!.currentPhase == PlantPhase.veg && !_plant!.rootsReachedWater)
-                  _buildWateringSlide(),
+                if (_initialRootsNotReached == true) ...[
+                  _buildRootsCheckSlide(),
+                  if (_tempRootsInWater == false) _buildTopWateringSlide(),
+                ],
                 _buildSlide(
                   title: l10n.checkinHealthTitle,
                   text: l10n.checkinHealthDesc,
                   icon: Icons.eco,
                   nextButtonText: l10n.checkinHealthNext,
                   onNext: _nextPage,
-                  showBack: _plant!.currentPhase == PlantPhase.veg && !_plant!.rootsReachedWater,
+                  showBack: _initialRootsNotReached == true,
                 ),
-                _buildMeasurementSlide(), // Station 2: Messen
+                if (_initialRootsNotReached != true || _tempRootsInWater == true) ...[
+                  _buildMeasurementSlide(),
+                  _buildAdjustmentExampleSlide(),
+                ],
                 _buildLampSlide(),
                 _buildSlide(
                   title: l10n.checkinFinishTitle,
@@ -123,7 +133,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     );
   }
 
-  Widget _buildWateringSlide() {
+
+  Widget _buildRootsCheckSlide() {
     final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(24.0),
@@ -132,10 +143,10 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Spacer(),
-          const Icon(Icons.water_drop, size: 80, color: Colors.blueAccent),
+          const Icon(Icons.grass, size: 80, color: Colors.green),
           const SizedBox(height: 32),
           Text(
-            l10n.checkinWateringTitle,
+            l10n.checkinRootsCheckTitle,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -144,55 +155,96 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           ),
           const SizedBox(height: 24),
           Text(
-            l10n.checkinWateringDesc,
+            l10n.checkinRootsCheckDesc,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
             textAlign: TextAlign.center,
           ),
-          const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          const SizedBox(height: 32),
+          Row(
             children: [
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  side: const BorderSide(color: Colors.white54),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                ),
-                onPressed: _nextPage,
-                child: Text(l10n.checkinWateringRootsNotReached),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.growGreen,
-                  foregroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                ),
-                onPressed: () async {
-                  final db = ref.read(databaseProvider).db;
-                  final updatedPlant = _plant!.copyWith(rootsReachedWater: true);
-                  await db.update(db.plants).replace(updatedPlant);
-                  if (mounted) {
+              Expanded(
+                child: ChoiceChip(
+                  label: Center(child: Text(l10n.checkinRootsCheckYes, style: const TextStyle(fontSize: 18))),
+                  selected: _tempRootsInWater == true,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  onSelected: (selected) {
                     setState(() {
-                      _plant = updatedPlant;
+                      _tempRootsInWater = true;
                     });
-                    _nextPage();
-                  }
-                },
-                child: Text(
-                  l10n.checkinWateringRootsReached,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  },
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: ChoiceChip(
+                  label: Center(child: Text(l10n.checkinRootsCheckNo, style: const TextStyle(fontSize: 18))),
+                  selected: _tempRootsInWater == false,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  onSelected: (selected) {
+                    setState(() {
+                      _tempRootsInWater = false;
+                    });
+                  },
                 ),
               ),
             ],
           ),
+          const Spacer(),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.growGreen,
+              foregroundColor: Colors.black,
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            ),
+            onPressed: () async {
+              if (_tempRootsInWater == null) {
+                return;
+              }
+              if (_tempRootsInWater == true) {
+                final db = ref.read(databaseProvider).db;
+                final updatedPlant = _plant!.copyWith(rootsReachedWater: true);
+                await db.update(db.plants).replace(updatedPlant);
+                setState(() {
+                  _plant = updatedPlant;
+                });
+              }
+              _nextPage();
+            },
+            child: Text(
+              l10n.checkinNext,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
           const SizedBox(height: 24),
         ],
       ),
+    );
+  }
+
+  Widget _buildTopWateringSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return _buildSlide(
+      title: l10n.checkinWateringTitle,
+      text: l10n.checkinWateringDesc,
+      icon: Icons.water_drop,
+      nextButtonText: l10n.checkinNext,
+      onNext: _nextPage,
+      showBack: true,
+    );
+  }
+
+  Widget _buildAdjustmentExampleSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return _buildSlide(
+      title: l10n.checkinAdjustTitle,
+      text: l10n.checkinAdjustDesc,
+      icon: Icons.science_outlined,
+      nextButtonText: l10n.checkinNext,
+      onNext: _nextPage,
+      showBack: true,
     );
   }
 
