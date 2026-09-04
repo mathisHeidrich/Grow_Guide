@@ -353,7 +353,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
             icon: const Icon(Icons.camera_alt),
             label: Text(_inputPpfd != null ? l10n.checkinMeasurePpfdAgain(_inputPpfd!.toStringAsFixed(0)) : l10n.checkinMeasurePpfd),
             onPressed: () async {
-              final result = await context.push<double>('/ppfd_meter');
+              final result = await context.push<double>('/ppfd_meter?plantId=${widget.plantId}');
               if (result != null) {
                 setState(() {
                   _inputPpfd = result;

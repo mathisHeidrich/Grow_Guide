@@ -84,7 +84,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/ppfd_meter',
-        builder: (context, state) => const PpfdMeterScreen(),
+        builder: (context, state) {
+          final plantIdStr = state.uri.queryParameters['plantId'];
+          final plantId = plantIdStr != null ? int.tryParse(plantIdStr) : null;
+          return PpfdMeterScreen(plantId: plantId);
+        },
       ),
     ],
   );

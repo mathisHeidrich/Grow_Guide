@@ -325,4 +325,17 @@
   "waterGuideNext": "Verstanden, weiter!",
   "plantStatusAllOk": "Alles im grünen Bereich",
   "plantStatusOverdue": "Check-in überfällig!"
+  ,"ppfdTargetRange": "Zielbereich: {min} - {max} µmol",
+  "@ppfdTargetRange": {
+    "placeholders": {
+      "min": {"type": "int"},
+      "max": {"type": "int"}
+    }
+  },
+  "ppfdHoldValue": "Wert festhalten",
+  "ppfdMeasureAgain": "Neu messen",
+  "ppfdSaveValue": "Wert speichern",
+  "ppfdDiffuserWarning": "WICHTIG: Hast du einen Diffusor (z.B. Papier) über der Kamera?",
+  "ppfdNeedsMoreLight": "Mehr Licht",
+  "ppfdNeedsLessLight": "Weniger Licht"
 }

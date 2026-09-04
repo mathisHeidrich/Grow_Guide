@@ -1,4 +1,5 @@
 export '../database/tables.dart';
+import '../database/tables.dart';
 export '../database/database.dart' show Plant, LogEntry, PlantsCompanion, LogEntriesCompanion;
 
 // removed unused import
@@ -12,3 +13,15 @@ extension PlantExtensions on Plant {
     return current.difference(start).inDays + 1;
   }
 }
+
+extension PlantPhaseExtensions on PlantPhase {
+  List<int> get targetPpfdRange {
+    switch (this) {
+      case PlantPhase.germination: return [100, 300];
+      case PlantPhase.veg: return [300, 600];
+      case PlantPhase.flower: return [600, 1000];
+      default: return [0, 0];
+    }
+  }
+}
+
