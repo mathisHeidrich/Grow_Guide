@@ -25,8 +25,10 @@ class PpfdSensorData {
 }
 
 class PpfdCameraService {
-  static const MethodChannel _methodChannel = MethodChannel('com.growguide.ppfd_camera/methods');
-  static const EventChannel _eventChannel = EventChannel('com.growguide.ppfd_camera/events');
+  static const MethodChannel _methodChannel =
+      MethodChannel('com.growguide.ppfd_camera/methods');
+  static const EventChannel _eventChannel =
+      EventChannel('com.growguide.ppfd_camera/events');
 
   Stream<PpfdSensorData>? _sensorStream;
 
@@ -39,9 +41,9 @@ class PpfdCameraService {
   }
 
   Stream<PpfdSensorData> get sensorStream {
-    _sensorStream ??= _eventChannel
-        .receiveBroadcastStream()
-        .map((dynamic event) => PpfdSensorData.fromMap(event as Map<dynamic, dynamic>));
+    _sensorStream ??= _eventChannel.receiveBroadcastStream().map(
+        (dynamic event) =>
+            PpfdSensorData.fromMap(event as Map<dynamic, dynamic>));
     return _sensorStream!;
   }
 }

@@ -30,7 +30,9 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
 
   Future<void> _completeSetup() async {
     final db = ref.read(databaseProvider).db;
-    final settings = await (db.select(db.appSettingsTable)..where((tbl) => tbl.id.equals(1))).getSingleOrNull();
+    final settings = await (db.select(db.appSettingsTable)
+          ..where((tbl) => tbl.id.equals(1)))
+        .getSingleOrNull();
     if (settings != null) {
       final updatedSettings = settings.copyWith(
         hasCompletedTentSetup: true,
@@ -111,7 +113,8 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
               text: l10n.tentDesc7,
               tipText: l10n.tentTip7,
               icon: Icons.bubble_chart,
-              iconColor: const Color(0xFFFF5252), // warning color for safety tip
+              iconColor:
+                  const Color(0xFFFF5252), // warning color for safety tip
               nextButtonText: l10n.tentNext7,
               onNext: _nextPage,
               showBack: true,
@@ -121,7 +124,8 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
               text: l10n.tentDesc8,
               tipText: l10n.tentTip8,
               icon: Icons.warning,
-              iconColor: const Color(0xFFFF5252), // warning color for safety tip
+              iconColor:
+                  const Color(0xFFFF5252), // warning color for safety tip
               nextButtonText: l10n.tentNext8,
               onNext: _nextPage,
               showBack: true,
@@ -193,7 +197,8 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
               decoration: BoxDecoration(
                 color: const Color(0xFF1E1E1E),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFF00E676).withOpacity(0.3)),
+                border:
+                    Border.all(color: const Color(0xFF00E676).withOpacity(0.3)),
               ),
               child: Text(
                 tipText,

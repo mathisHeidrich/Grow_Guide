@@ -26,7 +26,8 @@ class ScenarioLauncherScreen extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListTile(
-              title: Text(scenario.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+              title: Text(scenario.title,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(scenario.description),
               trailing: const Icon(Icons.play_arrow, color: Colors.greenAccent),
               onTap: () => _launchScenario(context, scenario),
@@ -37,7 +38,8 @@ class ScenarioLauncherScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _launchScenario(BuildContext context, TestScenario scenario) async {
+  Future<void> _launchScenario(
+      BuildContext context, TestScenario scenario) async {
     // Show a loading indicator
     showDialog(
       context: context,
@@ -58,7 +60,8 @@ class ScenarioLauncherScreen extends StatelessWidget {
           builder: (context) => ProviderScope(
             overrides: [
               databaseProvider.overrideWithValue(mockDb),
-              timeProvider.overrideWith(() => MockTimeNotifier(scenario.startTime)),
+              timeProvider
+                  .overrideWith(() => MockTimeNotifier(scenario.startTime)),
             ],
             child: const TimeTravelOverlay(
               child: GrowGuideApp(),
@@ -69,7 +72,8 @@ class ScenarioLauncherScreen extends StatelessWidget {
     } catch (e) {
       if (!context.mounted) return;
       Navigator.of(context).pop(); // dismiss loading
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Error: $e')));
     }
   }
 }

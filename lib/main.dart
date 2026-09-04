@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final dbService = DatabaseService();
   await dbService.init();
 
@@ -27,7 +27,7 @@ class GrowGuideApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goRouter = ref.watch(routerProvider);
-    
+
     return MaterialApp.router(
       title: 'Grow Guide V2',
       theme: ThemeData(

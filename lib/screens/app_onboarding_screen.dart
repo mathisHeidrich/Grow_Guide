@@ -7,7 +7,8 @@ class AppOnboardingScreen extends ConsumerStatefulWidget {
   const AppOnboardingScreen({super.key});
 
   @override
-  ConsumerState<AppOnboardingScreen> createState() => _AppOnboardingScreenState();
+  ConsumerState<AppOnboardingScreen> createState() =>
+      _AppOnboardingScreenState();
 }
 
 class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
@@ -27,7 +28,6 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
       body: SafeArea(
         child: PageView(
           controller: _pageController,
-          
           children: [
             _buildSlide(
               title: l10n.onboardingTitle1,
