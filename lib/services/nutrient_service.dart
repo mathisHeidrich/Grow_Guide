@@ -12,60 +12,79 @@ class NutrientCalculationResult {
   });
 }
 
+class NutrientWeekConfig {
+  final double targetEc;
+  final double growPerL;
+  final double microPerL;
+  final double bloomPerL;
+
+  const NutrientWeekConfig({
+    required this.targetEc,
+    required this.growPerL,
+    required this.microPerL,
+    required this.bloomPerL,
+  });
+}
+
 class NutrientService {
-  /// Target EC values per phase (Mock values for generic DWC)
-  static double getTargetEc(PlantPhase phase) {
-    switch (phase) {
-      case PlantPhase.onboarding:
-      case PlantPhase.germination:
-      case PlantPhase.archived:
-        return 0.8;
-      case PlantPhase.veg:
-        return 1.4;
-      case PlantPhase.flower:
-      case PlantPhase.drying:
-      case PlantPhase.curing:
-        return 1.8;
+  /// Mock weekly schedule for generic DWC 3-part nutrient
+  static final Map<PlantPhase, List<NutrientWeekConfig>> _schedule = {
+    PlantPhase.germination: [
+      const NutrientWeekConfig(targetEc: 0.5, growPerL: 0.2, microPerL: 0.2, bloomPerL: 0.2), // Week 1+
+    ],
+    PlantPhase.veg: [
+      const NutrientWeekConfig(targetEc: 0.8, growPerL: 0.5, microPerL: 0.5, bloomPerL: 0.5), // Week 1
+      const NutrientWeekConfig(targetEc: 1.1, growPerL: 1.0, microPerL: 1.0, bloomPerL: 0.5), // Week 2
+      const NutrientWeekConfig(targetEc: 1.4, growPerL: 1.5, microPerL: 1.5, bloomPerL: 1.0), // Week 3
+      const NutrientWeekConfig(targetEc: 1.5, growPerL: 1.8, microPerL: 1.8, bloomPerL: 1.2), // Week 4+
+    ],
+    PlantPhase.flower: [
+      const NutrientWeekConfig(targetEc: 1.5, growPerL: 1.5, microPerL: 1.5, bloomPerL: 1.5), // Week 1 (Transition)
+      const NutrientWeekConfig(targetEc: 1.6, growPerL: 1.0, microPerL: 1.5, bloomPerL: 1.5), // Week 2
+      const NutrientWeekConfig(targetEc: 1.7, growPerL: 0.5, microPerL: 1.5, bloomPerL: 2.0), // Week 3
+      const NutrientWeekConfig(targetEc: 1.8, growPerL: 0.5, microPerL: 1.5, bloomPerL: 2.0), // Week 4
+      const NutrientWeekConfig(targetEc: 1.8, growPerL: 0.0, microPerL: 1.5, bloomPerL: 2.5), // Week 5+
+    ],
+  };
+
+  /// Returns the nutrient config for the given phase and week.
+  static NutrientWeekConfig _getConfig(PlantPhase phase, int weekIndex) {
+    List<NutrientWeekConfig>? configs = _schedule[phase];
+    if (configs == null || configs.isEmpty) {
+      // Fallback for phases without a specific schedule
+      return const NutrientWeekConfig(targetEc: 0.5, growPerL: 0, microPerL: 0, bloomPerL: 0);
     }
+    // Cap the weekIndex to the last available config in the list
+    if (weekIndex >= configs.length) {
+      weekIndex = configs.length - 1;
+    }
+    if (weekIndex < 0) weekIndex = 0;
+    
+    return configs[weekIndex];
   }
 
-  /// Calculates the required nutrient amounts based on phase, topped up liters, 
+  /// Expose the Target EC for a given phase and week
+  static double getTargetEc(PlantPhase phase, int weekIndex) {
+    return _getConfig(phase, weekIndex).targetEc;
+  }
+
+  /// Calculates the required nutrient amounts based on phase, week, topped up liters, 
   /// and the current EC deficit in the whole tank.
   static NutrientCalculationResult calculateNutrients({
     required PlantPhase phase,
+    required int weekIndex,
     required double waterAddedLiters,
     required double totalVolumeLiters,
     required double currentEc,
   }) {
-    double targetEc = getTargetEc(phase);
+    final config = _getConfig(phase, weekIndex);
     
-    double growPerL = 0;
-    double microPerL = 0;
-    double bloomPerL = 0;
+    double targetEc = config.targetEc;
+    double growPerL = config.growPerL;
+    double microPerL = config.microPerL;
+    double bloomPerL = config.bloomPerL;
 
-    switch (phase) {
-      case PlantPhase.onboarding:
-      case PlantPhase.germination:
-      case PlantPhase.archived:
-        growPerL = 0.5;
-        microPerL = 0.5;
-        bloomPerL = 0.5;
-        break;
-      case PlantPhase.veg:
-        growPerL = 1.5;
-        microPerL = 1.5;
-        bloomPerL = 1.0;
-        break;
-      case PlantPhase.flower:
-      case PlantPhase.drying:
-      case PlantPhase.curing:
-        growPerL = 0.5;
-        microPerL = 1.5;
-        bloomPerL = 1.5;
-        break;
-    }
-
-    // 1. Calculate nutrients needed for the freshly added water (assuming fresh water has EC 0 or close to 0)
+    // 1. Calculate nutrients needed for the freshly added water
     double topOffGrow = growPerL * waterAddedLiters;
     double topOffMicro = microPerL * waterAddedLiters;
     double topOffBloom = bloomPerL * waterAddedLiters;
@@ -76,9 +95,7 @@ class NutrientService {
     double deficitBloom = 0;
 
     if (currentEc < targetEc) {
-      // How much percentage of the target EC is missing?
       double deficitRatio = (targetEc - currentEc) / targetEc;
-      // We apply this ratio to the total volume (minus what we just topped off, to avoid double counting)
       double existingVolume = totalVolumeLiters - waterAddedLiters;
       if (existingVolume < 0) existingVolume = 0;
       

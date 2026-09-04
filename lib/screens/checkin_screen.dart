@@ -366,7 +366,14 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   Widget _buildEcAdjustSlide() {
     final l10n = AppLocalizations.of(context)!;
     
-    double targetEc = NutrientService.getTargetEc(_plant!.currentPhase);
+    // Calculate week index
+    int weekIndex = 0;
+    if (_plant!.phaseStartDate != null) {
+      final now = ref.read(timeProvider);
+      weekIndex = now.difference(_plant!.phaseStartDate!).inDays ~/ 7;
+    }
+
+    double targetEc = NutrientService.getTargetEc(_plant!.currentPhase, weekIndex);
 
     // Check if EC is too high (margin of +0.3 above target is considered high)
     bool isEcTooHigh = (_inputEc ?? 0) > (targetEc + 0.3);
@@ -374,6 +381,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     // Compute Nutrients
     final nutes = NutrientService.calculateNutrients(
         phase: _plant!.currentPhase, 
+        weekIndex: weekIndex,
         waterAddedLiters: _inputWaterAdded ?? 0,
         totalVolumeLiters: _plant!.waterVolumeLiters,
         currentEc: _inputEc ?? 0,
