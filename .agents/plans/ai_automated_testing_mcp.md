@@ -19,7 +19,8 @@ To speed up the feedback loop, we will keep a background session of the Flutter 
 
 ### 2. Testing Execution (Hot Reload Session)
 - We will start a background task during testing:
-  `flutter run -d web-server --web-renderer html --web-port 8080`
+  `flutter run -t lib/main_test_env.dart -d web-server --web-renderer html --web-port 8080`
+- Note: If this fails with a sandbox permission error (e.g. `PathAccessException`), run the command with BypassSandbox.
 - When changes are made, we will trigger a Hot Reload by sending `r` to the background task's input.
 - The AI will use the Puppeteer MCP tools to verify changes in the browser.
 
