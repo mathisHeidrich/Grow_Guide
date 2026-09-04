@@ -8,6 +8,9 @@
 ## 1. Git Workflow & Branching
 - **NEVER COMMIT TO MASTER:** Direct code changes on the `master` or `main` branch are strictly forbidden.
 - **ALWAYS CREATE A BRANCH FIRST:** E.g., `feature/ui-update`, `fix/login-bug`.
+- **ISOLATED WORKSPACES (MANDATORY):** If you are a top-level agent starting a new task, DO NOT work directly in the main directory. You MUST create and use a Git Worktree to avoid interfering with other active agents. 
+  1. Create the worktree: `git worktree add .worktrees/<branch-name> -b <branch-name>`
+  2. Change your working directory (`Cwd`) to `.worktrees/<branch-name>` for all subsequent commands and file edits.
 - **COMMIT FREQUENTLY:** Make a commit immediately after each logical step. Do not batch everything at the end.
 - **TEAMWORK / SUBAGENTS:** Use `branch` or `share` workspaces to parallelize subagents.
 
