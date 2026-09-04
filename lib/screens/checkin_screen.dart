@@ -119,8 +119,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    if (_plant == null)
+    if (_plant == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -364,15 +365,22 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   Widget _buildEcAdjustSlide() {
     final l10n = AppLocalizations.of(context)!;
+    
+    double targetEc = NutrientService.getTargetEc(_plant!.currentPhase);
 
-    // Check if EC is too high (simple heuristic for now: > 2.5 is very high for DWC)
-    bool isEcTooHigh = (_inputEc ?? 0) > 2.5;
+    // Check if EC is too high (margin of +0.3 above target is considered high)
+    bool isEcTooHigh = (_inputEc ?? 0) > (targetEc + 0.3);
 
     // Compute Nutrients
     final nutes = NutrientService.calculateNutrients(
-        phase: _plant!.currentPhase, waterAddedLiters: _inputWaterAdded ?? 0);
+        phase: _plant!.currentPhase, 
+        waterAddedLiters: _inputWaterAdded ?? 0,
+        totalVolumeLiters: _plant!.waterVolumeLiters,
+        currentEc: _inputEc ?? 0,
+    );
+    // Add nutrients if any value is >= 0.1 ml (to prevent showing 0.0 ml)
     bool hasNutrientsToAdd =
-        nutes.growMl > 0 || nutes.microMl > 0 || nutes.bloomMl > 0;
+        nutes.growMl >= 0.1 || nutes.microMl >= 0.1 || nutes.bloomMl >= 0.1;
 
     return Padding(
       padding: const EdgeInsets.all(24.0),
