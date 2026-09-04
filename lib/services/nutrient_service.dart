@@ -1,113 +1,153 @@
 import '../database/tables.dart';
 
+class NutrientAmount {
+  final String name;
+  final double amountMl;
+  
+  NutrientAmount({required this.name, required this.amountMl});
+}
+
 class NutrientCalculationResult {
-  final double growMl;
-  final double microMl;
-  final double bloomMl;
+  final double targetEc;
+  final List<NutrientAmount> nutrients;
 
   NutrientCalculationResult({
-    required this.growMl,
-    required this.microMl,
-    required this.bloomMl,
+    required this.targetEc,
+    required this.nutrients,
   });
 }
 
-class NutrientWeekConfig {
-  final double targetEc;
-  final double growPerL;
-  final double microPerL;
-  final double bloomPerL;
+abstract class NutrientSchedule {
+  String get brandName;
+  
+  double getTargetEc(PlantPhase phase, int weekIndex);
+  
+  /// Returns ml per L for each component.
+  /// [userAdditives] is a list of optional additive IDs the user has enabled (e.g. 'calmag', 'silica').
+  List<NutrientAmount> getBaseMlPerLiter(PlantPhase phase, int weekIndex, List<String> userAdditives);
+}
 
-  const NutrientWeekConfig({
-    required this.targetEc,
-    required this.growPerL,
-    required this.microPerL,
-    required this.bloomPerL,
-  });
+class TerraAquaticaTriPartSchedule implements NutrientSchedule {
+  @override
+  String get brandName => 'Terra Aquatica TriPart';
+
+  @override
+  double getTargetEc(PlantPhase phase, int weekIndex) {
+    if (phase == PlantPhase.veg) {
+      if (weekIndex == 0) return 0.8;
+      if (weekIndex == 1) return 1.1;
+      return 1.4;
+    } else if (phase == PlantPhase.flower) {
+      if (weekIndex == 0) return 1.5;
+      if (weekIndex == 1) return 1.6;
+      if (weekIndex == 2) return 1.7;
+      return 1.8;
+    }
+    return 0.5; // fallback
+  }
+
+  @override
+  List<NutrientAmount> getBaseMlPerLiter(PlantPhase phase, int weekIndex, List<String> userAdditives) {
+    double grow = 0;
+    double micro = 0;
+    double bloom = 0;
+    
+    if (phase == PlantPhase.veg) {
+      if (weekIndex == 0) { grow = 0.5; micro = 0.5; bloom = 0.5; }
+      else if (weekIndex == 1) { grow = 1.0; micro = 1.0; bloom = 0.5; }
+      else { grow = 1.5; micro = 1.5; bloom = 1.0; }
+    } else if (phase == PlantPhase.flower) {
+      if (weekIndex == 0) { grow = 1.5; micro = 1.5; bloom = 1.5; }
+      else if (weekIndex == 1) { grow = 1.0; micro = 1.5; bloom = 1.5; }
+      else if (weekIndex == 2) { grow = 0.5; micro = 1.5; bloom = 2.0; }
+      else { grow = 0.0; micro = 1.5; bloom = 2.5; }
+    } else {
+       grow = 0.2; micro = 0.2; bloom = 0.2;
+    }
+
+    final nutrients = [
+      NutrientAmount(name: 'TriPart Grow', amountMl: grow),
+      NutrientAmount(name: 'TriPart Micro', amountMl: micro),
+      NutrientAmount(name: 'TriPart Bloom', amountMl: bloom),
+    ];
+
+    // Handle optional additives
+    if (userAdditives.contains('calmag')) {
+      nutrients.add(NutrientAmount(name: 'CalMag', amountMl: 1.0)); // e.g. 1ml/L globally
+    }
+    if (userAdditives.contains('silica')) {
+       // Only add silica in veg and early flower
+       if (phase == PlantPhase.veg || (phase == PlantPhase.flower && weekIndex < 2)) {
+         nutrients.add(NutrientAmount(name: 'Silica', amountMl: 0.5));
+       }
+    }
+
+    return nutrients;
+  }
 }
 
 class NutrientService {
-  /// Mock weekly schedule for generic DWC 3-part nutrient
-  static final Map<PlantPhase, List<NutrientWeekConfig>> _schedule = {
-    PlantPhase.germination: [
-      const NutrientWeekConfig(targetEc: 0.5, growPerL: 0.2, microPerL: 0.2, bloomPerL: 0.2), // Week 1+
-    ],
-    PlantPhase.veg: [
-      const NutrientWeekConfig(targetEc: 0.8, growPerL: 0.5, microPerL: 0.5, bloomPerL: 0.5), // Week 1
-      const NutrientWeekConfig(targetEc: 1.1, growPerL: 1.0, microPerL: 1.0, bloomPerL: 0.5), // Week 2
-      const NutrientWeekConfig(targetEc: 1.4, growPerL: 1.5, microPerL: 1.5, bloomPerL: 1.0), // Week 3
-      const NutrientWeekConfig(targetEc: 1.5, growPerL: 1.8, microPerL: 1.8, bloomPerL: 1.2), // Week 4+
-    ],
-    PlantPhase.flower: [
-      const NutrientWeekConfig(targetEc: 1.5, growPerL: 1.5, microPerL: 1.5, bloomPerL: 1.5), // Week 1 (Transition)
-      const NutrientWeekConfig(targetEc: 1.6, growPerL: 1.0, microPerL: 1.5, bloomPerL: 1.5), // Week 2
-      const NutrientWeekConfig(targetEc: 1.7, growPerL: 0.5, microPerL: 1.5, bloomPerL: 2.0), // Week 3
-      const NutrientWeekConfig(targetEc: 1.8, growPerL: 0.5, microPerL: 1.5, bloomPerL: 2.0), // Week 4
-      const NutrientWeekConfig(targetEc: 1.8, growPerL: 0.0, microPerL: 1.5, bloomPerL: 2.5), // Week 5+
-    ],
-  };
-
-  /// Returns the nutrient config for the given phase and week.
-  static NutrientWeekConfig _getConfig(PlantPhase phase, int weekIndex) {
-    List<NutrientWeekConfig>? configs = _schedule[phase];
-    if (configs == null || configs.isEmpty) {
-      // Fallback for phases without a specific schedule
-      return const NutrientWeekConfig(targetEc: 0.5, growPerL: 0, microPerL: 0, bloomPerL: 0);
+  /// We map the NutrientBrand enum from the DB to an actual NutrientSchedule implementation
+  static NutrientSchedule getScheduleForBrand(NutrientBrand brand) {
+    switch (brand) {
+      case NutrientBrand.ta:
+        return TerraAquaticaTriPartSchedule();
+      // Add more brands here when implemented:
+      // case NutrientBrand.cannaAqua: return CannaAquaSchedule();
+      // case NutrientBrand.advancedNutrients: return AdvancedNutrientsSchedule();
+      default:
+        // fallback
+        return TerraAquaticaTriPartSchedule(); 
     }
-    // Cap the weekIndex to the last available config in the list
-    if (weekIndex >= configs.length) {
-      weekIndex = configs.length - 1;
-    }
-    if (weekIndex < 0) weekIndex = 0;
-    
-    return configs[weekIndex];
   }
 
-  /// Expose the Target EC for a given phase and week
-  static double getTargetEc(PlantPhase phase, int weekIndex) {
-    return _getConfig(phase, weekIndex).targetEc;
-  }
-
-  /// Calculates the required nutrient amounts based on phase, week, topped up liters, 
-  /// and the current EC deficit in the whole tank.
+  /// Calculates the required nutrient amounts based on brand, phase, week, topped up liters, 
+  /// current EC deficit in the whole tank, and any optional additives the user selected.
   static NutrientCalculationResult calculateNutrients({
+    required NutrientBrand brand,
     required PlantPhase phase,
     required int weekIndex,
     required double waterAddedLiters,
     required double totalVolumeLiters,
     required double currentEc,
+    List<String> userAdditives = const [],
   }) {
-    final config = _getConfig(phase, weekIndex);
+    final schedule = getScheduleForBrand(brand);
     
-    double targetEc = config.targetEc;
-    double growPerL = config.growPerL;
-    double microPerL = config.microPerL;
-    double bloomPerL = config.bloomPerL;
+    double targetEc = schedule.getTargetEc(phase, weekIndex);
+    List<NutrientAmount> baseAmounts = schedule.getBaseMlPerLiter(phase, weekIndex, userAdditives);
 
-    // 1. Calculate nutrients needed for the freshly added water
-    double topOffGrow = growPerL * waterAddedLiters;
-    double topOffMicro = microPerL * waterAddedLiters;
-    double topOffBloom = bloomPerL * waterAddedLiters;
-
-    // 2. Calculate nutrients needed to fix the EC deficit in the existing water
-    double deficitGrow = 0;
-    double deficitMicro = 0;
-    double deficitBloom = 0;
-
+    // 1. Calculate deficit ratio for the existing water
+    double deficitRatio = 0.0;
     if (currentEc < targetEc) {
-      double deficitRatio = (targetEc - currentEc) / targetEc;
-      double existingVolume = totalVolumeLiters - waterAddedLiters;
-      if (existingVolume < 0) existingVolume = 0;
+       deficitRatio = (targetEc - currentEc) / targetEc;
+    }
+
+    double existingVolume = totalVolumeLiters - waterAddedLiters;
+    if (existingVolume < 0) existingVolume = 0;
+
+    List<NutrientAmount> calculatedNutrients = [];
+
+    for (var base in baseAmounts) {
+      // Amount for the fresh top-off water
+      double topOffAmount = base.amountMl * waterAddedLiters;
       
-      deficitGrow = deficitRatio * growPerL * existingVolume;
-      deficitMicro = deficitRatio * microPerL * existingVolume;
-      deficitBloom = deficitRatio * bloomPerL * existingVolume;
+      // Amount to fix the EC deficit in the existing water
+      double deficitAmount = deficitRatio * base.amountMl * existingVolume;
+
+      double totalAmount = topOffAmount + deficitAmount;
+
+      if (totalAmount > 0) {
+        calculatedNutrients.add(NutrientAmount(
+          name: base.name,
+          amountMl: totalAmount,
+        ));
+      }
     }
 
     return NutrientCalculationResult(
-      growMl: topOffGrow + deficitGrow,
-      microMl: topOffMicro + deficitMicro,
-      bloomMl: topOffBloom + deficitBloom,
+      targetEc: targetEc,
+      nutrients: calculatedNutrients,
     );
   }
 }

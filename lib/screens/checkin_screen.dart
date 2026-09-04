@@ -373,13 +373,15 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       weekIndex = now.difference(_plant!.phaseStartDate!).inDays ~/ 7;
     }
 
-    double targetEc = NutrientService.getTargetEc(_plant!.currentPhase, weekIndex);
+    final schedule = NutrientService.getScheduleForBrand(_plant!.nutrientBrand);
+    double targetEc = schedule.getTargetEc(_plant!.currentPhase, weekIndex);
 
     // Check if EC is too high (margin of +0.3 above target is considered high)
     bool isEcTooHigh = (_inputEc ?? 0) > (targetEc + 0.3);
 
     // Compute Nutrients
     final nutes = NutrientService.calculateNutrients(
+        brand: _plant!.nutrientBrand,
         phase: _plant!.currentPhase, 
         weekIndex: weekIndex,
         waterAddedLiters: _inputWaterAdded ?? 0,
@@ -387,8 +389,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         currentEc: _inputEc ?? 0,
     );
     // Add nutrients if any value is >= 0.1 ml (to prevent showing 0.0 ml)
-    bool hasNutrientsToAdd =
-        nutes.growMl >= 0.1 || nutes.microMl >= 0.1 || nutes.bloomMl >= 0.1;
+    final nutrientsToAdd = nutes.nutrients.where((n) => n.amountMl >= 0.1).toList();
+    bool hasNutrientsToAdd = nutrientsToAdd.isNotEmpty;
 
     return Padding(
       padding: const EdgeInsets.all(24.0),
@@ -452,24 +454,12 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   borderRadius: BorderRadius.circular(12)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                      l10n.checkinNutrientGrow(nutes.growMl.toStringAsFixed(1)),
-                      style:
-                          const TextStyle(fontSize: 18, color: Colors.white)),
-                  const SizedBox(height: 8),
-                  Text(
-                      l10n.checkinNutrientMicro(
-                          nutes.microMl.toStringAsFixed(1)),
-                      style:
-                          const TextStyle(fontSize: 18, color: Colors.white)),
-                  const SizedBox(height: 8),
-                  Text(
-                      l10n.checkinNutrientBloom(
-                          nutes.bloomMl.toStringAsFixed(1)),
-                      style:
-                          const TextStyle(fontSize: 18, color: Colors.white)),
-                ],
+                children: nutrientsToAdd.map((n) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Text(
+                      "${n.name}: ${n.amountMl.toStringAsFixed(1)} ml",
+                      style: const TextStyle(fontSize: 18, color: Colors.white)),
+                )).toList(),
               ),
             )
           ] else ...[
