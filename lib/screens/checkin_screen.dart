@@ -94,24 +94,28 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   Future<void> _completeCheckin() async {
     if (_plant == null) return;
 
-    if (_inputPh != null && _inputEc != null) {
-      final db = ref.read(databaseProvider).db;
-      await db.into(db.logEntries).insert(
-            LogEntriesCompanion.insert(
-              plantId: _plant!.id,
-              timestamp: ref.read(timeProvider),
-              ph: _inputPh!,
-              ec: _inputEc!,
-              ppfd: _inputPpfd != null
-                  ? drift.Value(_inputPpfd!)
-                  : const drift.Value.absent(),
-              waterAdded: _inputWaterAdded != null
-                  ? drift.Value(_inputWaterAdded!)
-                  : const drift.Value.absent(),
-              isWaterChange: drift.Value(_isWaterChange),
-            ),
-          );
+    final db = ref.read(databaseProvider).db;
+
+    if (_initialRootsNotReached == true && _tempRootsInWater == true) {
+      final updatedPlant = _plant!.copyWith(rootsReachedWater: true);
+      await db.update(db.plants).replace(updatedPlant);
     }
+
+    await db.into(db.logEntries).insert(
+          LogEntriesCompanion.insert(
+            plantId: _plant!.id,
+            timestamp: ref.read(timeProvider),
+            ph: _inputPh != null ? drift.Value(_inputPh!) : const drift.Value.absent(),
+            ec: _inputEc != null ? drift.Value(_inputEc!) : const drift.Value.absent(),
+            ppfd: _inputPpfd != null
+                ? drift.Value(_inputPpfd!)
+                : const drift.Value.absent(),
+            waterAdded: _inputWaterAdded != null
+                ? drift.Value(_inputWaterAdded!)
+                : const drift.Value.absent(),
+            isWaterChange: drift.Value(_isWaterChange),
+          ),
+        );
 
     if (mounted) context.go('/');
   }
@@ -645,17 +649,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16)),
             ),
-            onPressed: () async {
+            onPressed: () {
               if (_tempRootsInWater == null) {
                 return;
-              }
-              if (_tempRootsInWater == true) {
-                final db = ref.read(databaseProvider).db;
-                final updatedPlant = _plant!.copyWith(rootsReachedWater: true);
-                await db.update(db.plants).replace(updatedPlant);
-                setState(() {
-                  _plant = updatedPlant;
-                });
               }
               _nextPage();
             },
