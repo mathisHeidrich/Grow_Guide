@@ -31,8 +31,8 @@ class LogEntries extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get plantId => integer().references(Plants, #id)();
   DateTimeColumn get timestamp => dateTime()();
-  RealColumn get ph => real()();
-  RealColumn get ec => real()();
+  RealColumn get ph => real().nullable()();
+  RealColumn get ec => real().nullable()();
   RealColumn get ppfd => real().nullable()();
 }
 
