@@ -10,9 +10,11 @@ final ppfdCameraServiceProvider = Provider<PpfdCameraService>((ref) {
   return service;
 });
 
-final selectedLightSourceProvider = StateProvider<LightSource>((ref) => LightSource.led);
+final selectedLightSourceProvider =
+    StateProvider<LightSource>((ref) => LightSource.led);
 final calibrationFactorProvider = StateProvider<double>((ref) => 1.0);
-final ppfdCalibrationConstantProvider = Provider<double>((ref) => 250.0); // C in the formula
+final ppfdCalibrationConstantProvider =
+    Provider<double>((ref) => 250.0); // C in the formula
 
 final ppfdStreamProvider = StreamProvider<double>((ref) {
   final service = ref.watch(ppfdCameraServiceProvider);
@@ -27,8 +29,11 @@ final ppfdStreamProvider = StreamProvider<double>((ref) {
     if (data.exposureDuration <= 0 || data.iso <= 0) return 0.0;
 
     // Lux = C * (Aperture^2) / (Exposure Time * ISO) * Luminance
-    final lux = c * (data.aperture * data.aperture) / (data.exposureDuration * data.iso) * data.luminance;
-    
+    final lux = c *
+        (data.aperture * data.aperture) /
+        (data.exposureDuration * data.iso) *
+        data.luminance;
+
     // PPFD = Lux * LightSourceFactor * UserCalibration
     final ppfd = lux * lightSource.factor * calibrationFactor;
     return ppfd;

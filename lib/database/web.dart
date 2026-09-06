@@ -6,5 +6,7 @@ DatabaseConnection openConnection() {
 }
 
 DatabaseConnection openMemoryConnection() {
-  return DatabaseConnection(WebDatabase('test_db_${DateTime.now().millisecondsSinceEpoch}', logStatements: false));
+  return DatabaseConnection(WebDatabase(
+      'test_db_${DateTime.now().millisecondsSinceEpoch}',
+      logStatements: false));
 }

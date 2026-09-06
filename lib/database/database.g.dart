@@ -710,20 +710,37 @@ class $LogEntriesTable extends LogEntries
   static const VerificationMeta _phMeta = const VerificationMeta('ph');
   @override
   late final GeneratedColumn<double> ph = GeneratedColumn<double>(
-      'ph', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+      'ph', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
   static const VerificationMeta _ecMeta = const VerificationMeta('ec');
   @override
   late final GeneratedColumn<double> ec = GeneratedColumn<double>(
-      'ec', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
+      'ec', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
   static const VerificationMeta _ppfdMeta = const VerificationMeta('ppfd');
   @override
   late final GeneratedColumn<double> ppfd = GeneratedColumn<double>(
       'ppfd', aliasedName, true,
       type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _waterAddedMeta =
+      const VerificationMeta('waterAdded');
   @override
-  List<GeneratedColumn> get $columns => [id, plantId, timestamp, ph, ec, ppfd];
+  late final GeneratedColumn<double> waterAdded = GeneratedColumn<double>(
+      'water_added', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
+  static const VerificationMeta _isWaterChangeMeta =
+      const VerificationMeta('isWaterChange');
+  @override
+  late final GeneratedColumn<bool> isWaterChange = GeneratedColumn<bool>(
+      'is_water_change', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("is_water_change" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, plantId, timestamp, ph, ec, ppfd, waterAdded, isWaterChange];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -751,17 +768,25 @@ class $LogEntriesTable extends LogEntries
     }
     if (data.containsKey('ph')) {
       context.handle(_phMeta, ph.isAcceptableOrUnknown(data['ph']!, _phMeta));
-    } else if (isInserting) {
-      context.missing(_phMeta);
     }
     if (data.containsKey('ec')) {
       context.handle(_ecMeta, ec.isAcceptableOrUnknown(data['ec']!, _ecMeta));
-    } else if (isInserting) {
-      context.missing(_ecMeta);
     }
     if (data.containsKey('ppfd')) {
       context.handle(
           _ppfdMeta, ppfd.isAcceptableOrUnknown(data['ppfd']!, _ppfdMeta));
+    }
+    if (data.containsKey('water_added')) {
+      context.handle(
+          _waterAddedMeta,
+          waterAdded.isAcceptableOrUnknown(
+              data['water_added']!, _waterAddedMeta));
+    }
+    if (data.containsKey('is_water_change')) {
+      context.handle(
+          _isWaterChangeMeta,
+          isWaterChange.isAcceptableOrUnknown(
+              data['is_water_change']!, _isWaterChangeMeta));
     }
     return context;
   }
@@ -779,11 +804,15 @@ class $LogEntriesTable extends LogEntries
       timestamp: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}timestamp'])!,
       ph: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}ph'])!,
+          .read(DriftSqlType.double, data['${effectivePrefix}ph']),
       ec: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}ec'])!,
+          .read(DriftSqlType.double, data['${effectivePrefix}ec']),
       ppfd: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}ppfd']),
+      waterAdded: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}water_added']),
+      isWaterChange: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_water_change'])!,
     );
   }
 
@@ -797,27 +826,39 @@ class LogEntry extends DataClass implements Insertable<LogEntry> {
   final int id;
   final int plantId;
   final DateTime timestamp;
-  final double ph;
-  final double ec;
+  final double? ph;
+  final double? ec;
   final double? ppfd;
+  final double? waterAdded;
+  final bool isWaterChange;
   const LogEntry(
       {required this.id,
       required this.plantId,
       required this.timestamp,
-      required this.ph,
-      required this.ec,
-      this.ppfd});
+      this.ph,
+      this.ec,
+      this.ppfd,
+      this.waterAdded,
+      required this.isWaterChange});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['plant_id'] = Variable<int>(plantId);
     map['timestamp'] = Variable<DateTime>(timestamp);
-    map['ph'] = Variable<double>(ph);
-    map['ec'] = Variable<double>(ec);
+    if (!nullToAbsent || ph != null) {
+      map['ph'] = Variable<double>(ph);
+    }
+    if (!nullToAbsent || ec != null) {
+      map['ec'] = Variable<double>(ec);
+    }
     if (!nullToAbsent || ppfd != null) {
       map['ppfd'] = Variable<double>(ppfd);
     }
+    if (!nullToAbsent || waterAdded != null) {
+      map['water_added'] = Variable<double>(waterAdded);
+    }
+    map['is_water_change'] = Variable<bool>(isWaterChange);
     return map;
   }
 
@@ -826,9 +867,13 @@ class LogEntry extends DataClass implements Insertable<LogEntry> {
       id: Value(id),
       plantId: Value(plantId),
       timestamp: Value(timestamp),
-      ph: Value(ph),
-      ec: Value(ec),
+      ph: ph == null && nullToAbsent ? const Value.absent() : Value(ph),
+      ec: ec == null && nullToAbsent ? const Value.absent() : Value(ec),
       ppfd: ppfd == null && nullToAbsent ? const Value.absent() : Value(ppfd),
+      waterAdded: waterAdded == null && nullToAbsent
+          ? const Value.absent()
+          : Value(waterAdded),
+      isWaterChange: Value(isWaterChange),
     );
   }
 
@@ -839,9 +884,11 @@ class LogEntry extends DataClass implements Insertable<LogEntry> {
       id: serializer.fromJson<int>(json['id']),
       plantId: serializer.fromJson<int>(json['plantId']),
       timestamp: serializer.fromJson<DateTime>(json['timestamp']),
-      ph: serializer.fromJson<double>(json['ph']),
-      ec: serializer.fromJson<double>(json['ec']),
+      ph: serializer.fromJson<double?>(json['ph']),
+      ec: serializer.fromJson<double?>(json['ec']),
       ppfd: serializer.fromJson<double?>(json['ppfd']),
+      waterAdded: serializer.fromJson<double?>(json['waterAdded']),
+      isWaterChange: serializer.fromJson<bool>(json['isWaterChange']),
     );
   }
   @override
@@ -851,9 +898,11 @@ class LogEntry extends DataClass implements Insertable<LogEntry> {
       'id': serializer.toJson<int>(id),
       'plantId': serializer.toJson<int>(plantId),
       'timestamp': serializer.toJson<DateTime>(timestamp),
-      'ph': serializer.toJson<double>(ph),
-      'ec': serializer.toJson<double>(ec),
+      'ph': serializer.toJson<double?>(ph),
+      'ec': serializer.toJson<double?>(ec),
       'ppfd': serializer.toJson<double?>(ppfd),
+      'waterAdded': serializer.toJson<double?>(waterAdded),
+      'isWaterChange': serializer.toJson<bool>(isWaterChange),
     };
   }
 
@@ -861,16 +910,20 @@ class LogEntry extends DataClass implements Insertable<LogEntry> {
           {int? id,
           int? plantId,
           DateTime? timestamp,
-          double? ph,
-          double? ec,
-          Value<double?> ppfd = const Value.absent()}) =>
+          Value<double?> ph = const Value.absent(),
+          Value<double?> ec = const Value.absent(),
+          Value<double?> ppfd = const Value.absent(),
+          Value<double?> waterAdded = const Value.absent(),
+          bool? isWaterChange}) =>
       LogEntry(
         id: id ?? this.id,
         plantId: plantId ?? this.plantId,
         timestamp: timestamp ?? this.timestamp,
-        ph: ph ?? this.ph,
-        ec: ec ?? this.ec,
+        ph: ph.present ? ph.value : this.ph,
+        ec: ec.present ? ec.value : this.ec,
         ppfd: ppfd.present ? ppfd.value : this.ppfd,
+        waterAdded: waterAdded.present ? waterAdded.value : this.waterAdded,
+        isWaterChange: isWaterChange ?? this.isWaterChange,
       );
   LogEntry copyWithCompanion(LogEntriesCompanion data) {
     return LogEntry(
@@ -880,6 +933,11 @@ class LogEntry extends DataClass implements Insertable<LogEntry> {
       ph: data.ph.present ? data.ph.value : this.ph,
       ec: data.ec.present ? data.ec.value : this.ec,
       ppfd: data.ppfd.present ? data.ppfd.value : this.ppfd,
+      waterAdded:
+          data.waterAdded.present ? data.waterAdded.value : this.waterAdded,
+      isWaterChange: data.isWaterChange.present
+          ? data.isWaterChange.value
+          : this.isWaterChange,
     );
   }
 
@@ -891,13 +949,16 @@ class LogEntry extends DataClass implements Insertable<LogEntry> {
           ..write('timestamp: $timestamp, ')
           ..write('ph: $ph, ')
           ..write('ec: $ec, ')
-          ..write('ppfd: $ppfd')
+          ..write('ppfd: $ppfd, ')
+          ..write('waterAdded: $waterAdded, ')
+          ..write('isWaterChange: $isWaterChange')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, plantId, timestamp, ph, ec, ppfd);
+  int get hashCode => Object.hash(
+      id, plantId, timestamp, ph, ec, ppfd, waterAdded, isWaterChange);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -907,16 +968,20 @@ class LogEntry extends DataClass implements Insertable<LogEntry> {
           other.timestamp == this.timestamp &&
           other.ph == this.ph &&
           other.ec == this.ec &&
-          other.ppfd == this.ppfd);
+          other.ppfd == this.ppfd &&
+          other.waterAdded == this.waterAdded &&
+          other.isWaterChange == this.isWaterChange);
 }
 
 class LogEntriesCompanion extends UpdateCompanion<LogEntry> {
   final Value<int> id;
   final Value<int> plantId;
   final Value<DateTime> timestamp;
-  final Value<double> ph;
-  final Value<double> ec;
+  final Value<double?> ph;
+  final Value<double?> ec;
   final Value<double?> ppfd;
+  final Value<double?> waterAdded;
+  final Value<bool> isWaterChange;
   const LogEntriesCompanion({
     this.id = const Value.absent(),
     this.plantId = const Value.absent(),
@@ -924,18 +989,20 @@ class LogEntriesCompanion extends UpdateCompanion<LogEntry> {
     this.ph = const Value.absent(),
     this.ec = const Value.absent(),
     this.ppfd = const Value.absent(),
+    this.waterAdded = const Value.absent(),
+    this.isWaterChange = const Value.absent(),
   });
   LogEntriesCompanion.insert({
     this.id = const Value.absent(),
     required int plantId,
     required DateTime timestamp,
-    required double ph,
-    required double ec,
+    this.ph = const Value.absent(),
+    this.ec = const Value.absent(),
     this.ppfd = const Value.absent(),
+    this.waterAdded = const Value.absent(),
+    this.isWaterChange = const Value.absent(),
   })  : plantId = Value(plantId),
-        timestamp = Value(timestamp),
-        ph = Value(ph),
-        ec = Value(ec);
+        timestamp = Value(timestamp);
   static Insertable<LogEntry> custom({
     Expression<int>? id,
     Expression<int>? plantId,
@@ -943,6 +1010,8 @@ class LogEntriesCompanion extends UpdateCompanion<LogEntry> {
     Expression<double>? ph,
     Expression<double>? ec,
     Expression<double>? ppfd,
+    Expression<double>? waterAdded,
+    Expression<bool>? isWaterChange,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -951,6 +1020,8 @@ class LogEntriesCompanion extends UpdateCompanion<LogEntry> {
       if (ph != null) 'ph': ph,
       if (ec != null) 'ec': ec,
       if (ppfd != null) 'ppfd': ppfd,
+      if (waterAdded != null) 'water_added': waterAdded,
+      if (isWaterChange != null) 'is_water_change': isWaterChange,
     });
   }
 
@@ -958,9 +1029,11 @@ class LogEntriesCompanion extends UpdateCompanion<LogEntry> {
       {Value<int>? id,
       Value<int>? plantId,
       Value<DateTime>? timestamp,
-      Value<double>? ph,
-      Value<double>? ec,
-      Value<double?>? ppfd}) {
+      Value<double?>? ph,
+      Value<double?>? ec,
+      Value<double?>? ppfd,
+      Value<double?>? waterAdded,
+      Value<bool>? isWaterChange}) {
     return LogEntriesCompanion(
       id: id ?? this.id,
       plantId: plantId ?? this.plantId,
@@ -968,6 +1041,8 @@ class LogEntriesCompanion extends UpdateCompanion<LogEntry> {
       ph: ph ?? this.ph,
       ec: ec ?? this.ec,
       ppfd: ppfd ?? this.ppfd,
+      waterAdded: waterAdded ?? this.waterAdded,
+      isWaterChange: isWaterChange ?? this.isWaterChange,
     );
   }
 
@@ -992,6 +1067,12 @@ class LogEntriesCompanion extends UpdateCompanion<LogEntry> {
     if (ppfd.present) {
       map['ppfd'] = Variable<double>(ppfd.value);
     }
+    if (waterAdded.present) {
+      map['water_added'] = Variable<double>(waterAdded.value);
+    }
+    if (isWaterChange.present) {
+      map['is_water_change'] = Variable<bool>(isWaterChange.value);
+    }
     return map;
   }
 
@@ -1003,7 +1084,9 @@ class LogEntriesCompanion extends UpdateCompanion<LogEntry> {
           ..write('timestamp: $timestamp, ')
           ..write('ph: $ph, ')
           ..write('ec: $ec, ')
-          ..write('ppfd: $ppfd')
+          ..write('ppfd: $ppfd, ')
+          ..write('waterAdded: $waterAdded, ')
+          ..write('isWaterChange: $isWaterChange')
           ..write(')'))
         .toString();
   }
@@ -1543,17 +1626,21 @@ typedef $$LogEntriesTableCreateCompanionBuilder = LogEntriesCompanion Function({
   Value<int> id,
   required int plantId,
   required DateTime timestamp,
-  required double ph,
-  required double ec,
+  Value<double?> ph,
+  Value<double?> ec,
   Value<double?> ppfd,
+  Value<double?> waterAdded,
+  Value<bool> isWaterChange,
 });
 typedef $$LogEntriesTableUpdateCompanionBuilder = LogEntriesCompanion Function({
   Value<int> id,
   Value<int> plantId,
   Value<DateTime> timestamp,
-  Value<double> ph,
-  Value<double> ec,
+  Value<double?> ph,
+  Value<double?> ec,
   Value<double?> ppfd,
+  Value<double?> waterAdded,
+  Value<bool> isWaterChange,
 });
 
 class $$LogEntriesTableTableManager extends RootTableManager<
@@ -1576,9 +1663,11 @@ class $$LogEntriesTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<int> plantId = const Value.absent(),
             Value<DateTime> timestamp = const Value.absent(),
-            Value<double> ph = const Value.absent(),
-            Value<double> ec = const Value.absent(),
+            Value<double?> ph = const Value.absent(),
+            Value<double?> ec = const Value.absent(),
             Value<double?> ppfd = const Value.absent(),
+            Value<double?> waterAdded = const Value.absent(),
+            Value<bool> isWaterChange = const Value.absent(),
           }) =>
               LogEntriesCompanion(
             id: id,
@@ -1587,14 +1676,18 @@ class $$LogEntriesTableTableManager extends RootTableManager<
             ph: ph,
             ec: ec,
             ppfd: ppfd,
+            waterAdded: waterAdded,
+            isWaterChange: isWaterChange,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required int plantId,
             required DateTime timestamp,
-            required double ph,
-            required double ec,
+            Value<double?> ph = const Value.absent(),
+            Value<double?> ec = const Value.absent(),
             Value<double?> ppfd = const Value.absent(),
+            Value<double?> waterAdded = const Value.absent(),
+            Value<bool> isWaterChange = const Value.absent(),
           }) =>
               LogEntriesCompanion.insert(
             id: id,
@@ -1603,6 +1696,8 @@ class $$LogEntriesTableTableManager extends RootTableManager<
             ph: ph,
             ec: ec,
             ppfd: ppfd,
+            waterAdded: waterAdded,
+            isWaterChange: isWaterChange,
           ),
         ));
 }
@@ -1632,6 +1727,16 @@ class $$LogEntriesTableFilterComposer
 
   ColumnFilters<double> get ppfd => $state.composableBuilder(
       column: $state.table.ppfd,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<double> get waterAdded => $state.composableBuilder(
+      column: $state.table.waterAdded,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isWaterChange => $state.composableBuilder(
+      column: $state.table.isWaterChange,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1673,6 +1778,16 @@ class $$LogEntriesTableOrderingComposer
 
   ColumnOrderings<double> get ppfd => $state.composableBuilder(
       column: $state.table.ppfd,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<double> get waterAdded => $state.composableBuilder(
+      column: $state.table.waterAdded,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isWaterChange => $state.composableBuilder(
+      column: $state.table.isWaterChange,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

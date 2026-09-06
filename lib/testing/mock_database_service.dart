@@ -15,10 +15,10 @@ class MockDatabaseService extends DatabaseService {
 
     // Seed the database with scenario data
     await db.into(db.appSettingsTable).insert(
-      AppSettingsTableCompanion.insert(
-        hasCompletedOnboarding: Value(scenario.hasCompletedOnboarding),
-      ),
-    );
+          AppSettingsTableCompanion.insert(
+            hasCompletedOnboarding: Value(scenario.hasCompletedOnboarding),
+          ),
+        );
 
     for (final plantCompanion in scenario.plants) {
       await db.into(db.plants).insert(plantCompanion);

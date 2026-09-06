@@ -26,7 +26,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    
+
     // Build the list of hardware items
     final items = [
       _HardwareItemData(
@@ -193,9 +193,12 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: item.isRequired ? Colors.red.withOpacity(0.2) : Colors.blue.withOpacity(0.2),
+                      color: item.isRequired
+                          ? Colors.red.withOpacity(0.2)
+                          : Colors.blue.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: item.isRequired ? Colors.red : Colors.blue,
@@ -236,7 +239,8 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                     decoration: BoxDecoration(
                       color: const Color(0xFF1E1E1E),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFF00E676).withOpacity(0.3)),
+                      border: Border.all(
+                          color: const Color(0xFF00E676).withOpacity(0.3)),
                     ),
                     child: Text(
                       item.proTip!,
@@ -257,11 +261,13 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
-                            side: const BorderSide(color: Color(0xFF00E676), width: 2),
+                            side: const BorderSide(
+                                color: Color(0xFF00E676), width: 2),
                           ),
                         ),
                         onPressed: () {
-                          if (_pageController.page != null && _pageController.page!.toInt() > 0) {
+                          if (_pageController.page != null &&
+                              _pageController.page!.toInt() > 0) {
                             _pageController.previousPage(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeInOut,
@@ -289,8 +295,11 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                         ),
                         onPressed: () => _nextPage(items.length),
                         child: Text(
-                          index == items.length - 1 ? 'Weiter zur Wasser-Masterclass' : 'Weiter',
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          index == items.length - 1
+                              ? 'Weiter zur Wasser-Masterclass'
+                              : 'Weiter',
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

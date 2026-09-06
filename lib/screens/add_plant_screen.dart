@@ -20,7 +20,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String _name = '';
-  
+
   double? _waterVolume = 20.0;
   final _customWaterController = TextEditingController();
 
@@ -30,7 +30,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
   String _lampType = 'LED';
   int? _lampWattage = 200;
   final _customWattageController = TextEditingController();
-  
+
   int? _plantsUnderLamp = 1;
   final _customPlantsController = TextEditingController();
 
@@ -56,25 +56,28 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
 
     final db = ref.read(databaseProvider).db;
 
-    double finalVolume = _waterVolume ?? double.tryParse(_customWaterController.text) ?? 20.0;
-    int finalWattage = _lampWattage ?? int.tryParse(_customWattageController.text) ?? 200;
-    int finalPlants = _plantsUnderLamp ?? int.tryParse(_customPlantsController.text) ?? 1;
+    double finalVolume =
+        _waterVolume ?? double.tryParse(_customWaterController.text) ?? 20.0;
+    int finalWattage =
+        _lampWattage ?? int.tryParse(_customWattageController.text) ?? 200;
+    int finalPlants =
+        _plantsUnderLamp ?? int.tryParse(_customPlantsController.text) ?? 1;
     int finalDay = int.tryParse(_dayInPhaseController.text) ?? 1;
 
     final now = ref.read(timeProvider);
     final phaseStart = now.subtract(Duration(days: finalDay - 1));
 
     await db.into(db.plants).insert(PlantsCompanion.insert(
-      name: _name,
-      currentPhase: _currentPhase,
-      phaseStartDate: drift.Value(phaseStart),
-      waterVolumeLiters: finalVolume,
-      nutrientBrand: _nutrientBrand,
-      type: _plantType,
-      lampType: _lampType,
-      lampWattage: finalWattage,
-      plantsUnderLamp: finalPlants,
-    ));
+          name: _name,
+          currentPhase: _currentPhase,
+          phaseStartDate: drift.Value(phaseStart),
+          waterVolumeLiters: finalVolume,
+          nutrientBrand: _nutrientBrand,
+          type: _plantType,
+          lampType: _lampType,
+          lampWattage: finalWattage,
+          plantsUnderLamp: finalPlants,
+        ));
 
     if (mounted) {
       context.go('/');
@@ -99,13 +102,14 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                   labelText: l10n.addPlantNameLabel,
                   border: const OutlineInputBorder(),
                 ),
-                validator: (val) => val == null || val.isEmpty ? l10n.addPlantRequired : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? l10n.addPlantRequired : null,
                 onSaved: (val) => _name = val!,
               ),
               const SizedBox(height: 32),
-
               _buildSectionTitle(l10n.addPlantSection2),
-              Text(l10n.addPlantVolumeDesc, style: const TextStyle(color: AppColors.textSecondary)),
+              Text(l10n.addPlantVolumeDesc,
+                  style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               Wrap(
                 spacing: 8,
@@ -133,22 +137,24 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                   labelText: l10n.addPlantCustomLiters,
                   border: const OutlineInputBorder(),
                 ),
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 onChanged: (val) {
                   if (val.isNotEmpty) setState(() => _waterVolume = null);
                 },
               ),
               const SizedBox(height: 32),
-
               _buildSectionTitle(l10n.addPlantSection3),
-              Text(l10n.addPlantBrandDesc, style: const TextStyle(color: AppColors.textSecondary)),
+              Text(l10n.addPlantBrandDesc,
+                  style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               Column(
                 children: NutrientBrand.values.map((brand) {
                   String label = brand.toString().split('.').last;
                   if (brand == NutrientBrand.cannaAqua) label = 'Canna Aqua';
                   if (brand == NutrientBrand.ta) label = 'General Hydroponics';
-                  if (brand == NutrientBrand.advancedNutrients) label = 'Advanced Nutrients';
+                  if (brand == NutrientBrand.advancedNutrients)
+                    label = 'Advanced Nutrients';
                   if (brand == NutrientBrand.plagron) label = 'Plagron';
 
                   return RadioListTile<NutrientBrand>(
@@ -162,9 +168,9 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                 }).toList(),
               ),
               const SizedBox(height: 32),
-
               _buildSectionTitle(l10n.addPlantSection4),
-              Text(l10n.addPlantTypeDesc, style: const TextStyle(color: AppColors.textSecondary)),
+              Text(l10n.addPlantTypeDesc,
+                  style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               Row(
                 children: [
@@ -173,7 +179,8 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                       label: Center(child: Text(l10n.addPlantTypePhoto)),
                       selected: _plantType == PlantType.photo,
                       selectedColor: AppColors.growGreen,
-                      onSelected: (val) => setState(() => _plantType = PlantType.photo),
+                      onSelected: (val) =>
+                          setState(() => _plantType = PlantType.photo),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -182,38 +189,49 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                       label: Center(child: Text(l10n.addPlantTypeAuto)),
                       selected: _plantType == PlantType.auto,
                       selectedColor: AppColors.growGreen,
-                      onSelected: (val) => setState(() => _plantType = PlantType.auto),
+                      onSelected: (val) =>
+                          setState(() => _plantType = PlantType.auto),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 32),
-
               _buildSectionTitle(l10n.addPlantSection5),
-              Text(l10n.addPlantLampDesc, style: const TextStyle(color: AppColors.textSecondary)),
+              Text(l10n.addPlantLampDesc,
+                  style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
-              Text(l10n.addPlantLampType, style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.addPlantLampType,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
               Wrap(
                 spacing: 8,
-                children: ['LED', 'NDL', 'CMH'].map((t) => ChoiceChip(
-                  label: Text(t),
-                  selected: _lampType == t,
-                  selectedColor: AppColors.growGreen,
-                  onSelected: (val) => setState(() => _lampType = t),
-                )).toList(),
+                children: ['LED', 'NDL', 'CMH']
+                    .map((t) => ChoiceChip(
+                          label: Text(t),
+                          selected: _lampType == t,
+                          selectedColor: AppColors.growGreen,
+                          onSelected: (val) => setState(() => _lampType = t),
+                        ))
+                    .toList(),
               ),
               const SizedBox(height: 16),
-              Text(l10n.addPlantLampWattage, style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.addPlantLampWattage,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
               Wrap(
                 spacing: 8,
-                children: _wattageOptions.map((w) => ChoiceChip(
-                  label: Text('${w}W'),
-                  selected: _lampWattage == w,
-                  selectedColor: AppColors.growGreen,
-                  onSelected: (val) {
-                    if (val) setState(() { _lampWattage = w; _customWattageController.clear(); });
-                  },
-                )).toList(),
+                children: _wattageOptions
+                    .map((w) => ChoiceChip(
+                          label: Text('${w}W'),
+                          selected: _lampWattage == w,
+                          selectedColor: AppColors.growGreen,
+                          onSelected: (val) {
+                            if (val)
+                              setState(() {
+                                _lampWattage = w;
+                                _customWattageController.clear();
+                              });
+                          },
+                        ))
+                    .toList(),
               ),
               const SizedBox(height: 8),
               TextFormField(
@@ -228,17 +246,24 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                 },
               ),
               const SizedBox(height: 16),
-              Text(l10n.addPlantLampCount, style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.addPlantLampCount,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
               Wrap(
                 spacing: 8,
-                children: _plantsOptions.map((p) => ChoiceChip(
-                  label: Text('$p'),
-                  selected: _plantsUnderLamp == p,
-                  selectedColor: AppColors.growGreen,
-                  onSelected: (val) {
-                    if (val) setState(() { _plantsUnderLamp = p; _customPlantsController.clear(); });
-                  },
-                )).toList(),
+                children: _plantsOptions
+                    .map((p) => ChoiceChip(
+                          label: Text('$p'),
+                          selected: _plantsUnderLamp == p,
+                          selectedColor: AppColors.growGreen,
+                          onSelected: (val) {
+                            if (val)
+                              setState(() {
+                                _plantsUnderLamp = p;
+                                _customPlantsController.clear();
+                              });
+                          },
+                        ))
+                    .toList(),
               ),
               const SizedBox(height: 8),
               TextFormField(
@@ -253,9 +278,9 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                 },
               ),
               const SizedBox(height: 32),
-
               _buildSectionTitle(l10n.addPlantSection6),
-              Text(l10n.addPlantPhaseDesc, style: const TextStyle(color: AppColors.textSecondary)),
+              Text(l10n.addPlantPhaseDesc,
+                  style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
               Wrap(
                 spacing: 8,
@@ -265,19 +290,22 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                     label: Text(l10n.addPlantPhaseGermination),
                     selected: _currentPhase == PlantPhase.germination,
                     selectedColor: AppColors.growGreen,
-                    onSelected: (val) => setState(() => _currentPhase = PlantPhase.germination),
+                    onSelected: (val) =>
+                        setState(() => _currentPhase = PlantPhase.germination),
                   ),
                   ChoiceChip(
                     label: Text(l10n.addPlantPhaseVeg),
                     selected: _currentPhase == PlantPhase.veg,
                     selectedColor: AppColors.growGreen,
-                    onSelected: (val) => setState(() => _currentPhase = PlantPhase.veg),
+                    onSelected: (val) =>
+                        setState(() => _currentPhase = PlantPhase.veg),
                   ),
                   ChoiceChip(
                     label: Text(l10n.addPlantPhaseFlower),
                     selected: _currentPhase == PlantPhase.flower,
                     selectedColor: AppColors.growGreen,
-                    onSelected: (val) => setState(() => _currentPhase = PlantPhase.flower),
+                    onSelected: (val) =>
+                        setState(() => _currentPhase = PlantPhase.flower),
                   ),
                 ],
               ),
@@ -289,10 +317,10 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                   border: const OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
-                validator: (val) => val == null || val.isEmpty ? l10n.addPlantRequired : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? l10n.addPlantRequired : null,
               ),
               const SizedBox(height: 48),
-
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -300,10 +328,13 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                     backgroundColor: AppColors.growGreen,
                     foregroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
                   ),
                   onPressed: _savePlant,
-                  child: Text(l10n.addPlantSubmit, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  child: Text(l10n.addPlantSubmit,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ),
               const SizedBox(height: 24),
@@ -317,7 +348,10 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
   Widget _buildSectionTitle(String text) {
     return Text(
       text,
-      style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+      style: Theme.of(context)
+          .textTheme
+          .titleLarge
+          ?.copyWith(fontWeight: FontWeight.bold),
     );
   }
 }

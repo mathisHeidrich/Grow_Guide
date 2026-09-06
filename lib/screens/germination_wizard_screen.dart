@@ -14,10 +14,12 @@ class GerminationWizardScreen extends ConsumerStatefulWidget {
   const GerminationWizardScreen({super.key, required this.plantId});
 
   @override
-  ConsumerState<GerminationWizardScreen> createState() => _GerminationWizardScreenState();
+  ConsumerState<GerminationWizardScreen> createState() =>
+      _GerminationWizardScreenState();
 }
 
-class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScreen> {
+class _GerminationWizardScreenState
+    extends ConsumerState<GerminationWizardScreen> {
   final PageController _pageController = PageController();
   Plant? _plant;
   bool? _seedOpened;
@@ -31,17 +33,19 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
 
   Future<void> _loadPlant() async {
     final db = ref.read(databaseProvider).db;
-    final plant = await (db.select(db.plants)..where((tbl) => tbl.id.equals(widget.plantId))).getSingleOrNull();
+    final plant = await (db.select(db.plants)
+          ..where((tbl) => tbl.id.equals(widget.plantId)))
+        .getSingleOrNull();
     if (mounted && plant != null) {
       setState(() => _plant = plant);
-      
+
       if (_plant!.germinationStarted) {
         final now = ref.read(timeProvider);
-        final referenceDate = _plant!.lastGerminationCheck ?? _plant!.phaseStartDate;
-        final elapsedHours = referenceDate != null
-            ? now.difference(referenceDate).inHours
-            : 0;
-            
+        final referenceDate =
+            _plant!.lastGerminationCheck ?? _plant!.phaseStartDate;
+        final elapsedHours =
+            referenceDate != null ? now.difference(referenceDate).inHours : 0;
+
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (elapsedHours < 12) {
             _pageController.jumpToPage(3);
@@ -66,7 +70,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
       curve: Curves.easeInOut,
     );
   }
-  
+
   void _jumpToPage(int page) {
     _pageController.animateToPage(
       page,
@@ -77,7 +81,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
 
   Future<void> _finishPart1() async {
     if (_plant == null) return;
-    
+
     final db = ref.read(databaseProvider).db;
     final updatedPlant = _plant!.copyWith(
       germinationStarted: true,
@@ -90,7 +94,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
 
   Future<void> _markRootChecked() async {
     if (_plant == null) return;
-    
+
     final db = ref.read(databaseProvider).db;
     final updatedPlant = _plant!.copyWith(
       lastGerminationCheck: drift.Value(ref.read(timeProvider)),
@@ -102,7 +106,7 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
 
   Future<void> _completeGermination() async {
     if (_plant == null) return;
-    
+
     final db = ref.read(databaseProvider).db;
     final updatedPlant = _plant!.copyWith(
       currentPhase: PlantPhase.veg,
@@ -116,7 +120,8 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    if (_plant == null) return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    if (_plant == null)
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
 
     // Simple implementation of the germination flow
     return Scaffold(
@@ -126,7 +131,6 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
             PageView(
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
-              
               children: [
                 _buildSlide(
                   title: l10n.germinationTitle1,
@@ -247,14 +251,14 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildSeedOption(
-                icon: '🌰', 
-                label: l10n.germinationSeedClosed, 
+                icon: '🌰',
+                label: l10n.germinationSeedClosed,
                 isSelected: _seedOpened == false,
                 onTap: () => setState(() => _seedOpened = false),
               ),
               _buildSeedOption(
-                icon: '🌱', 
-                label: l10n.germinationSeedOpened, 
+                icon: '🌱',
+                label: l10n.germinationSeedOpened,
                 isSelected: _seedOpened == true,
                 onTap: () => setState(() => _seedOpened = true),
               ),
@@ -265,10 +269,12 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: _seedOpened != null ? AppColors.growGreen : Colors.grey,
+                backgroundColor:
+                    _seedOpened != null ? AppColors.growGreen : Colors.grey,
                 foregroundColor: Colors.black,
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
               ),
               onPressed: _seedOpened == null
                   ? null
@@ -291,14 +297,20 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
     );
   }
 
-  Widget _buildSeedOption({required String icon, required String label, required bool isSelected, required VoidCallback onTap}) {
+  Widget _buildSeedOption(
+      {required String icon,
+      required String label,
+      required bool isSelected,
+      required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 140,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.growGreen.withOpacity(0.2) : Colors.transparent,
+          color: isSelected
+              ? AppColors.growGreen.withOpacity(0.2)
+              : Colors.transparent,
           border: Border.all(
             color: isSelected ? AppColors.growGreen : Colors.white24,
             width: 2,
@@ -309,7 +321,10 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
           children: [
             Text(icon, style: const TextStyle(fontSize: 48)),
             const SizedBox(height: 12),
-            Text(label, style: TextStyle(color: isSelected ? AppColors.growGreen : Colors.white, fontWeight: FontWeight.bold)),
+            Text(label,
+                style: TextStyle(
+                    color: isSelected ? AppColors.growGreen : Colors.white,
+                    fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -348,12 +363,16 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
               backgroundColor: Colors.blueAccent,
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 20),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
             ),
             icon: const Icon(Icons.camera_alt),
-            label: Text(_inputPpfd != null ? l10n.checkinMeasurePpfdAgain(_inputPpfd!.toStringAsFixed(0)) : l10n.checkinMeasurePpfd),
+            label: Text(_inputPpfd != null
+                ? l10n.checkinMeasurePpfdAgain(_inputPpfd!.toStringAsFixed(0))
+                : l10n.checkinMeasurePpfd),
             onPressed: () async {
-              final result = await context.push<double>('/ppfd_meter?plantId=${widget.plantId}');
+              final result = await context
+                  .push<double>('/ppfd_meter?plantId=${widget.plantId}');
               if (result != null) {
                 setState(() {
                   _inputPpfd = result;
@@ -371,7 +390,8 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     side: const BorderSide(color: Colors.white54),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
                   ),
                   onPressed: _previousPage,
                   child: Text(l10n.checkinBack),
@@ -385,7 +405,8 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
                     backgroundColor: AppColors.growGreen,
                     foregroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
                   ),
                   onPressed: _completeGermination,
                   child: Text(
@@ -446,10 +467,14 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 side: const BorderSide(color: AppColors.warningAmber),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
               ),
               onPressed: onAlt,
-              child: Text(altButtonText, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.warningAmber)),
+              child: Text(altButtonText,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.warningAmber)),
             ),
             const SizedBox(height: 16),
           ],
@@ -463,7 +488,8 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       side: const BorderSide(color: Colors.white54),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
                     ),
                     onPressed: onBack ?? _previousPage,
                     child: Text(l10n.checkinBack),
@@ -477,7 +503,8 @@ class _GerminationWizardScreenState extends ConsumerState<GerminationWizardScree
                     backgroundColor: AppColors.growGreen,
                     foregroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
                   ),
                   onPressed: onNext,
                   child: Text(

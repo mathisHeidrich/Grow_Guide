@@ -12,6 +12,7 @@ import 'models/plant.dart';
 import 'screens/ppfd_meter_screen.dart';
 import 'screens/hardware_advisor_screen.dart';
 import 'screens/water_guide_screen.dart';
+import 'screens/water_change_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final db = ref.watch(databaseProvider).db;
@@ -19,13 +20,15 @@ final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/',
     redirect: (context, state) async {
-      final settings = await (db.select(db.appSettingsTable)..where((tbl) => tbl.id.equals(1))).getSingleOrNull();
+      final settings = await (db.select(db.appSettingsTable)
+            ..where((tbl) => tbl.id.equals(1)))
+          .getSingleOrNull();
       final hasCompletedOnboarding = settings?.hasCompletedOnboarding ?? false;
-      
-      final isAllowedPath = state.uri.path == '/onboarding' || 
-                            state.uri.path == '/hardware_advisor' || 
-                            state.uri.path == '/water_guide' || 
-                            state.uri.path == '/tent_setup';
+
+      final isAllowedPath = state.uri.path == '/onboarding' ||
+          state.uri.path == '/hardware_advisor' ||
+          state.uri.path == '/water_guide' ||
+          state.uri.path == '/tent_setup';
 
       if (!hasCompletedOnboarding && !isAllowedPath) {
         return '/onboarding';
@@ -62,21 +65,24 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) {
           final id = int.tryParse(state.pathParameters['id'] ?? '');
           if (id == null) return const DashboardScreen();
-          
+
           return FutureBuilder<Plant?>(
-            future: (db.select(db.plants)..where((tbl) => tbl.id.equals(id))).getSingleOrNull(),
+            future: (db.select(db.plants)..where((tbl) => tbl.id.equals(id)))
+                .getSingleOrNull(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Scaffold(body: Center(child: CircularProgressIndicator()));
+                return const Scaffold(
+                    body: Center(child: CircularProgressIndicator()));
               }
-              
+
               final plant = snapshot.data;
               if (plant == null) return const DashboardScreen();
-              
-              if (plant.currentPhase == PlantPhase.germination || plant.currentPhase == PlantPhase.onboarding) {
+
+              if (plant.currentPhase == PlantPhase.germination ||
+                  plant.currentPhase == PlantPhase.onboarding) {
                 return GerminationWizardScreen(plantId: id);
               }
-              
+
               return CheckinScreen(plantId: id);
             },
           );
@@ -89,6 +95,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           final plantId = plantIdStr != null ? int.tryParse(plantIdStr) : null;
           return PpfdMeterScreen(plantId: plantId);
         },
+      ),
+      GoRoute(
+        path: '/water_change',
+        builder: (context, state) => const WaterChangeScreen(),
       ),
     ],
   );

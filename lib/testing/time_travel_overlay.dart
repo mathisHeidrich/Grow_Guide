@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/time_provider.dart';
 import 'scenario_launcher_screen.dart';
+
 class TimeTravelOverlay extends ConsumerStatefulWidget {
   final Widget child;
 
@@ -38,20 +39,25 @@ class _TimeTravelOverlayState extends ConsumerState<TimeTravelOverlay> {
                     _buildTimeButton('+7 Tage', () => _addDays(7)),
                     const SizedBox(height: 8),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
                         color: Colors.black87,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         'Simulation: ${currentTime.day}.${currentTime.month}.${currentTime.year}',
-                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
                     const SizedBox(height: 8),
                     _buildTimeButton('Szenario wechseln', () {
-                      Navigator.of(context, rootNavigator: true).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const ScenarioLauncherScreen()),
+                      Navigator.of(context, rootNavigator: true)
+                          .pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const ScenarioLauncherScreen()),
                       );
                     }),
                     const SizedBox(height: 16),
