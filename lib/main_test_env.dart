@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'testing/scenario_launcher_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app/l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
