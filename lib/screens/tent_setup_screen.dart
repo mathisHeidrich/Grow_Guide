@@ -198,7 +198,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
                 color: const Color(0xFF1E1E1E),
                 borderRadius: BorderRadius.circular(12),
                 border:
-                    Border.all(color: const Color(0xFF00E676).withOpacity(0.3)),
+                    Border.all(color: const Color(0xFF00E676).withValues(alpha: 0.3)),
               ),
               child: Text(
                 tipText,

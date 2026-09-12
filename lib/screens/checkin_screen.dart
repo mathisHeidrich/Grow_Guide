@@ -248,6 +248,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                 : () async {
                     if (_willDoWaterChange == true) {
                       final result = await context.push<bool>('/water_change');
+                      if (!mounted) return;
                       if (result == true) {
                         setState(() {
                           _isWaterChange = true;
@@ -432,6 +433,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                 ),
                 onPressed: () async {
                   final result = await context.push<bool>('/water_change');
+                  if (!mounted) return;
                   if (result == true) {
                     setState(() {
                       _isWaterChange = true;
@@ -721,6 +723,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             onPressed: () async {
               final result = await context
                   .push<double>('/ppfd_meter?plantId=${widget.plantId}');
+              if (!mounted) return;
               if (result != null) {
                 setState(() {
                   _inputPpfd = result;

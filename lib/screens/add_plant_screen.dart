@@ -151,11 +151,12 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               Column(
                 children: NutrientBrand.values.map((brand) {
                   String label = brand.toString().split('.').last;
-                  if (brand == NutrientBrand.cannaAqua) label = 'Canna Aqua';
-                  if (brand == NutrientBrand.ta) label = 'General Hydroponics';
-                  if (brand == NutrientBrand.advancedNutrients)
+                  if (brand == NutrientBrand.cannaAqua) { label = 'Canna Aqua'; }
+                  if (brand == NutrientBrand.ta) { label = 'General Hydroponics'; }
+                  if (brand == NutrientBrand.advancedNutrients) {
                     label = 'Advanced Nutrients';
-                  if (brand == NutrientBrand.plagron) label = 'Plagron';
+                  }
+                  if (brand == NutrientBrand.plagron) { label = 'Plagron'; }
 
                   return RadioListTile<NutrientBrand>(
                     title: Text(label),
@@ -224,11 +225,12 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                           selected: _lampWattage == w,
                           selectedColor: AppColors.growGreen,
                           onSelected: (val) {
-                            if (val)
+                            if (val) {
                               setState(() {
                                 _lampWattage = w;
                                 _customWattageController.clear();
                               });
+                            }
                           },
                         ))
                     .toList(),
@@ -256,11 +258,12 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                           selected: _plantsUnderLamp == p,
                           selectedColor: AppColors.growGreen,
                           onSelected: (val) {
-                            if (val)
+                            if (val) {
                               setState(() {
                                 _plantsUnderLamp = p;
                                 _customPlantsController.clear();
                               });
+                            }
                           },
                         ))
                     .toList(),
