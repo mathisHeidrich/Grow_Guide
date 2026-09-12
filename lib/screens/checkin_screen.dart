@@ -105,8 +105,12 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           LogEntriesCompanion.insert(
             plantId: _plant!.id,
             timestamp: ref.read(timeProvider),
-            ph: _inputPh != null ? drift.Value(_inputPh!) : const drift.Value.absent(),
-            ec: _inputEc != null ? drift.Value(_inputEc!) : const drift.Value.absent(),
+            ph: _inputPh != null
+                ? drift.Value(_inputPh!)
+                : const drift.Value.absent(),
+            ec: _inputEc != null
+                ? drift.Value(_inputEc!)
+                : const drift.Value.absent(),
             ppfd: _inputPpfd != null
                 ? drift.Value(_inputPpfd!)
                 : const drift.Value.absent(),
@@ -369,7 +373,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   Widget _buildEcAdjustSlide() {
     final l10n = AppLocalizations.of(context)!;
-    
+
     // Calculate week index
     int weekIndex = 0;
     if (_plant!.phaseStartDate != null) {
@@ -385,15 +389,16 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
     // Compute Nutrients
     final nutes = NutrientService.calculateNutrients(
-        brand: _plant!.nutrientBrand,
-        phase: _plant!.currentPhase, 
-        weekIndex: weekIndex,
-        waterAddedLiters: _inputWaterAdded ?? 0,
-        totalVolumeLiters: _plant!.waterVolumeLiters,
-        currentEc: _inputEc ?? 0,
+      brand: _plant!.nutrientBrand,
+      phase: _plant!.currentPhase,
+      weekIndex: weekIndex,
+      waterAddedLiters: _inputWaterAdded ?? 0,
+      totalVolumeLiters: _plant!.waterVolumeLiters,
+      currentEc: _inputEc ?? 0,
     );
     // Add nutrients if any value is >= 0.1 ml (to prevent showing 0.0 ml)
-    final nutrientsToAdd = nutes.nutrients.where((n) => n.amountMl >= 0.1).toList();
+    final nutrientsToAdd =
+        nutes.nutrients.where((n) => n.amountMl >= 0.1).toList();
     bool hasNutrientsToAdd = nutrientsToAdd.isNotEmpty;
 
     return Padding(
@@ -458,12 +463,15 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   borderRadius: BorderRadius.circular(12)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: nutrientsToAdd.map((n) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                      "${n.name}: ${n.amountMl.toStringAsFixed(1)} ml",
-                      style: const TextStyle(fontSize: 18, color: Colors.white)),
-                )).toList(),
+                children: nutrientsToAdd
+                    .map((n) => Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Text(
+                              "${n.name}: ${n.amountMl.toStringAsFixed(1)} ml",
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white)),
+                        ))
+                    .toList(),
               ),
             )
           ] else ...[
@@ -680,6 +688,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   Widget _buildLampSlide() {
     final l10n = AppLocalizations.of(context)!;
+    final phase = _plant?.currentPhase ?? PlantPhase.veg;
+    final range = phase.targetPpfdRange;
+
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -698,8 +709,33 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.growGreen.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.growGreen, width: 2),
+              ),
+              child: Column(children: [
+                Text(
+                  l10n.checkinLampTargetPpfdLabel,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColors.growGreen,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "${range[0]} - ${range[1]}",
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ])),
+          const SizedBox(height: 24),
           Text(
-            l10n.checkinLampDesc,
+            l10n.checkinLampMeasureInstruction,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
