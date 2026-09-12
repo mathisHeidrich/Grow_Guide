@@ -253,9 +253,13 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                         setState(() {
                           _isWaterChange = true;
                         });
+                        // Jump to next page instantly so we don't see the slide animating
+                        _pageController.jumpToPage((_pageController.page ?? 0).toInt() + 1);
                       }
+                      // If result != true, user cancelled. Stay on this slide.
+                    } else {
+                      _nextPage();
                     }
-                    _nextPage();
                   },
             child: Text(l10n.checkinContinue,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -438,7 +442,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                     setState(() {
                       _isWaterChange = true;
                     });
-                    _previousPage(); // go back to re-measure EC
+                    _pageController.jumpToPage((_pageController.page ?? 0).toInt() - 1);
                   }
                 },
                 child: Text(l10n.checkinWaterChangeButton,
