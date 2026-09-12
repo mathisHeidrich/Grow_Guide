@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../providers/time_provider.dart';
 
 import '../providers/database_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:app/l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
 
