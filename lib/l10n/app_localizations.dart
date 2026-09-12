@@ -1875,6 +1875,186 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Kein Wasser nachgefüllt oder EC optimal. Keine Dünger-Anpassung nötig.'**
   String get checkinNutrientNone;
+
+  /// No description provided for @diagnoseProblemButton.
+  ///
+  /// In de, this message translates to:
+  /// **'Problem Diagnostizieren'**
+  String get diagnoseProblemButton;
+
+  /// No description provided for @problemSymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Symptome'**
+  String get problemSymptoms;
+
+  /// No description provided for @problemTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Auslöser'**
+  String get problemTriggers;
+
+  /// No description provided for @problemSolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Lösung'**
+  String get problemSolution;
+
+  /// No description provided for @problemPrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Vorbeugung'**
+  String get problemPrevention;
+
+  /// No description provided for @problemActionWaterChange.
+  ///
+  /// In de, this message translates to:
+  /// **'Wasserwechsel durchführen'**
+  String get problemActionWaterChange;
+
+  /// No description provided for @problemActionPpfdMeasure.
+  ///
+  /// In de, this message translates to:
+  /// **'PPFD prüfen'**
+  String get problemActionPpfdMeasure;
+
+  /// No description provided for @problemActionEcAdjust.
+  ///
+  /// In de, this message translates to:
+  /// **'EC-Wert prüfen'**
+  String get problemActionEcAdjust;
+
+  /// No description provided for @problemActionPhAdjust.
+  ///
+  /// In de, this message translates to:
+  /// **'pH-Wert prüfen'**
+  String get problemActionPhAdjust;
+
+  /// No description provided for @problemSelectPlantPrompt.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitte wähle eine Pflanze aus, um die Aktion zu starten:'**
+  String get problemSelectPlantPrompt;
+
+  /// No description provided for @problemNutrientBurnName.
+  ///
+  /// In de, this message translates to:
+  /// **'Nährstoffbrand (Überdüngung)'**
+  String get problemNutrientBurnName;
+
+  /// No description provided for @problemNutrientBurnSymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Verbrannte, braune und knusprige Blattspitzen. Die Verfärbung breitet sich von den Rändern nach innen aus.'**
+  String get problemNutrientBurnSymptoms;
+
+  /// No description provided for @problemNutrientBurnTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Der EC-Wert im Wasser ist zu hoch. Die Pflanze verdunstet mehr Wasser als sie Salze aufnimmt, wodurch sich Dünger in den Blattspitzen ansammelt.'**
+  String get problemNutrientBurnTriggers;
+
+  /// No description provided for @problemNutrientBurnSolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Wechsle das Wasser komplett aus oder pumpe die Hälfte ab und fülle ungedüngtes, ph-reguliertes Wasser nach, um den EC-Wert zu senken.'**
+  String get problemNutrientBurnSolution;
+
+  /// No description provided for @problemNutrientBurnPrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Mische den Dünger exakt nach Schema. Wenn die Spitzen anfangen leicht hell zu werden (Nutrient Tip Burn), senke den Ziel-EC beim nächsten Tankwechsel leicht ab.'**
+  String get problemNutrientBurnPrevention;
+
+  /// No description provided for @problemPhImbalanceName.
+  ///
+  /// In de, this message translates to:
+  /// **'pH-Wert Schwankung'**
+  String get problemPhImbalanceName;
+
+  /// No description provided for @problemPhImbalanceSymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Verdrehte oder wellige Blätter, gelbe und braune Flecken, die oft aussehen wie ein Kalzium-Mangel. Das Wachstum stagniert.'**
+  String get problemPhImbalanceSymptoms;
+
+  /// No description provided for @problemPhImbalanceTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Der pH-Wert liegt dauerhaft außerhalb des optimalen Bereichs (5.5 - 6.5). Dadurch können bestimmte Nährstoffe nicht mehr aufgenommen werden (Nährstoffsperre).'**
+  String get problemPhImbalanceTriggers;
+
+  /// No description provided for @problemPhImbalanceSolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Kontrolliere und korrigiere den pH-Wert sofort. Ist der Tank alt, wechsle das Wasser komplett, da alte Nährstoffe den pH-Wert unstabil machen.'**
+  String get problemPhImbalanceSolution;
+
+  /// No description provided for @problemPhImbalancePrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Prüfe den pH-Wert täglich beim Check-In. Wechsle das Wasser strikt jede Woche, da alte Nährstofflösungen ihren Puffer verlieren.'**
+  String get problemPhImbalancePrevention;
+
+  /// No description provided for @problemLightBurnName.
+  ///
+  /// In de, this message translates to:
+  /// **'Lichtbrand'**
+  String get problemLightBurnName;
+
+  /// No description provided for @problemLightBurnSymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Blätter an den obersten Trieben werden gelb oder weiß gebleicht, während die Adern oft grün bleiben. Die Ränder rollen sich nach oben (Kanu-Form) um die Hitze abzuleiten.'**
+  String get problemLightBurnSymptoms;
+
+  /// No description provided for @problemLightBurnTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Lampe hängt zu nah an der Pflanze oder ist zu stark eingestellt. Die Lichtintensität (PPFD) übersteigt das, was die Pflanze verarbeiten kann.'**
+  String get problemLightBurnTriggers;
+
+  /// No description provided for @problemLightBurnSolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Erhöhe den Abstand zur Lampe oder dimme sie herunter. Miss den PPFD-Wert an der Pflanzenspitze, um ihn anzupassen.'**
+  String get problemLightBurnSolution;
+
+  /// No description provided for @problemLightBurnPrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Passe den Lampenabstand an das Wachstum an. Nutze den PPFD-Meter bei jedem Check-In, um im optimalen Bereich zu bleiben.'**
+  String get problemLightBurnPrevention;
+
+  /// No description provided for @problemCalciumDeficiencyName.
+  ///
+  /// In de, this message translates to:
+  /// **'Kalziummangel'**
+  String get problemCalciumDeficiencyName;
+
+  /// No description provided for @problemCalciumDeficiencySymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Kleine braune/rostige Flecken auf jüngeren und mittleren Blättern. Neue Blätter wachsen oft verkrüppelt oder haben gelbe Ränder.'**
+  String get problemCalciumDeficiencySymptoms;
+
+  /// No description provided for @problemCalciumDeficiencyTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Meist weiches Leitungswasser (RO-Wasser oder EC < 0.2) ohne CalMag-Zusatz. Manchmal auch blockiert durch falschen pH-Wert oder zu viel Kalium.'**
+  String get problemCalciumDeficiencyTriggers;
+
+  /// No description provided for @problemCalciumDeficiencySolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Korrigiere den EC-Wert, indem du CalMag hinzufügst (Grundwasser immer zuerst auf 0.4 EC mit CalMag anheben, bevor Dünger rein kommt).'**
+  String get problemCalciumDeficiencySolution;
+
+  /// No description provided for @problemCalciumDeficiencyPrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Bei sehr weichem Wasser oder Osmosewasser zwingend bei jedem Wasserwechsel CalMag als Basis hinzufügen.'**
+  String get problemCalciumDeficiencyPrevention;
 }
 
 class _AppLocalizationsDelegate

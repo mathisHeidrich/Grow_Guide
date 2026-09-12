@@ -148,6 +148,20 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   onNext: _nextPage,
                   showBack:
                       _initialRootsNotReached == true || _needsWaterChange,
+                  extraWidget: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange.withOpacity(0.2),
+                      foregroundColor: Colors.orangeAccent,
+                      side: const BorderSide(color: Colors.orangeAccent),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    icon: const Icon(Icons.healing),
+                    label: Text(l10n.diagnoseProblemButton, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    onPressed: () {
+                      context.push('/problems?plantId=${widget.plantId}');
+                    },
+                  ),
                 ),
                 if (_initialRootsNotReached != true ||
                     _tempRootsInWater == true) ...[
@@ -749,6 +763,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     required String nextButtonText,
     required VoidCallback onNext,
     bool showBack = false,
+    Widget? extraWidget,
   }) {
     return Padding(
       padding: const EdgeInsets.all(24.0),
@@ -775,6 +790,10 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                 ),
             textAlign: TextAlign.center,
           ),
+          if (extraWidget != null) ...[
+            const SizedBox(height: 24),
+            extraWidget,
+          ],
           const Spacer(),
           Row(
             children: [
