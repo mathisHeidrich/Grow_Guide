@@ -105,8 +105,12 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           LogEntriesCompanion.insert(
             plantId: _plant!.id,
             timestamp: ref.read(timeProvider),
-            ph: _inputPh != null ? drift.Value(_inputPh!) : const drift.Value.absent(),
-            ec: _inputEc != null ? drift.Value(_inputEc!) : const drift.Value.absent(),
+            ph: _inputPh != null
+                ? drift.Value(_inputPh!)
+                : const drift.Value.absent(),
+            ec: _inputEc != null
+                ? drift.Value(_inputEc!)
+                : const drift.Value.absent(),
             ppfd: _inputPpfd != null
                 ? drift.Value(_inputPpfd!)
                 : const drift.Value.absent(),
@@ -135,37 +139,71 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                if (_needsWaterChange) _buildWaterChangeRecommendationSlide(),
+                if (_needsWaterChange)
+                  _wrapWithInfo(
+                      _buildWaterChangeRecommendationSlide(),
+                      l10n.checkinDeepDiveWaterChangeRecTitle,
+                      l10n.checkinDeepDiveWaterChangeRecText),
                 if (_initialRootsNotReached == true) ...[
-                  _buildRootsCheckSlide(),
-                  if (_tempRootsInWater == false) _buildTopWateringSlide(),
+                  _wrapWithInfo(
+                      _buildRootsCheckSlide(),
+                      l10n.checkinDeepDiveRootsCheckTitle,
+                      l10n.checkinDeepDiveRootsCheckText),
+                  if (_tempRootsInWater == false)
+                    _wrapWithInfo(
+                        _buildTopWateringSlide(),
+                        l10n.checkinDeepDiveTopWateringTitle,
+                        l10n.checkinDeepDiveTopWateringText),
                 ],
-                _buildSlide(
-                  title: l10n.checkinHealthTitle,
-                  text: l10n.checkinHealthDesc,
-                  icon: Icons.eco,
-                  nextButtonText: l10n.checkinHealthNext,
-                  onNext: _nextPage,
-                  showBack:
-                      _initialRootsNotReached == true || _needsWaterChange,
-                ),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.checkinHealthTitle,
+                      text: l10n.checkinHealthDesc,
+                      icon: Icons.eco,
+                      nextButtonText: l10n.checkinHealthNext,
+                      onNext: _nextPage,
+                      showBack:
+                          _initialRootsNotReached == true || _needsWaterChange,
+                    ),
+                    l10n.checkinDeepDiveHealthTitle,
+                    l10n.checkinDeepDiveHealthText),
                 if (_initialRootsNotReached != true ||
                     _tempRootsInWater == true) ...[
-                  if (!_isWaterChange) _buildWaterLevelSlide(),
-                  _buildEcMeasureSlide(),
-                  _buildEcAdjustSlide(),
-                  _buildPhMeasureSlide(),
-                  _buildPhAdjustSlide(),
+                  if (!_isWaterChange)
+                    _wrapWithInfo(
+                        _buildWaterLevelSlide(),
+                        l10n.checkinDeepDiveWaterLevelTitle,
+                        l10n.checkinDeepDiveWaterLevelText),
+                  _wrapWithInfo(
+                      _buildEcMeasureSlide(),
+                      l10n.checkinDeepDiveEcMeasureTitle,
+                      l10n.checkinDeepDiveEcMeasureText),
+                  _wrapWithInfo(
+                      _buildEcAdjustSlide(),
+                      l10n.checkinDeepDiveEcAdjustTitle,
+                      l10n.checkinDeepDiveEcAdjustText),
+                  _wrapWithInfo(
+                      _buildPhMeasureSlide(),
+                      l10n.checkinDeepDivePhMeasureTitle,
+                      l10n.checkinDeepDivePhMeasureText),
+                  _wrapWithInfo(
+                      _buildPhAdjustSlide(),
+                      l10n.checkinDeepDivePhAdjustTitle,
+                      l10n.checkinDeepDivePhAdjustText),
                 ],
-                _buildLampSlide(),
-                _buildSlide(
-                  title: l10n.checkinFinishTitle,
-                  text: l10n.checkinFinishDesc,
-                  icon: Icons.check_circle,
-                  nextButtonText: l10n.checkinFinishNext,
-                  onNext: _completeCheckin,
-                  showBack: true,
-                ),
+                _wrapWithInfo(_buildLampSlide(), l10n.checkinDeepDiveLampTitle,
+                    l10n.checkinDeepDiveLampText),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.checkinFinishTitle,
+                      text: l10n.checkinFinishDesc,
+                      icon: Icons.check_circle,
+                      nextButtonText: l10n.checkinFinishNext,
+                      onNext: _completeCheckin,
+                      showBack: true,
+                    ),
+                    l10n.checkinDeepDiveFinishTitle,
+                    l10n.checkinDeepDiveFinishText),
               ],
             ),
             Positioned(
@@ -179,6 +217,72 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _wrapWithInfo(Widget child, String title, String text) {
+    return Stack(
+      children: [
+        child,
+        Positioned(
+          top: 16,
+          left: 16,
+          child: IconButton(
+            icon:
+                const Icon(Icons.info_outline, color: Colors.white54, size: 32),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: const Color(0xFF1E1E1E),
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                ),
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: SafeArea(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                        const SizedBox(height: 16),
+                        Text(text,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.white70,
+                                height: 1.5)),
+                        const SizedBox(height: 24),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.growGreen,
+                              foregroundColor: Colors.black,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text("Verstanden",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -369,7 +473,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   Widget _buildEcAdjustSlide() {
     final l10n = AppLocalizations.of(context)!;
-    
+
     // Calculate week index
     int weekIndex = 0;
     if (_plant!.phaseStartDate != null) {
@@ -385,15 +489,16 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
     // Compute Nutrients
     final nutes = NutrientService.calculateNutrients(
-        brand: _plant!.nutrientBrand,
-        phase: _plant!.currentPhase, 
-        weekIndex: weekIndex,
-        waterAddedLiters: _inputWaterAdded ?? 0,
-        totalVolumeLiters: _plant!.waterVolumeLiters,
-        currentEc: _inputEc ?? 0,
+      brand: _plant!.nutrientBrand,
+      phase: _plant!.currentPhase,
+      weekIndex: weekIndex,
+      waterAddedLiters: _inputWaterAdded ?? 0,
+      totalVolumeLiters: _plant!.waterVolumeLiters,
+      currentEc: _inputEc ?? 0,
     );
     // Add nutrients if any value is >= 0.1 ml (to prevent showing 0.0 ml)
-    final nutrientsToAdd = nutes.nutrients.where((n) => n.amountMl >= 0.1).toList();
+    final nutrientsToAdd =
+        nutes.nutrients.where((n) => n.amountMl >= 0.1).toList();
     bool hasNutrientsToAdd = nutrientsToAdd.isNotEmpty;
 
     return Padding(
@@ -458,12 +563,15 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   borderRadius: BorderRadius.circular(12)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: nutrientsToAdd.map((n) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                      "${n.name}: ${n.amountMl.toStringAsFixed(1)} ml",
-                      style: const TextStyle(fontSize: 18, color: Colors.white)),
-                )).toList(),
+                children: nutrientsToAdd
+                    .map((n) => Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Text(
+                              "${n.name}: ${n.amountMl.toStringAsFixed(1)} ml",
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white)),
+                        ))
+                    .toList(),
               ),
             )
           ] else ...[

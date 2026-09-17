@@ -1018,4 +1018,153 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get checkinNutrientNone =>
       'Kein Wasser nachgefüllt oder EC optimal. Keine Dünger-Anpassung nötig.';
+
+  @override
+  String get checkinDeepDiveWaterChangeRecTitle =>
+      'Warum regelmäßiger Wasserwechsel?';
+
+  @override
+  String get checkinDeepDiveWaterChangeRecText =>
+      'Pflanzen scheiden Abfallstoffe aus und nicht alle Nährstoffe werden gleichmäßig verbraucht. Dies führt auf Dauer zu einer Ansammlung von unbrauchbaren Salzen, die den pH-Wert destabilisieren und die Nährstoffaufnahme blockieren (Nährstoff-Lockout). Ein wöchentlicher Wasserwechsel ist der beste Schutz gegen fast alle Mangelerscheinungen.';
+
+  @override
+  String get checkinDeepDiveWaterLevelTitle => 'Die richtige Füllhöhe';
+
+  @override
+  String get checkinDeepDiveWaterLevelText =>
+      'In der DWC-Methode ist es extrem wichtig, dass immer ein Luftspalt zwischen dem Wasser und dem Netztopf bleibt, sobald die Wurzeln im Wasser hängen. Die platzenden Blasen der Luftpumpe befeuchten die oberen Wurzeln (die sogenannten Luftwurzeln), welche Sauerstoff aufnehmen. Steht das Wasser zu hoch, ertrinkt die Pflanze.';
+
+  @override
+  String get checkinDeepDiveEcMeasureTitle => 'EC-Wert verstehen';
+
+  @override
+  String get checkinDeepDiveEcMeasureText =>
+      'EC (Electrical Conductivity) misst die elektrische Leitfähigkeit deines Wassers, die durch gelöste Salze (also deinen Dünger) entsteht. Er sagt dir, wie stark konzentriert deine Nährlösung ist. Ohne Messung weißt du nie, ob deine Pflanze hungert oder kurz vor der Überdüngung steht.';
+
+  @override
+  String get checkinDeepDiveEcAdjustTitle => 'Dünger richtig anpassen';
+
+  @override
+  String get checkinDeepDiveEcAdjustText =>
+      'Wenn der EC-Wert sinkt, hat die Pflanze mehr Dünger als Wasser verbraucht (sie hat Hunger). Wenn er steigt, trinkt sie mehr Wasser als Dünger (Überdüngungsgefahr!). Wir fügen nur Dünger für das frisch hinzugefügte Wasser hinzu, um die Balance im Tank zu halten.';
+
+  @override
+  String get checkinDeepDivePhMeasureTitle =>
+      'Warum der pH-Wert alles entscheidet';
+
+  @override
+  String get checkinDeepDivePhMeasureText =>
+      'Cannabis kann Nährstoffe nur in einem bestimmten pH-Bereich aufnehmen. In DWC/Hydroponik liegt dieser Sweet Spot zwischen 5.5 und 6.5. Ist der Wert falsch, kannst du so viel düngen wie du willst – die Pflanze verhungert bei vollem Magen (Nutrient Lockout).';
+
+  @override
+  String get checkinDeepDivePhAdjustTitle => 'pH-Wert langsam anpassen';
+
+  @override
+  String get checkinDeepDivePhAdjustText =>
+      'Gute pH-Regulatoren (pH Down) bestehen meist aus starken Säuren wie Phosphorsäure. Gib immer nur winzige Mengen (Tropfen) ins Wasser, rühre gut um und warte kurz, bevor du erneut misst. Zu starke Schwankungen schocken die Wurzeln.';
+
+  @override
+  String get checkinDeepDiveRootsCheckTitle => 'Das Warten auf die Wurzeln';
+
+  @override
+  String get checkinDeepDiveRootsCheckText =>
+      'In den ersten Tagen reicht die Feuchtigkeit der Steinwolle. Die Wurzeln wachsen auf der Suche nach Wasser nach unten. Sobald die erste Wurzel durch den Netztopf ins Wasser hängt, explodiert das Wachstum und die Pflanze versorgt sich fast von selbst.';
+
+  @override
+  String get checkinDeepDiveTopWateringTitle => 'Vorsichtiges Angießen';
+
+  @override
+  String get checkinDeepDiveTopWateringText =>
+      'Solange die Wurzeln das Wasserreservoir noch nicht erreicht haben, kann die Pflanze von unten vertrocknen. Durch leichtes Gießen von oben (Top Feeding) hilfst du ihr, bis sie das Wasser selbst erreicht. Verwende dabei nur das Wasser aus dem Eimer.';
+
+  @override
+  String get checkinDeepDiveLampTitle => 'Das Licht als Motor';
+
+  @override
+  String get checkinDeepDiveLampText =>
+      'Licht ist für die Photosynthese der Motor, der das Wasser und die Nährstoffe verarbeitet. Hängt die Lampe zu nah, verbrennen die Blätter (Lichtstress). Hängt sie zu weit weg, spargelt die Pflanze (wird lang und dünn). Nutze die PPFD-Messung für den perfekten Abstand.';
+
+  @override
+  String get checkinDeepDiveHealthTitle => 'Tägliche Sichtkontrolle';
+
+  @override
+  String get checkinDeepDiveHealthText =>
+      'Der Blick auf die Blätter verrät alles. Hängen sie schlaff? Meistens Sauerstoffmangel im Wasser (Pumpe prüfen!). Werden sie gelb oder haben Flecken? Fast immer ein falscher pH-Wert oder ein Nährstoffproblem. Rollen sich die Ränder nach oben? Hitzestress!';
+
+  @override
+  String get checkinDeepDiveFinishTitle => 'Routine ist alles';
+
+  @override
+  String get checkinDeepDiveFinishText =>
+      'Das wichtigste bei DWC ist Beständigkeit. Durch den täglichen, schnellen Check-In fängst du kleine Probleme (wie einen driftenden pH-Wert) ab, bevor sie zu großen Problemen für deine Pflanze werden.';
+
+  @override
+  String get germinationDeepDive1Title => 'Warum das Wasserglas?';
+
+  @override
+  String get germinationDeepDive1Text =>
+      'Das Einweichen in handwarmem Wasser simuliert den ersten Frühlingsregen. Die harte Schale des Samens saugt sich voll Wasser, weicht auf und signalisiert dem Keimling im Inneren, dass es Zeit ist, aufzuwachen. Lass den Samen nicht länger als 24 Stunden im Wasser, sonst ertrinkt er, da er Sauerstoff braucht.';
+
+  @override
+  String get germinationDeepDive1bTitle => 'Steinwolle und pH-Wert';
+
+  @override
+  String get germinationDeepDive1bText =>
+      'Steinwolle ist von Natur aus basisch (hoher pH-Wert). Wenn du sie nicht in pH-reguliertem Wasser (ca. 5.5) einweichst, kann sie später den pH-Wert deines gesamten Eimers nach oben ziehen und die Wurzelentwicklung deines Sämlings stören. Lass sie gut vollsaugen!';
+
+  @override
+  String get germinationDeepDive2Title => 'Die Dunkelheit';
+
+  @override
+  String get germinationDeepDive2Text =>
+      'Cannabiswurzeln und -samen hassen Licht. In der Natur keimen sie unter der Erde im absoluten Dunkeln. Licht kann in diesem frühen Stadium den Hormonhaushalt des Samens stören und die Keimung komplett stoppen.';
+
+  @override
+  String get germinationDeepDive3Title => 'Wunder der Natur';
+
+  @override
+  String get germinationDeepDive3Text =>
+      'Im Inneren des Samens passiert gerade Folgendes: Das Wasser aktiviert Enzyme, die die gespeicherte Stärke in Zucker umwandeln. Dieser Zucker liefert die Energie für das erste Zellwachstum. Die Wurzelspitze (Pfahlwurzel) drückt von innen gegen die Schale.';
+
+  @override
+  String get germinationDeepDive4Title => 'Die Pfahlwurzel (Taproot)';
+
+  @override
+  String get germinationDeepDive4Text =>
+      'Das kleine weiße Ding, das du siehst, ist die Pfahlwurzel. Sie ist das zukünftige Fundament deiner Pflanze. Aus ihr werden alle weiteren Wurzeln entspringen. Sie ist extrem empfindlich gegenüber Licht, Austrocknung und physischer Beschädigung – fasse sie am besten gar nicht oder nur sehr vorsichtig mit einer Pinzette an.';
+
+  @override
+  String get germinationDeepDive5Title => 'Jeder Same ist anders';
+
+  @override
+  String get germinationDeepDive5Text =>
+      'Geduld ist die wichtigste Tugend eines Growers. Ältere Samen oder Samen mit einer besonders dicken Schale brauchen manchmal bis zu 3 oder 4 Tage. Wenn der Samen jedoch nach 5-7 Tagen im Wasser nicht keimt, war er wahrscheinlich tot oder nicht lebensfähig.';
+
+  @override
+  String get germinationDeepDive6Title => 'Der perfekte Startplatz';
+
+  @override
+  String get germinationDeepDive6Text =>
+      'Steinwolle bietet das perfekte Verhältnis von Wasserhaltung und Sauerstoff für kleine Sämlinge. Wenn du den Samen einsetzt, muss die Wurzel nach unten zeigen, da sie der Schwerkraft folgt (Geotropismus). Der Keimling wächst dann der Schwerkraft entgegen nach oben.';
+
+  @override
+  String get germinationDeepDive7Title => 'Blähton Vorbereitung';
+
+  @override
+  String get germinationDeepDive7Text =>
+      'Der Blähton dient nur zur Stabilisierung des Steinwollwürfels und blockiert Licht, damit keine Algen im Wasser wachsen. Er ist an sich komplett nährstofffrei. Es ist extrem wichtig, ihn vorher abzuwaschen, da der rote Staub sonst in deinen Eimer gespült wird und deine Pumpen verstopfen kann.';
+
+  @override
+  String get germinationDeepDive8Title => 'DWC Prinzip für Anfänger';
+
+  @override
+  String get germinationDeepDive8Text =>
+      'Beim Deep Water Culture (DWC) hängen die Wurzeln in einer hochgradig mit Sauerstoff angereicherten Nährlösung. Dadurch verbrennt die Pflanze weniger Energie bei der Wurzelbildung und steckt diese stattdessen ins Wachstum der Blätter und Blüten. Deshalb wachsen DWC-Pflanzen oft viel schneller als auf Erde.';
+
+  @override
+  String get germinationDeepDive9Title => 'PPFD und junge Pflanzen';
+
+  @override
+  String get germinationDeepDive9Text =>
+      'PPFD (Photosynthetic Photon Flux Density) misst, wie viele Lichtteilchen tatsächlich auf den Blättern ankommen. Ein Sämling hat noch kaum Blätter und kann mit extrem viel Licht (hoher PPFD) nichts anfangen. Zu viel Licht führt zu Lichtstress, was den Sämling bleicht, das Wachstum stoppt oder ihn sogar abtötet.';
 }

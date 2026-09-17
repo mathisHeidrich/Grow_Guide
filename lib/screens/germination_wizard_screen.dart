@@ -132,80 +132,110 @@ class _GerminationWizardScreenState
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                _buildSlide(
-                  title: l10n.germinationTitle1,
-                  text: l10n.germinationDesc1,
-                  icon: Icons.local_drink,
-                  nextButtonText: l10n.germinationNext1,
-                  onNext: _nextPage,
-                ),
-                _buildSlide(
-                  title: l10n.germinationTitle1b,
-                  text: l10n.germinationDesc1b,
-                  icon: Icons.science,
-                  nextButtonText: l10n.germinationNext1b,
-                  onNext: _nextPage,
-                  showBack: true,
-                ),
-                _buildSlide(
-                  title: l10n.germinationTitle2,
-                  text: l10n.germinationDesc2,
-                  icon: Icons.nightlight_round,
-                  nextButtonText: l10n.germinationNext2,
-                  onNext: _nextPage,
-                  showBack: true,
-                ),
-                _buildSlide(
-                  title: l10n.germinationTitle3,
-                  text: l10n.germinationDesc3,
-                  icon: Icons.hourglass_empty,
-                  nextButtonText: l10n.germinationToDashboard,
-                  onNext: _finishPart1,
-                  showBack: true,
-                ),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.germinationTitle1,
+                      text: l10n.germinationDesc1,
+                      icon: Icons.local_drink,
+                      nextButtonText: l10n.germinationNext1,
+                      onNext: _nextPage,
+                    ),
+                    l10n.germinationDeepDive1Title,
+                    l10n.germinationDeepDive1Text),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.germinationTitle1b,
+                      text: l10n.germinationDesc1b,
+                      icon: Icons.science,
+                      nextButtonText: l10n.germinationNext1b,
+                      onNext: _nextPage,
+                      showBack: true,
+                    ),
+                    l10n.germinationDeepDive1bTitle,
+                    l10n.germinationDeepDive1bText),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.germinationTitle2,
+                      text: l10n.germinationDesc2,
+                      icon: Icons.nightlight_round,
+                      nextButtonText: l10n.germinationNext2,
+                      onNext: _nextPage,
+                      showBack: true,
+                    ),
+                    l10n.germinationDeepDive2Title,
+                    l10n.germinationDeepDive2Text),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.germinationTitle3,
+                      text: l10n.germinationDesc3,
+                      icon: Icons.hourglass_empty,
+                      nextButtonText: l10n.germinationToDashboard,
+                      onNext: _finishPart1,
+                      showBack: true,
+                    ),
+                    l10n.germinationDeepDive3Title,
+                    l10n.germinationDeepDive3Text),
                 // Wurzel Check (Index 4)
-                _buildRootCheckSlide(l10n),
+                _wrapWithInfo(
+                    _buildRootCheckSlide(l10n),
+                    l10n.germinationDeepDive4Title,
+                    l10n.germinationDeepDive4Text),
                 // Geduld! (Index 5)
-                _buildSlide(
-                  title: l10n.germinationTitle5,
-                  text: l10n.germinationDesc5,
-                  icon: Icons.timelapse,
-                  nextButtonText: l10n.germinationToDashboard,
-                  onNext: _markRootChecked,
-                  showBack: true,
-                  onBack: () => _jumpToPage(4),
-                ),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.germinationTitle5,
+                      text: l10n.germinationDesc5,
+                      icon: Icons.timelapse,
+                      nextButtonText: l10n.germinationToDashboard,
+                      onNext: _markRootChecked,
+                      showBack: true,
+                      onBack: () => _jumpToPage(4),
+                    ),
+                    l10n.germinationDeepDive5Title,
+                    l10n.germinationDeepDive5Text),
                 // Einzug in die Steinwolle (Index 6)
-                _buildSlide(
-                  title: l10n.germinationTitle6,
-                  text: l10n.germinationDesc6,
-                  icon: Icons.eco,
-                  nextButtonText: l10n.germinationNext6,
-                  onNext: _nextPage,
-                  showBack: true,
-                  onBack: () => _jumpToPage(4),
-                ),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.germinationTitle6,
+                      text: l10n.germinationDesc6,
+                      icon: Icons.eco,
+                      nextButtonText: l10n.germinationNext6,
+                      onNext: _nextPage,
+                      showBack: true,
+                      onBack: () => _jumpToPage(4),
+                    ),
+                    l10n.germinationDeepDive6Title,
+                    l10n.germinationDeepDive6Text),
                 // Netztopf (Index 6)
-                _buildSlide(
-                  title: l10n.germinationTitle7,
-                  text: l10n.germinationDesc7,
-                  icon: Icons.kitchen,
-                  nextButtonText: l10n.germinationNext7,
-                  onNext: _nextPage,
-                  showBack: true,
-                ),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.germinationTitle7,
+                      text: l10n.germinationDesc7,
+                      icon: Icons.kitchen,
+                      nextButtonText: l10n.germinationNext7,
+                      onNext: _nextPage,
+                      showBack: true,
+                    ),
+                    l10n.germinationDeepDive7Title,
+                    l10n.germinationDeepDive7Text),
                 // Finale (Index 7)
                 // Eimer (Index 7)
-                _buildSlide(
-                  title: l10n.germinationTitle8,
-                  text: l10n.germinationDesc8,
-                  icon: Icons.waves,
-                  nextButtonText: l10n.germinationNext8,
-                  onNext: _nextPage,
-                  showBack: true,
-                ),
+                _wrapWithInfo(
+                    _buildSlide(
+                      title: l10n.germinationTitle8,
+                      text: l10n.germinationDesc8,
+                      icon: Icons.waves,
+                      nextButtonText: l10n.germinationNext8,
+                      onNext: _nextPage,
+                      showBack: true,
+                    ),
+                    l10n.germinationDeepDive8Title,
+                    l10n.germinationDeepDive8Text),
                 // Licht (Index 8)
-                _buildLightSlide(l10n),
+                _wrapWithInfo(
+                    _buildLightSlide(l10n),
+                    l10n.germinationDeepDive9Title,
+                    l10n.germinationDeepDive9Text),
               ],
             ),
             Positioned(
@@ -219,6 +249,72 @@ class _GerminationWizardScreenState
           ],
         ),
       ),
+    );
+  }
+
+  Widget _wrapWithInfo(Widget child, String title, String text) {
+    return Stack(
+      children: [
+        child,
+        Positioned(
+          top: 16,
+          left: 16,
+          child: IconButton(
+            icon:
+                const Icon(Icons.info_outline, color: Colors.white54, size: 32),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: const Color(0xFF1E1E1E),
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                ),
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: SafeArea(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                        const SizedBox(height: 16),
+                        Text(text,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.white70,
+                                height: 1.5)),
+                        const SizedBox(height: 24),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.growGreen,
+                              foregroundColor: Colors.black,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text("Verstanden",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
