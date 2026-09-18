@@ -8,6 +8,7 @@ import 'package:app/l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
 import '../services/nutrient_service.dart';
+import 'package:app/theme/app_colors.dart';
 
 class CheckinScreen extends ConsumerStatefulWidget {
   final int plantId;
@@ -157,7 +158,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                           _initialRootsNotReached == true || _needsWaterChange,
                       extraWidget: ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orange.withOpacity(0.2),
+                          backgroundColor: Colors.orange.withValues(alpha: 0.2),
                           foregroundColor: Colors.orangeAccent,
                           side: const BorderSide(color: Colors.orangeAccent),
                           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -243,7 +244,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             onPressed: () {
               showModalBottomSheet(
                 context: context,
-                backgroundColor: const Color(0xFF1E1E1E),
+                backgroundColor: AppColors.surface,
                 isScrollControlled: true,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -280,8 +281,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                                   borderRadius: BorderRadius.circular(12)),
                             ),
                             onPressed: () => Navigator.pop(context),
-                            child: const Text("Verstanden",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            child: Text(AppLocalizations.of(context)!.generalUnderstood,
+                                style: const TextStyle(fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ],
@@ -575,7 +576,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                  color: const Color(0xFF1E1E1E),
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(12)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -817,7 +818,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               onPressed: () {
                 showModalBottomSheet(
                   context: context,
-                  backgroundColor: const Color(0xFF1E1E1E),
+                  backgroundColor: AppColors.surface,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                   ),
@@ -846,7 +847,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                             foregroundColor: Colors.black,
                           ),
                           onPressed: () => Navigator.pop(context),
-                          child: const Text('OK', style: TextStyle(fontWeight: FontWeight.bold)),
+                          child: Text(AppLocalizations.of(context)!.generalOk, style: const TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         const SizedBox(height: 16),
                       ],

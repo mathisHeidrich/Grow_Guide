@@ -1,6 +1,8 @@
 {
   "@@locale": "de",
   "appTitle": "Grow Guide",
+  "generalUnderstood": "Verstanden",
+  "generalOk": "OK",
   "onboardingTitle1": "Growen ohne Erde. Ohne Raten.",
   "onboardingText1": "Willkommen bei deinem DWC-Companion. Vergiss Erde, Schädlinge und Gießkannen. Wir züchten in sprudelndem Wasser – schneller, sauberer und mit massiven Erträgen.",
   "onboardingTitle2": "Deine tägliche 5-Minuten Routine",

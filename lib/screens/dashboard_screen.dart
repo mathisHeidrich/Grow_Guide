@@ -8,6 +8,7 @@ import 'package:drift/drift.dart' hide Column;
 import '../providers/database_provider.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
+import 'package:app/theme/app_colors.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});

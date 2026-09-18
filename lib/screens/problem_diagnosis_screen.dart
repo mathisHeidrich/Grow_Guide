@@ -4,6 +4,7 @@ import '../data/mock_problems.dart';
 import '../models/plant_problem.dart';
 import 'package:app/l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
+import 'package:app/theme/app_colors.dart';
 
 class ProblemDiagnosisScreen extends StatefulWidget {
   final int? plantId;
@@ -93,7 +94,7 @@ class _ProblemDiagnosisScreenState extends State<ProblemDiagnosisScreen> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            color: const Color(0xFF1E1E1E),
+            color: AppColors.surface,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -130,9 +131,9 @@ class _ProblemDiagnosisScreenState extends State<ProblemDiagnosisScreen> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 8),
-                      Text(
+                      const Text(
                         'Details ansehen',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.growGreen,
                           fontWeight: FontWeight.bold,
                         ),

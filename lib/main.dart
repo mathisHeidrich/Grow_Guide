@@ -4,6 +4,7 @@ import 'router.dart';
 import 'services/database.dart';
 import 'providers/database_provider.dart';
 import 'package:app/l10n/app_localizations.dart';
+import 'package:app/theme/app_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,10 +33,10 @@ class GrowGuideApp extends ConsumerWidget {
       title: 'Grow Guide V2',
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF121212),
-        cardColor: const Color(0xFF1E1E1E),
+        scaffoldBackgroundColor: AppColors.background,
+        cardColor: AppColors.surface,
         colorScheme: const ColorScheme.dark(
-          primary: Color(0xFF00E676),
+          primary: AppColors.growGreen,
           error: Color(0xFFFF5252),
           surface: Color(0xFF1E1E1E),
         ),

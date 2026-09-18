@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
 import 'package:app/l10n/app_localizations.dart';
+import 'package:app/theme/app_colors.dart';
 
 class TentSetupScreen extends ConsumerStatefulWidget {
   const TentSetupScreen({super.key});
@@ -114,7 +115,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
               tipText: l10n.tentTip7,
               icon: Icons.bubble_chart,
               iconColor:
-                  const Color(0xFFFF5252), // warning color for safety tip
+                  AppColors.errorRed, // warning color for safety tip
               nextButtonText: l10n.tentNext7,
               onNext: _nextPage,
               showBack: true,
@@ -125,7 +126,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
               tipText: l10n.tentTip8,
               icon: Icons.warning,
               iconColor:
-                  const Color(0xFFFF5252), // warning color for safety tip
+                  AppColors.errorRed, // warning color for safety tip
               nextButtonText: l10n.tentNext8,
               onNext: _nextPage,
               showBack: true,
@@ -159,7 +160,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
     required String text,
     String? tipText,
     required IconData icon,
-    Color iconColor = const Color(0xFF00E676),
+    Color iconColor = AppColors.growGreen,
     required String nextButtonText,
     required VoidCallback onNext,
     bool showBack = false,
@@ -195,14 +196,14 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: const Color(0xFF1E1E1E),
+                color: AppColors.surface,
                 borderRadius: BorderRadius.circular(12),
                 border:
-                    Border.all(color: const Color(0xFF00E676).withValues(alpha: 0.3)),
+                    Border.all(color: AppColors.growGreen.withValues(alpha: 0.3)),
               ),
               child: Text(
                 tipText,
-                style: const TextStyle(color: Color(0xFF00E676)),
+                style: const TextStyle(color: AppColors.growGreen),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -231,7 +232,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
                 flex: 2,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF00E676),
+                    backgroundColor: AppColors.growGreen,
                     foregroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     shape: RoundedRectangleBorder(
@@ -262,7 +263,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Spacer(),
-          const Icon(Icons.handyman, size: 120, color: Color(0xFF00E676)),
+          const Icon(Icons.handyman, size: 120, color: AppColors.growGreen),
           const SizedBox(height: 48),
           Text(
             l10n.tentIntroTitle,
@@ -283,7 +284,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
           const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00E676),
+              backgroundColor: AppColors.growGreen,
               foregroundColor: Colors.black,
               padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(
@@ -299,12 +300,12 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
           const SizedBox(height: 16),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1E1E1E), // Secondary button
+              backgroundColor: AppColors.surface, // Secondary button
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: Color(0xFF00E676)),
+                side: const BorderSide(color: AppColors.growGreen),
               ),
             ),
             onPressed: _completeSetup,

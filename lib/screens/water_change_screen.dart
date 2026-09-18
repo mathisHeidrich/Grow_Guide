@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
+import 'package:app/theme/app_colors.dart';
 
 class WaterChangeScreen extends StatefulWidget {
   const WaterChangeScreen({super.key});
@@ -16,7 +17,7 @@ class _WaterChangeScreenState extends State<WaterChangeScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text(l10n.waterChangeTitle),
         backgroundColor: Colors.transparent,
@@ -72,7 +73,7 @@ class _WaterChangeScreenState extends State<WaterChangeScreen> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E),
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
         border: isRecommended
             ? Border.all(color: AppColors.growGreen, width: 2)

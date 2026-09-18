@@ -4,6 +4,7 @@ import '../data/mock_problems.dart';
 import '../models/plant_problem.dart';
 import 'package:app/l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
+import 'package:app/theme/app_colors.dart';
 
 class ProblemDetailScreen extends StatelessWidget {
   final String problemId;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
+import 'package:app/theme/app_colors.dart';
 
 class AppOnboardingScreen extends ConsumerStatefulWidget {
   const AppOnboardingScreen({super.key});
@@ -68,7 +69,7 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
         children: [
           const Spacer(),
           // Placeholder for image
-          const Icon(Icons.eco, size: 120, color: Color(0xFF00E676)),
+          const Icon(Icons.eco, size: 120, color: AppColors.growGreen),
           const SizedBox(height: 48),
           Text(
             title,
@@ -89,7 +90,7 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
           const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00E676),
+              backgroundColor: AppColors.growGreen,
               foregroundColor: Colors.black,
               padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(
@@ -117,7 +118,7 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Spacer(),
-          const Icon(Icons.handyman, size: 120, color: Color(0xFF00E676)),
+          const Icon(Icons.handyman, size: 120, color: AppColors.growGreen),
           const SizedBox(height: 48),
           Text(
             l10n.onboardingFinalTitle,
@@ -138,7 +139,7 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
           const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00E676),
+              backgroundColor: AppColors.growGreen,
               foregroundColor: Colors.black,
               padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(

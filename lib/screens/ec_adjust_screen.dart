@@ -8,6 +8,7 @@ import '../models/plant.dart';
 import 'package:app/l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
 import '../services/nutrient_service.dart';
+import 'package:app/theme/app_colors.dart';
 
 class EcAdjustScreen extends ConsumerStatefulWidget {
   final int plantId;
@@ -135,7 +136,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.1),
+                  color: Colors.red.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: Colors.redAccent)
                 ),
@@ -155,7 +156,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    color: const Color(0xFF1E1E1E),
+                    color: AppColors.surface,
                     borderRadius: BorderRadius.circular(12)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +177,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    color: AppColors.growGreen.withOpacity(0.1),
+                    color: AppColors.growGreen.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: AppColors.growGreen)
                 ),
@@ -227,7 +228,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             ),
             onPressed: () => context.pop(),
-            child: const Text('Zurück', style: TextStyle(fontSize: 16)),
+            child: Text(AppLocalizations.of(context)!.checkinBack, style: const TextStyle(fontSize: 16)),
           ),
         ],
       ),

@@ -7,6 +7,7 @@ import '../providers/time_provider.dart';
 import '../models/plant.dart';
 import 'package:app/l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
+import 'package:app/theme/app_colors.dart';
 
 class PhAdjustScreen extends ConsumerStatefulWidget {
   final int plantId;
@@ -111,7 +112,7 @@ class _PhAdjustScreenState extends ConsumerState<PhAdjustScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                  color: isPhOk ? AppColors.growGreen.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                  color: isPhOk ? AppColors.growGreen.withValues(alpha: 0.1) : Colors.orange.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: isPhOk ? AppColors.growGreen : Colors.orange)
               ),
@@ -174,7 +175,7 @@ class _PhAdjustScreenState extends ConsumerState<PhAdjustScreen> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             ),
             onPressed: () => context.pop(),
-            child: const Text('Zurück', style: TextStyle(fontSize: 16)),
+            child: Text(AppLocalizations.of(context)!.checkinBack, style: const TextStyle(fontSize: 16)),
           ),
         ],
       ),

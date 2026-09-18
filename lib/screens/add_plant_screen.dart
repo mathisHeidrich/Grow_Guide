@@ -8,6 +8,7 @@ import 'package:app/l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
 import 'package:drift/drift.dart' as drift;
+import 'package:app/theme/app_colors.dart';
 
 class AddPlantScreen extends ConsumerStatefulWidget {
   const AddPlantScreen({super.key});

@@ -1,3 +1,4 @@
+import 'package:app/l10n/app_localizations.dart';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -99,6 +100,18 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Grow Guide'**
   String get appTitle;
+
+  /// No description provided for @generalUnderstood.
+  ///
+  /// In de, this message translates to:
+  /// **'Verstanden'**
+  String get generalUnderstood;
+
+  /// No description provided for @generalOk.
+  ///
+  /// In de, this message translates to:
+  /// **'OK'**
+  String get generalOk;
 
   /// No description provided for @onboardingTitle1.
   ///

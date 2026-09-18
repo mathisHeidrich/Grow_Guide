@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
+import 'package:app/theme/app_colors.dart';
 
 class HardwareAdvisorScreen extends StatefulWidget {
   const HardwareAdvisorScreen({super.key});
@@ -173,7 +174,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
     });
 
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text(l10n.hardwareAdvisorTitle),
         backgroundColor: Colors.transparent,
@@ -214,7 +215,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                   ),
                 ),
                 const Spacer(),
-                Icon(item.icon, size: 120, color: const Color(0xFF00E676)),
+                Icon(item.icon, size: 120, color: AppColors.growGreen),
                 const SizedBox(height: 48),
                 Text(
                   item.title,
@@ -237,14 +238,14 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1E1E1E),
+                      color: AppColors.surface,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                          color: const Color(0xFF00E676).withValues(alpha: 0.3)),
+                          color: AppColors.growGreen.withValues(alpha: 0.3)),
                     ),
                     child: Text(
                       item.proTip!,
-                      style: const TextStyle(color: Color(0xFF00E676)),
+                      style: const TextStyle(color: AppColors.growGreen),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -257,12 +258,12 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
-                          foregroundColor: const Color(0xFF00E676),
+                          foregroundColor: AppColors.growGreen,
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                             side: const BorderSide(
-                                color: Color(0xFF00E676), width: 2),
+                                color: AppColors.growGreen, width: 2),
                           ),
                         ),
                         onPressed: () {
@@ -286,7 +287,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                       flex: 3,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF00E676),
+                          backgroundColor: AppColors.growGreen,
                           foregroundColor: Colors.black,
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           shape: RoundedRectangleBorder(

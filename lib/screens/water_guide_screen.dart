@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
+import 'package:app/theme/app_colors.dart';
 
 class WaterGuideScreen extends StatelessWidget {
   const WaterGuideScreen({super.key});
@@ -10,7 +11,7 @@ class WaterGuideScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text(l10n.waterGuideTitle),
         backgroundColor: Colors.transparent,
@@ -74,7 +75,7 @@ class WaterGuideScreen extends StatelessWidget {
           const SizedBox(height: 32),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00E676),
+              backgroundColor: AppColors.growGreen,
               foregroundColor: Colors.black,
               padding: const EdgeInsets.symmetric(vertical: 20),
               shape: RoundedRectangleBorder(
@@ -102,7 +103,7 @@ class WaterGuideScreen extends StatelessWidget {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E),
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
       ),
       padding: const EdgeInsets.all(20),
@@ -111,7 +112,7 @@ class WaterGuideScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, color: const Color(0xFF00E676), size: 28),
+              Icon(icon, color: AppColors.growGreen, size: 28),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(

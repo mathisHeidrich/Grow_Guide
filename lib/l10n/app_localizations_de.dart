@@ -1,3 +1,4 @@
+import 'package:app/l10n/app_localizations.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
@@ -10,6 +11,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get appTitle => 'Grow Guide';
+
+  @override
+  String get generalUnderstood => 'Verstanden';
+
+  @override
+  String get generalOk => 'OK';
 
   @override
   String get onboardingTitle1 => 'Growen ohne Erde. Ohne Raten.';

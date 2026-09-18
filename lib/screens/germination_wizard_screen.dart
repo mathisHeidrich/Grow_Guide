@@ -8,6 +8,7 @@ import '../providers/database_provider.dart';
 import 'package:app/l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
+import 'package:app/theme/app_colors.dart';
 
 class GerminationWizardScreen extends ConsumerStatefulWidget {
   final int plantId;
@@ -266,7 +267,7 @@ class _GerminationWizardScreenState
             onPressed: () {
               showModalBottomSheet(
                 context: context,
-                backgroundColor: const Color(0xFF1E1E1E),
+                backgroundColor: AppColors.surface,
                 isScrollControlled: true,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -303,8 +304,8 @@ class _GerminationWizardScreenState
                                   borderRadius: BorderRadius.circular(12)),
                             ),
                             onPressed: () => Navigator.pop(context),
-                            child: const Text("Verstanden",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            child: Text(AppLocalizations.of(context)!.generalUnderstood,
+                                style: const TextStyle(fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ],
