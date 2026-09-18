@@ -788,6 +788,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   Widget _buildLampSlide() {
     final l10n = AppLocalizations.of(context)!;
+    final phase = _plant?.currentPhase ?? PlantPhase.veg;
+    final range = phase.targetPpfdRange;
+
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -806,8 +809,33 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.growGreen.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.growGreen, width: 2),
+              ),
+              child: Column(children: [
+                Text(
+                  l10n.checkinLampTargetPpfdLabel,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColors.growGreen,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "${range[0]} - ${range[1]}",
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ])),
+          const SizedBox(height: 24),
           Text(
-            l10n.checkinLampDesc,
+            l10n.checkinLampMeasureInstruction,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
