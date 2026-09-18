@@ -499,5 +499,11 @@
   "settingsResetApp": "App zurücksetzen",
   "settingsResetWarning": "Möchtest du wirklich alle Pflanzen, Logs und Einstellungen löschen? Dies kann nicht rückgängig gemacht werden.",
   "settingsCancel": "Abbrechen",
-  "settingsDelete": "Löschen"
+  "settingsDelete": "Löschen",
+  "settingsNotifications": "Benachrichtigungen",
+  "settingsCheckinFreq": "Check-in Erinnerungen",
+  "settingsFreqDaily": "Täglich",
+  "settingsFreqEvery2Days": "Alle 2 Tage",
+  "settingsFreqWeekly": "Wöchentlich",
+  "settingsFreqOff": "Aus"
 }

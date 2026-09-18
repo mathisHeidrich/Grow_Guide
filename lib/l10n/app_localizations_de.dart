@@ -1379,4 +1379,22 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsDelete => 'Löschen';
+
+  @override
+  String get settingsNotifications => 'Benachrichtigungen';
+
+  @override
+  String get settingsCheckinFreq => 'Check-in Erinnerungen';
+
+  @override
+  String get settingsFreqDaily => 'Täglich';
+
+  @override
+  String get settingsFreqEvery2Days => 'Alle 2 Tage';
+
+  @override
+  String get settingsFreqWeekly => 'Wöchentlich';
+
+  @override
+  String get settingsFreqOff => 'Aus';
 }

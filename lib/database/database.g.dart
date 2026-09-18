@@ -1162,6 +1162,14 @@ class $AppSettingsTableTable extends AppSettingsTable
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       defaultValue: const Constant('ec'));
+  static const VerificationMeta _checkinFrequencyMeta =
+      const VerificationMeta('checkinFrequency');
+  @override
+  late final GeneratedColumn<String> checkinFrequency = GeneratedColumn<String>(
+      'checkin_frequency', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('daily'));
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -1171,7 +1179,8 @@ class $AppSettingsTableTable extends AppSettingsTable
         language,
         volumeUnit,
         temperatureUnit,
-        conductivityUnit
+        conductivityUnit,
+        checkinFrequency
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -1224,6 +1233,12 @@ class $AppSettingsTableTable extends AppSettingsTable
           conductivityUnit.isAcceptableOrUnknown(
               data['conductivity_unit']!, _conductivityUnitMeta));
     }
+    if (data.containsKey('checkin_frequency')) {
+      context.handle(
+          _checkinFrequencyMeta,
+          checkinFrequency.isAcceptableOrUnknown(
+              data['checkin_frequency']!, _checkinFrequencyMeta));
+    }
     return context;
   }
 
@@ -1251,6 +1266,8 @@ class $AppSettingsTableTable extends AppSettingsTable
           DriftSqlType.string, data['${effectivePrefix}temperature_unit'])!,
       conductivityUnit: attachedDatabase.typeMapping.read(
           DriftSqlType.string, data['${effectivePrefix}conductivity_unit'])!,
+      checkinFrequency: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}checkin_frequency'])!,
     );
   }
 
@@ -1269,6 +1286,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
   final String volumeUnit;
   final String temperatureUnit;
   final String conductivityUnit;
+  final String checkinFrequency;
   const AppSettings(
       {required this.id,
       required this.hasCompletedOnboarding,
@@ -1277,7 +1295,8 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       this.language,
       required this.volumeUnit,
       required this.temperatureUnit,
-      required this.conductivityUnit});
+      required this.conductivityUnit,
+      required this.checkinFrequency});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1291,6 +1310,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
     map['volume_unit'] = Variable<String>(volumeUnit);
     map['temperature_unit'] = Variable<String>(temperatureUnit);
     map['conductivity_unit'] = Variable<String>(conductivityUnit);
+    map['checkin_frequency'] = Variable<String>(checkinFrequency);
     return map;
   }
 
@@ -1306,6 +1326,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       volumeUnit: Value(volumeUnit),
       temperatureUnit: Value(temperatureUnit),
       conductivityUnit: Value(conductivityUnit),
+      checkinFrequency: Value(checkinFrequency),
     );
   }
 
@@ -1323,6 +1344,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       volumeUnit: serializer.fromJson<String>(json['volumeUnit']),
       temperatureUnit: serializer.fromJson<String>(json['temperatureUnit']),
       conductivityUnit: serializer.fromJson<String>(json['conductivityUnit']),
+      checkinFrequency: serializer.fromJson<String>(json['checkinFrequency']),
     );
   }
   @override
@@ -1337,6 +1359,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       'volumeUnit': serializer.toJson<String>(volumeUnit),
       'temperatureUnit': serializer.toJson<String>(temperatureUnit),
       'conductivityUnit': serializer.toJson<String>(conductivityUnit),
+      'checkinFrequency': serializer.toJson<String>(checkinFrequency),
     };
   }
 
@@ -1348,7 +1371,8 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
           Value<String?> language = const Value.absent(),
           String? volumeUnit,
           String? temperatureUnit,
-          String? conductivityUnit}) =>
+          String? conductivityUnit,
+          String? checkinFrequency}) =>
       AppSettings(
         id: id ?? this.id,
         hasCompletedOnboarding:
@@ -1360,6 +1384,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
         volumeUnit: volumeUnit ?? this.volumeUnit,
         temperatureUnit: temperatureUnit ?? this.temperatureUnit,
         conductivityUnit: conductivityUnit ?? this.conductivityUnit,
+        checkinFrequency: checkinFrequency ?? this.checkinFrequency,
       );
   AppSettings copyWithCompanion(AppSettingsTableCompanion data) {
     return AppSettings(
@@ -1380,6 +1405,9 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       conductivityUnit: data.conductivityUnit.present
           ? data.conductivityUnit.value
           : this.conductivityUnit,
+      checkinFrequency: data.checkinFrequency.present
+          ? data.checkinFrequency.value
+          : this.checkinFrequency,
     );
   }
 
@@ -1393,7 +1421,8 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
           ..write('language: $language, ')
           ..write('volumeUnit: $volumeUnit, ')
           ..write('temperatureUnit: $temperatureUnit, ')
-          ..write('conductivityUnit: $conductivityUnit')
+          ..write('conductivityUnit: $conductivityUnit, ')
+          ..write('checkinFrequency: $checkinFrequency')
           ..write(')'))
         .toString();
   }
@@ -1407,7 +1436,8 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       language,
       volumeUnit,
       temperatureUnit,
-      conductivityUnit);
+      conductivityUnit,
+      checkinFrequency);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1419,7 +1449,8 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
           other.language == this.language &&
           other.volumeUnit == this.volumeUnit &&
           other.temperatureUnit == this.temperatureUnit &&
-          other.conductivityUnit == this.conductivityUnit);
+          other.conductivityUnit == this.conductivityUnit &&
+          other.checkinFrequency == this.checkinFrequency);
 }
 
 class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
@@ -1431,6 +1462,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
   final Value<String> volumeUnit;
   final Value<String> temperatureUnit;
   final Value<String> conductivityUnit;
+  final Value<String> checkinFrequency;
   const AppSettingsTableCompanion({
     this.id = const Value.absent(),
     this.hasCompletedOnboarding = const Value.absent(),
@@ -1440,6 +1472,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     this.volumeUnit = const Value.absent(),
     this.temperatureUnit = const Value.absent(),
     this.conductivityUnit = const Value.absent(),
+    this.checkinFrequency = const Value.absent(),
   });
   AppSettingsTableCompanion.insert({
     this.id = const Value.absent(),
@@ -1450,6 +1483,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     this.volumeUnit = const Value.absent(),
     this.temperatureUnit = const Value.absent(),
     this.conductivityUnit = const Value.absent(),
+    this.checkinFrequency = const Value.absent(),
   });
   static Insertable<AppSettings> custom({
     Expression<int>? id,
@@ -1460,6 +1494,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     Expression<String>? volumeUnit,
     Expression<String>? temperatureUnit,
     Expression<String>? conductivityUnit,
+    Expression<String>? checkinFrequency,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1472,6 +1507,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
       if (volumeUnit != null) 'volume_unit': volumeUnit,
       if (temperatureUnit != null) 'temperature_unit': temperatureUnit,
       if (conductivityUnit != null) 'conductivity_unit': conductivityUnit,
+      if (checkinFrequency != null) 'checkin_frequency': checkinFrequency,
     });
   }
 
@@ -1483,7 +1519,8 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
       Value<String?>? language,
       Value<String>? volumeUnit,
       Value<String>? temperatureUnit,
-      Value<String>? conductivityUnit}) {
+      Value<String>? conductivityUnit,
+      Value<String>? checkinFrequency}) {
     return AppSettingsTableCompanion(
       id: id ?? this.id,
       hasCompletedOnboarding:
@@ -1495,6 +1532,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
       volumeUnit: volumeUnit ?? this.volumeUnit,
       temperatureUnit: temperatureUnit ?? this.temperatureUnit,
       conductivityUnit: conductivityUnit ?? this.conductivityUnit,
+      checkinFrequency: checkinFrequency ?? this.checkinFrequency,
     );
   }
 
@@ -1527,6 +1565,9 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     if (conductivityUnit.present) {
       map['conductivity_unit'] = Variable<String>(conductivityUnit.value);
     }
+    if (checkinFrequency.present) {
+      map['checkin_frequency'] = Variable<String>(checkinFrequency.value);
+    }
     return map;
   }
 
@@ -1540,7 +1581,8 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
           ..write('language: $language, ')
           ..write('volumeUnit: $volumeUnit, ')
           ..write('temperatureUnit: $temperatureUnit, ')
-          ..write('conductivityUnit: $conductivityUnit')
+          ..write('conductivityUnit: $conductivityUnit, ')
+          ..write('checkinFrequency: $checkinFrequency')
           ..write(')'))
         .toString();
   }
@@ -2021,6 +2063,7 @@ typedef $$AppSettingsTableTableCreateCompanionBuilder
   Value<String> volumeUnit,
   Value<String> temperatureUnit,
   Value<String> conductivityUnit,
+  Value<String> checkinFrequency,
 });
 typedef $$AppSettingsTableTableUpdateCompanionBuilder
     = AppSettingsTableCompanion Function({
@@ -2032,6 +2075,7 @@ typedef $$AppSettingsTableTableUpdateCompanionBuilder
   Value<String> volumeUnit,
   Value<String> temperatureUnit,
   Value<String> conductivityUnit,
+  Value<String> checkinFrequency,
 });
 
 class $$AppSettingsTableTableTableManager extends RootTableManager<
@@ -2060,6 +2104,7 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             Value<String> volumeUnit = const Value.absent(),
             Value<String> temperatureUnit = const Value.absent(),
             Value<String> conductivityUnit = const Value.absent(),
+            Value<String> checkinFrequency = const Value.absent(),
           }) =>
               AppSettingsTableCompanion(
             id: id,
@@ -2070,6 +2115,7 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             volumeUnit: volumeUnit,
             temperatureUnit: temperatureUnit,
             conductivityUnit: conductivityUnit,
+            checkinFrequency: checkinFrequency,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -2080,6 +2126,7 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             Value<String> volumeUnit = const Value.absent(),
             Value<String> temperatureUnit = const Value.absent(),
             Value<String> conductivityUnit = const Value.absent(),
+            Value<String> checkinFrequency = const Value.absent(),
           }) =>
               AppSettingsTableCompanion.insert(
             id: id,
@@ -2090,6 +2137,7 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             volumeUnit: volumeUnit,
             temperatureUnit: temperatureUnit,
             conductivityUnit: conductivityUnit,
+            checkinFrequency: checkinFrequency,
           ),
         ));
 }
@@ -2136,6 +2184,11 @@ class $$AppSettingsTableTableFilterComposer
       column: $state.table.conductivityUnit,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get checkinFrequency => $state.composableBuilder(
+      column: $state.table.checkinFrequency,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$AppSettingsTableTableOrderingComposer
@@ -2178,6 +2231,11 @@ class $$AppSettingsTableTableOrderingComposer
 
   ColumnOrderings<String> get conductivityUnit => $state.composableBuilder(
       column: $state.table.conductivityUnit,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get checkinFrequency => $state.composableBuilder(
+      column: $state.table.checkinFrequency,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

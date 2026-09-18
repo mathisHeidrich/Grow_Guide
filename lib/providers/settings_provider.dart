@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:drift/drift.dart';
 import '../database/database.dart';
 import '../services/database.dart';
+import '../services/local_notification_service.dart';
 import 'database_provider.dart';
 
 final settingsProvider = StreamProvider<AppSettings>((ref) {
@@ -11,6 +12,7 @@ final settingsProvider = StreamProvider<AppSettings>((ref) {
 
 class SettingsNotifier {
   final DatabaseService dbService;
+  final LocalNotificationService _notificationService = LocalNotificationService();
 
   SettingsNotifier(this.dbService);
 
@@ -20,6 +22,7 @@ class SettingsNotifier {
     String? volumeUnit,
     String? temperatureUnit,
     String? conductivityUnit,
+    String? checkinFrequency,
   }) async {
     await dbService.db.update(dbService.db.appSettingsTable).write(
           AppSettingsTableCompanion(
@@ -35,8 +38,15 @@ class SettingsNotifier {
             conductivityUnit: conductivityUnit == null
                 ? const Value.absent()
                 : Value(conductivityUnit),
+            checkinFrequency: checkinFrequency == null
+                ? const Value.absent()
+                : Value(checkinFrequency),
           ),
         );
+
+    if (checkinFrequency != null) {
+      await _notificationService.scheduleCheckinReminder(checkinFrequency);
+    }
   }
 
   Future<void> updateLanguage(String? lang) async {
