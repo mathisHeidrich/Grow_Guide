@@ -17,6 +17,7 @@ import 'screens/problem_diagnosis_screen.dart';
 import 'screens/problem_detail_screen.dart';
 import 'screens/ec_adjust_screen.dart';
 import 'screens/ph_adjust_screen.dart';
+import 'screens/problem_select_plant_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final db = ref.watch(databaseProvider).db;
@@ -103,6 +104,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/water_change',
         builder: (context, state) => const WaterChangeScreen(),
+      ),
+      GoRoute(
+        path: '/select_plant_for_problem',
+        builder: (context, state) => const ProblemSelectPlantScreen(),
       ),
       GoRoute(
         path: '/problems',

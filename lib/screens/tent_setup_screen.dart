@@ -90,6 +90,18 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
               nextButtonText: l10n.tentNext4,
               onNext: _nextPage,
               showBack: true,
+              extraWidget: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                ),
+                icon: const Icon(Icons.camera_alt),
+                label: Text(l10n.checkinMeasurePpfd),
+                onPressed: () => context.push('/ppfd_meter'),
+              ),
             ),
             _buildSlide(
               title: l10n.tentTitle5,
@@ -164,6 +176,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
     required String nextButtonText,
     required VoidCallback onNext,
     bool showBack = false,
+    Widget? extraWidget,
   }) {
     final l10n = AppLocalizations.of(context)!;
     return Padding(
@@ -207,6 +220,10 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
+          ],
+          if (extraWidget != null) ...[
+            const SizedBox(height: 24),
+            extraWidget,
           ],
           const Spacer(),
           Row(

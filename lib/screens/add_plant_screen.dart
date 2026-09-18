@@ -341,6 +341,15 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                           fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () => context.go('/'),
+                  child: Text(l10n.checkinBack, // using "Zurück" as cancel
+                      style: const TextStyle(color: Colors.white70, fontSize: 16)),
+                ),
+              ),
               const SizedBox(height: 24),
             ],
           ),

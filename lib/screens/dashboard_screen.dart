@@ -23,9 +23,14 @@ class DashboardScreen extends ConsumerWidget {
         title: Text(l10n.dashboardTitle),
         actions: [
           IconButton(
+            icon: const Icon(Icons.lightbulb_outline, size: 28),
+            tooltip: l10n.ppfdTitle,
+            onPressed: () => context.push('/ppfd_meter'),
+          ),
+          IconButton(
             icon: const Icon(Icons.healing, size: 28),
             tooltip: l10n.diagnoseProblemButton,
-            onPressed: () => context.push('/problems'),
+            onPressed: () => context.push('/select_plant_for_problem'),
           ),
           IconButton(
             icon: const Icon(Icons.add, size: 32),
