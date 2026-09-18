@@ -8,7 +8,7 @@ import 'package:app/l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
 import '../services/nutrient_service.dart';
-import 'package:app/theme/app_colors.dart';
+
 
 class CheckinScreen extends ConsumerStatefulWidget {
   final int plantId;
@@ -31,6 +31,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   bool _isWaterChange = false;
   bool _needsWaterChange = false;
   bool? _willDoWaterChange;
+  bool _needsLampCheck = false;
+  bool _needsVentilatorCheck = false;
 
   @override
   void initState() {
@@ -69,11 +71,50 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         }
       }
 
+      final todayStart = DateTime(now.year, now.month, now.day);
+      
+      final lastPpfdLog = await (db.select(db.logEntries)
+            ..where((tbl) =>
+                tbl.plantId.equals(widget.plantId) & tbl.ppfd.isNotNull())
+            ..orderBy([
+              (t) => drift.OrderingTerm(
+                  expression: t.timestamp, mode: drift.OrderingMode.desc)
+            ])
+            ..limit(1))
+          .getSingleOrNull();
+
+      bool hasPpfdLogToday = lastPpfdLog != null && lastPpfdLog.timestamp.isAfter(todayStart);
+
+      final lastLog = await (db.select(db.logEntries)
+            ..where((tbl) => tbl.plantId.equals(widget.plantId))
+            ..orderBy([
+              (t) => drift.OrderingTerm(
+                  expression: t.timestamp, mode: drift.OrderingMode.desc)
+            ])
+            ..limit(1))
+          .getSingleOrNull();
+      
+      bool hasLogToday = lastLog != null && lastLog.timestamp.isAfter(todayStart);
+
+      bool lampCheck = false;
+      if (now.weekday == DateTime.wednesday) {
+        if (!hasPpfdLogToday) lampCheck = true;
+      } else if (lastPpfdLog == null || now.difference(lastPpfdLog.timestamp).inDays > 7) {
+        lampCheck = true;
+      }
+
+      bool ventCheck = false;
+      if (now.weekday == DateTime.sunday) {
+        if (!hasLogToday) ventCheck = true;
+      }
+
       setState(() {
         _plant = plant;
         _initialRootsNotReached ??= _plant!.currentPhase == PlantPhase.veg &&
             !_plant!.rootsReachedWater;
         _needsWaterChange = needsWc;
+        _needsLampCheck = lampCheck;
+        _needsVentilatorCheck = ventCheck;
       });
     }
   }
@@ -197,9 +238,10 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                       l10n.checkinDeepDivePhAdjustTitle,
                       l10n.checkinDeepDivePhAdjustText),
                 ],
-                _wrapWithInfo(_buildLampSlide(), l10n.checkinDeepDiveLampTitle,
-                    l10n.checkinDeepDiveLampText),
-                if (_needsWaterChange)
+                if (_needsLampCheck)
+                  _wrapWithInfo(_buildLampSlide(), l10n.checkinDeepDiveLampTitle,
+                      l10n.checkinDeepDiveLampText),
+                if (_needsVentilatorCheck)
                   _wrapWithInfo(
                       _buildVentilatorSlide(),
                       l10n.checkinVentilatorDeepDiveTitle,
