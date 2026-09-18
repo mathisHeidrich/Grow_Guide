@@ -2511,6 +2511,42 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Löschen'**
   String get settingsDelete;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In de, this message translates to:
+  /// **'Benachrichtigungen'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsCheckinFreq.
+  ///
+  /// In de, this message translates to:
+  /// **'Check-in Erinnerungen'**
+  String get settingsCheckinFreq;
+
+  /// No description provided for @settingsFreqDaily.
+  ///
+  /// In de, this message translates to:
+  /// **'Täglich'**
+  String get settingsFreqDaily;
+
+  /// No description provided for @settingsFreqEvery2Days.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle 2 Tage'**
+  String get settingsFreqEvery2Days;
+
+  /// No description provided for @settingsFreqWeekly.
+  ///
+  /// In de, this message translates to:
+  /// **'Wöchentlich'**
+  String get settingsFreqWeekly;
+
+  /// No description provided for @settingsFreqOff.
+  ///
+  /// In de, this message translates to:
+  /// **'Aus'**
+  String get settingsFreqOff;
 }
 
 class _AppLocalizationsDelegate

@@ -69,6 +69,8 @@ class AppSettingsTable extends Table {
       text().withDefault(const Constant('c'))(); // 'c', 'f'
   TextColumn get conductivityUnit =>
       text().withDefault(const Constant('ec'))(); // 'ec', 'ppm500', 'ppm700'
+  TextColumn get checkinFrequency => text()
+      .withDefault(const Constant('daily'))(); // 'daily', 'every_2_days', 'weekly', 'off'
 
   @override
   Set<Column> get primaryKey => {id};

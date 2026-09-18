@@ -136,6 +136,37 @@ class SettingsScreen extends ConsumerWidget {
                 ),
               ),
               const Divider(),
+              _buildSectionHeader(context, l10n.settingsNotifications),
+              ListTile(
+                title: Text(l10n.settingsCheckinFreq),
+                trailing: DropdownButton<String>(
+                  value: settings.checkinFrequency,
+                  onChanged: (val) {
+                    if (val != null) {
+                      notifier.updateSettings(checkinFrequency: val);
+                    }
+                  },
+                  items: [
+                    DropdownMenuItem(
+                      value: 'daily',
+                      child: Text(l10n.settingsFreqDaily),
+                    ),
+                    DropdownMenuItem(
+                      value: 'every_2_days',
+                      child: Text(l10n.settingsFreqEvery2Days),
+                    ),
+                    DropdownMenuItem(
+                      value: 'weekly',
+                      child: Text(l10n.settingsFreqWeekly),
+                    ),
+                    DropdownMenuItem(
+                      value: 'off',
+                      child: Text(l10n.settingsFreqOff),
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(),
               _buildSectionHeader(context, l10n.settingsDangerZone),
               ListTile(
                 title: Text(

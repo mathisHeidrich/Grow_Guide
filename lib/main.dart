@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'router.dart';
 import 'services/database.dart';
+import 'services/local_notification_service.dart';
 import 'providers/database_provider.dart';
 import 'providers/settings_provider.dart';
 import 'package:app/l10n/app_localizations.dart';
@@ -12,6 +13,10 @@ void main() async {
 
   final dbService = DatabaseService();
   await dbService.init();
+
+  final notificationService = LocalNotificationService();
+  await notificationService.init();
+  await notificationService.requestPermissions();
 
   runApp(
     ProviderScope(
