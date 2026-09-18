@@ -2313,6 +2313,36 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Bei sehr weichem Wasser oder Osmosewasser zwingend bei jedem Wasserwechsel CalMag als Basis hinzufügen.'**
   String get problemCalciumDeficiencyPrevention;
+
+  /// No description provided for @checkinVentilatorTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Ventilator-Check'**
+  String get checkinVentilatorTitle;
+
+  /// No description provided for @checkinVentilatorDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?'**
+  String get checkinVentilatorDesc;
+
+  /// No description provided for @checkinVentilatorNext.
+  ///
+  /// In de, this message translates to:
+  /// **'Sieht gut aus'**
+  String get checkinVentilatorNext;
+
+  /// No description provided for @checkinVentilatorDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Ventilator-Platzierung'**
+  String get checkinVentilatorDeepDiveTitle;
+
+  /// No description provided for @checkinVentilatorDeepDiveText.
+  ///
+  /// In de, this message translates to:
+  /// **'Platziere einen Ventilator über dem Blätterdach und einen darunter. Sie sollten schwenken (oszillieren) und eine sanfte Brise erzeugen.\n\nTypische Fehler:\n- Richte Ventilatoren nie direkt auf kleine Pflanzen (Gefahr von Windbrand!).\n- Ein starrer Luftstrom trocknet die Blätter aus.\n- Stehende Luft ohne Umluft begünstigt Schimmel.'**
+  String get checkinVentilatorDeepDiveText;
 }
 
 class _AppLocalizationsDelegate

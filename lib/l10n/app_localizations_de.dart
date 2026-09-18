@@ -1277,4 +1277,21 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get problemCalciumDeficiencyPrevention =>
       'Bei sehr weichem Wasser oder Osmosewasser zwingend bei jedem Wasserwechsel CalMag als Basis hinzufügen.';
+
+  @override
+  String get checkinVentilatorTitle => 'Ventilator-Check';
+
+  @override
+  String get checkinVentilatorDesc =>
+      'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?';
+
+  @override
+  String get checkinVentilatorNext => 'Sieht gut aus';
+
+  @override
+  String get checkinVentilatorDeepDiveTitle => 'Ventilator-Platzierung';
+
+  @override
+  String get checkinVentilatorDeepDiveText =>
+      'Platziere einen Ventilator über dem Blätterdach und einen darunter. Sie sollten schwenken (oszillieren) und eine sanfte Brise erzeugen.\n\nTypische Fehler:\n- Richte Ventilatoren nie direkt auf kleine Pflanzen (Gefahr von Windbrand!).\n- Ein starrer Luftstrom trocknet die Blätter aus.\n- Stehende Luft ohne Umluft begünstigt Schimmel.';
 }

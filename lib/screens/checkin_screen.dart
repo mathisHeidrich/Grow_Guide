@@ -207,6 +207,11 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                 ],
                 _wrapWithInfo(_buildLampSlide(), l10n.checkinDeepDiveLampTitle,
                     l10n.checkinDeepDiveLampText),
+                if (_needsWaterChange)
+                  _wrapWithInfo(
+                      _buildVentilatorSlide(),
+                      l10n.checkinVentilatorDeepDiveTitle,
+                      l10n.checkinVentilatorDeepDiveText),
                 _wrapWithInfo(
                     _buildSlide(
                       title: l10n.checkinFinishTitle,
@@ -797,6 +802,93 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       nextButtonText: l10n.checkinNext,
       onNext: _nextPage,
       showBack: true,
+    );
+  }
+
+  Widget _buildVentilatorSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              icon: const Icon(Icons.info_outline, color: Colors.white54, size: 32),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: const Color(0xFF1E1E1E),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  ),
+                  builder: (context) => Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          l10n.checkinVentilatorDeepDiveTitle,
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          l10n.checkinVentilatorDeepDiveText,
+                          style: const TextStyle(color: Colors.white70, fontSize: 16),
+                        ),
+                        const SizedBox(height: 24),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.growGreen,
+                            foregroundColor: Colors.black,
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('OK', style: TextStyle(fontWeight: FontWeight.bold)),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          const Spacer(),
+          const Icon(Icons.cyclone, size: 80, color: AppColors.growGreen),
+          const SizedBox(height: 32),
+          Text(
+            l10n.checkinVentilatorTitle,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          Text(
+            l10n.checkinVentilatorDesc,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.white70,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const Spacer(),
+          Row(
+            children: [
+              Expanded(flex: 1, child: _backButton()),
+              const SizedBox(width: 16),
+              Expanded(flex: 2, child: _nextButton(text: l10n.checkinVentilatorNext, onPressed: _nextPage)),
+            ],
+          ),
+          const SizedBox(height: 24),
+        ],
+      ),
     );
   }
 

@@ -325,12 +325,16 @@
   "waterGuideChap3Desc": "• Der Cut-Trick: Mische hartes Wasser 50/50 mit destilliertem Wasser.\n• Tischfilter (Brita) bringen nichts für den EC-Wert.\n• Umkehrosmose: Die beste Langzeitlösung.\n• Chlor ausgasen: Leitungswasser 24-48h abstehen lassen, bevor man es benutzt!",
   "waterGuideNext": "Verstanden, weiter!",
   "plantStatusAllOk": "Alles im grünen Bereich",
-  "plantStatusOverdue": "Check-in überfällig!"
-  ,"ppfdTargetRange": "Zielbereich: {min} - {max} µmol",
+  "plantStatusOverdue": "Check-in überfällig!",
+  "ppfdTargetRange": "Zielbereich: {min} - {max} µmol",
   "@ppfdTargetRange": {
     "placeholders": {
-      "min": {"type": "int"},
-      "max": {"type": "int"}
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
     }
   },
   "ppfdHoldValue": "Wert festhalten",
@@ -355,9 +359,27 @@
   "checkinNutrientGrow": "Grow: {amount} ml",
   "checkinNutrientMicro": "Micro: {amount} ml",
   "checkinNutrientBloom": "Bloom: {amount} ml",
-  "@checkinNutrientGrow": { "placeholders": { "amount": { "type": "String" } } },
-  "@checkinNutrientMicro": { "placeholders": { "amount": { "type": "String" } } },
-  "@checkinNutrientBloom": { "placeholders": { "amount": { "type": "String" } } },
+  "@checkinNutrientGrow": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "@checkinNutrientMicro": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "@checkinNutrientBloom": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "checkinEcTooHighPartial": "Dein EC-Wert ist zu hoch! Pumpe ca. 30% des Wassers ab und ersetze es durch klares, ungedüngtes Wasser.",
   "checkinEcTooHighFull": "Dein EC-Wert ist zu hoch und das Wasser ist alt. Bitte wechsle das Wasser komplett.",
   "checkinWaterChangeButton": "Zum Wasserwechsel",
@@ -444,5 +466,10 @@
   "problemCalciumDeficiencySymptoms": "Kleine braune/rostige Flecken auf jüngeren und mittleren Blättern. Neue Blätter wachsen oft verkrüppelt oder haben gelbe Ränder.",
   "problemCalciumDeficiencyTriggers": "Meist weiches Leitungswasser (RO-Wasser oder EC < 0.2) ohne CalMag-Zusatz. Manchmal auch blockiert durch falschen pH-Wert oder zu viel Kalium.",
   "problemCalciumDeficiencySolution": "Korrigiere den EC-Wert, indem du CalMag hinzufügst (Grundwasser immer zuerst auf 0.4 EC mit CalMag anheben, bevor Dünger rein kommt).",
-  "problemCalciumDeficiencyPrevention": "Bei sehr weichem Wasser oder Osmosewasser zwingend bei jedem Wasserwechsel CalMag als Basis hinzufügen."
+  "problemCalciumDeficiencyPrevention": "Bei sehr weichem Wasser oder Osmosewasser zwingend bei jedem Wasserwechsel CalMag als Basis hinzufügen.",
+  "checkinVentilatorTitle": "Ventilator-Check",
+  "checkinVentilatorDesc": "Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?",
+  "checkinVentilatorNext": "Sieht gut aus",
+  "checkinVentilatorDeepDiveTitle": "Ventilator-Platzierung",
+  "checkinVentilatorDeepDiveText": "Platziere einen Ventilator über dem Blätterdach und einen darunter. Sie sollten schwenken (oszillieren) und eine sanfte Brise erzeugen.\n\nTypische Fehler:\n- Richte Ventilatoren nie direkt auf kleine Pflanzen (Gefahr von Windbrand!).\n- Ein starrer Luftstrom trocknet die Blätter aus.\n- Stehende Luft ohne Umluft begünstigt Schimmel."
 }
