@@ -43,5 +43,9 @@ When the user requests changes to the App itself (UI, UX, features, logic):
 - **AUTOMATED TESTING:** Test autonomously using Puppeteer MCP (`flutter run -t lib/main_test_env.dart -d web-server --web-renderer html --web-port 8080`). Use hot reload ('r').
 - **CODE REVIEW:** Search for dead code or unneeded complexity with a sub-agent.
 
-## 7. Responses
+## 7. App Texte & Copywriting
+- **TEXT-RICHTLINIEN:** Alle Texte für die App (UI, Onboarding, Tutorials) müssen nach den definierten Regeln verfasst werden.
+- **GUIDELINE LESEN:** Siehe [Text Guidelines](.agents/guidelines/text_guidelines.md) für Struktur, Tonalität, Deep Dives und Bildbeschreibungen.
+
+## 8. Responses
 - Keep responses concise and to the point.
