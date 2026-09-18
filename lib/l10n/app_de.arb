@@ -324,12 +324,16 @@
   "waterGuideChap3Desc": "• Der Cut-Trick: Mische hartes Wasser 50/50 mit destilliertem Wasser.\n• Tischfilter (Brita) bringen nichts für den EC-Wert.\n• Umkehrosmose: Die beste Langzeitlösung.\n• Chlor ausgasen: Leitungswasser 24-48h abstehen lassen, bevor man es benutzt!",
   "waterGuideNext": "Verstanden, weiter!",
   "plantStatusAllOk": "Alles im grünen Bereich",
-  "plantStatusOverdue": "Check-in überfällig!"
-  ,"ppfdTargetRange": "Zielbereich: {min} - {max} µmol",
+  "plantStatusOverdue": "Check-in überfällig!",
+  "ppfdTargetRange": "Zielbereich: {min} - {max} µmol",
   "@ppfdTargetRange": {
     "placeholders": {
-      "min": {"type": "int"},
-      "max": {"type": "int"}
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
     }
   },
   "ppfdHoldValue": "Wert festhalten",
@@ -354,9 +358,27 @@
   "checkinNutrientGrow": "Grow: {amount} ml",
   "checkinNutrientMicro": "Micro: {amount} ml",
   "checkinNutrientBloom": "Bloom: {amount} ml",
-  "@checkinNutrientGrow": { "placeholders": { "amount": { "type": "String" } } },
-  "@checkinNutrientMicro": { "placeholders": { "amount": { "type": "String" } } },
-  "@checkinNutrientBloom": { "placeholders": { "amount": { "type": "String" } } },
+  "@checkinNutrientGrow": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "@checkinNutrientMicro": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "@checkinNutrientBloom": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "checkinEcTooHighPartial": "Dein EC-Wert ist zu hoch! Pumpe ca. 30% des Wassers ab und ersetze es durch klares, ungedüngtes Wasser.",
   "checkinEcTooHighFull": "Dein EC-Wert ist zu hoch und das Wasser ist alt. Bitte wechsle das Wasser komplett.",
   "checkinWaterChangeButton": "Zum Wasserwechsel",
@@ -371,5 +393,10 @@
   "checkinPhStatusTitle": "pH-Wert Status",
   "checkinPhStatusOk": "Dein pH-Wert ist im perfekten Bereich (5.5 - 6.5)!",
   "checkinPhStatusAdjust": "Dein pH-Wert ist nicht optimal. Bitte passe ihn mit pH Up / pH Down in kleinen Schritten an, bis er im Bereich 5.5 - 6.5 liegt.",
-  "checkinNutrientNone": "Kein Wasser nachgefüllt oder EC optimal. Keine Dünger-Anpassung nötig."
+  "checkinNutrientNone": "Kein Wasser nachgefüllt oder EC optimal. Keine Dünger-Anpassung nötig.",
+  "checkinVentilatorTitle": "Ventilator-Check",
+  "checkinVentilatorDesc": "Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?",
+  "checkinVentilatorNext": "Sieht gut aus",
+  "checkinVentilatorDeepDiveTitle": "Ventilator-Platzierung",
+  "checkinVentilatorDeepDiveText": "Platziere einen Ventilator über dem Blätterdach und einen darunter. Sie sollten schwenken (oszillieren) und eine sanfte Brise erzeugen.\n\nTypische Fehler:\n- Richte Ventilatoren nie direkt auf kleine Pflanzen (Gefahr von Windbrand!).\n- Ein starrer Luftstrom trocknet die Blätter aus.\n- Stehende Luft ohne Umluft begünstigt Schimmel."
 }
