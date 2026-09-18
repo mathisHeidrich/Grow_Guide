@@ -146,7 +146,7 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen>
               margin:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.2),
+                color: Colors.red.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.red),
               ),
@@ -181,7 +181,7 @@ class _PpfdMeterScreenState extends ConsumerState<PpfdMeterScreen>
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
               child: DropdownButtonFormField<LightSource>(
-                value: selectedLight,
+                initialValue: selectedLight,
                 dropdownColor: Colors.grey[900],
                 style: const TextStyle(color: Colors.white, fontSize: 18),
                 decoration: InputDecoration(

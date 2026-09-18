@@ -120,8 +120,9 @@ class _GerminationWizardScreenState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    if (_plant == null)
+    if (_plant == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
 
     // Simple implementation of the germination flow
     return Scaffold(
@@ -405,7 +406,7 @@ class _GerminationWizardScreenState
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.growGreen.withOpacity(0.2)
+              ? AppColors.growGreen.withValues(alpha: 0.2)
               : Colors.transparent,
           border: Border.all(
             color: isSelected ? AppColors.growGreen : Colors.white24,
