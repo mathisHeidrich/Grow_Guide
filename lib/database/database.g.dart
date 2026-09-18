@@ -1125,9 +1125,54 @@ class $AppSettingsTableTable extends AppSettingsTable
           defaultConstraints: GeneratedColumn.constraintIsAlways(
               'CHECK ("has_completed_tent_setup" IN (0, 1))'),
           defaultValue: const Constant(false));
+  static const VerificationMeta _themeMeta = const VerificationMeta('theme');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, hasCompletedOnboarding, hasCompletedTentSetup];
+  late final GeneratedColumn<String> theme = GeneratedColumn<String>(
+      'theme', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('system'));
+  static const VerificationMeta _languageMeta =
+      const VerificationMeta('language');
+  @override
+  late final GeneratedColumn<String> language = GeneratedColumn<String>(
+      'language', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _volumeUnitMeta =
+      const VerificationMeta('volumeUnit');
+  @override
+  late final GeneratedColumn<String> volumeUnit = GeneratedColumn<String>(
+      'volume_unit', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('l'));
+  static const VerificationMeta _temperatureUnitMeta =
+      const VerificationMeta('temperatureUnit');
+  @override
+  late final GeneratedColumn<String> temperatureUnit = GeneratedColumn<String>(
+      'temperature_unit', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('c'));
+  static const VerificationMeta _conductivityUnitMeta =
+      const VerificationMeta('conductivityUnit');
+  @override
+  late final GeneratedColumn<String> conductivityUnit = GeneratedColumn<String>(
+      'conductivity_unit', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('ec'));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        hasCompletedOnboarding,
+        hasCompletedTentSetup,
+        theme,
+        language,
+        volumeUnit,
+        temperatureUnit,
+        conductivityUnit
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1153,6 +1198,32 @@ class $AppSettingsTableTable extends AppSettingsTable
           hasCompletedTentSetup.isAcceptableOrUnknown(
               data['has_completed_tent_setup']!, _hasCompletedTentSetupMeta));
     }
+    if (data.containsKey('theme')) {
+      context.handle(
+          _themeMeta, theme.isAcceptableOrUnknown(data['theme']!, _themeMeta));
+    }
+    if (data.containsKey('language')) {
+      context.handle(_languageMeta,
+          language.isAcceptableOrUnknown(data['language']!, _languageMeta));
+    }
+    if (data.containsKey('volume_unit')) {
+      context.handle(
+          _volumeUnitMeta,
+          volumeUnit.isAcceptableOrUnknown(
+              data['volume_unit']!, _volumeUnitMeta));
+    }
+    if (data.containsKey('temperature_unit')) {
+      context.handle(
+          _temperatureUnitMeta,
+          temperatureUnit.isAcceptableOrUnknown(
+              data['temperature_unit']!, _temperatureUnitMeta));
+    }
+    if (data.containsKey('conductivity_unit')) {
+      context.handle(
+          _conductivityUnitMeta,
+          conductivityUnit.isAcceptableOrUnknown(
+              data['conductivity_unit']!, _conductivityUnitMeta));
+    }
     return context;
   }
 
@@ -1170,6 +1241,16 @@ class $AppSettingsTableTable extends AppSettingsTable
       hasCompletedTentSetup: attachedDatabase.typeMapping.read(
           DriftSqlType.bool,
           data['${effectivePrefix}has_completed_tent_setup'])!,
+      theme: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}theme'])!,
+      language: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}language']),
+      volumeUnit: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}volume_unit'])!,
+      temperatureUnit: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}temperature_unit'])!,
+      conductivityUnit: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}conductivity_unit'])!,
     );
   }
 
@@ -1183,16 +1264,33 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
   final int id;
   final bool hasCompletedOnboarding;
   final bool hasCompletedTentSetup;
+  final String theme;
+  final String? language;
+  final String volumeUnit;
+  final String temperatureUnit;
+  final String conductivityUnit;
   const AppSettings(
       {required this.id,
       required this.hasCompletedOnboarding,
-      required this.hasCompletedTentSetup});
+      required this.hasCompletedTentSetup,
+      required this.theme,
+      this.language,
+      required this.volumeUnit,
+      required this.temperatureUnit,
+      required this.conductivityUnit});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['has_completed_onboarding'] = Variable<bool>(hasCompletedOnboarding);
     map['has_completed_tent_setup'] = Variable<bool>(hasCompletedTentSetup);
+    map['theme'] = Variable<String>(theme);
+    if (!nullToAbsent || language != null) {
+      map['language'] = Variable<String>(language);
+    }
+    map['volume_unit'] = Variable<String>(volumeUnit);
+    map['temperature_unit'] = Variable<String>(temperatureUnit);
+    map['conductivity_unit'] = Variable<String>(conductivityUnit);
     return map;
   }
 
@@ -1201,6 +1299,13 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       id: Value(id),
       hasCompletedOnboarding: Value(hasCompletedOnboarding),
       hasCompletedTentSetup: Value(hasCompletedTentSetup),
+      theme: Value(theme),
+      language: language == null && nullToAbsent
+          ? const Value.absent()
+          : Value(language),
+      volumeUnit: Value(volumeUnit),
+      temperatureUnit: Value(temperatureUnit),
+      conductivityUnit: Value(conductivityUnit),
     );
   }
 
@@ -1213,6 +1318,11 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
           serializer.fromJson<bool>(json['hasCompletedOnboarding']),
       hasCompletedTentSetup:
           serializer.fromJson<bool>(json['hasCompletedTentSetup']),
+      theme: serializer.fromJson<String>(json['theme']),
+      language: serializer.fromJson<String?>(json['language']),
+      volumeUnit: serializer.fromJson<String>(json['volumeUnit']),
+      temperatureUnit: serializer.fromJson<String>(json['temperatureUnit']),
+      conductivityUnit: serializer.fromJson<String>(json['conductivityUnit']),
     );
   }
   @override
@@ -1222,19 +1332,34 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       'id': serializer.toJson<int>(id),
       'hasCompletedOnboarding': serializer.toJson<bool>(hasCompletedOnboarding),
       'hasCompletedTentSetup': serializer.toJson<bool>(hasCompletedTentSetup),
+      'theme': serializer.toJson<String>(theme),
+      'language': serializer.toJson<String?>(language),
+      'volumeUnit': serializer.toJson<String>(volumeUnit),
+      'temperatureUnit': serializer.toJson<String>(temperatureUnit),
+      'conductivityUnit': serializer.toJson<String>(conductivityUnit),
     };
   }
 
   AppSettings copyWith(
           {int? id,
           bool? hasCompletedOnboarding,
-          bool? hasCompletedTentSetup}) =>
+          bool? hasCompletedTentSetup,
+          String? theme,
+          Value<String?> language = const Value.absent(),
+          String? volumeUnit,
+          String? temperatureUnit,
+          String? conductivityUnit}) =>
       AppSettings(
         id: id ?? this.id,
         hasCompletedOnboarding:
             hasCompletedOnboarding ?? this.hasCompletedOnboarding,
         hasCompletedTentSetup:
             hasCompletedTentSetup ?? this.hasCompletedTentSetup,
+        theme: theme ?? this.theme,
+        language: language.present ? language.value : this.language,
+        volumeUnit: volumeUnit ?? this.volumeUnit,
+        temperatureUnit: temperatureUnit ?? this.temperatureUnit,
+        conductivityUnit: conductivityUnit ?? this.conductivityUnit,
       );
   AppSettings copyWithCompanion(AppSettingsTableCompanion data) {
     return AppSettings(
@@ -1245,6 +1370,16 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       hasCompletedTentSetup: data.hasCompletedTentSetup.present
           ? data.hasCompletedTentSetup.value
           : this.hasCompletedTentSetup,
+      theme: data.theme.present ? data.theme.value : this.theme,
+      language: data.language.present ? data.language.value : this.language,
+      volumeUnit:
+          data.volumeUnit.present ? data.volumeUnit.value : this.volumeUnit,
+      temperatureUnit: data.temperatureUnit.present
+          ? data.temperatureUnit.value
+          : this.temperatureUnit,
+      conductivityUnit: data.conductivityUnit.present
+          ? data.conductivityUnit.value
+          : this.conductivityUnit,
     );
   }
 
@@ -1253,41 +1388,78 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
     return (StringBuffer('AppSettings(')
           ..write('id: $id, ')
           ..write('hasCompletedOnboarding: $hasCompletedOnboarding, ')
-          ..write('hasCompletedTentSetup: $hasCompletedTentSetup')
+          ..write('hasCompletedTentSetup: $hasCompletedTentSetup, ')
+          ..write('theme: $theme, ')
+          ..write('language: $language, ')
+          ..write('volumeUnit: $volumeUnit, ')
+          ..write('temperatureUnit: $temperatureUnit, ')
+          ..write('conductivityUnit: $conductivityUnit')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, hasCompletedOnboarding, hasCompletedTentSetup);
+  int get hashCode => Object.hash(
+      id,
+      hasCompletedOnboarding,
+      hasCompletedTentSetup,
+      theme,
+      language,
+      volumeUnit,
+      temperatureUnit,
+      conductivityUnit);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is AppSettings &&
           other.id == this.id &&
           other.hasCompletedOnboarding == this.hasCompletedOnboarding &&
-          other.hasCompletedTentSetup == this.hasCompletedTentSetup);
+          other.hasCompletedTentSetup == this.hasCompletedTentSetup &&
+          other.theme == this.theme &&
+          other.language == this.language &&
+          other.volumeUnit == this.volumeUnit &&
+          other.temperatureUnit == this.temperatureUnit &&
+          other.conductivityUnit == this.conductivityUnit);
 }
 
 class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
   final Value<int> id;
   final Value<bool> hasCompletedOnboarding;
   final Value<bool> hasCompletedTentSetup;
+  final Value<String> theme;
+  final Value<String?> language;
+  final Value<String> volumeUnit;
+  final Value<String> temperatureUnit;
+  final Value<String> conductivityUnit;
   const AppSettingsTableCompanion({
     this.id = const Value.absent(),
     this.hasCompletedOnboarding = const Value.absent(),
     this.hasCompletedTentSetup = const Value.absent(),
+    this.theme = const Value.absent(),
+    this.language = const Value.absent(),
+    this.volumeUnit = const Value.absent(),
+    this.temperatureUnit = const Value.absent(),
+    this.conductivityUnit = const Value.absent(),
   });
   AppSettingsTableCompanion.insert({
     this.id = const Value.absent(),
     this.hasCompletedOnboarding = const Value.absent(),
     this.hasCompletedTentSetup = const Value.absent(),
+    this.theme = const Value.absent(),
+    this.language = const Value.absent(),
+    this.volumeUnit = const Value.absent(),
+    this.temperatureUnit = const Value.absent(),
+    this.conductivityUnit = const Value.absent(),
   });
   static Insertable<AppSettings> custom({
     Expression<int>? id,
     Expression<bool>? hasCompletedOnboarding,
     Expression<bool>? hasCompletedTentSetup,
+    Expression<String>? theme,
+    Expression<String>? language,
+    Expression<String>? volumeUnit,
+    Expression<String>? temperatureUnit,
+    Expression<String>? conductivityUnit,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1295,19 +1467,34 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
         'has_completed_onboarding': hasCompletedOnboarding,
       if (hasCompletedTentSetup != null)
         'has_completed_tent_setup': hasCompletedTentSetup,
+      if (theme != null) 'theme': theme,
+      if (language != null) 'language': language,
+      if (volumeUnit != null) 'volume_unit': volumeUnit,
+      if (temperatureUnit != null) 'temperature_unit': temperatureUnit,
+      if (conductivityUnit != null) 'conductivity_unit': conductivityUnit,
     });
   }
 
   AppSettingsTableCompanion copyWith(
       {Value<int>? id,
       Value<bool>? hasCompletedOnboarding,
-      Value<bool>? hasCompletedTentSetup}) {
+      Value<bool>? hasCompletedTentSetup,
+      Value<String>? theme,
+      Value<String?>? language,
+      Value<String>? volumeUnit,
+      Value<String>? temperatureUnit,
+      Value<String>? conductivityUnit}) {
     return AppSettingsTableCompanion(
       id: id ?? this.id,
       hasCompletedOnboarding:
           hasCompletedOnboarding ?? this.hasCompletedOnboarding,
       hasCompletedTentSetup:
           hasCompletedTentSetup ?? this.hasCompletedTentSetup,
+      theme: theme ?? this.theme,
+      language: language ?? this.language,
+      volumeUnit: volumeUnit ?? this.volumeUnit,
+      temperatureUnit: temperatureUnit ?? this.temperatureUnit,
+      conductivityUnit: conductivityUnit ?? this.conductivityUnit,
     );
   }
 
@@ -1325,6 +1512,21 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
       map['has_completed_tent_setup'] =
           Variable<bool>(hasCompletedTentSetup.value);
     }
+    if (theme.present) {
+      map['theme'] = Variable<String>(theme.value);
+    }
+    if (language.present) {
+      map['language'] = Variable<String>(language.value);
+    }
+    if (volumeUnit.present) {
+      map['volume_unit'] = Variable<String>(volumeUnit.value);
+    }
+    if (temperatureUnit.present) {
+      map['temperature_unit'] = Variable<String>(temperatureUnit.value);
+    }
+    if (conductivityUnit.present) {
+      map['conductivity_unit'] = Variable<String>(conductivityUnit.value);
+    }
     return map;
   }
 
@@ -1333,7 +1535,12 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     return (StringBuffer('AppSettingsTableCompanion(')
           ..write('id: $id, ')
           ..write('hasCompletedOnboarding: $hasCompletedOnboarding, ')
-          ..write('hasCompletedTentSetup: $hasCompletedTentSetup')
+          ..write('hasCompletedTentSetup: $hasCompletedTentSetup, ')
+          ..write('theme: $theme, ')
+          ..write('language: $language, ')
+          ..write('volumeUnit: $volumeUnit, ')
+          ..write('temperatureUnit: $temperatureUnit, ')
+          ..write('conductivityUnit: $conductivityUnit')
           ..write(')'))
         .toString();
   }
@@ -1809,12 +2016,22 @@ typedef $$AppSettingsTableTableCreateCompanionBuilder
   Value<int> id,
   Value<bool> hasCompletedOnboarding,
   Value<bool> hasCompletedTentSetup,
+  Value<String> theme,
+  Value<String?> language,
+  Value<String> volumeUnit,
+  Value<String> temperatureUnit,
+  Value<String> conductivityUnit,
 });
 typedef $$AppSettingsTableTableUpdateCompanionBuilder
     = AppSettingsTableCompanion Function({
   Value<int> id,
   Value<bool> hasCompletedOnboarding,
   Value<bool> hasCompletedTentSetup,
+  Value<String> theme,
+  Value<String?> language,
+  Value<String> volumeUnit,
+  Value<String> temperatureUnit,
+  Value<String> conductivityUnit,
 });
 
 class $$AppSettingsTableTableTableManager extends RootTableManager<
@@ -1838,21 +2055,41 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<bool> hasCompletedOnboarding = const Value.absent(),
             Value<bool> hasCompletedTentSetup = const Value.absent(),
+            Value<String> theme = const Value.absent(),
+            Value<String?> language = const Value.absent(),
+            Value<String> volumeUnit = const Value.absent(),
+            Value<String> temperatureUnit = const Value.absent(),
+            Value<String> conductivityUnit = const Value.absent(),
           }) =>
               AppSettingsTableCompanion(
             id: id,
             hasCompletedOnboarding: hasCompletedOnboarding,
             hasCompletedTentSetup: hasCompletedTentSetup,
+            theme: theme,
+            language: language,
+            volumeUnit: volumeUnit,
+            temperatureUnit: temperatureUnit,
+            conductivityUnit: conductivityUnit,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<bool> hasCompletedOnboarding = const Value.absent(),
             Value<bool> hasCompletedTentSetup = const Value.absent(),
+            Value<String> theme = const Value.absent(),
+            Value<String?> language = const Value.absent(),
+            Value<String> volumeUnit = const Value.absent(),
+            Value<String> temperatureUnit = const Value.absent(),
+            Value<String> conductivityUnit = const Value.absent(),
           }) =>
               AppSettingsTableCompanion.insert(
             id: id,
             hasCompletedOnboarding: hasCompletedOnboarding,
             hasCompletedTentSetup: hasCompletedTentSetup,
+            theme: theme,
+            language: language,
+            volumeUnit: volumeUnit,
+            temperatureUnit: temperatureUnit,
+            conductivityUnit: conductivityUnit,
           ),
         ));
 }
@@ -1874,6 +2111,31 @@ class $$AppSettingsTableTableFilterComposer
       column: $state.table.hasCompletedTentSetup,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get theme => $state.composableBuilder(
+      column: $state.table.theme,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get language => $state.composableBuilder(
+      column: $state.table.language,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get volumeUnit => $state.composableBuilder(
+      column: $state.table.volumeUnit,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get temperatureUnit => $state.composableBuilder(
+      column: $state.table.temperatureUnit,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get conductivityUnit => $state.composableBuilder(
+      column: $state.table.conductivityUnit,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$AppSettingsTableTableOrderingComposer
@@ -1891,6 +2153,31 @@ class $$AppSettingsTableTableOrderingComposer
 
   ColumnOrderings<bool> get hasCompletedTentSetup => $state.composableBuilder(
       column: $state.table.hasCompletedTentSetup,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get theme => $state.composableBuilder(
+      column: $state.table.theme,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get language => $state.composableBuilder(
+      column: $state.table.language,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get volumeUnit => $state.composableBuilder(
+      column: $state.table.volumeUnit,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get temperatureUnit => $state.composableBuilder(
+      column: $state.table.temperatureUnit,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get conductivityUnit => $state.composableBuilder(
+      column: $state.table.conductivityUnit,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

@@ -59,6 +59,17 @@ class AppSettingsTable extends Table {
   BoolColumn get hasCompletedTentSetup =>
       boolean().withDefault(const Constant(false))();
 
+  // Settings
+  TextColumn get theme =>
+      text().withDefault(const Constant('system'))(); // 'light', 'dark', 'system'
+  TextColumn get language => text().nullable()(); // 'de', 'en', null (for system)
+  TextColumn get volumeUnit =>
+      text().withDefault(const Constant('l'))(); // 'l', 'gal'
+  TextColumn get temperatureUnit =>
+      text().withDefault(const Constant('c'))(); // 'c', 'f'
+  TextColumn get conductivityUnit =>
+      text().withDefault(const Constant('ec'))(); // 'ec', 'ppm500', 'ppm700'
+
   @override
   Set<Column> get primaryKey => {id};
 }

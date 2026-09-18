@@ -1,4 +1,3 @@
-import 'package:app/l10n/app_localizations.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
@@ -1301,4 +1300,83 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get checkinVentilatorDeepDiveText =>
       'Platziere einen Ventilator über dem Blätterdach und einen darunter. Sie sollten schwenken (oszillieren) und eine sanfte Brise erzeugen.\n\nTypische Fehler:\n- Richte Ventilatoren nie direkt auf kleine Pflanzen (Gefahr von Windbrand!).\n- Ein starrer Luftstrom trocknet die Blätter aus.\n- Stehende Luft ohne Umluft begünstigt Schimmel.';
+
+  @override
+  String get settingsTitle => 'Einstellungen';
+
+  @override
+  String get settingsAppearance => 'Erscheinungsbild';
+
+  @override
+  String get settingsTheme => 'Design';
+
+  @override
+  String get settingsThemeLight => 'Hell';
+
+  @override
+  String get settingsThemeDark => 'Dunkel';
+
+  @override
+  String get settingsThemeSystem => 'System-Standard';
+
+  @override
+  String get settingsLanguage => 'Sprache';
+
+  @override
+  String get settingsLanguageSystem => 'System-Standard';
+
+  @override
+  String get settingsLanguageDe => 'Deutsch';
+
+  @override
+  String get settingsLanguageEn => 'Englisch';
+
+  @override
+  String get settingsUnits => 'Einheiten';
+
+  @override
+  String get settingsVolumeUnit => 'Volumen';
+
+  @override
+  String get settingsVolumeLiters => 'Liter (L)';
+
+  @override
+  String get settingsVolumeGallons => 'Gallonen (Gal)';
+
+  @override
+  String get settingsTempUnit => 'Temperatur';
+
+  @override
+  String get settingsTempC => 'Celsius (°C)';
+
+  @override
+  String get settingsTempF => 'Fahrenheit (°F)';
+
+  @override
+  String get settingsCondUnit => 'Leitfähigkeit';
+
+  @override
+  String get settingsCondEc => 'EC (mS/cm)';
+
+  @override
+  String get settingsCondPpm500 => 'PPM (500)';
+
+  @override
+  String get settingsCondPpm700 => 'PPM (700)';
+
+  @override
+  String get settingsDangerZone => 'Gefahrenzone';
+
+  @override
+  String get settingsResetApp => 'App zurücksetzen';
+
+  @override
+  String get settingsResetWarning =>
+      'Möchtest du wirklich alle Pflanzen, Logs und Einstellungen löschen? Dies kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get settingsCancel => 'Abbrechen';
+
+  @override
+  String get settingsDelete => 'Löschen';
 }

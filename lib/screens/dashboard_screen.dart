@@ -36,6 +36,11 @@ class DashboardScreen extends ConsumerWidget {
             icon: const Icon(Icons.add, size: 32),
             onPressed: () => context.go('/add_plant'),
           ),
+          IconButton(
+            icon: const Icon(Icons.settings, size: 28),
+            tooltip: 'Settings', // Will localize properly later if needed
+            onPressed: () => context.push('/settings'),
+          ),
         ],
       ),
       body: StreamBuilder<List<Plant>>(

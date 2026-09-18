@@ -18,6 +18,7 @@ import 'screens/problem_detail_screen.dart';
 import 'screens/ec_adjust_screen.dart';
 import 'screens/ph_adjust_screen.dart';
 import 'screens/problem_select_plant_screen.dart';
+import 'screens/settings_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final db = ref.watch(databaseProvider).db;
@@ -41,6 +42,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
+      GoRoute(
+        path: '/settings',
+        builder: (context, state) => const SettingsScreen(),
+      ),
       GoRoute(
         path: '/onboarding',
         builder: (context, state) => const AppOnboardingScreen(),

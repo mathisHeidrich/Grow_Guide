@@ -1,4 +1,3 @@
-import 'package:app/l10n/app_localizations.dart';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -2356,6 +2355,162 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Platziere einen Ventilator über dem Blätterdach und einen darunter. Sie sollten schwenken (oszillieren) und eine sanfte Brise erzeugen.\n\nTypische Fehler:\n- Richte Ventilatoren nie direkt auf kleine Pflanzen (Gefahr von Windbrand!).\n- Ein starrer Luftstrom trocknet die Blätter aus.\n- Stehende Luft ohne Umluft begünstigt Schimmel.'**
   String get checkinVentilatorDeepDiveText;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Einstellungen'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsAppearance.
+  ///
+  /// In de, this message translates to:
+  /// **'Erscheinungsbild'**
+  String get settingsAppearance;
+
+  /// No description provided for @settingsTheme.
+  ///
+  /// In de, this message translates to:
+  /// **'Design'**
+  String get settingsTheme;
+
+  /// No description provided for @settingsThemeLight.
+  ///
+  /// In de, this message translates to:
+  /// **'Hell'**
+  String get settingsThemeLight;
+
+  /// No description provided for @settingsThemeDark.
+  ///
+  /// In de, this message translates to:
+  /// **'Dunkel'**
+  String get settingsThemeDark;
+
+  /// No description provided for @settingsThemeSystem.
+  ///
+  /// In de, this message translates to:
+  /// **'System-Standard'**
+  String get settingsThemeSystem;
+
+  /// No description provided for @settingsLanguage.
+  ///
+  /// In de, this message translates to:
+  /// **'Sprache'**
+  String get settingsLanguage;
+
+  /// No description provided for @settingsLanguageSystem.
+  ///
+  /// In de, this message translates to:
+  /// **'System-Standard'**
+  String get settingsLanguageSystem;
+
+  /// No description provided for @settingsLanguageDe.
+  ///
+  /// In de, this message translates to:
+  /// **'Deutsch'**
+  String get settingsLanguageDe;
+
+  /// No description provided for @settingsLanguageEn.
+  ///
+  /// In de, this message translates to:
+  /// **'Englisch'**
+  String get settingsLanguageEn;
+
+  /// No description provided for @settingsUnits.
+  ///
+  /// In de, this message translates to:
+  /// **'Einheiten'**
+  String get settingsUnits;
+
+  /// No description provided for @settingsVolumeUnit.
+  ///
+  /// In de, this message translates to:
+  /// **'Volumen'**
+  String get settingsVolumeUnit;
+
+  /// No description provided for @settingsVolumeLiters.
+  ///
+  /// In de, this message translates to:
+  /// **'Liter (L)'**
+  String get settingsVolumeLiters;
+
+  /// No description provided for @settingsVolumeGallons.
+  ///
+  /// In de, this message translates to:
+  /// **'Gallonen (Gal)'**
+  String get settingsVolumeGallons;
+
+  /// No description provided for @settingsTempUnit.
+  ///
+  /// In de, this message translates to:
+  /// **'Temperatur'**
+  String get settingsTempUnit;
+
+  /// No description provided for @settingsTempC.
+  ///
+  /// In de, this message translates to:
+  /// **'Celsius (°C)'**
+  String get settingsTempC;
+
+  /// No description provided for @settingsTempF.
+  ///
+  /// In de, this message translates to:
+  /// **'Fahrenheit (°F)'**
+  String get settingsTempF;
+
+  /// No description provided for @settingsCondUnit.
+  ///
+  /// In de, this message translates to:
+  /// **'Leitfähigkeit'**
+  String get settingsCondUnit;
+
+  /// No description provided for @settingsCondEc.
+  ///
+  /// In de, this message translates to:
+  /// **'EC (mS/cm)'**
+  String get settingsCondEc;
+
+  /// No description provided for @settingsCondPpm500.
+  ///
+  /// In de, this message translates to:
+  /// **'PPM (500)'**
+  String get settingsCondPpm500;
+
+  /// No description provided for @settingsCondPpm700.
+  ///
+  /// In de, this message translates to:
+  /// **'PPM (700)'**
+  String get settingsCondPpm700;
+
+  /// No description provided for @settingsDangerZone.
+  ///
+  /// In de, this message translates to:
+  /// **'Gefahrenzone'**
+  String get settingsDangerZone;
+
+  /// No description provided for @settingsResetApp.
+  ///
+  /// In de, this message translates to:
+  /// **'App zurücksetzen'**
+  String get settingsResetApp;
+
+  /// No description provided for @settingsResetWarning.
+  ///
+  /// In de, this message translates to:
+  /// **'Möchtest du wirklich alle Pflanzen, Logs und Einstellungen löschen? Dies kann nicht rückgängig gemacht werden.'**
+  String get settingsResetWarning;
+
+  /// No description provided for @settingsCancel.
+  ///
+  /// In de, this message translates to:
+  /// **'Abbrechen'**
+  String get settingsCancel;
+
+  /// No description provided for @settingsDelete.
+  ///
+  /// In de, this message translates to:
+  /// **'Löschen'**
+  String get settingsDelete;
 }
 
 class _AppLocalizationsDelegate
