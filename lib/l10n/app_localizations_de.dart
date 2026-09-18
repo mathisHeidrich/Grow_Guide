@@ -291,8 +291,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get checkinLampTitle => 'Lampenabstand prüfen';
 
   @override
-  String get checkinLampDesc =>
-      'Miss den Abstand von der Pflanzenspitze zur Lampe. LED-Panels sollten ca. 30-40 cm entfernt sein.';
+  String get checkinLampMeasureInstruction =>
+      'Halte die Kamera deines Smartphones auf Höhe der obersten Blätter (Canopy) und richte sie mit einem Diffusor (z. B. 80g Papier) nach oben zur Lampe.';
+
+  @override
+  String get checkinLampTargetPpfdLabel => 'Zielbereich';
 
   @override
   String get checkinMeasurePpfd => 'PPFD Messen';
@@ -1167,4 +1170,111 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get germinationDeepDive9Text =>
       'PPFD (Photosynthetic Photon Flux Density) misst, wie viele Lichtteilchen tatsächlich auf den Blättern ankommen. Ein Sämling hat noch kaum Blätter und kann mit extrem viel Licht (hoher PPFD) nichts anfangen. Zu viel Licht führt zu Lichtstress, was den Sämling bleicht, das Wachstum stoppt oder ihn sogar abtötet.';
+
+  @override
+  String get diagnoseProblemButton => 'Problem Diagnostizieren';
+
+  @override
+  String get problemSymptoms => 'Symptome';
+
+  @override
+  String get problemTriggers => 'Auslöser';
+
+  @override
+  String get problemSolution => 'Lösung';
+
+  @override
+  String get problemPrevention => 'Vorbeugung';
+
+  @override
+  String get problemActionWaterChange => 'Wasserwechsel durchführen';
+
+  @override
+  String get problemActionPpfdMeasure => 'PPFD prüfen';
+
+  @override
+  String get problemActionEcAdjust => 'EC-Wert prüfen';
+
+  @override
+  String get problemActionPhAdjust => 'pH-Wert prüfen';
+
+  @override
+  String get problemSelectPlantPrompt =>
+      'Bitte wähle eine Pflanze aus, um die Aktion zu starten:';
+
+  @override
+  String get problemNutrientBurnName => 'Nährstoffbrand (Überdüngung)';
+
+  @override
+  String get problemNutrientBurnSymptoms =>
+      'Verbrannte, braune und knusprige Blattspitzen. Die Verfärbung breitet sich von den Rändern nach innen aus.';
+
+  @override
+  String get problemNutrientBurnTriggers =>
+      'Der EC-Wert im Wasser ist zu hoch. Die Pflanze verdunstet mehr Wasser als sie Salze aufnimmt, wodurch sich Dünger in den Blattspitzen ansammelt.';
+
+  @override
+  String get problemNutrientBurnSolution =>
+      'Wechsle das Wasser komplett aus oder pumpe die Hälfte ab und fülle ungedüngtes, ph-reguliertes Wasser nach, um den EC-Wert zu senken.';
+
+  @override
+  String get problemNutrientBurnPrevention =>
+      'Mische den Dünger exakt nach Schema. Wenn die Spitzen anfangen leicht hell zu werden (Nutrient Tip Burn), senke den Ziel-EC beim nächsten Tankwechsel leicht ab.';
+
+  @override
+  String get problemPhImbalanceName => 'pH-Wert Schwankung';
+
+  @override
+  String get problemPhImbalanceSymptoms =>
+      'Verdrehte oder wellige Blätter, gelbe und braune Flecken, die oft aussehen wie ein Kalzium-Mangel. Das Wachstum stagniert.';
+
+  @override
+  String get problemPhImbalanceTriggers =>
+      'Der pH-Wert liegt dauerhaft außerhalb des optimalen Bereichs (5.5 - 6.5). Dadurch können bestimmte Nährstoffe nicht mehr aufgenommen werden (Nährstoffsperre).';
+
+  @override
+  String get problemPhImbalanceSolution =>
+      'Kontrolliere und korrigiere den pH-Wert sofort. Ist der Tank alt, wechsle das Wasser komplett, da alte Nährstoffe den pH-Wert unstabil machen.';
+
+  @override
+  String get problemPhImbalancePrevention =>
+      'Prüfe den pH-Wert täglich beim Check-In. Wechsle das Wasser strikt jede Woche, da alte Nährstofflösungen ihren Puffer verlieren.';
+
+  @override
+  String get problemLightBurnName => 'Lichtbrand';
+
+  @override
+  String get problemLightBurnSymptoms =>
+      'Die Blätter an den obersten Trieben werden gelb oder weiß gebleicht, während die Adern oft grün bleiben. Die Ränder rollen sich nach oben (Kanu-Form) um die Hitze abzuleiten.';
+
+  @override
+  String get problemLightBurnTriggers =>
+      'Die Lampe hängt zu nah an der Pflanze oder ist zu stark eingestellt. Die Lichtintensität (PPFD) übersteigt das, was die Pflanze verarbeiten kann.';
+
+  @override
+  String get problemLightBurnSolution =>
+      'Erhöhe den Abstand zur Lampe oder dimme sie herunter. Miss den PPFD-Wert an der Pflanzenspitze, um ihn anzupassen.';
+
+  @override
+  String get problemLightBurnPrevention =>
+      'Passe den Lampenabstand an das Wachstum an. Nutze den PPFD-Meter bei jedem Check-In, um im optimalen Bereich zu bleiben.';
+
+  @override
+  String get problemCalciumDeficiencyName => 'Kalziummangel';
+
+  @override
+  String get problemCalciumDeficiencySymptoms =>
+      'Kleine braune/rostige Flecken auf jüngeren und mittleren Blättern. Neue Blätter wachsen oft verkrüppelt oder haben gelbe Ränder.';
+
+  @override
+  String get problemCalciumDeficiencyTriggers =>
+      'Meist weiches Leitungswasser (RO-Wasser oder EC < 0.2) ohne CalMag-Zusatz. Manchmal auch blockiert durch falschen pH-Wert oder zu viel Kalium.';
+
+  @override
+  String get problemCalciumDeficiencySolution =>
+      'Korrigiere den EC-Wert, indem du CalMag hinzufügst (Grundwasser immer zuerst auf 0.4 EC mit CalMag anheben, bevor Dünger rein kommt).';
+
+  @override
+  String get problemCalciumDeficiencyPrevention =>
+      'Bei sehr weichem Wasser oder Osmosewasser zwingend bei jedem Wasserwechsel CalMag als Basis hinzufügen.';
 }

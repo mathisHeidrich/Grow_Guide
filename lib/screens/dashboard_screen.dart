@@ -22,6 +22,11 @@ class DashboardScreen extends ConsumerWidget {
         title: Text(l10n.dashboardTitle),
         actions: [
           IconButton(
+            icon: const Icon(Icons.healing, size: 28),
+            tooltip: l10n.diagnoseProblemButton,
+            onPressed: () => context.push('/problems'),
+          ),
+          IconButton(
             icon: const Icon(Icons.add, size: 32),
             onPressed: () => context.go('/add_plant'),
           ),

@@ -13,6 +13,10 @@ import 'screens/ppfd_meter_screen.dart';
 import 'screens/hardware_advisor_screen.dart';
 import 'screens/water_guide_screen.dart';
 import 'screens/water_change_screen.dart';
+import 'screens/problem_diagnosis_screen.dart';
+import 'screens/problem_detail_screen.dart';
+import 'screens/ec_adjust_screen.dart';
+import 'screens/ph_adjust_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final db = ref.watch(databaseProvider).db;
@@ -99,6 +103,39 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/water_change',
         builder: (context, state) => const WaterChangeScreen(),
+      ),
+      GoRoute(
+        path: '/problems',
+        builder: (context, state) {
+          final plantIdStr = state.uri.queryParameters['plantId'];
+          final plantId = plantIdStr != null ? int.tryParse(plantIdStr) : null;
+          return ProblemDiagnosisScreen(plantId: plantId);
+        },
+      ),
+      GoRoute(
+        path: '/problem_detail/:id',
+        builder: (context, state) {
+          final problemId = state.pathParameters['id']!;
+          final plantIdStr = state.uri.queryParameters['plantId'];
+          final plantId = plantIdStr != null ? int.tryParse(plantIdStr) : null;
+          return ProblemDetailScreen(problemId: problemId, plantId: plantId);
+        },
+      ),
+      GoRoute(
+        path: '/ec_adjust/:id',
+        builder: (context, state) {
+          final id = int.tryParse(state.pathParameters['id'] ?? '');
+          if (id == null) return const DashboardScreen();
+          return EcAdjustScreen(plantId: id);
+        },
+      ),
+      GoRoute(
+        path: '/ph_adjust/:id',
+        builder: (context, state) {
+          final id = int.tryParse(state.pathParameters['id'] ?? '');
+          if (id == null) return const DashboardScreen();
+          return PhAdjustScreen(plantId: id);
+        },
       ),
     ],
   );
