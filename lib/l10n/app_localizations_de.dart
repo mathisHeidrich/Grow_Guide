@@ -605,91 +605,87 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get hw_grow_tentDesc =>
-      'Warum brauche ich das? Ein lichtdichtes Zelt sorgt für das perfekte Klima und schützt vor Störlicht.';
+      'Ein lichtdichtes Zelt sorgt für das perfekte Klima und schützt vor Störlicht.';
 
   @override
   String get hw_ledTitle => 'LED-Pflanzenlampe';
 
   @override
   String get hw_ledDesc =>
-      'Warum brauche ich das? Cannabis liebt Licht! Ohne starke Lampe gibt es keine fetten Buds.';
+      'Cannabis liebt Licht! Ohne starke Lampe gibt es keine fetten Buds.';
 
   @override
   String get hw_exhaustTitle => 'Abluft-Ventilator';
 
   @override
   String get hw_exhaustDesc =>
-      'Warum brauche ich das? Erneuert die Luft im Zelt und transportiert Hitze sowie Feuchtigkeit nach draußen.';
+      'Erneuert die Luft im Zelt und transportiert Hitze sowie Feuchtigkeit nach draußen.';
 
   @override
   String get hw_carbon_filterTitle => 'Aktivkohlefilter (AKF)';
 
   @override
   String get hw_carbon_filterDesc =>
-      'Warum brauche ich das? Cannabis stinkt gewaltig. Der Filter neutralisiert den Geruch zu 100%.';
+      'Cannabis stinkt gewaltig. Der Filter neutralisiert den Geruch zu 100%.';
 
   @override
   String get hw_circulation_fanTitle => 'Umluft-Ventilator';
 
   @override
   String get hw_circulation_fanDesc =>
-      'Warum brauche ich das? Sorgt für dicke Stängel und verhindert Schimmel in den Blüten.';
+      'Sorgt für dicke Stängel und verhindert Schimmel in den Blüten.';
 
   @override
   String get hw_thermo_hygroTitle => 'Thermo-/Hygrometer';
 
   @override
   String get hw_thermo_hygroDesc =>
-      'Warum brauche ich das? Zur Überwachung von Temperatur und Luftfeuchtigkeit.';
+      'Zur Überwachung von Temperatur und Luftfeuchtigkeit.';
 
   @override
   String get hw_humidifierTitle => 'Luftbefeuchter / Entfeuchter';
 
   @override
   String get hw_humidifierDesc =>
-      'Warum brauche ich das? Zur exakten Kontrolle der Luftfeuchtigkeit (VPD).';
+      'Zur exakten Kontrolle der Luftfeuchtigkeit (VPD).';
 
   @override
   String get hw_dwc_bucketTitle => 'DWC-Eimer / Wassertank';
 
   @override
-  String get hw_dwc_bucketDesc =>
-      'Warum brauche ich das? Das neue Zuhause deiner Wurzeln!';
+  String get hw_dwc_bucketDesc => 'Das neue Zuhause deiner Wurzeln!';
 
   @override
   String get hw_net_potTitle => 'Netztopf';
 
   @override
-  String get hw_net_potDesc =>
-      'Warum brauche ich das? Hält den Blähton und gibt den Wurzeln Halt.';
+  String get hw_net_potDesc => 'Hält den Blähton und gibt den Wurzeln Halt.';
 
   @override
   String get hw_air_pumpTitle => 'Luftpumpe & Ausströmerstein';
 
   @override
   String get hw_air_pumpDesc =>
-      'Warum brauche ich das? Sauerstoff ist Leben! Ohne Blubberblasen ertrinken die Wurzeln.';
+      'Sauerstoff ist Leben! Ohne Blubberblasen ertrinken die Wurzeln.';
 
   @override
   String get hw_clay_pebblesTitle => 'Blähton';
 
   @override
-  String get hw_clay_pebblesDesc =>
-      'Warum brauche ich das? Steriles Medium statt Erde.';
+  String get hw_clay_pebblesDesc => 'Steriles Medium statt Erde.';
 
   @override
   String get hw_starter_cubesTitle => 'Anzuchtwürfel';
 
   @override
   String get hw_starter_cubesDesc =>
-      'Warum brauche ich das? Darin keimt dein Samen sicher und stabil.';
+      'Darin keimt dein Samen sicher und stabil.';
 
   @override
   String get hw_second_bucketTitle => 'Zweiter DWC-Eimer';
 
   @override
-  String get hw_second_bucketDesc =>
-      'Warum brauche ich das? Erleichtert den Wasserwechsel enorm.';
+  String get hw_second_bucketDesc => 'Erleichtert den Wasserwechsel enorm.';
 
   @override
   String get hw_second_bucketProTip =>
@@ -699,22 +695,20 @@ class AppLocalizationsDe extends AppLocalizations {
   String get hw_chillerTitle => 'Durchlaufkühler (Water Chiller)';
 
   @override
-  String get hw_chillerDesc =>
-      'Warum brauche ich das? Kühlt das Wasser auf perfekte 18-20°C.';
+  String get hw_chillerDesc => 'Kühlt das Wasser auf perfekte 18-20°C.';
 
   @override
   String get hw_hydro_nutesTitle => 'Hydrokultur-Dünger';
 
   @override
-  String get hw_hydro_nutesDesc =>
-      'Warum brauche ich das? Spezieller Dünger für DWC.';
+  String get hw_hydro_nutesDesc => 'Spezieller Dünger für DWC.';
 
   @override
   String get hw_ph_dropsTitle => 'pH-Messtropfen oder Gerät';
 
   @override
   String get hw_ph_dropsDesc =>
-      'Warum brauche ich das? Der pH-Wert entscheidet, ob die Pflanze Nährstoffe aufnimmt.';
+      'Der pH-Wert entscheidet, ob die Pflanze Nährstoffe aufnimmt.';
 
   @override
   String get hw_ph_dropsProTip =>
@@ -725,14 +719,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get hw_ec_meterDesc =>
-      'Warum brauche ich das? Zeigt dir genau an, wie viel Dünger im Wasser ist.';
+      'Zeigt dir genau an, wie viel Dünger im Wasser ist.';
 
   @override
   String get hw_ph_downTitle => 'pH -';
 
   @override
   String get hw_ph_downDesc =>
-      'Warum brauche ich das? Um den pH-Wert zu senken. Nutze als Stoff z.B. Phosphorsäure, keine organischen Säuren.';
+      'Um den pH-Wert zu senken. Nutze als Stoff z.B. Phosphorsäure, keine organischen Säuren.';
 
   @override
   String get hw_ph_downProTip =>
@@ -743,21 +737,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get hw_ph_upDesc =>
-      'Warum brauche ich das? Um den pH-Wert zu erhöhen. Nutze als Stoff z.B. Kaliumcarbonat oder Kaliumsilikat.';
+      'Um den pH-Wert zu erhöhen. Nutze als Stoff z.B. Kaliumcarbonat oder Kaliumsilikat.';
 
   @override
   String get hw_calibration_fluidTitle => 'Kalibrierflüssigkeit';
 
   @override
-  String get hw_calibration_fluidDesc =>
-      'Warum brauche ich das? Um deine Messgeräte zu eichen.';
+  String get hw_calibration_fluidDesc => 'Um deine Messgeräte zu eichen.';
 
   @override
   String get hw_water_pumpTitle => 'Elektrische Mini-Tauchpumpe';
 
   @override
-  String get hw_water_pumpDesc =>
-      'Warum brauche ich das? Pumpt das Wasser aus dem Eimer.';
+  String get hw_water_pumpDesc => 'Pumpt das Wasser aus dem Eimer.';
 
   @override
   String get hw_water_pumpProTip =>
@@ -767,8 +759,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get hw_ro_systemTitle => 'Umkehrosmose-Anlage';
 
   @override
-  String get hw_ro_systemDesc =>
-      'Warum brauche ich das? Filtert alle Salze aus dem Leitungswasser.';
+  String get hw_ro_systemDesc => 'Filtert alle Salze aus dem Leitungswasser.';
 
   @override
   String get hw_ro_systemProTip =>
@@ -779,21 +770,20 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get hw_timerDesc =>
-      'Warum brauche ich das? Steuert das Licht automatisch (z.B. 18h an, 6h aus).';
+      'Steuert das Licht automatisch (z.B. 18h an, 6h aus).';
 
   @override
   String get hw_scissorsTitle => 'Ernteschere';
 
   @override
-  String get hw_scissorsDesc =>
-      'Warum brauche ich das? Für die Maniküre der Buds.';
+  String get hw_scissorsDesc => 'Für die Maniküre der Buds.';
 
   @override
   String get hw_loupeTitle => 'Taschenmikroskop / Lupe';
 
   @override
   String get hw_loupeDesc =>
-      'Warum brauche ich das? Um den perfekten Erntezeitpunkt (Trichome) zu bestimmen.';
+      'Um den perfekten Erntezeitpunkt (Trichome) zu bestimmen.';
 
   @override
   String get waterGuideTitle => 'Wasser-Masterclass';

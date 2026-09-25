@@ -1177,7 +1177,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_grow_tentDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Ein lichtdichtes Zelt sorgt für das perfekte Klima und schützt vor Störlicht.'**
+  /// **'Ein lichtdichtes Zelt sorgt für das perfekte Klima und schützt vor Störlicht.'**
   String get hw_grow_tentDesc;
 
   /// No description provided for @hw_ledTitle.
@@ -1189,7 +1189,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_ledDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Cannabis liebt Licht! Ohne starke Lampe gibt es keine fetten Buds.'**
+  /// **'Cannabis liebt Licht! Ohne starke Lampe gibt es keine fetten Buds.'**
   String get hw_ledDesc;
 
   /// No description provided for @hw_exhaustTitle.
@@ -1201,7 +1201,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_exhaustDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Erneuert die Luft im Zelt und transportiert Hitze sowie Feuchtigkeit nach draußen.'**
+  /// **'Erneuert die Luft im Zelt und transportiert Hitze sowie Feuchtigkeit nach draußen.'**
   String get hw_exhaustDesc;
 
   /// No description provided for @hw_carbon_filterTitle.
@@ -1213,7 +1213,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_carbon_filterDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Cannabis stinkt gewaltig. Der Filter neutralisiert den Geruch zu 100%.'**
+  /// **'Cannabis stinkt gewaltig. Der Filter neutralisiert den Geruch zu 100%.'**
   String get hw_carbon_filterDesc;
 
   /// No description provided for @hw_circulation_fanTitle.
@@ -1225,7 +1225,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_circulation_fanDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Sorgt für dicke Stängel und verhindert Schimmel in den Blüten.'**
+  /// **'Sorgt für dicke Stängel und verhindert Schimmel in den Blüten.'**
   String get hw_circulation_fanDesc;
 
   /// No description provided for @hw_thermo_hygroTitle.
@@ -1237,7 +1237,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_thermo_hygroDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Zur Überwachung von Temperatur und Luftfeuchtigkeit.'**
+  /// **'Zur Überwachung von Temperatur und Luftfeuchtigkeit.'**
   String get hw_thermo_hygroDesc;
 
   /// No description provided for @hw_humidifierTitle.
@@ -1249,7 +1249,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_humidifierDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Zur exakten Kontrolle der Luftfeuchtigkeit (VPD).'**
+  /// **'Zur exakten Kontrolle der Luftfeuchtigkeit (VPD).'**
   String get hw_humidifierDesc;
 
   /// No description provided for @hw_dwc_bucketTitle.
@@ -1261,7 +1261,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_dwc_bucketDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Das neue Zuhause deiner Wurzeln!'**
+  /// **'Das neue Zuhause deiner Wurzeln!'**
   String get hw_dwc_bucketDesc;
 
   /// No description provided for @hw_net_potTitle.
@@ -1273,7 +1273,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_net_potDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Hält den Blähton und gibt den Wurzeln Halt.'**
+  /// **'Hält den Blähton und gibt den Wurzeln Halt.'**
   String get hw_net_potDesc;
 
   /// No description provided for @hw_air_pumpTitle.
@@ -1285,7 +1285,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_air_pumpDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Sauerstoff ist Leben! Ohne Blubberblasen ertrinken die Wurzeln.'**
+  /// **'Sauerstoff ist Leben! Ohne Blubberblasen ertrinken die Wurzeln.'**
   String get hw_air_pumpDesc;
 
   /// No description provided for @hw_clay_pebblesTitle.
@@ -1297,7 +1297,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_clay_pebblesDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Steriles Medium statt Erde.'**
+  /// **'Steriles Medium statt Erde.'**
   String get hw_clay_pebblesDesc;
 
   /// No description provided for @hw_starter_cubesTitle.
@@ -1309,7 +1309,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_starter_cubesDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Darin keimt dein Samen sicher und stabil.'**
+  /// **'Darin keimt dein Samen sicher und stabil.'**
   String get hw_starter_cubesDesc;
 
   /// No description provided for @hw_second_bucketTitle.
@@ -1321,7 +1321,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_second_bucketDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Erleichtert den Wasserwechsel enorm.'**
+  /// **'Erleichtert den Wasserwechsel enorm.'**
   String get hw_second_bucketDesc;
 
   /// No description provided for @hw_second_bucketProTip.
@@ -1339,7 +1339,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_chillerDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Kühlt das Wasser auf perfekte 18-20°C.'**
+  /// **'Kühlt das Wasser auf perfekte 18-20°C.'**
   String get hw_chillerDesc;
 
   /// No description provided for @hw_hydro_nutesTitle.
@@ -1351,7 +1351,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_hydro_nutesDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Spezieller Dünger für DWC.'**
+  /// **'Spezieller Dünger für DWC.'**
   String get hw_hydro_nutesDesc;
 
   /// No description provided for @hw_ph_dropsTitle.
@@ -1363,7 +1363,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_ph_dropsDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Der pH-Wert entscheidet, ob die Pflanze Nährstoffe aufnimmt.'**
+  /// **'Der pH-Wert entscheidet, ob die Pflanze Nährstoffe aufnimmt.'**
   String get hw_ph_dropsDesc;
 
   /// No description provided for @hw_ph_dropsProTip.
@@ -1381,7 +1381,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_ec_meterDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Zeigt dir genau an, wie viel Dünger im Wasser ist.'**
+  /// **'Zeigt dir genau an, wie viel Dünger im Wasser ist.'**
   String get hw_ec_meterDesc;
 
   /// No description provided for @hw_ph_downTitle.
@@ -1393,7 +1393,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_ph_downDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Um den pH-Wert zu senken. Nutze als Stoff z.B. Phosphorsäure, keine organischen Säuren.'**
+  /// **'Um den pH-Wert zu senken. Nutze als Stoff z.B. Phosphorsäure, keine organischen Säuren.'**
   String get hw_ph_downDesc;
 
   /// No description provided for @hw_ph_downProTip.
@@ -1411,7 +1411,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_ph_upDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Um den pH-Wert zu erhöhen. Nutze als Stoff z.B. Kaliumcarbonat oder Kaliumsilikat.'**
+  /// **'Um den pH-Wert zu erhöhen. Nutze als Stoff z.B. Kaliumcarbonat oder Kaliumsilikat.'**
   String get hw_ph_upDesc;
 
   /// No description provided for @hw_calibration_fluidTitle.
@@ -1423,7 +1423,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_calibration_fluidDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Um deine Messgeräte zu eichen.'**
+  /// **'Um deine Messgeräte zu eichen.'**
   String get hw_calibration_fluidDesc;
 
   /// No description provided for @hw_water_pumpTitle.
@@ -1435,7 +1435,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_water_pumpDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Pumpt das Wasser aus dem Eimer.'**
+  /// **'Pumpt das Wasser aus dem Eimer.'**
   String get hw_water_pumpDesc;
 
   /// No description provided for @hw_water_pumpProTip.
@@ -1453,7 +1453,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_ro_systemDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Filtert alle Salze aus dem Leitungswasser.'**
+  /// **'Filtert alle Salze aus dem Leitungswasser.'**
   String get hw_ro_systemDesc;
 
   /// No description provided for @hw_ro_systemProTip.
@@ -1471,7 +1471,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_timerDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Steuert das Licht automatisch (z.B. 18h an, 6h aus).'**
+  /// **'Steuert das Licht automatisch (z.B. 18h an, 6h aus).'**
   String get hw_timerDesc;
 
   /// No description provided for @hw_scissorsTitle.
@@ -1483,7 +1483,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_scissorsDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Für die Maniküre der Buds.'**
+  /// **'Für die Maniküre der Buds.'**
   String get hw_scissorsDesc;
 
   /// No description provided for @hw_loupeTitle.
@@ -1495,7 +1495,7 @@ abstract class AppLocalizations {
   /// No description provided for @hw_loupeDesc.
   ///
   /// In de, this message translates to:
-  /// **'Warum brauche ich das? Um den perfekten Erntezeitpunkt (Trichome) zu bestimmen.'**
+  /// **'Um den perfekten Erntezeitpunkt (Trichome) zu bestimmen.'**
   String get hw_loupeDesc;
 
   /// No description provided for @waterGuideTitle.
