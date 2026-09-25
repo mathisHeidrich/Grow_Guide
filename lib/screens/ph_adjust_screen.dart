@@ -65,7 +65,7 @@ class _PhAdjustScreenState extends ConsumerState<PhAdjustScreen> {
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center),
           const SizedBox(height: 16),
-          Text(l10n.checkinPhAdjustDesc,
+          TipFormattedText(l10n.checkinPhAdjustDesc,
               style: const TextStyle(color: Colors.white70, fontSize: 16),
               textAlign: TextAlign.center),
           const SizedBox(height: 32),
