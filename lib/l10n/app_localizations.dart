@@ -2275,7 +2275,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinVentilatorDesc.
   ///
   /// In de, this message translates to:
-  /// **'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?'**
+  /// **'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?\n\nTIPP: Richte den Luftstrom niemals direkt auf die Pflanzen. Ein starrer Luftstrom führt zu Windbrand und trocknet die Blätter aus.'**
   String get checkinVentilatorDesc;
 
   /// No description provided for @checkinVentilatorNext.

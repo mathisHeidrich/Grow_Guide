@@ -102,9 +102,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
       bool lampCheck = false;
       if (now.weekday == DateTime.wednesday) {
-        if (!hasPpfdLogToday) lampCheck = true;
-      } else if (lastPpfdLog == null || now.difference(lastPpfdLog.timestamp).inDays > 7) {
-        lampCheck = true;
+        if (!hasLogToday) lampCheck = true;
       }
 
       bool ventCheck = false;
@@ -1133,7 +1131,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             l10n.checkinVentilatorDesc,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,

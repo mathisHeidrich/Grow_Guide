@@ -460,7 +460,7 @@
   "problemCalciumDeficiencySolution": "Korrigiere den EC-Wert, indem du CalMag hinzufügst (Grundwasser immer zuerst auf 0.4 EC mit CalMag anheben, bevor Dünger rein kommt).",
   "problemCalciumDeficiencyPrevention": "Bei sehr weichem Wasser oder Osmosewasser zwingend bei jedem Wasserwechsel CalMag als Basis hinzufügen.",
   "checkinVentilatorTitle": "Ventilator-Check",
-  "checkinVentilatorDesc": "Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?",
+  "checkinVentilatorDesc": "Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?\n\nTIPP: Richte den Luftstrom niemals direkt auf die Pflanzen. Ein starrer Luftstrom führt zu Windbrand und trocknet die Blätter aus.",
   "checkinVentilatorNext": "Sieht gut aus",
   "checkinVentilatorDeepDiveTitle": "Ventilator-Platzierung",
   "checkinVentilatorDeepDiveText": "Platziere einen Ventilator über dem Blätterdach und einen darunter. Sie sollten schwenken (oszillieren) und eine sanfte Brise erzeugen.\n\nTypische Fehler:\n- Richte Ventilatoren nie direkt auf kleine Pflanzen (Gefahr von Windbrand!).\n- Ein starrer Luftstrom trocknet die Blätter aus.\n- Stehende Luft ohne Umluft begünstigt Schimmel.",

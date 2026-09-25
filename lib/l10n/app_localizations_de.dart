@@ -1252,7 +1252,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinVentilatorDesc =>
-      'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?';
+      'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?\n\nTIPP: Richte den Luftstrom niemals direkt auf die Pflanzen. Ein starrer Luftstrom führt zu Windbrand und trocknet die Blätter aus.';
 
   @override
   String get checkinVentilatorNext => 'Sieht gut aus';
