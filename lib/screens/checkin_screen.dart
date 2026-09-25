@@ -427,28 +427,29 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             rightTitle: yesText,
             leftSubtitle: isAuto ? "Noch vegetativ" : "Noch Platz",
             rightSubtitle: isAuto ? "Vorblüte startet" : "Zelt gefüllt",
-            onLeftSelected: () {
-              setState(() {
-                _showFlowerTransition = false;
-              });
+            onConfirm: (index) async {
+              if (index == 0) {
+                setState(() {
+                  _showFlowerTransition = false;
+                });
+              } else {
+                final db = ref.read(databaseProvider).db;
+                final updatedPlant = _plant!.copyWith(
+                  currentPhase: PlantPhase.flower,
+                  phaseStartDate: drift.Value(ref.read(timeProvider)),
+                );
+                await db.update(db.plants).replace(updatedPlant);
+                
+                setState(() {
+                  _plant = updatedPlant;
+                  _showFlowerTransition = false;
+                  _showLightCycleTransition = true;
+                  _needsWaterChange = true;
+                  _isFlowerTransitionWaterChange = true;
+                });
+              }
             },
-            onRightSelected: () async {
-              final db = ref.read(databaseProvider).db;
-              final updatedPlant = _plant!.copyWith(
-                currentPhase: PlantPhase.flower,
-                phaseStartDate: drift.Value(ref.read(timeProvider)),
-              );
-              await db.update(db.plants).replace(updatedPlant);
-              
-              setState(() {
-                _plant = updatedPlant;
-                _showFlowerTransition = false;
-                _showLightCycleTransition = true;
-                _needsWaterChange = true;
-                _isFlowerTransitionWaterChange = true;
-              });
-            },
-            rightAccentColor: Colors.purpleAccent,
+
           ),
           const SizedBox(height: 24),
         ],
@@ -1362,17 +1363,14 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             rightTitle: l10n.checkinHarvestReady,
             leftSubtitle: "Klar / Weiß",
             rightSubtitle: "Milchig / Bernstein",
-            onLeftSelected: _nextPage,
-            onRightSelected: () {
-              context.pushReplacement('/harvest_wizard?plantId=${widget.plantId}');
+            backButton: _backButton(),
+            onConfirm: (index) {
+              if (index == 0) {
+                _nextPage();
+              } else {
+                context.pushReplacement('/harvest_wizard?plantId=${widget.plantId}');
+              }
             },
-          ),
-          const SizedBox(height: 24),
-          Row(
-            children: [
-              Expanded(flex: 1, child: _backButton()),
-              const Spacer(flex: 2),
-            ],
           ),
         ],
       ),

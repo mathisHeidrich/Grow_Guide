@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+import 'package:app/l10n/app_localizations.dart';
 
-class ImageSelectionCard extends StatelessWidget {
+class ImageSelectionCard extends StatefulWidget {
   final String leftImagePath;
   final String rightImagePath;
   final String leftTitle;
   final String rightTitle;
   final String leftSubtitle;
   final String rightSubtitle;
-  final VoidCallback onLeftSelected;
-  final VoidCallback onRightSelected;
-  final Color leftAccentColor;
-  final Color rightAccentColor;
+  
+  /// Callback when the confirm button is pressed. 
+  /// Passes 0 if left is selected, 1 if right is selected.
+  final void Function(int) onConfirm;
+  final Widget? backButton;
 
   const ImageSelectionCard({
     super.key,
@@ -21,36 +23,73 @@ class ImageSelectionCard extends StatelessWidget {
     required this.rightTitle,
     required this.leftSubtitle,
     required this.rightSubtitle,
-    required this.onLeftSelected,
-    required this.onRightSelected,
-    this.leftAccentColor = Colors.white24,
-    this.rightAccentColor = AppColors.growGreen,
+    required this.onConfirm,
+    this.backButton,
   });
 
   @override
+  State<ImageSelectionCard> createState() => _ImageSelectionCardState();
+}
+
+class _ImageSelectionCardState extends State<ImageSelectionCard> {
+  int? _selectedIndex;
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
+    final l10n = AppLocalizations.of(context)!;
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(
-          child: _buildOption(
-            context,
-            imagePath: leftImagePath,
-            title: leftTitle,
-            subtitle: leftSubtitle,
-            onTap: onLeftSelected,
-            color: leftAccentColor,
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: _buildOption(
+                context,
+                index: 0,
+                imagePath: widget.leftImagePath,
+                title: widget.leftTitle,
+                subtitle: widget.leftSubtitle,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _buildOption(
+                context,
+                index: 1,
+                imagePath: widget.rightImagePath,
+                title: widget.rightTitle,
+                subtitle: widget.rightSubtitle,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: _buildOption(
-            context,
-            imagePath: rightImagePath,
-            title: rightTitle,
-            subtitle: rightSubtitle,
-            onTap: onRightSelected,
-            color: rightAccentColor,
-          ),
+        const SizedBox(height: 24),
+        Row(
+          children: [
+            if (widget.backButton != null) ...[
+              Expanded(flex: 1, child: widget.backButton!),
+              const SizedBox(width: 16),
+            ],
+            Expanded(
+              flex: 2,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.growGreen,
+                  foregroundColor: Colors.black,
+                  disabledBackgroundColor: Colors.grey[800],
+                  disabledForegroundColor: Colors.white54,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+                onPressed: _selectedIndex == null ? null : () => widget.onConfirm(_selectedIndex!),
+                child: Text(
+                  l10n.checkinNext,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -58,26 +97,32 @@ class ImageSelectionCard extends StatelessWidget {
 
   Widget _buildOption(
     BuildContext context, {
+    required int index,
     required String imagePath,
     required String title,
     required String subtitle,
-    required VoidCallback onTap,
-    required Color color,
   }) {
+    final isSelected = _selectedIndex == index;
+    final color = isSelected ? AppColors.growGreen : Colors.transparent;
+    
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
       borderRadius: BorderRadius.circular(16),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color, width: 2),
+          border: Border.all(color: color, width: 3),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(13)),
               child: Image.asset(
                 imagePath,
                 fit: BoxFit.cover,
@@ -90,10 +135,10 @@ class ImageSelectionCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                      color: Colors.white,
+                      color: isSelected ? AppColors.growGreen : Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -101,7 +146,7 @@ class ImageSelectionCard extends StatelessWidget {
                   Text(
                     subtitle,
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       color: Colors.white70,
                     ),
                     textAlign: TextAlign.center,

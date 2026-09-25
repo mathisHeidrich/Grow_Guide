@@ -355,34 +355,26 @@ class _GerminationWizardScreenState
             rightTitle: "Wurzel sichtbar",
             leftSubtitle: "Weiter warten",
             rightSubtitle: "Einpflanzen",
-            onLeftSelected: () {
-              setState(() => _seedOpened = false);
-              _jumpToPage(5);
-            },
-            onRightSelected: () {
-              setState(() => _seedOpened = true);
-              _jumpToPage(6);
-            },
-          ),
-          const SizedBox(height: 24),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    side: const BorderSide(color: Colors.white54),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                  ),
-                  onPressed: () => _jumpToPage(4),
-                  child: Text(l10n.checkinBack),
-                ),
+            backButton: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                side: const BorderSide(color: Colors.white54),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
               ),
-              const Spacer(flex: 2),
-            ],
+              onPressed: () => _jumpToPage(4),
+              child: Text(l10n.checkinBack),
+            ),
+            onConfirm: (index) {
+              if (index == 0) {
+                setState(() => _seedOpened = false);
+                _jumpToPage(5);
+              } else {
+                setState(() => _seedOpened = true);
+                _jumpToPage(6);
+              }
+            },
           ),
         ],
       ),
