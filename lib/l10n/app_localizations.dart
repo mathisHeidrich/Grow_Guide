@@ -3069,6 +3069,36 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Nutze bei weichem Wasser immer CalMag, bevor du den eigentlichen Dünger ins Wasser gibst.'**
   String get problemMagnesiumDefPrevention;
+
+  /// No description provided for @plantActionDelete.
+  ///
+  /// In de, this message translates to:
+  /// **'Pflanze löschen'**
+  String get plantActionDelete;
+
+  /// No description provided for @plantActionDeleteConfirmTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Pflanze löschen?'**
+  String get plantActionDeleteConfirmTitle;
+
+  /// No description provided for @plantActionDeleteConfirmText.
+  ///
+  /// In de, this message translates to:
+  /// **'Möchtest du diese Pflanze und all ihre Daten wirklich unwiderruflich löschen?'**
+  String get plantActionDeleteConfirmText;
+
+  /// No description provided for @generalCancel.
+  ///
+  /// In de, this message translates to:
+  /// **'Abbrechen'**
+  String get generalCancel;
+
+  /// No description provided for @generalDelete.
+  ///
+  /// In de, this message translates to:
+  /// **'Löschen'**
+  String get generalDelete;
 }
 
 class _AppLocalizationsDelegate

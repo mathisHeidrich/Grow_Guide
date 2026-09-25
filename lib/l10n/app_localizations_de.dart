@@ -1696,4 +1696,20 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get problemMagnesiumDefPrevention =>
       'Nutze bei weichem Wasser immer CalMag, bevor du den eigentlichen Dünger ins Wasser gibst.';
+
+  @override
+  String get plantActionDelete => 'Pflanze löschen';
+
+  @override
+  String get plantActionDeleteConfirmTitle => 'Pflanze löschen?';
+
+  @override
+  String get plantActionDeleteConfirmText =>
+      'Möchtest du diese Pflanze und all ihre Daten wirklich unwiderruflich löschen?';
+
+  @override
+  String get generalCancel => 'Abbrechen';
+
+  @override
+  String get generalDelete => 'Löschen';
 }

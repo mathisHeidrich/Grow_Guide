@@ -613,5 +613,10 @@
   "problemMagnesiumDefSymptoms": "Die Blätter werden zwischen den Adern gelb, während die Adern selbst grün bleiben. Oft treten auch rote oder violette Stängel auf.",
   "problemMagnesiumDefTriggers": "Magnesium wird bei sehr weichem Wasser oft knapp. Ein falscher pH-Wert (oft zu niedrig) kann die Aufnahme ebenfalls blockieren.",
   "problemMagnesiumDefSolution": "Korrigiere den pH-Wert. Bei echtem Mangel: Füge CalMag zur Nährstofflösung hinzu.",
-  "problemMagnesiumDefPrevention": "Nutze bei weichem Wasser immer CalMag, bevor du den eigentlichen Dünger ins Wasser gibst."
+  "problemMagnesiumDefPrevention": "Nutze bei weichem Wasser immer CalMag, bevor du den eigentlichen Dünger ins Wasser gibst.",
+  "plantActionDelete": "Pflanze löschen",
+  "plantActionDeleteConfirmTitle": "Pflanze löschen?",
+  "plantActionDeleteConfirmText": "Möchtest du diese Pflanze und all ihre Daten wirklich unwiderruflich löschen?",
+  "generalCancel": "Abbrechen",
+  "generalDelete": "Löschen"
 }

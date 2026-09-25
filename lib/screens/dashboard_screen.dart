@@ -267,14 +267,48 @@ class DashboardScreen extends ConsumerWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        IconButton(
+                        PopupMenuButton<String>(
                           icon: const Icon(Icons.more_vert),
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
-                          onPressed: () {
-                            // Show bottom sheet or navigate to edit
-                            context.go('/edit_plant/${plant.id}');
+                          onSelected: (value) async {
+                            if (value == 'delete') {
+                              final confirm = await showDialog<bool>(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  backgroundColor: AppColors.surface,
+                                  title: Text(l10n.plantActionDeleteConfirmTitle, style: const TextStyle(color: Colors.white)),
+                                  content: Text(l10n.plantActionDeleteConfirmText, style: const TextStyle(color: Colors.white70)),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(ctx, false),
+                                      child: Text(l10n.generalCancel, style: const TextStyle(color: Colors.white54)),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(ctx, true),
+                                      child: Text(l10n.generalDelete, style: const TextStyle(color: Colors.red)),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              if (confirm == true) {
+                                final db = ref.read(databaseProvider).db;
+                                await db.delete(db.plants).delete(plant);
+                              }
+                            }
                           },
+                          itemBuilder: (context) => [
+                            PopupMenuItem(
+                              value: 'delete',
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.delete, color: Colors.red),
+                                  const SizedBox(width: 8),
+                                  Text(l10n.plantActionDelete, style: const TextStyle(color: Colors.red)),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
