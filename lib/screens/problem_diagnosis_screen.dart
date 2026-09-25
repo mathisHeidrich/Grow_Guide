@@ -27,12 +27,17 @@ class _ProblemDiagnosisScreenState extends State<ProblemDiagnosisScreen> {
 
   String _getLocalizedName(AppLocalizations l10n, String key) {
     switch (key) {
-      case 'problemNutrientBurnName': return l10n.problemNutrientBurnName;
-      case 'problemPhImbalanceName': return l10n.problemPhImbalanceName;
-      case 'problemLightBurnName': return l10n.problemLightBurnName;
-      case 'problemCalciumDeficiencyName': return l10n.problemCalciumDeficiencyName;
+      case "problemNutrientBurnName": return l10n.problemNutrientBurnName;
+      case "problemPhImbalanceName": return l10n.problemPhImbalanceName;
+      case "problemLightBurnName": return l10n.problemLightBurnName;
+      case "problemCalciumDeficiencyName": return l10n.problemCalciumDeficiencyName;
+      case "problemRootRotName": return l10n.problemRootRotName;
+      case "problemNitrogenDefName": return l10n.problemNitrogenDefName;
+      case "problemNitrogenToxName": return l10n.problemNitrogenToxName;
+      case "problemMagnesiumDefName": return l10n.problemMagnesiumDefName;
       default: return key;
     }
+  }
   }
 
   @override
@@ -103,15 +108,21 @@ class _ProblemDiagnosisScreenState extends State<ProblemDiagnosisScreen> {
                 flex: 3,
                 child: ClipRRect(
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                  // Using a colored container with an icon as a placeholder since we don't have real images yet.
-                  child: Container(
-                    color: Colors.grey[800],
-                    child: Center(
-                      child: Icon(
-                        Icons.image_not_supported_outlined,
-                        size: 80,
-                        color: Colors.grey[600],
+                  child: Image.asset(
+                    problem.imageAssetPath,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: Colors.grey[800],
+                      child: Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 80,
+                          color: Colors.grey[600],
+                        ),
                       ),
+                    ),
+                  ),
+                ),
                     ),
                   ),
                 ),

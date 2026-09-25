@@ -38,6 +38,30 @@ class ProblemDetailScreen extends StatelessWidget {
       case 'problemCalciumDeficiencySolution': return l10n.problemCalciumDeficiencySolution;
       case 'problemCalciumDeficiencyPrevention': return l10n.problemCalciumDeficiencyPrevention;
       
+            case "problemRootRotName": return l10n.problemRootRotName;
+      case "problemRootRotSymptoms": return l10n.problemRootRotSymptoms;
+      case "problemRootRotTriggers": return l10n.problemRootRotTriggers;
+      case "problemRootRotSolution": return l10n.problemRootRotSolution;
+      case "problemRootRotPrevention": return l10n.problemRootRotPrevention;
+
+      case "problemNitrogenDefName": return l10n.problemNitrogenDefName;
+      case "problemNitrogenDefSymptoms": return l10n.problemNitrogenDefSymptoms;
+      case "problemNitrogenDefTriggers": return l10n.problemNitrogenDefTriggers;
+      case "problemNitrogenDefSolution": return l10n.problemNitrogenDefSolution;
+      case "problemNitrogenDefPrevention": return l10n.problemNitrogenDefPrevention;
+
+      case "problemNitrogenToxName": return l10n.problemNitrogenToxName;
+      case "problemNitrogenToxSymptoms": return l10n.problemNitrogenToxSymptoms;
+      case "problemNitrogenToxTriggers": return l10n.problemNitrogenToxTriggers;
+      case "problemNitrogenToxSolution": return l10n.problemNitrogenToxSolution;
+      case "problemNitrogenToxPrevention": return l10n.problemNitrogenToxPrevention;
+
+      case "problemMagnesiumDefName": return l10n.problemMagnesiumDefName;
+      case "problemMagnesiumDefSymptoms": return l10n.problemMagnesiumDefSymptoms;
+      case "problemMagnesiumDefTriggers": return l10n.problemMagnesiumDefTriggers;
+      case "problemMagnesiumDefSolution": return l10n.problemMagnesiumDefSolution;
+      case "problemMagnesiumDefPrevention": return l10n.problemMagnesiumDefPrevention;
+      
       default: return key;
     }
   }
@@ -101,12 +125,25 @@ class ProblemDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              height: 250,
-              decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(20),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                problem.imageAssetPath,
+                height: 250,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  height: 250,
+                  color: Colors.grey[800],
+                  child: Center(
+                    child: Icon(
+                      Icons.image_not_supported_outlined,
+                      size: 100,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
               ),
+            ),
               child: Center(
                 child: Icon(
                   Icons.image_not_supported_outlined,
