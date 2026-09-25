@@ -2949,6 +2949,126 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Noch keine archivierten Pflanzen.'**
   String get archiveNoPlants;
+
+  /// No description provided for @problemRootRotName.
+  ///
+  /// In de, this message translates to:
+  /// **'Wurzelfäule (Root Rot)'**
+  String get problemRootRotName;
+
+  /// No description provided for @problemRootRotSymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Wurzeln sind braun, schleimig und riechen oft faulig oder nach Moder. Die Pflanze lässt die Blätter hängen und das Wachstum stoppt.'**
+  String get problemRootRotSymptoms;
+
+  /// No description provided for @problemRootRotTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Zu hohe Wassertemperaturen (über 22°C), mangelnde Belüftung des Wassers (zu wenig Sauerstoff) oder Licht, das in den Tank fällt.'**
+  String get problemRootRotTriggers;
+
+  /// No description provided for @problemRootRotSolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Entferne verfaulte Wurzeln vorsichtig. Führe einen kompletten Wasserwechsel durch, füge Wasserstoffperoxid oder nützliche Bakterien (wie Bacillus amyloliquefaciens) hinzu.'**
+  String get problemRootRotSolution;
+
+  /// No description provided for @problemRootRotPrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Halte die Wassertemperatur stets unter 21°C. Sorge für ausreichend Sauerstoff durch einen guten Sprudelstein. Achte darauf, dass das System 100% lichtdicht ist.'**
+  String get problemRootRotPrevention;
+
+  /// No description provided for @problemNitrogenDefName.
+  ///
+  /// In de, this message translates to:
+  /// **'Stickstoff-Mangel'**
+  String get problemNitrogenDefName;
+
+  /// No description provided for @problemNitrogenDefSymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Die unteren (ältesten) Blätter werden gleichmäßig hellgrün bis blassgelb und fallen schließlich ab. Die oberen Blätter bleiben noch etwas grüner.'**
+  String get problemNitrogenDefSymptoms;
+
+  /// No description provided for @problemNitrogenDefTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Pflanze benötigt für ihr Wachstum, besonders in der Vegetationsphase, viel Stickstoff. Dieser fehlt im Wasser oder der pH-Wert blockiert die Aufnahme.'**
+  String get problemNitrogenDefTriggers;
+
+  /// No description provided for @problemNitrogenDefSolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Prüfe den pH-Wert und EC-Wert. Falls zu niedrig, erhöhe die Dosierung deines Basisdüngers. Stickstoffmangel lässt sich meist sehr leicht und schnell beheben.'**
+  String get problemNitrogenDefSolution;
+
+  /// No description provided for @problemNitrogenDefPrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Achte auf einen stabilen EC-Wert und wechsle das Wasser wöchentlich, um eine ausgewogene Nährstofflösung sicherzustellen.'**
+  String get problemNitrogenDefPrevention;
+
+  /// No description provided for @problemNitrogenToxName.
+  ///
+  /// In de, this message translates to:
+  /// **'Stickstoff-Überschuss'**
+  String get problemNitrogenToxName;
+
+  /// No description provided for @problemNitrogenToxSymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Blätter werden extrem dunkelgrün und die Spitzen krümmen sich nach unten (bekannt als \"Adlerkrallen\"). Das Wachstum verlangsamt sich.'**
+  String get problemNitrogenToxSymptoms;
+
+  /// No description provided for @problemNitrogenToxTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Zu viel Dünger, oft ausgelöst durch einen extrem hohen EC-Wert oder zu starkes Einengen des Wassers bei der Verdunstung.'**
+  String get problemNitrogenToxTriggers;
+
+  /// No description provided for @problemNitrogenToxSolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Pumpe sofort 50% des Tankwassers ab und fülle es mit frischem, pH-reguliertem Wasser (ohne Dünger) auf. Der EC-Wert muss deutlich gesenkt werden.'**
+  String get problemNitrogenToxSolution;
+
+  /// No description provided for @problemNitrogenToxPrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Halte dich genau an das Düngeschema. Wenn du Adlerkrallen bemerkst, ist es ein absolutes Warnsignal, dass dein EC-Wert für diese Genetik zu hoch ist.'**
+  String get problemNitrogenToxPrevention;
+
+  /// No description provided for @problemMagnesiumDefName.
+  ///
+  /// In de, this message translates to:
+  /// **'Magnesiummangel'**
+  String get problemMagnesiumDefName;
+
+  /// No description provided for @problemMagnesiumDefSymptoms.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Blätter werden zwischen den Adern gelb, während die Adern selbst grün bleiben. Oft treten auch rote oder violette Stängel auf.'**
+  String get problemMagnesiumDefSymptoms;
+
+  /// No description provided for @problemMagnesiumDefTriggers.
+  ///
+  /// In de, this message translates to:
+  /// **'Magnesium wird bei sehr weichem Wasser oft knapp. Ein falscher pH-Wert (oft zu niedrig) kann die Aufnahme ebenfalls blockieren.'**
+  String get problemMagnesiumDefTriggers;
+
+  /// No description provided for @problemMagnesiumDefSolution.
+  ///
+  /// In de, this message translates to:
+  /// **'Korrigiere den pH-Wert. Bei echtem Mangel: Füge CalMag zur Nährstofflösung hinzu.'**
+  String get problemMagnesiumDefSolution;
+
+  /// No description provided for @problemMagnesiumDefPrevention.
+  ///
+  /// In de, this message translates to:
+  /// **'Nutze bei weichem Wasser immer CalMag, bevor du den eigentlichen Dünger ins Wasser gibst.'**
+  String get problemMagnesiumDefPrevention;
 }
 
 class _AppLocalizationsDelegate

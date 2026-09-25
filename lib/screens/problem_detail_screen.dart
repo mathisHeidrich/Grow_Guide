@@ -144,14 +144,6 @@ class ProblemDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-              child: Center(
-                child: Icon(
-                  Icons.image_not_supported_outlined,
-                  size: 100,
-                  color: Colors.grey[600],
-                ),
-              ),
-            ),
             const SizedBox(height: 32),
             _buildSection(l10n.problemSymptoms, _getLocalizedString(l10n, problem.localizedSymptomsKey), Icons.warning_amber_rounded, Colors.orange),
             const SizedBox(height: 24),

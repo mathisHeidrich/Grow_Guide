@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/tip_formatted_text.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:drift/drift.dart' as drift;
@@ -117,7 +119,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center),
           const SizedBox(height: 16),
-          TipFormattedTipFormattedText(l10n.checkinEcMeasureDesc,
+          TipFormattedText(l10n.checkinEcMeasureDesc,
               style: const TextStyle(color: Colors.white70, fontSize: 16),
               textAlign: TextAlign.center),
           const SizedBox(height: 32),
@@ -161,7 +163,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TipFormattedTipFormattedText(l10n.checkinNutrientDesc,
+                    TipFormattedText(l10n.checkinNutrientDesc,
                       style: const TextStyle(color: Colors.white70, fontSize: 16)),
                     const SizedBox(height: 16),
                     ...nutrientsToAdd.map((n) => Padding(

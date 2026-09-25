@@ -38,7 +38,6 @@ class _ProblemDiagnosisScreenState extends State<ProblemDiagnosisScreen> {
       default: return key;
     }
   }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,9 +119,6 @@ class _ProblemDiagnosisScreenState extends State<ProblemDiagnosisScreen> {
                           color: Colors.grey[600],
                         ),
                       ),
-                    ),
-                  ),
-                ),
                     ),
                   ),
                 ),

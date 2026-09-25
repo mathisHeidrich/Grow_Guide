@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/image_selection_card.dart';
+
 import '../widgets/tip_formatted_text.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -365,7 +367,20 @@ class _GerminationWizardScreenState
           const SizedBox(height: 24),
           Row(
             children: [
-              Expanded(flex: 1, child: _backButton()),
+              Expanded(
+                flex: 1,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    side: const BorderSide(color: Colors.white54),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
+                  ),
+                  onPressed: () => _jumpToPage(4),
+                  child: Text(l10n.checkinBack),
+                ),
+              ),
               const Spacer(flex: 2),
             ],
           ),

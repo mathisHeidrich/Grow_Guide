@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/tip_formatted_text.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
 import 'package:app/theme/app_colors.dart';

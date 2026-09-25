@@ -1620,4 +1620,80 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get archiveNoPlants => 'Noch keine archivierten Pflanzen.';
+
+  @override
+  String get problemRootRotName => 'Wurzelfäule (Root Rot)';
+
+  @override
+  String get problemRootRotSymptoms =>
+      'Die Wurzeln sind braun, schleimig und riechen oft faulig oder nach Moder. Die Pflanze lässt die Blätter hängen und das Wachstum stoppt.';
+
+  @override
+  String get problemRootRotTriggers =>
+      'Zu hohe Wassertemperaturen (über 22°C), mangelnde Belüftung des Wassers (zu wenig Sauerstoff) oder Licht, das in den Tank fällt.';
+
+  @override
+  String get problemRootRotSolution =>
+      'Entferne verfaulte Wurzeln vorsichtig. Führe einen kompletten Wasserwechsel durch, füge Wasserstoffperoxid oder nützliche Bakterien (wie Bacillus amyloliquefaciens) hinzu.';
+
+  @override
+  String get problemRootRotPrevention =>
+      'Halte die Wassertemperatur stets unter 21°C. Sorge für ausreichend Sauerstoff durch einen guten Sprudelstein. Achte darauf, dass das System 100% lichtdicht ist.';
+
+  @override
+  String get problemNitrogenDefName => 'Stickstoff-Mangel';
+
+  @override
+  String get problemNitrogenDefSymptoms =>
+      'Die unteren (ältesten) Blätter werden gleichmäßig hellgrün bis blassgelb und fallen schließlich ab. Die oberen Blätter bleiben noch etwas grüner.';
+
+  @override
+  String get problemNitrogenDefTriggers =>
+      'Die Pflanze benötigt für ihr Wachstum, besonders in der Vegetationsphase, viel Stickstoff. Dieser fehlt im Wasser oder der pH-Wert blockiert die Aufnahme.';
+
+  @override
+  String get problemNitrogenDefSolution =>
+      'Prüfe den pH-Wert und EC-Wert. Falls zu niedrig, erhöhe die Dosierung deines Basisdüngers. Stickstoffmangel lässt sich meist sehr leicht und schnell beheben.';
+
+  @override
+  String get problemNitrogenDefPrevention =>
+      'Achte auf einen stabilen EC-Wert und wechsle das Wasser wöchentlich, um eine ausgewogene Nährstofflösung sicherzustellen.';
+
+  @override
+  String get problemNitrogenToxName => 'Stickstoff-Überschuss';
+
+  @override
+  String get problemNitrogenToxSymptoms =>
+      'Die Blätter werden extrem dunkelgrün und die Spitzen krümmen sich nach unten (bekannt als \"Adlerkrallen\"). Das Wachstum verlangsamt sich.';
+
+  @override
+  String get problemNitrogenToxTriggers =>
+      'Zu viel Dünger, oft ausgelöst durch einen extrem hohen EC-Wert oder zu starkes Einengen des Wassers bei der Verdunstung.';
+
+  @override
+  String get problemNitrogenToxSolution =>
+      'Pumpe sofort 50% des Tankwassers ab und fülle es mit frischem, pH-reguliertem Wasser (ohne Dünger) auf. Der EC-Wert muss deutlich gesenkt werden.';
+
+  @override
+  String get problemNitrogenToxPrevention =>
+      'Halte dich genau an das Düngeschema. Wenn du Adlerkrallen bemerkst, ist es ein absolutes Warnsignal, dass dein EC-Wert für diese Genetik zu hoch ist.';
+
+  @override
+  String get problemMagnesiumDefName => 'Magnesiummangel';
+
+  @override
+  String get problemMagnesiumDefSymptoms =>
+      'Die Blätter werden zwischen den Adern gelb, während die Adern selbst grün bleiben. Oft treten auch rote oder violette Stängel auf.';
+
+  @override
+  String get problemMagnesiumDefTriggers =>
+      'Magnesium wird bei sehr weichem Wasser oft knapp. Ein falscher pH-Wert (oft zu niedrig) kann die Aufnahme ebenfalls blockieren.';
+
+  @override
+  String get problemMagnesiumDefSolution =>
+      'Korrigiere den pH-Wert. Bei echtem Mangel: Füge CalMag zur Nährstofflösung hinzu.';
+
+  @override
+  String get problemMagnesiumDefPrevention =>
+      'Nutze bei weichem Wasser immer CalMag, bevor du den eigentlichen Dünger ins Wasser gibst.';
 }

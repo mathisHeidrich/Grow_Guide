@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/tip_formatted_text.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
