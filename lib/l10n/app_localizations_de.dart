@@ -1447,4 +1447,76 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get checkinFlowerWaterChangeRecDesc =>
       'Da deine Pflanze nun in die Blütephase übergegangen ist, benötigt sie einen anderen Mix an Nährstoffen (mehr Phosphor/Kalium). Deshalb muss das Wasser heute unbedingt komplett gewechselt werden, bevor der neue Dünger angemischt wird.';
+
+  @override
+  String get checkinHarvestTitle => 'Ernte-Check: Trichome & Stigmen';
+
+  @override
+  String checkinHarvestDesc(String tip) {
+    return 'Prüfe die Blüten. Die feinen Härchen (Stigmen) sollten sich zu 70-90% braun verfärbt haben. Die kleinen Harzdrüsen (Trichome) sollten milchig-trüb bis leicht bernsteinfarben sein.\n\n$tip';
+  }
+
+  @override
+  String get checkinHarvestTip =>
+      'Tipp: Nutze eine Lupe oder ein Taschenmikroskop, um die Trichome zu prüfen.';
+
+  @override
+  String get checkinHarvestDeepDiveTitle => 'Warum die Trichome prüfen?';
+
+  @override
+  String get checkinHarvestDeepDiveDesc =>
+      'Trichome produzieren die Wirkstoffe. Klare Trichome sind unreif. Milchige bedeuten maximalen THC-Gehalt. Bernsteinfarbene sorgen für eine beruhigendere, körperliche Wirkung.';
+
+  @override
+  String get checkinHarvestNotReady => 'Noch nicht bereit';
+
+  @override
+  String get checkinHarvestReady => 'Bereit für die Ernte';
+
+  @override
+  String get checkinFlushTitle => 'Beginn der Spülung (Flushing)';
+
+  @override
+  String checkinFlushDesc(String tip) {
+    return 'Wir nähern uns der Ernte! Jetzt senken wir den EC-Wert schrittweise. Die Pflanze bekommt weniger Nährstoffe und nutzt ihre eigenen Reserven.\n\n$tip';
+  }
+
+  @override
+  String get checkinFlushTip =>
+      'Tipp: Passe beim nächsten Wasserwechsel deinen Nährstoffplan an und nutze nur noch sehr wenig oder gar keinen Dünger (reines pH-angepasstes Wasser).';
+
+  @override
+  String get checkinFlushDeepDiveTitle => 'Warum Spülen?';
+
+  @override
+  String get checkinFlushDeepDiveDesc =>
+      'Durch das Spülen zwingen wir die Pflanze, im Gewebe gespeicherte Nährstoffe zu verbrauchen. Das verbessert später den Geschmack, Geruch und das Abbrennverhalten der Blüten deutlich. Kratziger Rauch wird vermieden.';
+
+  @override
+  String get checkinFlushNext => 'Verstanden';
+
+  @override
+  String get checkinAutumnTitle => 'Pflanzengesundheit (Herbsteln)';
+
+  @override
+  String checkinAutumnDesc(String tip) {
+    return 'Wie sieht deine Pflanze insgesamt aus? Keine Sorge: Gelbe Blätter am Ende der Blüte sind jetzt völlig normal.\n\n$tip';
+  }
+
+  @override
+  String get checkinAutumnTip =>
+      'Tipp: Entferne alte, komplett vertrocknete Blätter, aber lass Blätter dran, die nur leicht gelb sind. Die Pflanze zieht gerade noch Energie aus ihnen.';
+
+  @override
+  String get checkinAutumnDeepDiveTitle => 'Der Herbst-Effekt';
+
+  @override
+  String get checkinAutumnDeepDiveDesc =>
+      'Weil wir den EC-Wert senken und die Pflanze an ihr Lebensende kommt, baut sie Chlorophyll ab. Das führt zu wunderschönen Herbstfarben (Gelb-, Rot- und Lilatöne). Dies ist ein Zeichen, dass das Spülen funktioniert.';
+
+  @override
+  String get checkinAutumnLooksGood => 'Sieht gut aus';
+
+  @override
+  String get checkinAutumnProblems => 'Ich sehe echte Probleme';
 }

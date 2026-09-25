@@ -2631,6 +2631,126 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Da deine Pflanze nun in die Blütephase übergegangen ist, benötigt sie einen anderen Mix an Nährstoffen (mehr Phosphor/Kalium). Deshalb muss das Wasser heute unbedingt komplett gewechselt werden, bevor der neue Dünger angemischt wird.'**
   String get checkinFlowerWaterChangeRecDesc;
+
+  /// No description provided for @checkinHarvestTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Ernte-Check: Trichome & Stigmen'**
+  String get checkinHarvestTitle;
+
+  /// No description provided for @checkinHarvestDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Prüfe die Blüten. Die feinen Härchen (Stigmen) sollten sich zu 70-90% braun verfärbt haben. Die kleinen Harzdrüsen (Trichome) sollten milchig-trüb bis leicht bernsteinfarben sein.\n\n{tip}'**
+  String checkinHarvestDesc(String tip);
+
+  /// No description provided for @checkinHarvestTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Nutze eine Lupe oder ein Taschenmikroskop, um die Trichome zu prüfen.'**
+  String get checkinHarvestTip;
+
+  /// No description provided for @checkinHarvestDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum die Trichome prüfen?'**
+  String get checkinHarvestDeepDiveTitle;
+
+  /// No description provided for @checkinHarvestDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Trichome produzieren die Wirkstoffe. Klare Trichome sind unreif. Milchige bedeuten maximalen THC-Gehalt. Bernsteinfarbene sorgen für eine beruhigendere, körperliche Wirkung.'**
+  String get checkinHarvestDeepDiveDesc;
+
+  /// No description provided for @checkinHarvestNotReady.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch nicht bereit'**
+  String get checkinHarvestNotReady;
+
+  /// No description provided for @checkinHarvestReady.
+  ///
+  /// In de, this message translates to:
+  /// **'Bereit für die Ernte'**
+  String get checkinHarvestReady;
+
+  /// No description provided for @checkinFlushTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Beginn der Spülung (Flushing)'**
+  String get checkinFlushTitle;
+
+  /// No description provided for @checkinFlushDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Wir nähern uns der Ernte! Jetzt senken wir den EC-Wert schrittweise. Die Pflanze bekommt weniger Nährstoffe und nutzt ihre eigenen Reserven.\n\n{tip}'**
+  String checkinFlushDesc(String tip);
+
+  /// No description provided for @checkinFlushTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Passe beim nächsten Wasserwechsel deinen Nährstoffplan an und nutze nur noch sehr wenig oder gar keinen Dünger (reines pH-angepasstes Wasser).'**
+  String get checkinFlushTip;
+
+  /// No description provided for @checkinFlushDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum Spülen?'**
+  String get checkinFlushDeepDiveTitle;
+
+  /// No description provided for @checkinFlushDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Durch das Spülen zwingen wir die Pflanze, im Gewebe gespeicherte Nährstoffe zu verbrauchen. Das verbessert später den Geschmack, Geruch und das Abbrennverhalten der Blüten deutlich. Kratziger Rauch wird vermieden.'**
+  String get checkinFlushDeepDiveDesc;
+
+  /// No description provided for @checkinFlushNext.
+  ///
+  /// In de, this message translates to:
+  /// **'Verstanden'**
+  String get checkinFlushNext;
+
+  /// No description provided for @checkinAutumnTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Pflanzengesundheit (Herbsteln)'**
+  String get checkinAutumnTitle;
+
+  /// No description provided for @checkinAutumnDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Wie sieht deine Pflanze insgesamt aus? Keine Sorge: Gelbe Blätter am Ende der Blüte sind jetzt völlig normal.\n\n{tip}'**
+  String checkinAutumnDesc(String tip);
+
+  /// No description provided for @checkinAutumnTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Entferne alte, komplett vertrocknete Blätter, aber lass Blätter dran, die nur leicht gelb sind. Die Pflanze zieht gerade noch Energie aus ihnen.'**
+  String get checkinAutumnTip;
+
+  /// No description provided for @checkinAutumnDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Der Herbst-Effekt'**
+  String get checkinAutumnDeepDiveTitle;
+
+  /// No description provided for @checkinAutumnDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Weil wir den EC-Wert senken und die Pflanze an ihr Lebensende kommt, baut sie Chlorophyll ab. Das führt zu wunderschönen Herbstfarben (Gelb-, Rot- und Lilatöne). Dies ist ein Zeichen, dass das Spülen funktioniert.'**
+  String get checkinAutumnDeepDiveDesc;
+
+  /// No description provided for @checkinAutumnLooksGood.
+  ///
+  /// In de, this message translates to:
+  /// **'Sieht gut aus'**
+  String get checkinAutumnLooksGood;
+
+  /// No description provided for @checkinAutumnProblems.
+  ///
+  /// In de, this message translates to:
+  /// **'Ich sehe echte Probleme'**
+  String get checkinAutumnProblems;
 }
 
 class _AppLocalizationsDelegate

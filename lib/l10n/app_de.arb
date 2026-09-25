@@ -519,5 +519,46 @@
   "checkinTransitionLightAutoTitle": "Licht bleibt auf 18/6",
   "checkinTransitionLightAutoDesc": "Da es sich um eine Autoflower handelt, musst du an der Zeitschaltuhr nichts ändern. Lass sie auf 18/6 (oder 20/4).\n\nAchte in den nächsten Tagen extrem auf den Lampenabstand, da sie stark in die Höhe wachsen wird.",
   "checkinFlowerWaterChangeRecTitle": "Neues Düngeschema",
-  "checkinFlowerWaterChangeRecDesc": "Da deine Pflanze nun in die Blütephase übergegangen ist, benötigt sie einen anderen Mix an Nährstoffen (mehr Phosphor/Kalium). Deshalb muss das Wasser heute unbedingt komplett gewechselt werden, bevor der neue Dünger angemischt wird."
+  "checkinFlowerWaterChangeRecDesc": "Da deine Pflanze nun in die Blütephase übergegangen ist, benötigt sie einen anderen Mix an Nährstoffen (mehr Phosphor/Kalium). Deshalb muss das Wasser heute unbedingt komplett gewechselt werden, bevor der neue Dünger angemischt wird.",
+  "checkinHarvestTitle": "Ernte-Check: Trichome & Stigmen",
+  "checkinHarvestDesc": "Prüfe die Blüten. Die feinen Härchen (Stigmen) sollten sich zu 70-90% braun verfärbt haben. Die kleinen Harzdrüsen (Trichome) sollten milchig-trüb bis leicht bernsteinfarben sein.\n\n{tip}",
+  "@checkinHarvestDesc": {
+    "placeholders": {
+      "tip": {
+        "type": "String"
+      }
+    }
+  },
+  "checkinHarvestTip": "Tipp: Nutze eine Lupe oder ein Taschenmikroskop, um die Trichome zu prüfen.",
+  "checkinHarvestDeepDiveTitle": "Warum die Trichome prüfen?",
+  "checkinHarvestDeepDiveDesc": "Trichome produzieren die Wirkstoffe. Klare Trichome sind unreif. Milchige bedeuten maximalen THC-Gehalt. Bernsteinfarbene sorgen für eine beruhigendere, körperliche Wirkung.",
+  "checkinHarvestNotReady": "Noch nicht bereit",
+  "checkinHarvestReady": "Bereit für die Ernte",
+  "checkinFlushTitle": "Beginn der Spülung (Flushing)",
+  "checkinFlushDesc": "Wir nähern uns der Ernte! Jetzt senken wir den EC-Wert schrittweise. Die Pflanze bekommt weniger Nährstoffe und nutzt ihre eigenen Reserven.\n\n{tip}",
+  "@checkinFlushDesc": {
+    "placeholders": {
+      "tip": {
+        "type": "String"
+      }
+    }
+  },
+  "checkinFlushTip": "Tipp: Passe beim nächsten Wasserwechsel deinen Nährstoffplan an und nutze nur noch sehr wenig oder gar keinen Dünger (reines pH-angepasstes Wasser).",
+  "checkinFlushDeepDiveTitle": "Warum Spülen?",
+  "checkinFlushDeepDiveDesc": "Durch das Spülen zwingen wir die Pflanze, im Gewebe gespeicherte Nährstoffe zu verbrauchen. Das verbessert später den Geschmack, Geruch und das Abbrennverhalten der Blüten deutlich. Kratziger Rauch wird vermieden.",
+  "checkinFlushNext": "Verstanden",
+  "checkinAutumnTitle": "Pflanzengesundheit (Herbsteln)",
+  "checkinAutumnDesc": "Wie sieht deine Pflanze insgesamt aus? Keine Sorge: Gelbe Blätter am Ende der Blüte sind jetzt völlig normal.\n\n{tip}",
+  "@checkinAutumnDesc": {
+    "placeholders": {
+      "tip": {
+        "type": "String"
+      }
+    }
+  },
+  "checkinAutumnTip": "Tipp: Entferne alte, komplett vertrocknete Blätter, aber lass Blätter dran, die nur leicht gelb sind. Die Pflanze zieht gerade noch Energie aus ihnen.",
+  "checkinAutumnDeepDiveTitle": "Der Herbst-Effekt",
+  "checkinAutumnDeepDiveDesc": "Weil wir den EC-Wert senken und die Pflanze an ihr Lebensende kommt, baut sie Chlorophyll ab. Das führt zu wunderschönen Herbstfarben (Gelb-, Rot- und Lilatöne). Dies ist ein Zeichen, dass das Spülen funktioniert.",
+  "checkinAutumnLooksGood": "Sieht gut aus",
+  "checkinAutumnProblems": "Ich sehe echte Probleme"
 }

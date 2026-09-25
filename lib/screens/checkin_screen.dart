@@ -35,6 +35,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   bool _showFlowerTransition = false;
   bool _showLightCycleTransition = false;
   bool _isFlowerTransitionWaterChange = false;
+  bool _showHarvestCheck = false;
 
   @override
   void initState() {
@@ -115,6 +116,11 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         flowerTrans = true;
       }
 
+      bool harvestCheck = false;
+      if (plant.currentPhase == PlantPhase.flower && plant.getDayInPhase(now) >= 42) {
+        harvestCheck = true;
+      }
+
       setState(() {
         _plant = plant;
         _initialRootsNotReached ??= _plant!.currentPhase == PlantPhase.veg &&
@@ -123,6 +129,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         _needsLampCheck = lampCheck;
         _needsVentilatorCheck = ventCheck;
         _showFlowerTransition = flowerTrans;
+        _showHarvestCheck = harvestCheck;
       });
     }
   }
@@ -259,6 +266,20 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                       _buildVentilatorSlide(),
                       l10n.checkinVentilatorDeepDiveTitle,
                       l10n.checkinVentilatorDeepDiveText),
+                if (_showHarvestCheck) ...[
+                  _wrapWithInfo(
+                      _buildHarvestCheckSlide(),
+                      l10n.checkinHarvestDeepDiveTitle,
+                      l10n.checkinHarvestDeepDiveDesc),
+                  _wrapWithInfo(
+                      _buildFlushSlide(),
+                      l10n.checkinFlushDeepDiveTitle,
+                      l10n.checkinFlushDeepDiveDesc),
+                  _wrapWithInfo(
+                      _buildAutumnSlide(),
+                      l10n.checkinAutumnDeepDiveTitle,
+                      l10n.checkinAutumnDeepDiveDesc),
+                ],
                 _wrapWithInfo(
                     _buildSlide(
                       title: l10n.checkinFinishTitle,
@@ -1306,6 +1327,71 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       onPressed: enabled ? (onPressed ?? _nextPage) : null,
       child: Text(text ?? l10n.checkinNext,
           style: const TextStyle(fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Widget _buildHarvestCheckSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return _buildSlide(
+      title: l10n.checkinHarvestTitle,
+      text: l10n.checkinHarvestDesc(l10n.checkinHarvestTip),
+      icon: Icons.search,
+      nextButtonText: l10n.checkinHarvestNotReady,
+      onNext: _nextPage,
+      showBack: true,
+      extraWidget: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.growGreen.withValues(alpha: 0.2),
+          foregroundColor: AppColors.growGreen,
+          side: const BorderSide(color: AppColors.growGreen),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+        icon: const Icon(Icons.cut),
+        label: Text(l10n.checkinHarvestReady, style: const TextStyle(fontWeight: FontWeight.bold)),
+        onPressed: () {
+          // TODO: implement tutorial later, just close for now
+          _completeCheckin();
+        },
+      ),
+    );
+  }
+
+  Widget _buildFlushSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return _buildSlide(
+      title: l10n.checkinFlushTitle,
+      text: l10n.checkinFlushDesc(l10n.checkinFlushTip),
+      icon: Icons.water_drop,
+      nextButtonText: l10n.checkinFlushNext,
+      onNext: _nextPage,
+      showBack: true,
+    );
+  }
+
+  Widget _buildAutumnSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return _buildSlide(
+      title: l10n.checkinAutumnTitle,
+      text: l10n.checkinAutumnDesc(l10n.checkinAutumnTip),
+      icon: Icons.nature,
+      nextButtonText: l10n.checkinAutumnLooksGood,
+      onNext: _nextPage,
+      showBack: true,
+      extraWidget: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange.withValues(alpha: 0.2),
+          foregroundColor: Colors.orangeAccent,
+          side: const BorderSide(color: Colors.orangeAccent),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+        icon: const Icon(Icons.healing),
+        label: Text(l10n.checkinAutumnProblems, style: const TextStyle(fontWeight: FontWeight.bold)),
+        onPressed: () {
+          context.push('/problems?plantId=${widget.plantId}');
+        },
+      ),
     );
   }
 }
