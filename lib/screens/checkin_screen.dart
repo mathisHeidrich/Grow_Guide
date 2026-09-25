@@ -1,6 +1,7 @@
 import '../providers/time_provider.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/tip_formatted_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -37,6 +38,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   bool _showLightCycleTransition = false;
   bool _isFlowerTransitionWaterChange = false;
   bool _showHarvestCheck = false;
+  bool _showFlushSlideFlag = true;
 
   @override
   void initState() {
@@ -97,17 +99,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         }
       }
 
-      final todayStart = DateTime(now.year, now.month, now.day);
       
-      final lastPpfdLog = await (db.select(db.logEntries)
-            ..where((tbl) =>
-                tbl.plantId.equals(widget.plantId) & tbl.ppfd.isNotNull())
-            ..orderBy([
-              (t) => drift.OrderingTerm(
-                  expression: t.timestamp, mode: drift.OrderingMode.desc)
-            ])
-            ..limit(1))
-          .getSingleOrNull();
 
       
 
@@ -136,6 +128,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         harvestCheck = true;
       }
 
+      final prefs = await SharedPreferences.getInstance();
+      final flushShown = prefs.getBool('flush_shown_${widget.plantId}') ?? false;
+      
       setState(() {
         _plant = plant;
         _initialRootsNotReached ??= _plant!.currentPhase == PlantPhase.veg &&
@@ -145,6 +140,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         _needsVentilatorCheck = ventCheck;
         _showFlowerTransition = flowerTrans;
         _showHarvestCheck = harvestCheck;
+        _showFlushSlideFlag = !flushShown;
       });
     }
   }
@@ -205,6 +201,21 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   _buildFlowerTransitionSlide(),
                 if (_showLightCycleTransition)
                   _buildLightCycleTransitionSlide(),
+                if (_showHarvestCheck) ...[
+                  _wrapWithInfo(
+                      _buildHarvestCheckSlide(),
+                      l10n.checkinHarvestDeepDiveTitle,
+                      l10n.checkinHarvestDeepDiveDesc),
+                  if (_showFlushSlideFlag)
+                    _wrapWithInfo(
+                        _buildFlushSlide(),
+                        l10n.checkinFlushDeepDiveTitle,
+                        l10n.checkinFlushDeepDiveDesc),
+                  _wrapWithInfo(
+                      _buildAutumnSlide(),
+                      l10n.checkinAutumnDeepDiveTitle,
+                      l10n.checkinAutumnDeepDiveDesc),
+                ],
                 if (_needsWaterChange)
                   _wrapWithInfo(
                       _buildWaterChangeRecommendationSlide(),
@@ -226,9 +237,10 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                         l10n.checkinDeepDiveTopWateringTitle,
                         l10n.checkinDeepDiveTopWateringText),
                 ],
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.checkinHealthTitle,
+                if (!_showHarvestCheck)
+                  _wrapWithInfo(
+                      _buildSlide(
+                        title: l10n.checkinHealthTitle,
                       text: l10n.checkinHealthDesc,
                       icon: Icons.eco,
                       nextButtonText: l10n.checkinHealthNext,
@@ -281,20 +293,6 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                       _buildVentilatorSlide(),
                       l10n.checkinVentilatorDeepDiveTitle,
                       l10n.checkinVentilatorDeepDiveText),
-                if (_showHarvestCheck) ...[
-                  _wrapWithInfo(
-                      _buildHarvestCheckSlide(),
-                      l10n.checkinHarvestDeepDiveTitle,
-                      l10n.checkinHarvestDeepDiveDesc),
-                  _wrapWithInfo(
-                      _buildFlushSlide(),
-                      l10n.checkinFlushDeepDiveTitle,
-                      l10n.checkinFlushDeepDiveDesc),
-                  _wrapWithInfo(
-                      _buildAutumnSlide(),
-                      l10n.checkinAutumnDeepDiveTitle,
-                      l10n.checkinAutumnDeepDiveDesc),
-                ],
                 _wrapWithInfo(
                     _buildSlide(
                       title: l10n.checkinFinishTitle,
@@ -1378,7 +1376,11 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       text: l10n.checkinFlushDesc(l10n.checkinFlushTip),
       icon: Icons.water_drop,
       nextButtonText: l10n.checkinFlushNext,
-      onNext: _nextPage,
+      onNext: () async {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('flush_shown_${widget.plantId}', true);
+        _nextPage();
+      },
       showBack: true,
     );
   }
