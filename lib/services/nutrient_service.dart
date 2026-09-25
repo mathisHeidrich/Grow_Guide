@@ -86,18 +86,166 @@ class TerraAquaticaTriPartSchedule implements NutrientSchedule {
   }
 }
 
+class CannaAquaSchedule implements NutrientSchedule {
+  @override
+  String get brandName => 'CANNA Aqua';
+
+  @override
+  double getTargetEc(PlantPhase phase, int weekIndex) {
+    if (phase == PlantPhase.veg) {
+      if (weekIndex == 0) return 1.2;
+      if (weekIndex == 1) return 1.4;
+      return 1.6;
+    } else if (phase == PlantPhase.flower) {
+      if (weekIndex == 0) return 1.7;
+      if (weekIndex == 1) return 1.8;
+      if (weekIndex == 2) return 1.9;
+      return 2.0;
+    }
+    return 0.5;
+  }
+
+  @override
+  List<NutrientAmount> getBaseMlPerLiter(PlantPhase phase, int weekIndex, List<String> userAdditives) {
+    double a = 0;
+    double b = 0;
+    String componentName = 'Aqua Vega';
+
+    if (phase == PlantPhase.veg) {
+      componentName = 'Aqua Vega';
+      if (weekIndex == 0) { a = 1.8; b = 1.8; }
+      else if (weekIndex == 1) { a = 2.2; b = 2.2; }
+      else { a = 2.8; b = 2.8; }
+    } else if (phase == PlantPhase.flower) {
+      componentName = 'Aqua Flores';
+      if (weekIndex < 3) { a = 3.4; b = 3.4; } // Blüte I & II
+      else { a = 2.5; b = 2.5; } // Blüte III (Spät)
+    }
+
+    final nutrients = [
+      NutrientAmount(name: '$componentName A', amountMl: a),
+      NutrientAmount(name: '$componentName B', amountMl: b),
+    ];
+
+    if (userAdditives.contains('calmag')) {
+      nutrients.add(NutrientAmount(name: 'CalMag', amountMl: 1.0));
+    }
+    if (userAdditives.contains('silica')) {
+       if (phase == PlantPhase.veg || (phase == PlantPhase.flower && weekIndex < 2)) {
+         nutrients.add(NutrientAmount(name: 'Silica', amountMl: 0.5));
+       }
+    }
+    return nutrients;
+  }
+}
+
+class AdvancedNutrientsSchedule implements NutrientSchedule {
+  @override
+  String get brandName => 'Advanced Nutrients pH Perfect';
+
+  @override
+  double getTargetEc(PlantPhase phase, int weekIndex) {
+    if (phase == PlantPhase.veg) {
+      if (weekIndex == 0) return 1.0;
+      if (weekIndex == 1) return 1.3;
+      if (weekIndex == 2) return 1.6;
+      return 1.8;
+    } else if (phase == PlantPhase.flower) {
+      return 2.0;
+    }
+    return 0.5;
+  }
+
+  @override
+  List<NutrientAmount> getBaseMlPerLiter(PlantPhase phase, int weekIndex, List<String> userAdditives) {
+    double ml = 0;
+    
+    if (phase == PlantPhase.veg) {
+      if (weekIndex == 0) ml = 1.0;
+      else if (weekIndex == 1) ml = 2.0;
+      else if (weekIndex == 2) ml = 3.0;
+      else ml = 4.0;
+    } else if (phase == PlantPhase.flower) {
+      ml = 4.0;
+    }
+
+    final nutrients = [
+      NutrientAmount(name: 'pH Perfect Micro', amountMl: ml),
+      NutrientAmount(name: 'pH Perfect Grow', amountMl: ml),
+      NutrientAmount(name: 'pH Perfect Bloom', amountMl: ml),
+    ];
+
+    if (userAdditives.contains('calmag')) {
+      nutrients.add(NutrientAmount(name: 'CalMag', amountMl: 1.0));
+    }
+    if (userAdditives.contains('silica')) {
+       if (phase == PlantPhase.veg || (phase == PlantPhase.flower && weekIndex < 2)) {
+         nutrients.add(NutrientAmount(name: 'Silica', amountMl: 0.5));
+       }
+    }
+    return nutrients;
+  }
+}
+
+class PlagronHydroSchedule implements NutrientSchedule {
+  @override
+  String get brandName => 'Plagron 100% HYDRO';
+
+  @override
+  double getTargetEc(PlantPhase phase, int weekIndex) {
+    if (phase == PlantPhase.veg) {
+      if (weekIndex == 0) return 1.2;
+      return 1.5;
+    } else if (phase == PlantPhase.flower) {
+      if (weekIndex == 0) return 1.7;
+      if (weekIndex < 3) return 1.9;
+      return 2.2;
+    }
+    return 0.5;
+  }
+
+  @override
+  List<NutrientAmount> getBaseMlPerLiter(PlantPhase phase, int weekIndex, List<String> userAdditives) {
+    double ml = 0;
+    
+    if (phase == PlantPhase.veg) {
+      if (weekIndex == 0) ml = 1.6;
+      else ml = 1.8;
+    } else if (phase == PlantPhase.flower) {
+      if (weekIndex == 0) ml = 2.0;
+      else if (weekIndex < 3) ml = 2.2;
+      else ml = 2.5;
+    }
+
+    final nutrients = [
+      NutrientAmount(name: 'Hydro A', amountMl: ml),
+      NutrientAmount(name: 'Hydro B', amountMl: ml),
+    ];
+
+    if (userAdditives.contains('calmag')) {
+      nutrients.add(NutrientAmount(name: 'CalMag', amountMl: 1.0));
+    }
+    if (userAdditives.contains('silica')) {
+       if (phase == PlantPhase.veg || (phase == PlantPhase.flower && weekIndex < 2)) {
+         nutrients.add(NutrientAmount(name: 'Silica', amountMl: 0.5));
+       }
+    }
+    return nutrients;
+  }
+}
+
 class NutrientService {
   /// We map the NutrientBrand enum from the DB to an actual NutrientSchedule implementation
   static NutrientSchedule getScheduleForBrand(NutrientBrand brand) {
     switch (brand) {
       case NutrientBrand.ta:
         return TerraAquaticaTriPartSchedule();
-      // Add more brands here when implemented:
-      // case NutrientBrand.cannaAqua: return CannaAquaSchedule();
-      // case NutrientBrand.advancedNutrients: return AdvancedNutrientsSchedule();
-      default:
-        // fallback
-        return TerraAquaticaTriPartSchedule(); 
+      case NutrientBrand.cannaAqua:
+        return CannaAquaSchedule();
+      case NutrientBrand.advancedNutrients:
+        return AdvancedNutrientsSchedule();
+      case NutrientBrand.plagron:
+        return PlagronHydroSchedule();
     }
   }
 
