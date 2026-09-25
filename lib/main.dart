@@ -40,8 +40,6 @@ class GrowGuideApp extends ConsumerWidget {
     final languageSetting = settingsAsync.valueOrNull?.language;
 
     ThemeMode themeMode = ThemeMode.dark;
-    if (themeSetting == 'light') themeMode = ThemeMode.light;
-    else if (themeSetting == 'system') themeMode = ThemeMode.system;
 
     Locale? locale;
     if (languageSetting != null) {

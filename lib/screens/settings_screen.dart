@@ -26,29 +26,7 @@ class SettingsScreen extends ConsumerWidget {
           return ListView(
             children: [
               _buildSectionHeader(context, l10n.settingsAppearance),
-              ListTile(
-                title: Text(l10n.settingsTheme),
-                trailing: DropdownButton<String>(
-                  value: settings.theme ?? 'system',
-                  onChanged: (val) {
-                    if (val != null) notifier.updateSettings(theme: val);
-                  },
-                  items: [
-                    DropdownMenuItem(
-                      value: 'system',
-                      child: Text(l10n.settingsThemeSystem),
-                    ),
-                    DropdownMenuItem(
-                      value: 'light',
-                      child: Text(l10n.settingsThemeLight),
-                    ),
-                    DropdownMenuItem(
-                      value: 'dark',
-                      child: Text(l10n.settingsThemeDark),
-                    ),
-                  ],
-                ),
-              ),
+
               ListTile(
                 title: Text(l10n.settingsLanguage),
                 trailing: DropdownButton<String>(

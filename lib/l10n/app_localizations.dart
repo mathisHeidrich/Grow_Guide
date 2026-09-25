@@ -121,31 +121,31 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingText1.
   ///
   /// In de, this message translates to:
-  /// **'Willkommen bei deinem DWC-Companion. Vergiss Erde, Schädlinge und Gießkannen. Wir züchten in sprudelndem Wasser – schneller, sauberer und mit massiven Erträgen.'**
+  /// **'Willkommen bei deinem DWC-Companion. Vergiss Erde, Schädlinge und Gießkannen. Wir züchten in sprudelndem Wasser. Das bedeutet für dich: sauberes Arbeiten, kontrollierbares Wachstum und maximale Erträge.'**
   String get onboardingText1;
 
   /// No description provided for @onboardingTitle2.
   ///
   /// In de, this message translates to:
-  /// **'Deine tägliche 5-Minuten Routine'**
+  /// **'Fünf Minuten am Tag.'**
   String get onboardingTitle2;
 
   /// No description provided for @onboardingText2.
   ///
   /// In de, this message translates to:
-  /// **'Kein Vorwissen nötig. Unser täglicher, bilderbasierter Check-In Wizard nimmt dich jeden Tag an die Hand. Er sagt dir genau, wo du hinsehen musst, und schützt dich vor Anfängerfehlern.'**
+  /// **'Du benötigst kein Vorwissen. Der tägliche Check-In nimmt dich jeden Tag an die Hand. Er zeigt dir exakt, was du prüfen musst, und bewahrt dich vor typischen Anfängerfehlern. Konstanz ist hier dein wichtigstes Werkzeug.'**
   String get onboardingText2;
 
   /// No description provided for @onboardingTitle3.
   ///
   /// In de, this message translates to:
-  /// **'Nie wieder überdüngen'**
+  /// **'Schluss mit der Überdüngung.'**
   String get onboardingTitle3;
 
   /// No description provided for @onboardingText3.
   ///
   /// In de, this message translates to:
-  /// **'Du gibst nur deine Messwerte (pH/EC) ein – unsere smarte Rezept-Engine berechnet dir wie ein Thermomix exakt auf den Milliliter genau, was du ins Wasser mischen musst.'**
+  /// **'Du misst lediglich deinen pH- und EC-Wert. Unser System berechnet im Hintergrund auf den Milliliter genau, was deine Pflanze heute benötigt. Kein Rätselraten bei den Düngeschemata mehr.'**
   String get onboardingText3;
 
   /// No description provided for @onboardingNextButton.
@@ -163,13 +163,13 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingFinalTitle.
   ///
   /// In de, this message translates to:
-  /// **'Lass uns starten!'**
+  /// **'Bereit für den Start.'**
   String get onboardingFinalTitle;
 
   /// No description provided for @onboardingFinalText.
   ///
   /// In de, this message translates to:
-  /// **'Hast du dein Zelt schon aufgebaut, oder brauchst du Hilfe beim Schrauben und Verkabeln?'**
+  /// **'Bevor wir deinen ersten Samen keimen lassen, müssen wir sicherstellen, dass deine Hardware bereit ist. Steht dein Zelt bereits komplett fertig, oder sollen wir den Aufbau gemeinsam Schritt für Schritt durchgehen?'**
   String get onboardingFinalText;
 
   /// No description provided for @onboardingTentSetupButton.
@@ -493,13 +493,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkinHealthTitle.
   ///
   /// In de, this message translates to:
-  /// **'Pflanzen-Gesundheit'**
+  /// **'Gesundheits-Check'**
   String get checkinHealthTitle;
 
   /// No description provided for @checkinHealthDesc.
   ///
   /// In de, this message translates to:
-  /// **'Schau dir die Pflanze an. Hängen die Blätter extrem schlaff? Gibt es braune Flecken oder rollen sich die Blattspitzen stark ein?'**
+  /// **'• Wirf einen genauen Blick auf die Blätter deiner Pflanze.\n• Achte auf schlaff hängende Blätter, braune Flecken oder stark nach oben eingerollte Ränder.\n\nTIPP: Wenn die Blätter minimal nach oben zeigen (\'Praying Leaves\'), ist die Pflanze extrem glücklich.'**
   String get checkinHealthDesc;
 
   /// No description provided for @checkinHealthNext.
@@ -511,13 +511,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkinRootsCheckTitle.
   ///
   /// In de, this message translates to:
-  /// **'Wurzel-Check'**
+  /// **'Suchen nach Wurzeln'**
   String get checkinRootsCheckTitle;
 
   /// No description provided for @checkinRootsCheckDesc.
   ///
   /// In de, this message translates to:
-  /// **'Sind die Wurzeln schon im Wasser?'**
+  /// **'• Hebe den Netztopf leicht an.\n• Hängen bereits weiße Wurzeln unten aus dem Netztopf heraus in Richtung Wasser?'**
   String get checkinRootsCheckDesc;
 
   /// No description provided for @checkinRootsCheckYes.
@@ -547,7 +547,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinWateringDesc.
   ///
   /// In de, this message translates to:
-  /// **'Gieße etwas Wasser aus dem Eimer über den Blähton, um die Pflanze zu bewässern. Füge kein zusätzliches Wasser hinzu! Da die Wurzeln noch nicht im Wasser sind, musst du pH und EC noch nicht kontrollieren.'**
+  /// **'• Da die Wurzeln das Wasser noch nicht erreicht haben, helfe etwas nach.\n• Nimm einen kleinen Becher und gieße etwas Wasser *aus dem Eimer* vorsichtig um den Stamm über den Blähton.\n\nTIPP: Nutze ausschließlich das Wasser, das ohnehin schon im Eimer ist. Füge kein neues Wasser von außen hinzu.'**
   String get checkinWateringDesc;
 
   /// No description provided for @checkinAdjustTitle.
@@ -565,13 +565,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkinFinishTitle.
   ///
   /// In de, this message translates to:
-  /// **'Check-In Abschließen'**
+  /// **'Alles erledigt.'**
   String get checkinFinishTitle;
 
   /// No description provided for @checkinFinishDesc.
   ///
   /// In de, this message translates to:
-  /// **'Du hast alle Stationen für heute erledigt. Deine Pflanze ist versorgt.'**
+  /// **'• Du hast alle wichtigen Parameter geprüft.\n• Dein Zelt ist nun wieder sicher für die nächsten 24 Stunden.\n• Klicke auf Speichern, um deine Werte im Logbuch zu sichern.'**
   String get checkinFinishDesc;
 
   /// No description provided for @checkinFinishNext.
@@ -625,7 +625,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinLampMeasureInstruction.
   ///
   /// In de, this message translates to:
-  /// **'Halte die Kamera deines Smartphones auf Höhe der obersten Blätter (Canopy) und richte sie mit einem Diffusor (z. B. 80g Papier) nach oben zur Lampe.'**
+  /// **'• Die Pflanze wächst jeden Tag näher an die Lampe heran.\n• Lege ein Stück Papier (80g) als Diffusor über die Frontkamera.\n• Halte das Handy genau auf Höhe der obersten Blätter und richte es zur Lampe.\n\nTIPP: Nutze immer Papier als Diffusor, sonst sind die Werte völlig unbrauchbar.'**
   String get checkinLampMeasureInstruction;
 
   /// No description provided for @checkinLampTargetPpfdLabel.
@@ -661,7 +661,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc1.
   ///
   /// In de, this message translates to:
-  /// **'Fülle ein kleines Glas mit handwarmem Wasser und lass deinen Samen sanft hineinfallen.'**
+  /// **'• Fülle ein kleines Glas mit handwarmem Wasser.\n• Lass deinen Samen sanft hineinfallen. Er wird zunächst an der Oberfläche schwimmen.\n\nTIPP: Berühre den Samen so wenig wie möglich mit den Fingern. Nutze eine Pinzette.'**
   String get germinationDesc1;
 
   /// No description provided for @germinationNext1.
@@ -673,13 +673,13 @@ abstract class AppLocalizations {
   /// No description provided for @germinationTitle1b.
   ///
   /// In de, this message translates to:
-  /// **'Die Steinwolle & pH-Wert'**
+  /// **'Steinwolle & pH-Wert'**
   String get germinationTitle1b;
 
   /// No description provided for @germinationDesc1b.
   ///
   /// In de, this message translates to:
-  /// **'Fülle ein Gefäß mit Wasser. Miss den pH-Wert mit deinem Gerät oder den Test-Tropfen (Farbskala beachten). Gib tropfenweise pH-Down hinzu, bis der Wert bei etwa 5.5 liegt.\n\nLege deinen Steinwollwürfel hinein. Er muss 24h einweichen!'**
+  /// **'• Fülle eine Schüssel mit Wasser und miss den pH-Wert.\n• Senke den pH-Wert mit pH-Down tröpfchenweise auf etwa 5.5 ab.\n• Lege deinen Steinwollwürfel hinein und lass ihn mindestens 12 Stunden einweichen.\n\nTIPP: Drücke die Steinwolle niemals wie einen Schwamm aus. Das zerstört ihre innere Struktur.'**
   String get germinationDesc1b;
 
   /// No description provided for @germinationNext1b.
@@ -697,7 +697,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc2.
   ///
   /// In de, this message translates to:
-  /// **'Cannabis-Samen sind Dunkelkeimer. Stelle das Glas an einen warmen, absolut dunklen Ort.'**
+  /// **'• Stelle das Wasserglas an einen warmen (ca. 22-25°C), absolut dunklen Ort.\n• Ein Küchenschrank eignet sich hierfür hervorragend.\n\nTIPP: Markiere das Glas, damit niemand aus Versehen das Wasser wegschüttet.'**
   String get germinationDesc2;
 
   /// No description provided for @germinationNext2.
@@ -709,13 +709,13 @@ abstract class AppLocalizations {
   /// No description provided for @germinationTitle3.
   ///
   /// In de, this message translates to:
-  /// **'Der Warteraum'**
+  /// **'Warten und Prüfen'**
   String get germinationTitle3;
 
   /// No description provided for @germinationDesc3.
   ///
   /// In de, this message translates to:
-  /// **'Lass den Samen nun für 12 bis 24 Stunden im Wasser ruhen. Wir warten darauf, dass sich die Schale öffnet.'**
+  /// **'• Lass den Samen nun für 12 bis 24 Stunden im Glas ruhen.\n• Hol das Glas aus dem Schrank und prüfe vorsichtig: Ist die Samenschale leicht aufgeplatzt und zeigt sich eine kleine, weiße Wurzelspitze?'**
   String get germinationDesc3;
 
   /// No description provided for @germinationNext3.
@@ -727,13 +727,13 @@ abstract class AppLocalizations {
   /// No description provided for @germinationTitle4.
   ///
   /// In de, this message translates to:
-  /// **'Der Wurzel-Check'**
+  /// **'Noch geschlossen'**
   String get germinationTitle4;
 
   /// No description provided for @germinationDesc4.
   ///
   /// In de, this message translates to:
-  /// **'Hol das Glas aus dem Schrank. Ist die Samenschale aufgeplatzt und zeigt sich eine kleine, weiße Wurzelspitze?'**
+  /// **'• Der Samen ist noch komplett geschlossen.\n• Gib ihm noch etwas Zeit im Dunkeln.\n\nTIPP: Manche Samen benötigen bis zu 48 oder 72 Stunden. Geduld ist jetzt wichtig.'**
   String get germinationDesc4;
 
   /// No description provided for @germinationNext4.
@@ -757,7 +757,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc5.
   ///
   /// In de, this message translates to:
-  /// **'Manche Samen brauchen bis zu 48 Stunden. Stelle das Glas wieder in den Schrank und schau morgen noch mal rein.'**
+  /// **'• Der Samen ist noch komplett geschlossen.\n• Gib ihm noch etwas Zeit im Dunkeln.\n\nTIPP: Manche Samen benötigen bis zu 48 oder 72 Stunden. Geduld ist jetzt wichtig.'**
   String get germinationDesc5;
 
   /// No description provided for @germinationNext5.
@@ -775,7 +775,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc6.
   ///
   /// In de, this message translates to:
-  /// **'Setze den Samen etwa 1-2 cm tief in das Pflanzloch deines eingeweichten Steinwollwürfels.\n\nWichtig: Wurzelspitze nach unten!'**
+  /// **'• Nimm den eingeweichten Steinwollwürfel aus dem Wasser.\n• Setze den Samen etwa 1 bis 2 cm tief in das Loch des Würfels.\n• WICHTIG: Die weiße Wurzelspitze muss strikt nach unten zeigen.\n\nTIPP: Verschließe das Loch oben ganz leicht, indem du ein winziges Stückchen Steinwolle vom Rand darüber zupfst. So bleibt es innen dunkel.'**
   String get germinationDesc6;
 
   /// No description provided for @germinationNext6.
@@ -787,13 +787,13 @@ abstract class AppLocalizations {
   /// No description provided for @germinationTitle7.
   ///
   /// In de, this message translates to:
-  /// **'Netztopf & Blähton'**
+  /// **'Vorbereitung des Netztopfs'**
   String get germinationTitle7;
 
   /// No description provided for @germinationDesc7.
   ///
   /// In de, this message translates to:
-  /// **'Spüle deinen Blähton gut ab. Setze den Steinwollwürfel in den Netztopf und fülle ihn mit Blähton auf.'**
+  /// **'• Spüle deinen Blähton extrem gründlich unter fließendem Wasser ab, bis das Wasser klar bleibt.\n• Setze den Steinwollwürfel mittig in deinen Netztopf.\n• Fülle den restlichen Platz vorsichtig mit dem gewaschenen Blähton auf.\n\nTIPP: Achte darauf, dass die oberste Schicht der Steinwolle leicht vom Blähton bedeckt ist, um Algenbildung zu verhindern.'**
   String get germinationDesc7;
 
   /// No description provided for @germinationNext7.
@@ -805,13 +805,13 @@ abstract class AppLocalizations {
   /// No description provided for @germinationTitle8.
   ///
   /// In de, this message translates to:
-  /// **'Der DWC-Eimer & Klima'**
+  /// **'Der Eimer & Das Klima'**
   String get germinationTitle8;
 
   /// No description provided for @germinationDesc8.
   ///
   /// In de, this message translates to:
-  /// **'Hänge den Netztopf in deinen DWC-Eimer. Fülle den Eimer so weit, dass das Wasser ca. 1-2 cm unter dem Netztopf steht. Die platzenden Blubberblasen befeuchten die Wurzeln.\n\n1. Keine Nährstoffe, nur Wasser (pH 5.8).\n2. Luftpumpe auf 100%.\n3. Abluft und Umluft (leichte Brise) einschalten.'**
+  /// **'• Fülle deinen DWC-Eimer mit Wasser (pH 5.8). Gib noch keinen Dünger hinzu.\n• Der Wasserstand sollte etwa 1 bis 2 cm unter dem Boden des Netztopfs enden. Das Wasser darf die Steinwolle nicht berühren.\n• Hänge den Netztopf ein und schalte die Luftpumpe auf 100% ein.\n\nTIPP: Die platzenden Blubberblasen spritzen kleine Wassertropfen an den Netztopf. Das reicht völlig aus, um die Steinwolle feucht zu halten.'**
   String get germinationDesc8;
 
   /// No description provided for @germinationNext8.
@@ -823,13 +823,13 @@ abstract class AppLocalizations {
   /// No description provided for @germinationTitle9.
   ///
   /// In de, this message translates to:
-  /// **'Das Licht (PPFD)'**
+  /// **'Sanftes Licht'**
   String get germinationTitle9;
 
   /// No description provided for @germinationDesc9.
   ///
   /// In de, this message translates to:
-  /// **'Sämlinge vertragen nicht viel Licht! Zu viel Licht hemmt das Wachstum extrem.\n\nNutze den eingebauten PPFD-Messer (ca. 150-200 µmol/m²/s). \n\nKlima-Tipp: Ist es im Zelt zu kalt (unter 24°C), hänge die Lampe etwas höher und dreh sie stärker auf, damit sie mehr heizt. Ansonsten dimm sie tief runter und hänge sie nah ran, um Strom zu sparen.'**
+  /// **'• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer (ca. 150-200 µmol/m²/s an der Spitze).\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.'**
   String get germinationDesc9;
 
   /// No description provided for @germinationNext9.
@@ -889,13 +889,13 @@ abstract class AppLocalizations {
   /// No description provided for @tentTitle1.
   ///
   /// In de, this message translates to:
-  /// **'Station 1: Das Zelt aufstellen'**
+  /// **'Station 1: Der Standplatz'**
   String get tentTitle1;
 
   /// No description provided for @tentDesc1.
   ///
   /// In de, this message translates to:
-  /// **'Such dir einen ruhigen Ort mit Fenster (für die Abluft). Bau das Metallgerüst auf und zieh die Zelthülle darüber.'**
+  /// **'• Wähle einen Ort in der Nähe eines Fensters.\n• Baue das Metallgerüst auf und ziehe die Zelthülle darüber.\n• Lege die wasserdichte Einlegewanne auf den Zeltboden.\n\nTIPP: Der Zeltboden muss absolut wasserdicht sein. Bei Hydroponik kann immer mal ein Tropfen daneben gehen.'**
   String get tentDesc1;
 
   /// No description provided for @tentTip1.
@@ -913,13 +913,13 @@ abstract class AppLocalizations {
   /// No description provided for @tentTitle2.
   ///
   /// In de, this message translates to:
-  /// **'Station 2: AKF & Ventilator'**
+  /// **'Station 2: Die Lunge des Zeltes'**
   String get tentTitle2;
 
   /// No description provided for @tentDesc2.
   ///
   /// In de, this message translates to:
-  /// **'Der Aktivkohlefilter (AKF) und der Rohrventilator kommen ganz nach oben ins Zelt. Häng sie mit den mitgelieferten Gurten stabil unter die Decke.'**
+  /// **'• Hänge den Aktivkohlefilter (AKF) und den Rohrventilator ganz oben unter die Zeltdecke.\n• Verbinde beide luftdicht miteinander.\n\nTIPP: Nutze großzügig Panzertape oder starke Schlauchklemmen. Jeder Millimeter, der nicht dicht ist, lässt später ungefilterten Geruch entweichen.'**
   String get tentDesc2;
 
   /// No description provided for @tentTip2.
@@ -943,7 +943,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc3.
   ///
   /// In de, this message translates to:
-  /// **'Führe den Abluftschlauch vom Ventilator durch eine der oberen Öffnungen nach draußen.'**
+  /// **'• Führe den Abluftschlauch vom Ventilator durch eine der oberen Öffnungen nach draußen, idealerweise aus dem Fenster.'**
   String get tentDesc3;
 
   /// No description provided for @tentTip3.
@@ -961,13 +961,13 @@ abstract class AppLocalizations {
   /// No description provided for @tentTitle4.
   ///
   /// In de, this message translates to:
-  /// **'Station 4: Die LED-Sonne'**
+  /// **'Station 4: Die Sonne aufhängen'**
   String get tentTitle4;
 
   /// No description provided for @tentDesc4.
   ///
   /// In de, this message translates to:
-  /// **'Häng deine LED-Lampe mittig auf. Nutze dafür stufenlos verstellbare Seilzugratschen (Rope Ratchets), damit du die Höhe später einfach anpassen kannst.'**
+  /// **'• Hänge deine LED-Lampe mittig im Zelt auf.\n• Verwende stufenlos verstellbare Seilzugratschen (Rope Ratchets), keine starren Ketten.\n\nTIPP: Wenn deine Lampe ein externes Netzteil (Driver) hat, montiere es außerhalb des Zeltes. Das erspart dir im Sommer Hitze.'**
   String get tentDesc4;
 
   /// No description provided for @tentTip4.
@@ -985,13 +985,13 @@ abstract class AppLocalizations {
   /// No description provided for @tentTitle5.
   ///
   /// In de, this message translates to:
-  /// **'Station 5: Frische Brise'**
+  /// **'Station 5: Die frische Brise'**
   String get tentTitle5;
 
   /// No description provided for @tentDesc5.
   ///
   /// In de, this message translates to:
-  /// **'Befestige deine Umluft-Ventilatoren an den Zeltstangen. Sie sorgen für dicke Stängel und beugen Schimmel vor.'**
+  /// **'• Befestige deine Umluft-Ventilatoren an den Eckstangen.\n• Richte sie so aus, dass sie später über und unter dem Blätterdach wehen.\n\nTIPP: Richte den Luftstrom niemals direkt auf eine junge Pflanze. Das führt zu massivem Windbrand.'**
   String get tentDesc5;
 
   /// No description provided for @tentTip5.
@@ -1009,13 +1009,13 @@ abstract class AppLocalizations {
   /// No description provided for @tentTitle6.
   ///
   /// In de, this message translates to:
-  /// **'Station 6: DWC-Eimer & Blähton'**
+  /// **'Station 6: Eimer & Pumpe'**
   String get tentTitle6;
 
   /// No description provided for @tentDesc6.
   ///
   /// In de, this message translates to:
-  /// **'Stell deinen DWC-Eimer mittig unter die Lampe. Setz den Netztopf ein.'**
+  /// **'• Stelle den leeren DWC-Eimer mittig unter die Lampe.\n• Setze den Netztopf ein.'**
   String get tentDesc6;
 
   /// No description provided for @tentTip6.
@@ -1039,7 +1039,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc7.
   ///
   /// In de, this message translates to:
-  /// **'Führe den Luftschlauch von unten ins Zelt zum Ausströmerstein im Eimer.'**
+  /// **'• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n\nTIPP: Stelle die Luftpumpe immer auf eine kleine Erhöhung oberhalb des maximalen Wasserspiegels (Siphon-Effekt verhindern).'**
   String get tentDesc7;
 
   /// No description provided for @tentTip7.
@@ -1057,13 +1057,13 @@ abstract class AppLocalizations {
   /// No description provided for @tentTitle8.
   ///
   /// In de, this message translates to:
-  /// **'Station 8: Strom & Kabel'**
+  /// **'Station 8: Verkabelung'**
   String get tentTitle8;
 
   /// No description provided for @tentDesc8.
   ///
   /// In de, this message translates to:
-  /// **'Verlege alle Kabel sauber nach draußen.'**
+  /// **'• Führe alle Kabel sauber durch die vorgesehenen Öffnungen nach draußen.\n\nTIPP: Lege unter keinen Umständen Mehrfachsteckdosen auf den Zeltboden. Wasser und Strom sind lebensgefährlich.'**
   String get tentDesc8;
 
   /// No description provided for @tentTip8.
@@ -1087,7 +1087,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc9.
   ///
   /// In de, this message translates to:
-  /// **'Die Lampe kommt an die Zeitschaltuhr (noch nicht einstellen).'**
+  /// **'• Schließe die Lampe an die Zeitschaltuhr an.\n• Abluft, Umluft und Luftpumpe laufen auf Dauerstrom (24/7).'**
   String get tentDesc9;
 
   /// No description provided for @tentTip9.
@@ -1105,13 +1105,13 @@ abstract class AppLocalizations {
   /// No description provided for @tentTitle10.
   ///
   /// In de, this message translates to:
-  /// **'Station 10: Der finale Test'**
+  /// **'Station 10: Der letzte Check'**
   String get tentTitle10;
 
   /// No description provided for @tentDesc10.
   ///
   /// In de, this message translates to:
-  /// **'Mach das Zelt zu und schalte alles an.'**
+  /// **'• Schalte alle Geräte ein und schließe das Zelt vollständig.\n• Zieht sich die Zelthülle leicht nach innen? (Unterdruck-Check).\n\nTIPP: Schalte das Licht im Raum aus. Dringt aus dem Zelt irgendwo Licht nach außen? Klebe Lecks von innen ab.'**
   String get tentDesc10;
 
   /// No description provided for @tentTip10.
@@ -1741,13 +1741,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkinWaterLevelTitle.
   ///
   /// In de, this message translates to:
-  /// **'Wasserstand'**
+  /// **'Wasserstand prüfen'**
   String get checkinWaterLevelTitle;
 
   /// No description provided for @checkinWaterLevelDesc.
   ///
   /// In de, this message translates to:
-  /// **'Wie viel Liter Wasser hast du nachgefüllt, um die optimale Füllhöhe wieder zu erreichen?'**
+  /// **'• Prüfe den Wasserstand im Eimer.\n• Ist er gesunken, fülle ihn mit klarem Leitungswasser wieder auf, bis das Wasser 1-2 cm unter dem Netztopf steht.\n• Trage hier ein, wie viele Liter du genau nachgefüllt hast.\n\nTIPP: Mache eine Markierung für die optimale Füllhöhe an den Eimer.'**
   String get checkinWaterLevelDesc;
 
   /// No description provided for @checkinWaterLevelLabel.
@@ -1765,13 +1765,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkinEcMeasureTitle.
   ///
   /// In de, this message translates to:
-  /// **'EC-Wert messen'**
+  /// **'Messwerte eintragen'**
   String get checkinEcMeasureTitle;
 
   /// No description provided for @checkinEcMeasureDesc.
   ///
   /// In de, this message translates to:
-  /// **'Miss den EC-Wert nach dem Auffüllen (bzw. nach dem Wasserwechsel).'**
+  /// **'• Miss den EC-Wert und den pH-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage beide Werte hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.'**
   String get checkinEcMeasureDesc;
 
   /// No description provided for @checkinNutrientTitle.
@@ -1783,7 +1783,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinNutrientDesc.
   ///
   /// In de, this message translates to:
-  /// **'Basierend auf der Wachstumsphase und dem nachgefüllten Wasser solltest du folgende Mengen hinzufügen:'**
+  /// **'• Basierend auf deinem nachgefüllten Wasser und den aktuellen Werten benötigst du heute die folgenden Mengen.\n• Gib die Dünger nacheinander in den Eimer und rühre gut um.\n\nTIPP: Mische pure Dünger niemals unverdünnt direkt zusammen.'**
   String get checkinNutrientDesc;
 
   /// No description provided for @checkinNutrientGrow.
@@ -1825,13 +1825,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkinPhAdjustTitle.
   ///
   /// In de, this message translates to:
-  /// **'pH-Wert messen & anpassen'**
+  /// **'pH-Wert justieren'**
   String get checkinPhAdjustTitle;
 
   /// No description provided for @checkinPhAdjustDesc.
   ///
   /// In de, this message translates to:
-  /// **'Miss den pH-Wert. Ist er außerhalb von 5.5 - 6.5, korrigiere ihn tröpfchenweise.'**
+  /// **'• Dein Zielbereich liegt bei 5.5 bis 6.5.\n• Ist dein gemessener Wert zu hoch, gib tröpfchenweise pH-Down hinzu.\n• Rühre um, warte eine Minute und miss erneut.\n\nTIPP: pH-Down besteht meist aus konzentrierter Säure. Wenige Tropfen verändern den Wert massiv. Arbeite extrem vorsichtig.'**
   String get checkinPhAdjustDesc;
 
   /// No description provided for @waterChangeTitle.
@@ -1843,13 +1843,13 @@ abstract class AppLocalizations {
   /// No description provided for @waterChangeMethod1Title.
   ///
   /// In de, this message translates to:
-  /// **'Methode 1: Tauchpumpe (Empfohlen)'**
+  /// **'Der wöchentliche Wechsel'**
   String get waterChangeMethod1Title;
 
   /// No description provided for @waterChangeMethod1Desc.
   ///
   /// In de, this message translates to:
-  /// **'1. Pumpe das Wasser mit der Minipumpe in einen leeren Eimer ab.\n2. Reinige den Tank kurz, falls nötig.\n3. Fülle mit frischem, temperiertem Leitungswasser auf.'**
+  /// **'• Wir empfehlen, das Wasser im Tank alle 7 bis 10 Tage komplett auszutauschen.\n• Pumpe das alte Wasser vollständig ab (z.B. mit Tauchpumpe).\n• Fülle frisches, temperiertes und pH-reguliertes Wasser mit Dünger ein.\n\nTIPP: Bereite das Wasser immer in einem zweiten Eimer vor.'**
   String get waterChangeMethod1Desc;
 
   /// No description provided for @waterChangeMethod2Title.
@@ -1861,7 +1861,7 @@ abstract class AppLocalizations {
   /// No description provided for @waterChangeMethod2Desc.
   ///
   /// In de, this message translates to:
-  /// **'1. Bereite einen zweiten, sauberen Eimer vor.\n2. Hebe den Deckel mitsamt Pflanze hoch und setze ihn auf den zweiten Eimer.\n3. Leere und reinige den Haupttank und fülle ihn frisch auf.\n4. Setze die Pflanze zurück.'**
+  /// **'• Bereite einen zweiten, sauberen Eimer vor.\n• Hebe den Deckel mitsamt Pflanze hoch und setze ihn auf den zweiten Eimer.\n• Leere und reinige den Haupttank und fülle ihn frisch auf.'**
   String get waterChangeMethod2Desc;
 
   /// No description provided for @waterChangeDone.
@@ -1897,13 +1897,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkinDeepDiveWaterChangeRecTitle.
   ///
   /// In de, this message translates to:
-  /// **'Warum regelmäßiger Wasserwechsel?'**
+  /// **'Warum ein kompletter Wechsel?'**
   String get checkinDeepDiveWaterChangeRecTitle;
 
   /// No description provided for @checkinDeepDiveWaterChangeRecText.
   ///
   /// In de, this message translates to:
-  /// **'Pflanzen scheiden Abfallstoffe aus und nicht alle Nährstoffe werden gleichmäßig verbraucht. Dies führt auf Dauer zu einer Ansammlung von unbrauchbaren Salzen, die den pH-Wert destabilisieren und die Nährstoffaufnahme blockieren (Nährstoff-Lockout). Ein wöchentlicher Wasserwechsel ist der beste Schutz gegen fast alle Mangelerscheinungen.'**
+  /// **'Die Pflanze scheidet Stoffwechselprodukte in das Wasser aus und nimmt nie alle Nährstoffe gleichmäßig auf. Fügst du immer nur frisch hinzu, reichern sich unbrauchbare Salze an. Der EC-Wert mag stimmen, besteht aber nur noch aus Abfall. Ein Wechsel ist dein bester Schutz.'**
   String get checkinDeepDiveWaterChangeRecText;
 
   /// No description provided for @checkinDeepDiveWaterLevelTitle.
@@ -1915,31 +1915,31 @@ abstract class AppLocalizations {
   /// No description provided for @checkinDeepDiveWaterLevelText.
   ///
   /// In de, this message translates to:
-  /// **'In der DWC-Methode ist es extrem wichtig, dass immer ein Luftspalt zwischen dem Wasser und dem Netztopf bleibt, sobald die Wurzeln im Wasser hängen. Die platzenden Blasen der Luftpumpe befeuchten die oberen Wurzeln (die sogenannten Luftwurzeln), welche Sauerstoff aufnehmen. Steht das Wasser zu hoch, ertrinkt die Pflanze.'**
+  /// **'Eine gesunde Pflanze trinkt extrem viel Wasser. Sinkt der Wasserstand, steigt automatisch die Konzentration der Nährstoffe im restlichen Wasser an, was zu Überdüngung führt. Gleichzeitig muss jedoch immer ein Luftspalt bleiben, damit die oberen \'Luftwurzeln\' Sauerstoff atmen können.'**
   String get checkinDeepDiveWaterLevelText;
 
   /// No description provided for @checkinDeepDiveEcMeasureTitle.
   ///
   /// In de, this message translates to:
-  /// **'EC-Wert verstehen'**
+  /// **'Das Steuerinstrument'**
   String get checkinDeepDiveEcMeasureTitle;
 
   /// No description provided for @checkinDeepDiveEcMeasureText.
   ///
   /// In de, this message translates to:
-  /// **'EC (Electrical Conductivity) misst die elektrische Leitfähigkeit deines Wassers, die durch gelöste Salze (also deinen Dünger) entsteht. Er sagt dir, wie stark konzentriert deine Nährlösung ist. Ohne Messung weißt du nie, ob deine Pflanze hungert oder kurz vor der Überdüngung steht.'**
+  /// **'Der EC-Wert sagt dir genau, wie hoch die Nährstoffkonzentration ist. Sinkt er über Nacht, hatte die Pflanze Hunger. Steigt er, war ihr das Wasser zu stark. Der pH-Wert entscheidet, ob die Pflanze diese Nährstoffe chemisch überhaupt aufnehmen kann.'**
   String get checkinDeepDiveEcMeasureText;
 
   /// No description provided for @checkinDeepDiveEcAdjustTitle.
   ///
   /// In de, this message translates to:
-  /// **'Dünger richtig anpassen'**
+  /// **'Exaktes Düngen'**
   String get checkinDeepDiveEcAdjustTitle;
 
   /// No description provided for @checkinDeepDiveEcAdjustText.
   ///
   /// In de, this message translates to:
-  /// **'Wenn der EC-Wert sinkt, hat die Pflanze mehr Dünger als Wasser verbraucht (sie hat Hunger). Wenn er steigt, trinkt sie mehr Wasser als Dünger (Überdüngungsgefahr!). Wir fügen nur Dünger für das frisch hinzugefügte Wasser hinzu, um die Balance im Tank zu halten.'**
+  /// **'Wir düngen niemals \'auf Verdacht\'. Wir ersetzen immer exakt nur die Nährstoffe für das Volumen an Wasser, das die Pflanze getrunken hat. Das verhindert, dass sich unverbrauchte Salze im Tank anstauen und den EC-Wert schleichend in toxische Höhen treiben.'**
   String get checkinDeepDiveEcAdjustText;
 
   /// No description provided for @checkinDeepDivePhMeasureTitle.
@@ -1951,31 +1951,31 @@ abstract class AppLocalizations {
   /// No description provided for @checkinDeepDivePhMeasureText.
   ///
   /// In de, this message translates to:
-  /// **'Cannabis kann Nährstoffe nur in einem bestimmten pH-Bereich aufnehmen. In DWC/Hydroponik liegt dieser Sweet Spot zwischen 5.5 und 6.5. Ist der Wert falsch, kannst du so viel düngen wie du willst – die Pflanze verhungert bei vollem Magen (Nutrient Lockout).'**
+  /// **'Cannabis kann Nährstoffe nur in einem bestimmten pH-Bereich aufnehmen. In DWC liegt dieser Sweet Spot zwischen 5.5 und 6.5. Ist der Wert falsch, kannst du so viel düngen wie du willst – die Pflanze verhungert bei vollem Magen (Nutrient Lockout).'**
   String get checkinDeepDivePhMeasureText;
 
   /// No description provided for @checkinDeepDivePhAdjustTitle.
   ///
   /// In de, this message translates to:
-  /// **'pH-Wert langsam anpassen'**
+  /// **'Vorsichtige Korrektur'**
   String get checkinDeepDivePhAdjustTitle;
 
   /// No description provided for @checkinDeepDivePhAdjustText.
   ///
   /// In de, this message translates to:
-  /// **'Gute pH-Regulatoren (pH Down) bestehen meist aus starken Säuren wie Phosphorsäure. Gib immer nur winzige Mengen (Tropfen) ins Wasser, rühre gut um und warte kurz, bevor du erneut misst. Zu starke Schwankungen schocken die Wurzeln.'**
+  /// **'Bei falschen pH-Werten kommt es zum \'Nutrient Lockout\'. Die Pflanze verhungert bei vollem Magen. Ein leichter Drift des pH-Wertes im Rahmen von 5.5 bis 6.5 ist normal und sogar gut, da verschiedene Nährstoffe bei minimal unterschiedlichen pH-Werten am besten absorbiert werden.'**
   String get checkinDeepDivePhAdjustText;
 
   /// No description provided for @checkinDeepDiveRootsCheckTitle.
   ///
   /// In de, this message translates to:
-  /// **'Das Warten auf die Wurzeln'**
+  /// **'Der Wendepunkt'**
   String get checkinDeepDiveRootsCheckTitle;
 
   /// No description provided for @checkinDeepDiveRootsCheckText.
   ///
   /// In de, this message translates to:
-  /// **'In den ersten Tagen reicht die Feuchtigkeit der Steinwolle. Die Wurzeln wachsen auf der Suche nach Wasser nach unten. Sobald die erste Wurzel durch den Netztopf ins Wasser hängt, explodiert das Wachstum und die Pflanze versorgt sich fast von selbst.'**
+  /// **'Dieser Moment markiert den Wendepunkt im DWC-Anbau. Sobald die Wurzeln das hochgradig mit Sauerstoff angereicherte Wasser direkt erreichen, schaltet die Pflanze den Turbo ein. Bis das passiert, versorgt sich die Pflanze primär aus der Feuchtigkeit der Steinwolle.'**
   String get checkinDeepDiveRootsCheckText;
 
   /// No description provided for @checkinDeepDiveTopWateringTitle.
@@ -1987,7 +1987,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinDeepDiveTopWateringText.
   ///
   /// In de, this message translates to:
-  /// **'Solange die Wurzeln das Wasserreservoir noch nicht erreicht haben, kann die Pflanze von unten vertrocknen. Durch leichtes Gießen von oben (Top Feeding) hilfst du ihr, bis sie das Wasser selbst erreicht. Verwende dabei nur das Wasser aus dem Eimer.'**
+  /// **'Solange die Wurzeln in der Luft hängen, riskierst du, dass der Steinwollwürfel austrocknet. Durch dieses \'Top Feeding\' hältst du den Blähton und den Würfel feucht. Sobald die Wurzeln im Wasser angekommen sind, ist dieser Schritt strengstens verboten (Gefahr von Stammfäule).'**
   String get checkinDeepDiveTopWateringText;
 
   /// No description provided for @checkinDeepDiveLampTitle.
@@ -1999,19 +1999,19 @@ abstract class AppLocalizations {
   /// No description provided for @checkinDeepDiveLampText.
   ///
   /// In de, this message translates to:
-  /// **'Licht ist für die Photosynthese der Motor, der das Wasser und die Nährstoffe verarbeitet. Hängt die Lampe zu nah, verbrennen die Blätter (Lichtstress). Hängt sie zu weit weg, spargelt die Pflanze (wird lang und dünn). Nutze die PPFD-Messung für den perfekten Abstand.'**
+  /// **'Das Licht ist der Motor für das Wachstum. Die PPFD-Messung stellt sicher, dass wir diesen Motor nicht überdrehen. Wenn die Pflanze in die Höhe schießt, vervielfacht sich die Lichtintensität. Ein zu geringer Abstand führt unweigerlich zu Lichtstress (verbrannte Spitzen).'**
   String get checkinDeepDiveLampText;
 
   /// No description provided for @checkinDeepDiveHealthTitle.
   ///
   /// In de, this message translates to:
-  /// **'Tägliche Sichtkontrolle'**
+  /// **'Die Blätter als Display'**
   String get checkinDeepDiveHealthTitle;
 
   /// No description provided for @checkinDeepDiveHealthText.
   ///
   /// In de, this message translates to:
-  /// **'Der Blick auf die Blätter verrät alles. Hängen sie schlaff? Meistens Sauerstoffmangel im Wasser (Pumpe prüfen!). Werden sie gelb oder haben Flecken? Fast immer ein falscher pH-Wert oder ein Nährstoffproblem. Rollen sich die Ränder nach oben? Hitzestress!'**
+  /// **'Die Blätter sind das Display deiner Pflanze. Hängen sie extrem schlaff herunter, deutet das bei DWC fast immer auf ein Problem im Wasser hin (Sauerstoffmangel/Wurzelfäule). Braune oder gelbe Flecken signalisieren falsche pH-Werte. Nach oben gerollte Ränder sind der Versuch, Hitzestress abzubauen.'**
   String get checkinDeepDiveHealthText;
 
   /// No description provided for @checkinDeepDiveFinishTitle.
@@ -2023,7 +2023,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinDeepDiveFinishText.
   ///
   /// In de, this message translates to:
-  /// **'Das wichtigste bei DWC ist Beständigkeit. Durch den täglichen, schnellen Check-In fängst du kleine Probleme (wie einen driftenden pH-Wert) ab, bevor sie zu großen Problemen für deine Pflanze werden.'**
+  /// **'Konstanz ist beim DWC-Anbau alles. Indem du jeden Tag diese kleinen Checks durchführst, verhinderst du, dass kleine Schwankungen zu massiven Problemen eskalieren. Ein abrutschender pH-Wert ist nach einem Tag kein Problem – nach drei Tagen zeigt die Pflanze schwere Schäden.'**
   String get checkinDeepDiveFinishText;
 
   /// No description provided for @germinationDeepDive1Title.
@@ -2035,19 +2035,19 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDeepDive1Text.
   ///
   /// In de, this message translates to:
-  /// **'Das Einweichen in handwarmem Wasser simuliert den ersten Frühlingsregen. Die harte Schale des Samens saugt sich voll Wasser, weicht auf und signalisiert dem Keimling im Inneren, dass es Zeit ist, aufzuwachen. Lass den Samen nicht länger als 24 Stunden im Wasser, sonst ertrinkt er, da er Sauerstoff braucht.'**
+  /// **'Die harte Schale des Samens benötigt Feuchtigkeit, um aufzuweichen. Das handwarme Wasser simuliert den ersten Frühlingsregen und signalisiert dem Keimling, dass es Zeit ist, aufzuwachen. Lass den Samen jedoch nie länger als 24 Stunden im Glas, da er sonst ertrinkt – er benötigt Sauerstoff.'**
   String get germinationDeepDive1Text;
 
   /// No description provided for @germinationDeepDive1bTitle.
   ///
   /// In de, this message translates to:
-  /// **'Steinwolle und pH-Wert'**
+  /// **'Warum pH-angepasstes Wasser?'**
   String get germinationDeepDive1bTitle;
 
   /// No description provided for @germinationDeepDive1bText.
   ///
   /// In de, this message translates to:
-  /// **'Steinwolle ist von Natur aus basisch (hoher pH-Wert). Wenn du sie nicht in pH-reguliertem Wasser (ca. 5.5) einweichst, kann sie später den pH-Wert deines gesamten Eimers nach oben ziehen und die Wurzelentwicklung deines Sämlings stören. Lass sie gut vollsaugen!'**
+  /// **'Steinwolle ist bei der Herstellung extrem basisch (hoher pH-Wert). Würdest du sie nicht in saurem Wasser einweichen, würde sie später den pH-Wert in deinem DWC-Eimer ständig nach oben ziehen. Der Keimling könnte dann keine Nährstoffe mehr aufnehmen.'**
   String get germinationDeepDive1bText;
 
   /// No description provided for @germinationDeepDive2Title.
@@ -2059,19 +2059,19 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDeepDive2Text.
   ///
   /// In de, this message translates to:
-  /// **'Cannabiswurzeln und -samen hassen Licht. In der Natur keimen sie unter der Erde im absoluten Dunkeln. Licht kann in diesem frühen Stadium den Hormonhaushalt des Samens stören und die Keimung komplett stoppen.'**
+  /// **'Cannabissamen sind Dunkelkeimer. In der Natur liegen sie geschützt unter der Erde. Fällt Licht auf den Samen, während er Feuchtigkeit zieht, kann dies seinen Hormonhaushalt stören und den Keimvorgang abbrechen.'**
   String get germinationDeepDive2Text;
 
   /// No description provided for @germinationDeepDive3Title.
   ///
   /// In de, this message translates to:
-  /// **'Wunder der Natur'**
+  /// **'Die Wurzel wächst'**
   String get germinationDeepDive3Title;
 
   /// No description provided for @germinationDeepDive3Text.
   ///
   /// In de, this message translates to:
-  /// **'Im Inneren des Samens passiert gerade Folgendes: Das Wasser aktiviert Enzyme, die die gespeicherte Stärke in Zucker umwandeln. Dieser Zucker liefert die Energie für das erste Zellwachstum. Die Wurzelspitze (Pfahlwurzel) drückt von innen gegen die Schale.'**
+  /// **'Die kleine weiße Spitze, die du siehst, ist die sogenannte Pfahlwurzel (Taproot). Aus ihr bildet sich das gesamte spätere Fundament der Pflanze. Sie ist extrem fragil. Setze sie auf keinen Fall direktem, starkem Licht aus.'**
   String get germinationDeepDive3Text;
 
   /// No description provided for @germinationDeepDive4Title.
@@ -2107,7 +2107,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDeepDive6Text.
   ///
   /// In de, this message translates to:
-  /// **'Steinwolle bietet das perfekte Verhältnis von Wasserhaltung und Sauerstoff für kleine Sämlinge. Wenn du den Samen einsetzt, muss die Wurzel nach unten zeigen, da sie der Schwerkraft folgt (Geotropismus). Der Keimling wächst dann der Schwerkraft entgegen nach oben.'**
+  /// **'Wurzeln wachsen immer der Schwerkraft folgend nach unten (Geotropismus), während der Stängel nach oben wächst. Wenn du den Samen falsch herum einsetzt, muss der Keimling im Inneren erst eine 180-Grad-Wende vollziehen. Das kostet ihn wertvolle Energie und verzögert das Wachstum.'**
   String get germinationDeepDive6Text;
 
   /// No description provided for @germinationDeepDive7Title.
@@ -2119,7 +2119,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDeepDive7Text.
   ///
   /// In de, this message translates to:
-  /// **'Der Blähton dient nur zur Stabilisierung des Steinwollwürfels und blockiert Licht, damit keine Algen im Wasser wachsen. Er ist an sich komplett nährstofffrei. Es ist extrem wichtig, ihn vorher abzuwaschen, da der rote Staub sonst in deinen Eimer gespült wird und deine Pumpen verstopfen kann.'**
+  /// **'Der Blähton hat keinerlei Nährstoffe. Seine einzige Aufgabe ist es, der Pflanze mechanischen Halt zu geben und das Licht vom Wasserreservoir fernzuhalten. Ungewaschener Blähton spült feinen, roten Staub in deinen Eimer. Dieser Staub blockiert die feinen Poren der Wurzeln und ruiniert deine Luftpumpe.'**
   String get germinationDeepDive7Text;
 
   /// No description provided for @germinationDeepDive8Title.
@@ -2131,7 +2131,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDeepDive8Text.
   ///
   /// In de, this message translates to:
-  /// **'Beim Deep Water Culture (DWC) hängen die Wurzeln in einer hochgradig mit Sauerstoff angereicherten Nährlösung. Dadurch verbrennt die Pflanze weniger Energie bei der Wurzelbildung und steckt diese stattdessen ins Wachstum der Blätter und Blüten. Deshalb wachsen DWC-Pflanzen oft viel schneller als auf Erde.'**
+  /// **'Beim Deep Water Culture System ist der Sauerstoff im Wasser dein wichtigster Verbündeter. Stünde die Steinwolle direkt im Wasser, würde sie sich komplett vollsaugen und der Keimling würde unweigerlich ertrinken. Die hohe Luftfeuchtigkeit im Eimer und die feinen Spritzer ziehen die Wurzeln förmlich nach unten.'**
   String get germinationDeepDive8Text;
 
   /// No description provided for @germinationDeepDive9Title.
@@ -2143,7 +2143,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDeepDive9Text.
   ///
   /// In de, this message translates to:
-  /// **'PPFD (Photosynthetic Photon Flux Density) misst, wie viele Lichtteilchen tatsächlich auf den Blättern ankommen. Ein Sämling hat noch kaum Blätter und kann mit extrem viel Licht (hoher PPFD) nichts anfangen. Zu viel Licht führt zu Lichtstress, was den Sämling bleicht, das Wachstum stoppt oder ihn sogar abtötet.'**
+  /// **'PPFD misst die Anzahl der Lichtteilchen, die tatsächlich auf der Pflanze ankommen. Ein Sämling hat noch keine echten Blätter für die Photosynthese. Zu viel Licht in diesem Stadium führt zu starkem Lichtstress: Der Sämling bleicht aus, stoppt das Wachstum oder stirbt ab.'**
   String get germinationDeepDive9Text;
 
   /// No description provided for @diagnoseProblemButton.
@@ -2215,25 +2215,25 @@ abstract class AppLocalizations {
   /// No description provided for @problemNutrientBurnSymptoms.
   ///
   /// In de, this message translates to:
-  /// **'Verbrannte, braune und knusprige Blattspitzen. Die Verfärbung breitet sich von den Rändern nach innen aus.'**
+  /// **'Braune, verbrannte und knusprige Blattspitzen, die sich langsam nach innen ausbreiten.'**
   String get problemNutrientBurnSymptoms;
 
   /// No description provided for @problemNutrientBurnTriggers.
   ///
   /// In de, this message translates to:
-  /// **'Der EC-Wert im Wasser ist zu hoch. Die Pflanze verdunstet mehr Wasser als sie Salze aufnimmt, wodurch sich Dünger in den Blattspitzen ansammelt.'**
+  /// **'Nährstoffbrand entsteht, wenn der EC-Wert so hoch ist, dass durch osmotischen Druck Salze in den Blattspitzen abgelagert werden. Eine Überdüngung wirft die Pflanze um Wochen zurück. Dünge bei Zweifeln weniger.'**
   String get problemNutrientBurnTriggers;
 
   /// No description provided for @problemNutrientBurnSolution.
   ///
   /// In de, this message translates to:
-  /// **'Wechsle das Wasser komplett aus oder pumpe die Hälfte ab und fülle ungedüngtes, ph-reguliertes Wasser nach, um den EC-Wert zu senken.'**
+  /// **'Senke den EC-Wert im Wasser sofort. Pumpe ca. 30-50% des Wassers ab und fülle reines, pH-reguliertes (ungedüngtes) Wasser nach.'**
   String get problemNutrientBurnSolution;
 
   /// No description provided for @problemNutrientBurnPrevention.
   ///
   /// In de, this message translates to:
-  /// **'Mische den Dünger exakt nach Schema. Wenn die Spitzen anfangen leicht hell zu werden (Nutrient Tip Burn), senke den Ziel-EC beim nächsten Tankwechsel leicht ab.'**
+  /// **'Achte auf \'Tip Burn\' – winzige gelbe Punkte ganz an der Spitze der Blätter. Dies ist das perfekte Zeichen, dass du das exakte Limit der Pflanze erreicht hast.'**
   String get problemNutrientBurnPrevention;
 
   /// No description provided for @problemPhImbalanceName.
@@ -2245,25 +2245,25 @@ abstract class AppLocalizations {
   /// No description provided for @problemPhImbalanceSymptoms.
   ///
   /// In de, this message translates to:
-  /// **'Verdrehte oder wellige Blätter, gelbe und braune Flecken, die oft aussehen wie ein Kalzium-Mangel. Das Wachstum stagniert.'**
+  /// **'Gelbe, oft rostige Flecken auf den mittleren Blättern. Verdrehtes oder unförmiges Wachstum.'**
   String get problemPhImbalanceSymptoms;
 
   /// No description provided for @problemPhImbalanceTriggers.
   ///
   /// In de, this message translates to:
-  /// **'Der pH-Wert liegt dauerhaft außerhalb des optimalen Bereichs (5.5 - 6.5). Dadurch können bestimmte Nährstoffe nicht mehr aufgenommen werden (Nährstoffsperre).'**
+  /// **'Anfänger verwechseln diese Flecken oft mit Kalziummangel und düngen mehr – ein fataler Fehler. Die Mineralien sind da, aber der falsche pH-Wert blockiert die Wurzeln chemisch (Lockout).'**
   String get problemPhImbalanceTriggers;
 
   /// No description provided for @problemPhImbalanceSolution.
   ///
   /// In de, this message translates to:
-  /// **'Kontrolliere und korrigiere den pH-Wert sofort. Ist der Tank alt, wechsle das Wasser komplett, da alte Nährstoffe den pH-Wert unstabil machen.'**
+  /// **'Korrigiere den pH-Wert sofort in den Bereich 5.5 bis 6.5. Ist das Wasser älter als 7 Tage, wechsle es komplett aus.'**
   String get problemPhImbalanceSolution;
 
   /// No description provided for @problemPhImbalancePrevention.
   ///
   /// In de, this message translates to:
-  /// **'Prüfe den pH-Wert täglich beim Check-In. Wechsle das Wasser strikt jede Woche, da alte Nährstofflösungen ihren Puffer verlieren.'**
+  /// **'Nutze niemals Hausmittel wie Essig oder Zitronensaft, um den pH-Wert zu senken. Der pH-Wert schießt nach wenigen Stunden wieder unkontrolliert nach oben.'**
   String get problemPhImbalancePrevention;
 
   /// No description provided for @problemLightBurnName.
@@ -2547,6 +2547,90 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Aus'**
   String get settingsFreqOff;
+
+  /// No description provided for @checkinTransitionAutoTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Beginnt die Blüte?'**
+  String get checkinTransitionAutoTitle;
+
+  /// No description provided for @checkinTransitionAutoDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Es bilden sich erste kleine weiße Härchen (Vorblüte / Pistils) an den Blattachseln (Nodien). Zudem beginnt die Pflanze plötzlich stark in die Höhe zu wachsen.\n\nSiehst du diese weißen Härchen an deiner Pflanze?'**
+  String get checkinTransitionAutoDesc;
+
+  /// No description provided for @checkinTransitionAutoNo.
+  ///
+  /// In de, this message translates to:
+  /// **'Nein, noch nicht'**
+  String get checkinTransitionAutoNo;
+
+  /// No description provided for @checkinTransitionAutoYes.
+  ///
+  /// In de, this message translates to:
+  /// **'Ja, Blüte hat begonnen'**
+  String get checkinTransitionAutoYes;
+
+  /// No description provided for @checkinTransitionPhotoTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Zeit für die Blüte?'**
+  String get checkinTransitionPhotoTitle;
+
+  /// No description provided for @checkinTransitionPhotoDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Cannabis wächst in den ersten 2-3 Wochen der Blüte (dem \'Stretch\') extrem in die Höhe – oft verdoppelt oder verdreifacht sie ihre Größe.\n\nHat die Pflanze ca. 1/3 bis 1/2 des maximal verfügbaren Platzes erreicht und ist gesund?\n\nMöchtest du sie heute in die Blüte schicken?'**
+  String get checkinTransitionPhotoDesc;
+
+  /// No description provided for @checkinTransitionPhotoNo.
+  ///
+  /// In de, this message translates to:
+  /// **'Nein, sie braucht noch Zeit'**
+  String get checkinTransitionPhotoNo;
+
+  /// No description provided for @checkinTransitionPhotoYes.
+  ///
+  /// In de, this message translates to:
+  /// **'Ja, heute wird umgestellt'**
+  String get checkinTransitionPhotoYes;
+
+  /// No description provided for @checkinTransitionLightPhotoTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Lichtumstellung (12/12)'**
+  String get checkinTransitionLightPhotoTitle;
+
+  /// No description provided for @checkinTransitionLightPhotoDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Um die Blüte auszulösen, musst du deine Zeitschaltuhr heute auf 12 Stunden an / 12 Stunden aus umstellen.\n\nWICHTIG: In den 12 Stunden Dunkelheit darf kein noch so kleines Licht ins Zelt fallen (Störlicht), sonst zwittert die Pflanze.'**
+  String get checkinTransitionLightPhotoDesc;
+
+  /// No description provided for @checkinTransitionLightAutoTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Licht bleibt auf 18/6'**
+  String get checkinTransitionLightAutoTitle;
+
+  /// No description provided for @checkinTransitionLightAutoDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Da es sich um eine Autoflower handelt, musst du an der Zeitschaltuhr nichts ändern. Lass sie auf 18/6 (oder 20/4).\n\nAchte in den nächsten Tagen extrem auf den Lampenabstand, da sie stark in die Höhe wachsen wird.'**
+  String get checkinTransitionLightAutoDesc;
+
+  /// No description provided for @checkinFlowerWaterChangeRecTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Neues Düngeschema'**
+  String get checkinFlowerWaterChangeRecTitle;
+
+  /// No description provided for @checkinFlowerWaterChangeRecDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Da deine Pflanze nun in die Blütephase übergegangen ist, benötigt sie einen anderen Mix an Nährstoffen (mehr Phosphor/Kalium). Deshalb muss das Wasser heute unbedingt komplett gewechselt werden, bevor der neue Dünger angemischt wird.'**
+  String get checkinFlowerWaterChangeRecDesc;
 }
 
 class _AppLocalizationsDelegate

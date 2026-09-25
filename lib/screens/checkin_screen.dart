@@ -24,7 +24,6 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   bool? _initialRootsNotReached;
   bool? _tempRootsInWater;
 
-  double? _inputPh;
   double? _inputEc;
   double? _inputPpfd;
   double? _inputWaterAdded;
@@ -33,6 +32,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   bool? _willDoWaterChange;
   bool _needsLampCheck = false;
   bool _needsVentilatorCheck = false;
+  bool _showFlowerTransition = false;
+  bool _showLightCycleTransition = false;
+  bool _isFlowerTransitionWaterChange = false;
 
   @override
   void initState() {
@@ -108,6 +110,11 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         if (!hasLogToday) ventCheck = true;
       }
 
+      bool flowerTrans = false;
+      if (plant.currentPhase == PlantPhase.veg && plant.getDayInPhase(now) >= 21) {
+        flowerTrans = true;
+      }
+
       setState(() {
         _plant = plant;
         _initialRootsNotReached ??= _plant!.currentPhase == PlantPhase.veg &&
@@ -115,6 +122,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         _needsWaterChange = needsWc;
         _needsLampCheck = lampCheck;
         _needsVentilatorCheck = ventCheck;
+        _showFlowerTransition = flowerTrans;
       });
     }
   }
@@ -148,7 +156,6 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       LogEntriesCompanion.insert(
         plantId: _plant!.id,
         timestamp: ref.read(timeProvider),
-        ph: _inputPh != null ? drift.Value(_inputPh!) : const drift.Value.absent(),
         ec: _inputEc != null ? drift.Value(_inputEc!) : const drift.Value.absent(),
         ppfd: _inputPpfd != null ? drift.Value(_inputPpfd!) : const drift.Value.absent(),
       ),
@@ -172,9 +179,18 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
+                if (_showFlowerTransition)
+                  _buildFlowerTransitionSlide(),
+                if (_showLightCycleTransition)
+                  _buildLightCycleTransitionSlide(),
                 if (_needsWaterChange)
                   _wrapWithInfo(
                       _buildWaterChangeRecommendationSlide(),
+                      l10n.checkinDeepDiveWaterChangeRecTitle,
+                      l10n.checkinDeepDiveWaterChangeRecText),
+                if (_willDoWaterChange == true)
+                  _wrapWithInfo(
+                      _buildWaterChangeExecutionSlide(),
                       l10n.checkinDeepDiveWaterChangeRecTitle,
                       l10n.checkinDeepDiveWaterChangeRecText),
                 if (_initialRootsNotReached == true) ...[
@@ -233,10 +249,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                       _buildPhMeasureSlide(),
                       l10n.checkinDeepDivePhMeasureTitle,
                       l10n.checkinDeepDivePhMeasureText),
-                  _wrapWithInfo(
-                      _buildPhAdjustSlide(),
-                      l10n.checkinDeepDivePhAdjustTitle,
-                      l10n.checkinDeepDivePhAdjustText),
+
                 ],
                 if (_needsLampCheck)
                   _wrapWithInfo(_buildLampSlide(), l10n.checkinDeepDiveLampTitle,
@@ -341,6 +354,130 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   // --- NEW SLIDES ---
 
+  Widget _buildFlowerTransitionSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    final isAuto = _plant?.type == PlantType.auto;
+    final title = isAuto ? l10n.checkinTransitionAutoTitle : l10n.checkinTransitionPhotoTitle;
+    final desc = isAuto ? l10n.checkinTransitionAutoDesc : l10n.checkinTransitionPhotoDesc;
+    final noText = isAuto ? l10n.checkinTransitionAutoNo : l10n.checkinTransitionPhotoNo;
+    final yesText = isAuto ? l10n.checkinTransitionAutoYes : l10n.checkinTransitionPhotoYes;
+
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Spacer(),
+          const Icon(Icons.local_florist, size: 80, color: Colors.purpleAccent),
+          const SizedBox(height: 32),
+          Text(title,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+              textAlign: TextAlign.center),
+          const SizedBox(height: 24),
+          Text(desc,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.white70,
+                  ),
+              textAlign: TextAlign.center),
+          const Spacer(),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.surface,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            onPressed: () {
+              setState(() {
+                _showFlowerTransition = false;
+              });
+            },
+            child: Text(noText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.purpleAccent,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            onPressed: () async {
+              final db = ref.read(databaseProvider).db;
+              final updatedPlant = _plant!.copyWith(
+                currentPhase: PlantPhase.flower,
+                phaseStartDate: drift.Value(ref.read(timeProvider)),
+              );
+              await db.update(db.plants).replace(updatedPlant);
+              
+              setState(() {
+                _plant = updatedPlant;
+                _showFlowerTransition = false;
+                _showLightCycleTransition = true;
+                _needsWaterChange = true;
+                _isFlowerTransitionWaterChange = true;
+              });
+            },
+            child: Text(yesText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          ),
+          const SizedBox(height: 24),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLightCycleTransitionSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    final isAuto = _plant?.type == PlantType.auto;
+    final title = isAuto ? l10n.checkinTransitionLightAutoTitle : l10n.checkinTransitionLightPhotoTitle;
+    final desc = isAuto ? l10n.checkinTransitionLightAutoDesc : l10n.checkinTransitionLightPhotoDesc;
+
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Spacer(),
+          const Icon(Icons.light_mode, size: 80, color: Colors.orangeAccent),
+          const SizedBox(height: 32),
+          Text(title,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+              textAlign: TextAlign.center),
+          const SizedBox(height: 24),
+          Text(desc,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.white70,
+                  ),
+              textAlign: TextAlign.center),
+          const Spacer(),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.growGreen,
+              foregroundColor: Colors.black,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            onPressed: () {
+              setState(() {
+                _showLightCycleTransition = false;
+              });
+            },
+            child: Text(l10n.generalUnderstood, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          ),
+          const SizedBox(height: 24),
+        ],
+      ),
+    );
+  }
+
   Widget _buildWaterChangeRecommendationSlide() {
     final l10n = AppLocalizations.of(context)!;
     return Padding(
@@ -353,7 +490,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           const Icon(Icons.water_damage, size: 80, color: Colors.blueAccent),
           const SizedBox(height: 32),
           Text(
-            l10n.checkinWaterChangeRecTitle,
+            _isFlowerTransitionWaterChange 
+                ? l10n.checkinFlowerWaterChangeRecTitle 
+                : l10n.checkinWaterChangeRecTitle,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -362,7 +501,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
           ),
           const SizedBox(height: 24),
           Text(
-            l10n.checkinWaterChangeRecDesc,
+            _isFlowerTransitionWaterChange
+                ? l10n.checkinFlowerWaterChangeRecDesc
+                : l10n.checkinWaterChangeRecDesc,
             style: Theme.of(context)
                 .textTheme
                 .bodyLarge
@@ -370,62 +511,170 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
-          ChoiceChip(
-            label: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Center(
-                    child: Text(l10n.checkinWaterChangeRecNow,
-                        style: const TextStyle(fontSize: 16)))),
-            selected: _willDoWaterChange == true,
-            onSelected: (val) => setState(() => _willDoWaterChange = true),
+          if (_isFlowerTransitionWaterChange) ...[
+            const Spacer(),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.growGreen,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+              ),
+              onPressed: () {
+                setState(() {
+                  _willDoWaterChange = true;
+                  _isWaterChange = true;
+                });
+                _nextPage();
+              },
+              child: Text(l10n.checkinWaterChangeRecNow,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            ),
+          ] else ...[
+            ChoiceChip(
+              label: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Center(
+                      child: Text(l10n.checkinWaterChangeRecNow,
+                          style: const TextStyle(fontSize: 16)))),
+              selected: _willDoWaterChange == true,
+              onSelected: (val) => setState(() => _willDoWaterChange = true),
+            ),
+            const SizedBox(height: 12),
+            ChoiceChip(
+              label: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Center(
+                      child: Text(l10n.checkinWaterChangeRecLater,
+                          style: const TextStyle(fontSize: 16)))),
+              selected: _willDoWaterChange == false,
+              onSelected: (val) => setState(() => _willDoWaterChange = false),
+            ),
+            const Spacer(),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.growGreen,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+              ),
+              onPressed: _willDoWaterChange == null
+                  ? null
+                  : () {
+                      if (_willDoWaterChange == true) {
+                        setState(() {
+                          _isWaterChange = true;
+                        });
+                      }
+                      _nextPage();
+                    },
+              child: Text(l10n.checkinContinue,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ],
+          const SizedBox(height: 24),
+        ],
+      ),
+    );
+  }
+  Widget _buildWaterChangeExecutionSlide() {
+    final l10n = AppLocalizations.of(context)!;
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Spacer(),
+          _buildMethodCard(
+            title: l10n.waterChangeMethod1Title,
+            content: l10n.waterChangeMethod1Desc,
+            icon: Icons.waves,
+            isRecommended: true,
           ),
-          const SizedBox(height: 12),
-          ChoiceChip(
-            label: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Center(
-                    child: Text(l10n.checkinWaterChangeRecLater,
-                        style: const TextStyle(fontSize: 16)))),
-            selected: _willDoWaterChange == false,
-            onSelected: (val) => setState(() => _willDoWaterChange = false),
+          const SizedBox(height: 16),
+          _buildMethodCard(
+            title: l10n.waterChangeMethod2Title,
+            content: l10n.waterChangeMethod2Desc,
+            icon: Icons.wash,
           ),
           const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.growGreen,
               foregroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
-            onPressed: _willDoWaterChange == null
-                ? null
-                : () async {
-                    if (_willDoWaterChange == true) {
-                      final result = await context.push<bool>('/water_change');
-                      if (!mounted) return;
-                      if (result == true) {
-                        setState(() {
-                          _isWaterChange = true;
-                        });
-                        // Jump to next page instantly so we don't see the slide animating
-                        _pageController.jumpToPage((_pageController.page ?? 0).toInt() + 1);
-                      }
-                      // If result != true, user cancelled. Stay on this slide.
-                    } else {
-                      _nextPage();
-                    }
-                  },
-            child: Text(l10n.checkinContinue,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+            onPressed: () {
+              _nextPage();
+            },
+            child: Text(
+              l10n.waterChangeDone,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(height: 24),
         ],
       ),
     );
   }
+
+  Widget _buildMethodCard({
+    required String title,
+    required String content,
+    required IconData icon,
+    bool isRecommended = false,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: isRecommended
+            ? Border.all(color: AppColors.growGreen, width: 2)
+            : null,
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon,
+                  color: isRecommended ? AppColors.growGreen : Colors.white,
+                  size: 24),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color:
+                            isRecommended ? AppColors.growGreen : Colors.white,
+                      ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            content,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.white70,
+                  height: 1.3,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+
 
   Widget _buildWaterLevelSlide() {
     final l10n = AppLocalizations.of(context)!;
@@ -680,56 +929,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   .bodyLarge
                   ?.copyWith(color: Colors.white70),
               textAlign: TextAlign.center),
-          const SizedBox(height: 32),
-          TextFormField(
-            decoration: InputDecoration(
-                labelText: l10n.checkinPhLabel,
-                border: const OutlineInputBorder()),
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            onChanged: (val) => setState(
-                () => _inputPh = double.tryParse(val.replaceAll(',', '.'))),
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              Expanded(flex: 1, child: _backButton()),
-              const SizedBox(width: 16),
-              Expanded(flex: 2, child: _nextButton(enabled: _inputPh != null)),
-            ],
-          ),
           const SizedBox(height: 24),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildPhAdjustSlide() {
-    final l10n = AppLocalizations.of(context)!;
-    bool phOk = _inputPh != null && _inputPh! >= 5.5 && _inputPh! <= 6.5;
-
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Spacer(),
-          Icon(phOk ? Icons.check_circle : Icons.warning,
-              size: 80, color: phOk ? AppColors.growGreen : Colors.orange),
-          const SizedBox(height: 24),
-          Text(l10n.checkinPhStatusTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall
-                  ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
-              textAlign: TextAlign.center),
-          const SizedBox(height: 16),
-          Text(phOk ? l10n.checkinPhStatusOk : l10n.checkinPhStatusAdjust,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: Colors.white70),
-              textAlign: TextAlign.center),
           const Spacer(),
           Row(
             children: [
@@ -743,7 +944,6 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       ),
     );
   }
-
   // --- EXISTING SLIDES ---
 
   Widget _buildRootsCheckSlide() {
