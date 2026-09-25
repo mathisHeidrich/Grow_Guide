@@ -18,16 +18,63 @@ class _WaterChangeScreenState extends State<WaterChangeScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
+      appBar: AppBar(
+        title: Text(l10n.waterChangeTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: AppColors.surface,
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                ),
+                builder: (context) => Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: SafeArea(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(l10n.checkinDeepDiveWaterChangeRecTitle,
+                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold, color: Colors.white)),
+                        const SizedBox(height: 16),
+                        Text(l10n.checkinDeepDiveWaterChangeRecText,
+                            style: const TextStyle(fontSize: 16, color: Colors.white70, height: 1.5)),
+                        const SizedBox(height: 24),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.growGreen,
+                              foregroundColor: Colors.black,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(l10n.generalUnderstood,
+                                style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Spacer(),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Spacer(),
                   _buildMethodCard(
                     context,
                     title: l10n.waterChangeMethod1Title,
@@ -43,109 +90,27 @@ class _WaterChangeScreenState extends State<WaterChangeScreen> {
                     icon: Icons.wash,
                   ),
                   const Spacer(),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            side: const BorderSide(color: Colors.white54),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                          onPressed: () => context.pop(false),
-                          child: Text(l10n.checkinBack),
-                        ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.growGreen,
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        flex: 2,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.growGreen,
-                            foregroundColor: Colors.black,
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                          onPressed: () {
-                            context.pop(true);
-                          },
-                          child: Text(
-                            l10n.waterChangeDone,
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
+                    onPressed: () {
+                      context.pop(true);
+                    },
+                    child: Text(
+                      l10n.waterChangeDone,
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ),
                   const SizedBox(height: 24),
                 ],
               ),
             ),
-            Positioned(
-              top: 16,
-              left: 16,
-              child: IconButton(
-                icon: const Icon(Icons.info_outline, color: Colors.white54, size: 32),
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: AppColors.surface,
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                    ),
-                    builder: (context) => Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: SafeArea(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(l10n.checkinDeepDiveWaterChangeRecTitle,
-                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                    fontWeight: FontWeight.bold, color: Colors.white)),
-                            const SizedBox(height: 16),
-                            Text(l10n.checkinDeepDiveWaterChangeRecText,
-                                style: const TextStyle(fontSize: 16, color: Colors.white70, height: 1.5)),
-                            const SizedBox(height: 24),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.growGreen,
-                                  foregroundColor: Colors.black,
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                ),
-                                onPressed: () => Navigator.pop(context),
-                                child: Text(l10n.generalUnderstood,
-                                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Positioned(
-              top: 16,
-              right: 16,
-              child: IconButton(
-                icon: const Icon(Icons.close, color: Colors.white54, size: 32),
-                onPressed: () => context.pop(false),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
