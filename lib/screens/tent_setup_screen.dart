@@ -87,18 +87,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
               nextButtonText: l10n.tentNext4,
               onNext: _nextPage,
               showBack: true,
-              extraWidget: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                ),
-                icon: const Icon(Icons.camera_alt),
-                label: Text(l10n.checkinMeasurePpfd),
-                onPressed: () => context.push('/ppfd_meter'),
-              ),
             ),
             _buildSlide(
               title: l10n.tentTitle5,

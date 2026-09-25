@@ -144,18 +144,9 @@ class _HarvestWizardScreenState extends ConsumerState<HarvestWizardScreen> {
           ),
           const SizedBox(height: 24),
           TipFormattedText(
-            text,
+            tip.isNotEmpty ? '$text\n\n$tip' : text,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            tip,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.growGreen.withValues(alpha: 0.8),
-                  fontStyle: FontStyle.italic,
                 ),
             textAlign: TextAlign.center,
           ),
