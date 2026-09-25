@@ -116,6 +116,11 @@ final routerProvider = Provider<GoRouter>((ref) {
                 return GerminationWizardScreen(plantId: id);
               }
 
+              if (plant.currentPhase == PlantPhase.drying ||
+                  plant.currentPhase == PlantPhase.curing) {
+                return FinishWizardScreen(plantId: id);
+              }
+
               return CheckinScreen(plantId: id);
             },
           );
