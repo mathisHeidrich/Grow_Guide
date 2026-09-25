@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/tip_formatted_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
@@ -59,7 +60,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle1,
               text: l10n.tentDesc1,
-              tipText: l10n.tentTip1,
               icon: Icons.place,
               nextButtonText: l10n.tentNext1,
               onNext: _nextPage,
@@ -67,7 +67,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle2,
               text: l10n.tentDesc2,
-              tipText: l10n.tentTip2,
               icon: Icons.filter_alt,
               nextButtonText: l10n.tentNext2,
               onNext: _nextPage,
@@ -76,7 +75,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle3,
               text: l10n.tentDesc3,
-              tipText: l10n.tentTip3,
               icon: Icons.air,
               nextButtonText: l10n.tentNext3,
               onNext: _nextPage,
@@ -85,7 +83,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle4,
               text: l10n.tentDesc4,
-              tipText: l10n.tentTip4,
               icon: Icons.lightbulb,
               nextButtonText: l10n.tentNext4,
               onNext: _nextPage,
@@ -106,7 +103,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle5,
               text: l10n.tentDesc5,
-              tipText: l10n.tentTip5,
               icon: Icons.cyclone,
               nextButtonText: l10n.tentNext5,
               onNext: _nextPage,
@@ -115,7 +111,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle6,
               text: l10n.tentDesc6,
-              tipText: l10n.tentTip6,
               icon: Icons.delete,
               nextButtonText: l10n.tentNext6,
               onNext: _nextPage,
@@ -124,7 +119,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle7,
               text: l10n.tentDesc7,
-              tipText: l10n.tentTip7,
               icon: Icons.bubble_chart,
               iconColor:
                   AppColors.errorRed, // warning color for safety tip
@@ -135,7 +129,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle8,
               text: l10n.tentDesc8,
-              tipText: l10n.tentTip8,
               icon: Icons.warning,
               iconColor:
                   AppColors.errorRed, // warning color for safety tip
@@ -146,7 +139,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle9,
               text: l10n.tentDesc9,
-              tipText: l10n.tentTip9,
               icon: Icons.timer,
               nextButtonText: l10n.tentNext9,
               onNext: _nextPage,
@@ -155,7 +147,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             _buildSlide(
               title: l10n.tentTitle10,
               text: l10n.tentDesc10,
-              tipText: l10n.tentTip10,
               icon: Icons.check_circle,
               nextButtonText: l10n.tentNext10,
               onNext: _completeSetup,
@@ -170,7 +161,6 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
   Widget _buildSlide({
     required String title,
     required String text,
-    String? tipText,
     required IconData icon,
     Color iconColor = AppColors.growGreen,
     required String nextButtonText,
@@ -197,30 +187,13 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             text,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
             textAlign: TextAlign.center,
           ),
-          if (tipText != null) ...[
-            const SizedBox(height: 24),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(12),
-                border:
-                    Border.all(color: AppColors.growGreen.withValues(alpha: 0.3)),
-              ),
-              child: Text(
-                tipText,
-                style: const TextStyle(color: AppColors.growGreen),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
           if (extraWidget != null) ...[
             const SizedBox(height: 24),
             extraWidget,

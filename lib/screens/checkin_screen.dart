@@ -1,6 +1,8 @@
 import '../providers/time_provider.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../widgets/tip_formatted_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
@@ -36,11 +38,34 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
   bool _showLightCycleTransition = false;
   bool _isFlowerTransitionWaterChange = false;
   bool _showHarvestCheck = false;
+  bool _showFlushSlideFlag = true;
 
   @override
   void initState() {
     super.initState();
     _loadData();
+  }
+
+
+  bool _passedWeekday(DateTime? lastLogDate, DateTime now, int targetWeekday) {
+    if (lastLogDate == null) {
+      return now.weekday == targetWeekday;
+    }
+    
+    final last = DateTime(lastLogDate.year, lastLogDate.month, lastLogDate.day);
+    final today = DateTime(now.year, now.month, now.day);
+    
+    final int days = today.difference(last).inDays;
+    
+    if (days >= 7) return true;
+    if (days <= 0) return false;
+    
+    for (int i = 1; i <= days; i++) {
+      if (last.add(Duration(days: i)).weekday == targetWeekday) {
+        return true;
+      }
+    }
+    return false;
   }
 
   Future<void> _loadData() async {
@@ -74,19 +99,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         }
       }
 
-      final todayStart = DateTime(now.year, now.month, now.day);
       
-      final lastPpfdLog = await (db.select(db.logEntries)
-            ..where((tbl) =>
-                tbl.plantId.equals(widget.plantId) & tbl.ppfd.isNotNull())
-            ..orderBy([
-              (t) => drift.OrderingTerm(
-                  expression: t.timestamp, mode: drift.OrderingMode.desc)
-            ])
-            ..limit(1))
-          .getSingleOrNull();
 
-      bool hasPpfdLogToday = lastPpfdLog != null && lastPpfdLog.timestamp.isAfter(todayStart);
+      
 
       final lastLog = await (db.select(db.logEntries)
             ..where((tbl) => tbl.plantId.equals(widget.plantId))
@@ -97,19 +112,11 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             ..limit(1))
           .getSingleOrNull();
       
-      bool hasLogToday = lastLog != null && lastLog.timestamp.isAfter(todayStart);
+      
 
-      bool lampCheck = false;
-      if (now.weekday == DateTime.wednesday) {
-        if (!hasPpfdLogToday) lampCheck = true;
-      } else if (lastPpfdLog == null || now.difference(lastPpfdLog.timestamp).inDays > 7) {
-        lampCheck = true;
-      }
-
-      bool ventCheck = false;
-      if (now.weekday == DateTime.sunday) {
-        if (!hasLogToday) ventCheck = true;
-      }
+      final referenceDate = lastLog?.timestamp ?? plant.phaseStartDate;
+      bool lampCheck = _passedWeekday(referenceDate, now, DateTime.wednesday);
+      bool ventCheck = _passedWeekday(referenceDate, now, DateTime.sunday);
 
       bool flowerTrans = false;
       if (plant.currentPhase == PlantPhase.veg && plant.getDayInPhase(now) >= 21) {
@@ -121,6 +128,9 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         harvestCheck = true;
       }
 
+      final prefs = await SharedPreferences.getInstance();
+      final flushShown = prefs.getBool('flush_shown_${widget.plantId}') ?? false;
+      
       setState(() {
         _plant = plant;
         _initialRootsNotReached ??= _plant!.currentPhase == PlantPhase.veg &&
@@ -130,6 +140,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         _needsVentilatorCheck = ventCheck;
         _showFlowerTransition = flowerTrans;
         _showHarvestCheck = harvestCheck;
+        _showFlushSlideFlag = !flushShown;
       });
     }
   }
@@ -190,6 +201,21 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   _buildFlowerTransitionSlide(),
                 if (_showLightCycleTransition)
                   _buildLightCycleTransitionSlide(),
+                if (_showHarvestCheck) ...[
+                  _wrapWithInfo(
+                      _buildHarvestCheckSlide(),
+                      l10n.checkinHarvestDeepDiveTitle,
+                      l10n.checkinHarvestDeepDiveDesc),
+                  if (_showFlushSlideFlag)
+                    _wrapWithInfo(
+                        _buildFlushSlide(),
+                        l10n.checkinFlushDeepDiveTitle,
+                        l10n.checkinFlushDeepDiveDesc),
+                  _wrapWithInfo(
+                      _buildAutumnSlide(),
+                      l10n.checkinAutumnDeepDiveTitle,
+                      l10n.checkinAutumnDeepDiveDesc),
+                ],
                 if (_needsWaterChange)
                   _wrapWithInfo(
                       _buildWaterChangeRecommendationSlide(),
@@ -211,9 +237,10 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                         l10n.checkinDeepDiveTopWateringTitle,
                         l10n.checkinDeepDiveTopWateringText),
                 ],
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.checkinHealthTitle,
+                if (!_showHarvestCheck)
+                  _wrapWithInfo(
+                      _buildSlide(
+                        title: l10n.checkinHealthTitle,
                       text: l10n.checkinHealthDesc,
                       icon: Icons.eco,
                       nextButtonText: l10n.checkinHealthNext,
@@ -266,20 +293,6 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                       _buildVentilatorSlide(),
                       l10n.checkinVentilatorDeepDiveTitle,
                       l10n.checkinVentilatorDeepDiveText),
-                if (_showHarvestCheck) ...[
-                  _wrapWithInfo(
-                      _buildHarvestCheckSlide(),
-                      l10n.checkinHarvestDeepDiveTitle,
-                      l10n.checkinHarvestDeepDiveDesc),
-                  _wrapWithInfo(
-                      _buildFlushSlide(),
-                      l10n.checkinFlushDeepDiveTitle,
-                      l10n.checkinFlushDeepDiveDesc),
-                  _wrapWithInfo(
-                      _buildAutumnSlide(),
-                      l10n.checkinAutumnDeepDiveTitle,
-                      l10n.checkinAutumnDeepDiveDesc),
-                ],
                 _wrapWithInfo(
                     _buildSlide(
                       title: l10n.checkinFinishTitle,
@@ -1132,7 +1145,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             l10n.checkinVentilatorDesc,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
@@ -1273,7 +1286,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             text,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
@@ -1363,7 +1376,11 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       text: l10n.checkinFlushDesc(l10n.checkinFlushTip),
       icon: Icons.water_drop,
       nextButtonText: l10n.checkinFlushNext,
-      onNext: _nextPage,
+      onNext: () async {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('flush_shown_${widget.plantId}', true);
+        _nextPage();
+      },
       showBack: true,
     );
   }

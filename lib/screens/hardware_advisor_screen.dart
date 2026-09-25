@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/tip_formatted_text.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
 import 'package:app/theme/app_colors.dart';
@@ -226,30 +227,13 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
-                Text(
-                  item.description,
+                TipFormattedText(
+                  item.proTip != null ? '${item.description}\n\n${item.proTip}' : item.description,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.white70,
                       ),
                   textAlign: TextAlign.center,
                 ),
-                if (item.proTip != null) ...[
-                  const SizedBox(height: 24),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: AppColors.surface,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                          color: AppColors.growGreen.withValues(alpha: 0.3)),
-                    ),
-                    child: Text(
-                      item.proTip!,
-                      style: const TextStyle(color: AppColors.growGreen),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
                 const Spacer(),
                 Row(
                   children: [

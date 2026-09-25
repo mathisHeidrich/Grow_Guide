@@ -898,12 +898,6 @@ abstract class AppLocalizations {
   /// **'• Wähle einen Ort in der Nähe eines Fensters.\n• Baue das Metallgerüst auf und ziehe die Zelthülle darüber.\n• Lege die wasserdichte Einlegewanne auf den Zeltboden.\n\nTIPP: Der Zeltboden muss absolut wasserdicht sein. Bei Hydroponik kann immer mal ein Tropfen daneben gehen.'**
   String get tentDesc1;
 
-  /// No description provided for @tentTip1.
-  ///
-  /// In de, this message translates to:
-  /// **'Leg unbedingt die wasserdichte Einlegewanne auf den Zeltboden – bei DWC kann immer mal etwas Wasser tropfen!'**
-  String get tentTip1;
-
   /// No description provided for @tentNext1.
   ///
   /// In de, this message translates to:
@@ -921,12 +915,6 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'• Hänge den Aktivkohlefilter (AKF) und den Rohrventilator ganz oben unter die Zeltdecke.\n• Verbinde beide luftdicht miteinander.\n\nTIPP: Nutze großzügig Panzertape oder starke Schlauchklemmen. Jeder Millimeter, der nicht dicht ist, lässt später ungefilterten Geruch entweichen.'**
   String get tentDesc2;
-
-  /// No description provided for @tentTip2.
-  ///
-  /// In de, this message translates to:
-  /// **'Achte darauf, dass die Verbindung zwischen AKF und Ventilator absolut luftdicht ist (Panzertape hilft!).'**
-  String get tentTip2;
 
   /// No description provided for @tentNext2.
   ///
@@ -946,12 +934,6 @@ abstract class AppLocalizations {
   /// **'• Führe den Abluftschlauch vom Ventilator durch eine der oberen Öffnungen nach draußen, idealerweise aus dem Fenster.'**
   String get tentDesc3;
 
-  /// No description provided for @tentTip3.
-  ///
-  /// In de, this message translates to:
-  /// **'Die Abluft sollte idealerweise aus dem Raum (z.B. aus dem Fenster) geleitet werden, um die Luftfeuchtigkeit im Zimmer nicht zu stark zu erhöhen.'**
-  String get tentTip3;
-
   /// No description provided for @tentNext3.
   ///
   /// In de, this message translates to:
@@ -969,12 +951,6 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'• Hänge deine LED-Lampe mittig im Zelt auf.\n• Verwende stufenlos verstellbare Seilzugratschen (Rope Ratchets), keine starren Ketten.\n\nTIPP: Wenn deine Lampe ein externes Netzteil (Driver) hat, montiere es außerhalb des Zeltes. Das erspart dir im Sommer Hitze.'**
   String get tentDesc4;
-
-  /// No description provided for @tentTip4.
-  ///
-  /// In de, this message translates to:
-  /// **'Wenn möglich, montiere das Netzteil (Driver) der Lampe außerhalb des Zeltes, um Hitze im Zelt zu vermeiden.'**
-  String get tentTip4;
 
   /// No description provided for @tentNext4.
   ///
@@ -994,12 +970,6 @@ abstract class AppLocalizations {
   /// **'• Befestige deine Umluft-Ventilatoren an den Eckstangen.\n• Richte sie so aus, dass sie später über und unter dem Blätterdach wehen.\n\nTIPP: Richte den Luftstrom niemals direkt auf eine junge Pflanze. Das führt zu massivem Windbrand.'**
   String get tentDesc5;
 
-  /// No description provided for @tentTip5.
-  ///
-  /// In de, this message translates to:
-  /// **'Richte die Ventilatoren nie direkt auf die kleinen Pflanzen (Windbrand-Gefahr!), sondern lass sie leicht darüber oder gegen die Zeltwand pusten.'**
-  String get tentTip5;
-
   /// No description provided for @tentNext5.
   ///
   /// In de, this message translates to:
@@ -1018,12 +988,6 @@ abstract class AppLocalizations {
   /// **'• Stelle den leeren DWC-Eimer mittig unter die Lampe.\n• Setze den Netztopf ein.'**
   String get tentDesc6;
 
-  /// No description provided for @tentTip6.
-  ///
-  /// In de, this message translates to:
-  /// **'Wasche deinen Blähton VOR der Benutzung extrem gründlich aus, sonst hast du später roten Schlamm im Eimer, der den pH-Wert ruiniert!'**
-  String get tentTip6;
-
   /// No description provided for @tentNext6.
   ///
   /// In de, this message translates to:
@@ -1039,14 +1003,8 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc7.
   ///
   /// In de, this message translates to:
-  /// **'• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n\nTIPP: Stelle die Luftpumpe immer auf eine kleine Erhöhung oberhalb des maximalen Wasserspiegels (Siphon-Effekt verhindern).'**
+  /// **'• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n\nTIPP: WICHTIG: Die Luftpumpe MUSS immer außerhalb des Zeltes stehen und am besten höher als der Wasserspiegel! Fällt der Strom aus, kann das Wasser sonst durch den Schlauch in die Pumpe laufen.'**
   String get tentDesc7;
-
-  /// No description provided for @tentTip7.
-  ///
-  /// In de, this message translates to:
-  /// **'WICHTIG: Die Luftpumpe MUSS immer außerhalb des Zeltes stehen und am besten höher als der Wasserspiegel! Fällt der Strom aus, kann das Wasser sonst durch den Schlauch in die Pumpe laufen.'**
-  String get tentTip7;
 
   /// No description provided for @tentNext7.
   ///
@@ -1066,12 +1024,6 @@ abstract class AppLocalizations {
   /// **'• Führe alle Kabel sauber durch die vorgesehenen Öffnungen nach draußen.\n\nTIPP: Lege unter keinen Umständen Mehrfachsteckdosen auf den Zeltboden. Wasser und Strom sind lebensgefährlich.'**
   String get tentDesc8;
 
-  /// No description provided for @tentTip8.
-  ///
-  /// In de, this message translates to:
-  /// **'Wasser und Strom sind Feinde! Leg NIEMALS Mehrfachsteckdosen auf den Zeltboden. Befestige sie sicher außerhalb oder häng sie weit oben auf.'**
-  String get tentTip8;
-
   /// No description provided for @tentNext8.
   ///
   /// In de, this message translates to:
@@ -1090,12 +1042,6 @@ abstract class AppLocalizations {
   /// **'• Schließe die Lampe an die Zeitschaltuhr an.\n• Abluft, Umluft und Luftpumpe laufen auf Dauerstrom (24/7).'**
   String get tentDesc9;
 
-  /// No description provided for @tentTip9.
-  ///
-  /// In de, this message translates to:
-  /// **'Abluft, Umluft und vor allem die Luftpumpe für die Wurzeln laufen IMMER (24/7)! Die Luftpumpe darf niemals ausgeschaltet werden.'**
-  String get tentTip9;
-
   /// No description provided for @tentNext9.
   ///
   /// In de, this message translates to:
@@ -1113,12 +1059,6 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'• Schalte alle Geräte ein und schließe das Zelt vollständig.\n• Zieht sich die Zelthülle leicht nach innen? (Unterdruck-Check).\n\nTIPP: Schalte das Licht im Raum aus. Dringt aus dem Zelt irgendwo Licht nach außen? Klebe Lecks von innen ab.'**
   String get tentDesc10;
-
-  /// No description provided for @tentTip10.
-  ///
-  /// In de, this message translates to:
-  /// **'Unterdruck-Check: Ziehen sich die Wände leicht nach innen? Gut! Licht-Check: Mach das Licht im Zimmer aus – dringt irgendwo Licht aus dem Zelt? Klebe es ab!'**
-  String get tentTip10;
 
   /// No description provided for @tentNext10.
   ///
@@ -2335,7 +2275,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinVentilatorDesc.
   ///
   /// In de, this message translates to:
-  /// **'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?'**
+  /// **'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?\n\nTIPP: Richte den Luftstrom niemals direkt auf die Pflanzen. Ein starrer Luftstrom führt zu Windbrand und trocknet die Blätter aus.'**
   String get checkinVentilatorDesc;
 
   /// No description provided for @checkinVentilatorNext.

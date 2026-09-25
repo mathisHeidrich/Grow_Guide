@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/tip_formatted_text.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -337,7 +338,7 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             l10n.germinationDesc4,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
@@ -448,7 +449,32 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          Container(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.growGreen.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.growGreen, width: 2),
+              ),
+              child: Column(children: [
+                Text(
+                  l10n.checkinLampTargetPpfdLabel,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColors.growGreen,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "${PlantPhase.germination.targetPpfdRange[0]} - ${PlantPhase.germination.targetPpfdRange[1]}",
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ])),
+          const SizedBox(height: 24),
+          TipFormattedText(
             l10n.germinationDesc9,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
@@ -551,7 +577,7 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             text,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
