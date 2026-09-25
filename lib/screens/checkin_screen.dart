@@ -418,29 +418,19 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   ),
               textAlign: TextAlign.center),
           const Spacer(),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.surface,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-            onPressed: () {
+          ImageSelectionCard(
+            leftImagePath: isAuto ? "assets/images/pistils_no.jpg" : "assets/images/tent_empty.jpg",
+            rightImagePath: isAuto ? "assets/images/pistils_yes.jpg" : "assets/images/tent_full.jpg",
+            leftTitle: noText,
+            rightTitle: yesText,
+            leftSubtitle: isAuto ? "Noch vegetativ" : "Noch Platz",
+            rightSubtitle: isAuto ? "Vorblüte startet" : "Zelt gefüllt",
+            onLeftSelected: () {
               setState(() {
                 _showFlowerTransition = false;
               });
             },
-            child: Text(noText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.purpleAccent,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-            onPressed: () async {
+            onRightSelected: () async {
               final db = ref.read(databaseProvider).db;
               final updatedPlant = _plant!.copyWith(
                 currentPhase: PlantPhase.flower,
@@ -456,7 +446,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                 _isFlowerTransitionWaterChange = true;
               });
             },
-            child: Text(yesText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            rightAccentColor: Colors.purpleAccent,
           ),
           const SizedBox(height: 24),
         ],
@@ -1341,26 +1331,48 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   Widget _buildHarvestCheckSlide() {
     final l10n = AppLocalizations.of(context)!;
-    return _buildSlide(
-      title: l10n.checkinHarvestTitle,
-      text: l10n.checkinHarvestDesc(l10n.checkinHarvestTip),
-      icon: Icons.search,
-      nextButtonText: l10n.checkinHarvestNotReady,
-      onNext: _nextPage,
-      showBack: true,
-      extraWidget: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.growGreen.withValues(alpha: 0.2),
-          foregroundColor: AppColors.growGreen,
-          side: const BorderSide(color: AppColors.growGreen),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ),
-        icon: const Icon(Icons.cut),
-        label: Text(l10n.checkinHarvestReady, style: const TextStyle(fontWeight: FontWeight.bold)),
-        onPressed: () {
-          context.pushReplacement('/harvest_wizard?plantId=${widget.plantId}');
-        },
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Spacer(),
+          const Icon(Icons.search, size: 80, color: AppColors.growGreen),
+          const SizedBox(height: 32),
+          Text(l10n.checkinHarvestTitle,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+              textAlign: TextAlign.center),
+          const SizedBox(height: 24),
+          TipFormattedText(l10n.checkinHarvestDesc(l10n.checkinHarvestTip),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.white70,
+                  ),
+              textAlign: TextAlign.center),
+          const Spacer(),
+          ImageSelectionCard(
+            leftImagePath: "assets/images/trichomes_unripe.jpg",
+            rightImagePath: "assets/images/trichomes_ripe.jpg",
+            leftTitle: l10n.checkinHarvestNotReady,
+            rightTitle: l10n.checkinHarvestReady,
+            leftSubtitle: "Klar / Weiß",
+            rightSubtitle: "Milchig / Bernstein",
+            onLeftSelected: _nextPage,
+            onRightSelected: () {
+              context.pushReplacement('/harvest_wizard?plantId=${widget.plantId}');
+            },
+          ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              Expanded(flex: 1, child: _backButton()),
+              const Spacer(flex: 2),
+            ],
+          ),
+        ],
       ),
     );
   }

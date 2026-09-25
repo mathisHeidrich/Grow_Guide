@@ -346,86 +346,30 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildSeedOption(
-                icon: '🌰',
-                label: l10n.germinationSeedClosed,
-                isSelected: _seedOpened == false,
-                onTap: () => setState(() => _seedOpened = false),
-              ),
-              _buildSeedOption(
-                icon: '🌱',
-                label: l10n.germinationSeedOpened,
-                isSelected: _seedOpened == true,
-                onTap: () => setState(() => _seedOpened = true),
-              ),
-            ],
-          ),
-          const Spacer(),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    _seedOpened != null ? AppColors.growGreen : Colors.grey,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-              ),
-              onPressed: _seedOpened == null
-                  ? null
-                  : () {
-                      if (_seedOpened == true) {
-                        _jumpToPage(6);
-                      } else {
-                        _jumpToPage(5);
-                      }
-                    },
-              child: Text(
-                l10n.germinationNextButton,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
+          ImageSelectionCard(
+            leftImagePath: "assets/images/seed_closed.jpg",
+            rightImagePath: "assets/images/seed_opened.jpg",
+            leftTitle: "Noch zu",
+            rightTitle: "Wurzel sichtbar",
+            leftSubtitle: "Weiter warten",
+            rightSubtitle: "Einpflanzen",
+            onLeftSelected: () {
+              setState(() => _seedOpened = false);
+              _jumpToPage(5);
+            },
+            onRightSelected: () {
+              setState(() => _seedOpened = true);
+              _jumpToPage(6);
+            },
           ),
           const SizedBox(height: 24),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSeedOption(
-      {required String icon,
-      required String label,
-      required bool isSelected,
-      required VoidCallback onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 140,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.growGreen.withValues(alpha: 0.2)
-              : Colors.transparent,
-          border: Border.all(
-            color: isSelected ? AppColors.growGreen : Colors.white24,
-            width: 2,
+          Row(
+            children: [
+              Expanded(flex: 1, child: _backButton()),
+              const Spacer(flex: 2),
+            ],
           ),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          children: [
-            Text(icon, style: const TextStyle(fontSize: 48)),
-            const SizedBox(height: 12),
-            Text(label,
-                style: TextStyle(
-                    color: isSelected ? AppColors.growGreen : Colors.white,
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
+        ],
       ),
     );
   }
