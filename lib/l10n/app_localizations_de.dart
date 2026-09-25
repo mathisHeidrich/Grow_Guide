@@ -451,10 +451,6 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Wähle einen Ort in der Nähe eines Fensters.\n• Baue das Metallgerüst auf und ziehe die Zelthülle darüber.\n• Lege die wasserdichte Einlegewanne auf den Zeltboden.\n\nTIPP: Der Zeltboden muss absolut wasserdicht sein. Bei Hydroponik kann immer mal ein Tropfen daneben gehen.';
 
   @override
-  String get tentTip1 =>
-      'Leg unbedingt die wasserdichte Einlegewanne auf den Zeltboden – bei DWC kann immer mal etwas Wasser tropfen!';
-
-  @override
   String get tentNext1 => 'Zelt steht & ist isoliert';
 
   @override
@@ -463,10 +459,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tentDesc2 =>
       '• Hänge den Aktivkohlefilter (AKF) und den Rohrventilator ganz oben unter die Zeltdecke.\n• Verbinde beide luftdicht miteinander.\n\nTIPP: Nutze großzügig Panzertape oder starke Schlauchklemmen. Jeder Millimeter, der nicht dicht ist, lässt später ungefilterten Geruch entweichen.';
-
-  @override
-  String get tentTip2 =>
-      'Achte darauf, dass die Verbindung zwischen AKF und Ventilator absolut luftdicht ist (Panzertape hilft!).';
 
   @override
   String get tentNext2 => 'Abluft hängt sicher';
@@ -479,10 +471,6 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Führe den Abluftschlauch vom Ventilator durch eine der oberen Öffnungen nach draußen, idealerweise aus dem Fenster.';
 
   @override
-  String get tentTip3 =>
-      'Die Abluft sollte idealerweise aus dem Raum (z.B. aus dem Fenster) geleitet werden, um die Luftfeuchtigkeit im Zimmer nicht zu stark zu erhöhen.';
-
-  @override
   String get tentNext3 => 'Schlauch verlegt';
 
   @override
@@ -491,10 +479,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tentDesc4 =>
       '• Hänge deine LED-Lampe mittig im Zelt auf.\n• Verwende stufenlos verstellbare Seilzugratschen (Rope Ratchets), keine starren Ketten.\n\nTIPP: Wenn deine Lampe ein externes Netzteil (Driver) hat, montiere es außerhalb des Zeltes. Das erspart dir im Sommer Hitze.';
-
-  @override
-  String get tentTip4 =>
-      'Wenn möglich, montiere das Netzteil (Driver) der Lampe außerhalb des Zeltes, um Hitze im Zelt zu vermeiden.';
 
   @override
   String get tentNext4 => 'Lampe hängt';
@@ -507,10 +491,6 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Befestige deine Umluft-Ventilatoren an den Eckstangen.\n• Richte sie so aus, dass sie später über und unter dem Blätterdach wehen.\n\nTIPP: Richte den Luftstrom niemals direkt auf eine junge Pflanze. Das führt zu massivem Windbrand.';
 
   @override
-  String get tentTip5 =>
-      'Richte die Ventilatoren nie direkt auf die kleinen Pflanzen (Windbrand-Gefahr!), sondern lass sie leicht darüber oder gegen die Zeltwand pusten.';
-
-  @override
   String get tentNext5 => 'Ventilatoren montiert';
 
   @override
@@ -521,10 +501,6 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Stelle den leeren DWC-Eimer mittig unter die Lampe.\n• Setze den Netztopf ein.';
 
   @override
-  String get tentTip6 =>
-      'Wasche deinen Blähton VOR der Benutzung extrem gründlich aus, sonst hast du später roten Schlamm im Eimer, der den pH-Wert ruiniert!';
-
-  @override
   String get tentNext6 => 'Eimer positioniert';
 
   @override
@@ -532,11 +508,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentDesc7 =>
-      '• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n\nTIPP: Stelle die Luftpumpe immer auf eine kleine Erhöhung oberhalb des maximalen Wasserspiegels (Siphon-Effekt verhindern).';
-
-  @override
-  String get tentTip7 =>
-      'WICHTIG: Die Luftpumpe MUSS immer außerhalb des Zeltes stehen und am besten höher als der Wasserspiegel! Fällt der Strom aus, kann das Wasser sonst durch den Schlauch in die Pumpe laufen.';
+      '• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n\nTIPP: WICHTIG: Die Luftpumpe MUSS immer außerhalb des Zeltes stehen und am besten höher als der Wasserspiegel! Fällt der Strom aus, kann das Wasser sonst durch den Schlauch in die Pumpe laufen.';
 
   @override
   String get tentNext7 => 'Pumpe platziert';
@@ -549,10 +521,6 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Führe alle Kabel sauber durch die vorgesehenen Öffnungen nach draußen.\n\nTIPP: Lege unter keinen Umständen Mehrfachsteckdosen auf den Zeltboden. Wasser und Strom sind lebensgefährlich.';
 
   @override
-  String get tentTip8 =>
-      'Wasser und Strom sind Feinde! Leg NIEMALS Mehrfachsteckdosen auf den Zeltboden. Befestige sie sicher außerhalb oder häng sie weit oben auf.';
-
-  @override
   String get tentNext8 => 'Kabel verlegt';
 
   @override
@@ -563,10 +531,6 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Schließe die Lampe an die Zeitschaltuhr an.\n• Abluft, Umluft und Luftpumpe laufen auf Dauerstrom (24/7).';
 
   @override
-  String get tentTip9 =>
-      'Abluft, Umluft und vor allem die Luftpumpe für die Wurzeln laufen IMMER (24/7)! Die Luftpumpe darf niemals ausgeschaltet werden.';
-
-  @override
   String get tentNext9 => 'Alles verkabelt';
 
   @override
@@ -575,10 +539,6 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tentDesc10 =>
       '• Schalte alle Geräte ein und schließe das Zelt vollständig.\n• Zieht sich die Zelthülle leicht nach innen? (Unterdruck-Check).\n\nTIPP: Schalte das Licht im Raum aus. Dringt aus dem Zelt irgendwo Licht nach außen? Klebe Lecks von innen ab.';
-
-  @override
-  String get tentTip10 =>
-      'Unterdruck-Check: Ziehen sich die Wände leicht nach innen? Gut! Licht-Check: Mach das Licht im Zimmer aus – dringt irgendwo Licht aus dem Zelt? Klebe es ab!';
 
   @override
   String get tentNext10 => 'Setup abgeschlossen!';

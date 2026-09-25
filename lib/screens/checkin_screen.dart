@@ -1,6 +1,7 @@
 import '../providers/time_provider.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:flutter/material.dart';
+import '../widgets/tip_formatted_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/database_provider.dart';
@@ -1273,7 +1274,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             text,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,

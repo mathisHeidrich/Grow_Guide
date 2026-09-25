@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/tip_formatted_text.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -337,7 +338,7 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             l10n.germinationDesc4,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
@@ -448,7 +449,7 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             l10n.germinationDesc9,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
@@ -551,7 +552,7 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
+          TipFormattedText(
             text,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
