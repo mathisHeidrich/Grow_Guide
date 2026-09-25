@@ -44,6 +44,28 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     _loadData();
   }
 
+
+  bool _passedWeekday(DateTime? lastLogDate, DateTime now, int targetWeekday) {
+    if (lastLogDate == null) {
+      return now.weekday == targetWeekday;
+    }
+    
+    final last = DateTime(lastLogDate.year, lastLogDate.month, lastLogDate.day);
+    final today = DateTime(now.year, now.month, now.day);
+    
+    final int days = today.difference(last).inDays;
+    
+    if (days >= 7) return true;
+    if (days <= 0) return false;
+    
+    for (int i = 1; i <= days; i++) {
+      if (last.add(Duration(days: i)).weekday == targetWeekday) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   Future<void> _loadData() async {
     final db = ref.read(databaseProvider).db;
     final plant = await (db.select(db.plants)
@@ -87,7 +109,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             ..limit(1))
           .getSingleOrNull();
 
-      bool hasPpfdLogToday = lastPpfdLog != null && lastPpfdLog.timestamp.isAfter(todayStart);
+      
 
       final lastLog = await (db.select(db.logEntries)
             ..where((tbl) => tbl.plantId.equals(widget.plantId))
@@ -98,17 +120,11 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             ..limit(1))
           .getSingleOrNull();
       
-      bool hasLogToday = lastLog != null && lastLog.timestamp.isAfter(todayStart);
+      
 
-      bool lampCheck = false;
-      if (now.weekday == DateTime.wednesday) {
-        if (!hasLogToday) lampCheck = true;
-      }
-
-      bool ventCheck = false;
-      if (now.weekday == DateTime.sunday) {
-        if (!hasLogToday) ventCheck = true;
-      }
+      final referenceDate = lastLog?.timestamp ?? plant.phaseStartDate;
+      bool lampCheck = _passedWeekday(referenceDate, now, DateTime.wednesday);
+      bool ventCheck = _passedWeekday(referenceDate, now, DateTime.sunday);
 
       bool flowerTrans = false;
       if (plant.currentPhase == PlantPhase.veg && plant.getDayInPhase(now) >= 21) {
