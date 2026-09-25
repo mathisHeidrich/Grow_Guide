@@ -1712,4 +1712,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get generalDelete => 'Löschen';
+
+  @override
+  String get hw_buy_on_amazon => 'Auf Amazon ansehen';
+
+  @override
+  String get hw_buy_complete_set => 'Komplettes Set kaufen';
+
+  @override
+  String get hw_complete_set_title => 'Das Starter-Set';
+
+  @override
+  String get hw_complete_set_desc =>
+      'Spar dir die Mühe und kaufe alle benötigten Teile für deinen DWC-Grow auf einen Schlag.';
 }

@@ -3099,6 +3099,30 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Löschen'**
   String get generalDelete;
+
+  /// No description provided for @hw_buy_on_amazon.
+  ///
+  /// In de, this message translates to:
+  /// **'Auf Amazon ansehen'**
+  String get hw_buy_on_amazon;
+
+  /// No description provided for @hw_buy_complete_set.
+  ///
+  /// In de, this message translates to:
+  /// **'Komplettes Set kaufen'**
+  String get hw_buy_complete_set;
+
+  /// No description provided for @hw_complete_set_title.
+  ///
+  /// In de, this message translates to:
+  /// **'Das Starter-Set'**
+  String get hw_complete_set_title;
+
+  /// No description provided for @hw_complete_set_desc.
+  ///
+  /// In de, this message translates to:
+  /// **'Spar dir die Mühe und kaufe alle benötigten Teile für deinen DWC-Grow auf einen Schlag.'**
+  String get hw_complete_set_desc;
 }
 
 class _AppLocalizationsDelegate
