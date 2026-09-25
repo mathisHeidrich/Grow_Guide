@@ -412,7 +412,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   ),
               textAlign: TextAlign.center),
           const SizedBox(height: 24),
-          Text(desc,
+          TipFormattedText(desc,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.white70,
                   ),
@@ -486,7 +486,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   ),
               textAlign: TextAlign.center),
           const SizedBox(height: 24),
-          Text(desc,
+          TipFormattedText(desc,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.white70,
                   ),
@@ -697,8 +697,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
-            content,
+          TipFormattedText(content,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Colors.white70,
                   height: 1.3,
@@ -728,7 +727,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
               textAlign: TextAlign.center),
           const SizedBox(height: 24),
-          Text(l10n.checkinWaterLevelDesc,
+          TipFormattedText(l10n.checkinWaterLevelDesc,
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge
@@ -783,7 +782,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
               textAlign: TextAlign.center),
           const SizedBox(height: 16),
-          Text(l10n.checkinEcMeasureDesc,
+          TipFormattedText(l10n.checkinEcMeasureDesc,
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge
@@ -891,7 +890,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               )
             ]
           ] else if (hasNutrientsToAdd) ...[
-            Text(l10n.checkinNutrientDesc,
+            TipFormattedText(l10n.checkinNutrientDesc,
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge
@@ -957,7 +956,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                   ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
               textAlign: TextAlign.center),
           const SizedBox(height: 16),
-          Text(l10n.checkinPhAdjustDesc,
+          TipFormattedText(l10n.checkinPhAdjustDesc,
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge
@@ -1000,8 +999,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
-            l10n.checkinRootsCheckDesc,
+          TipFormattedText(l10n.checkinRootsCheckDesc,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
@@ -1112,8 +1110,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Text(
-                          l10n.checkinVentilatorDeepDiveText,
+                        TipFormattedText(l10n.checkinVentilatorDeepDiveText,
                           style: const TextStyle(color: Colors.white70, fontSize: 16),
                         ),
                         const SizedBox(height: 24),
@@ -1214,8 +1211,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                 ),
               ])),
           const SizedBox(height: 24),
-          Text(
-            l10n.checkinLampMeasureInstruction,
+          TipFormattedText(l10n.checkinLampMeasureInstruction,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),

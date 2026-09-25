@@ -117,7 +117,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
               textAlign: TextAlign.center),
           const SizedBox(height: 16),
-          Text(l10n.checkinEcMeasureDesc,
+          TipFormattedTipFormattedText(l10n.checkinEcMeasureDesc,
               style: const TextStyle(color: Colors.white70, fontSize: 16),
               textAlign: TextAlign.center),
           const SizedBox(height: 32),
@@ -161,7 +161,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(l10n.checkinNutrientDesc,
+                    TipFormattedTipFormattedText(l10n.checkinNutrientDesc,
                       style: const TextStyle(color: Colors.white70, fontSize: 16)),
                     const SizedBox(height: 16),
                     ...nutrientsToAdd.map((n) => Padding(

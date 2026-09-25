@@ -126,7 +126,7 @@ class WaterGuideScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          Text(
+          TipFormattedText(
             content,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Colors.white70,
@@ -171,7 +171,7 @@ class WaterGuideScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          Text(
+          TipFormattedText(
             desc,
             style: const TextStyle(
               color: Colors.white70,
