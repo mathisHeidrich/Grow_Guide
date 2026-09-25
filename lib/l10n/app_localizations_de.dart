@@ -1519,4 +1519,155 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinAutumnProblems => 'Ich sehe echte Probleme';
+
+  @override
+  String get harvestWizardPrepTitle => 'Die Erntevorbereitung';
+
+  @override
+  String get harvestWizardPrepDesc =>
+      'Es ist soweit! Bevor wir die Pflanze fällen, bereite deinen Arbeitsplatz vor. Du brauchst eine scharfe, saubere Ernteschere, Einweghandschuhe und Reinigungsalkohol.';
+
+  @override
+  String get harvestWizardPrepTip =>
+      'Tipp: Das Harz der Blüten klebt extrem. Trage unbedingt Handschuhe und reinige die Schere zwischendurch mit Alkohol.';
+
+  @override
+  String get harvestWizardPrepDeepDiveTitle => 'Warum Sauberkeit?';
+
+  @override
+  String get harvestWizardPrepDeepDiveDesc =>
+      'Eine unsaubere Schere kann Schmutz oder Pilzsporen in die frischen Schnittstellen tragen. Das Harz (Trichome) enthält die gesamten Wirkstoffe – Handschuhe verhindern klebrige Hände.';
+
+  @override
+  String get harvestWizardCutTitle => 'Die Pflanze fällen';
+
+  @override
+  String get harvestWizardCutDesc =>
+      'Schneide die Pflanze am Hauptstamm knapp über dem Topf ab. Hänge sie danach als Ganzes kopfüber auf. Ist sie zu groß, hänge sie Ast für Ast auf.';
+
+  @override
+  String get harvestWizardCutTip =>
+      'Tipp: Nutze Kleiderbügel, Gartendraht oder ein Trockennetz, um die Äste in deinem Zelt aufzuhängen.';
+
+  @override
+  String get harvestWizardCutDeepDiveTitle => 'Warum kopfüber ins Zelt?';
+
+  @override
+  String get harvestWizardCutDeepDiveDesc =>
+      'Kopfüber trocknen die Pflanzen gleichmäßiger. Das Zelt ist der perfekte Ort dafür, da der Aktivkohlefilter den starken Geruch neutralisiert.';
+
+  @override
+  String get harvestWizardTrimTitle => 'Die Blätter entfernen (Trimmen)';
+
+  @override
+  String get harvestWizardTrimDesc =>
+      'Entferne jetzt alle großen Sonnensegel. Die kleinen harzigen Blätter an den Blüten (Zuckerblätter) lässt du für den Trocknungsprozess am besten dran (Dry Trim).';
+
+  @override
+  String get harvestWizardTrimTip =>
+      'Tipp: Hebe die harzigen Zuckerblätter später auf! Du kannst daraus nach der Trocknung Tee, Butter oder Extrakte herstellen.';
+
+  @override
+  String get harvestWizardTrimDeepDiveTitle => 'Warum Dry Trim?';
+
+  @override
+  String get harvestWizardTrimDeepDiveDesc =>
+      'Die Blätter legen sich wie ein Schutzmantel um die Blüte. Das verlangsamt die Trocknung, was Geschmack (Terpene) schützt und ein kratziges Raucherlebnis verhindert.';
+
+  @override
+  String get harvestWizardDryingTitle => 'Die perfekte Trocknungsumgebung';
+
+  @override
+  String get harvestWizardDryingDesc =>
+      'Deine Ernte hängt.\n\n• Temperatur: Optimal 18-20°C\n• Luftfeuchtigkeit: 55-60%\n• Licht: Absolute Dunkelheit\n• Umluft: Abluft an, kein direkter Wind';
+
+  @override
+  String get harvestWizardDryingTip =>
+      'Tipp: Die Trocknung dauert meist 7-14 Tage. Sie sind trocken, wenn kleine Äste beim Biegen mit einem \"Knack\" brechen (Snap-Test).';
+
+  @override
+  String get harvestWizardDryingDeepDiveTitle => 'Warum so langsam?';
+
+  @override
+  String get harvestWizardDryingDeepDiveDesc =>
+      'Zu schnelles Trocknen zerstört feine Aromen und schließt Chlorophyll ein – das schmeckt nach Heu. Geduld ist hier der Schlüssel zu Top-Qualität.';
+
+  @override
+  String get harvestWizardFinishBtn => 'Trocknung starten';
+
+  @override
+  String get dashboardDryingFinishedBtn =>
+      'Trocknung abgeschlossen (Snap-Test)';
+
+  @override
+  String get finishWizardTrimTitle => 'Der finale Dry Trim';
+
+  @override
+  String get finishWizardTrimDesc =>
+      'Die Äste knacken, die Blüten sind trocken! Schneide nun alle verbliebenen, kleinen Zuckerblätter nah an der Blüte ab.';
+
+  @override
+  String get finishWizardTrimTip =>
+      'Tipp: Halte die Blüte am Stiel fest, um die Harzdrüsen nicht zu zerdrücken.';
+
+  @override
+  String get finishWizardTrimDeepDiveTitle => 'Warum jetzt trimmen?';
+
+  @override
+  String get finishWizardTrimDeepDiveDesc =>
+      'Nach der langsamen Trocknung lassen sich die Zuckerblätter leicht abschneiden. Ohne Blätter schmeckt der Rauch weicher.';
+
+  @override
+  String get finishWizardWeighTitle => 'Wiegen & Abschluss';
+
+  @override
+  String get finishWizardWeighDesc =>
+      'Deine Ernte ist fertig getrimmt! Wiege jetzt deine Ausbeute und trage sie hier ein, um diesen Grow erfolgreich abzuschließen.';
+
+  @override
+  String get finishWizardWeighInputLabel => 'Ertrag (in Gramm)';
+
+  @override
+  String get finishWizardWeighTip =>
+      'Tipp: Das Gewicht der getrockneten Blüten ist etwa 75-80% geringer als direkt nach der Ernte.';
+
+  @override
+  String get finishWizardWeighDeepDiveTitle => 'Warum wiegen?';
+
+  @override
+  String get finishWizardWeighDeepDiveDesc =>
+      'So kannst du bei jedem Grow deine Fortschritte tracken und sehen, ob Anpassungen an Licht oder Nährstoffen einen Unterschied gemacht haben.';
+
+  @override
+  String get finishWizardCuringTitle => 'Das Curing (Aushärten)';
+
+  @override
+  String get finishWizardCuringDesc =>
+      'Pack die Blüten jetzt in luftdichte Gläser (am besten mit 58-62% Feuchtigkeitspack). Öffne die Gläser in den ersten 1-2 Wochen täglich für 15 Minuten.';
+
+  @override
+  String get finishWizardCuringTip =>
+      'Tipp: Curing verwandelt gutes Gras in absolutes Spitzen-Gras. Es baut letztes Chlorophyll ab.';
+
+  @override
+  String get finishWizardCuringDeepDiveTitle => 'Was passiert beim Curing?';
+
+  @override
+  String get finishWizardCuringDeepDiveDesc =>
+      'Die Restfeuchtigkeit verteilt sich gleichmäßig. Die Terpene (Aromastoffe) werden konserviert und der Abbau von Zuckerstoffen verhindert, dass der Rauch kratzig wird.';
+
+  @override
+  String get finishWizardFinishBtn => 'Pflanze archivieren';
+
+  @override
+  String get archiveTitle => 'Archiv';
+
+  @override
+  String get archiveYield => 'Ertrag';
+
+  @override
+  String get archiveDays => 'Tage';
+
+  @override
+  String get archiveNoPlants => 'Noch keine archivierten Pflanzen.';
 }

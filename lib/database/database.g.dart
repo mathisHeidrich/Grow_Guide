@@ -35,6 +35,24 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
   late final GeneratedColumn<DateTime> phaseStartDate =
       GeneratedColumn<DateTime>('phase_start_date', aliasedName, true,
           type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _startDateMeta =
+      const VerificationMeta('startDate');
+  @override
+  late final GeneratedColumn<DateTime> startDate = GeneratedColumn<DateTime>(
+      'start_date', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _endDateMeta =
+      const VerificationMeta('endDate');
+  @override
+  late final GeneratedColumn<DateTime> endDate = GeneratedColumn<DateTime>(
+      'end_date', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _yieldGramsMeta =
+      const VerificationMeta('yieldGrams');
+  @override
+  late final GeneratedColumn<double> yieldGrams = GeneratedColumn<double>(
+      'yield_grams', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
   static const VerificationMeta _waterVolumeLitersMeta =
       const VerificationMeta('waterVolumeLiters');
   @override
@@ -104,6 +122,9 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
         name,
         currentPhase,
         phaseStartDate,
+        startDate,
+        endDate,
+        yieldGrams,
         waterVolumeLiters,
         nutrientBrand,
         type,
@@ -139,6 +160,20 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
           _phaseStartDateMeta,
           phaseStartDate.isAcceptableOrUnknown(
               data['phase_start_date']!, _phaseStartDateMeta));
+    }
+    if (data.containsKey('start_date')) {
+      context.handle(_startDateMeta,
+          startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta));
+    }
+    if (data.containsKey('end_date')) {
+      context.handle(_endDateMeta,
+          endDate.isAcceptableOrUnknown(data['end_date']!, _endDateMeta));
+    }
+    if (data.containsKey('yield_grams')) {
+      context.handle(
+          _yieldGramsMeta,
+          yieldGrams.isAcceptableOrUnknown(
+              data['yield_grams']!, _yieldGramsMeta));
     }
     if (data.containsKey('water_volume_liters')) {
       context.handle(
@@ -208,6 +243,12 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
           .read(DriftSqlType.int, data['${effectivePrefix}current_phase'])!),
       phaseStartDate: attachedDatabase.typeMapping.read(
           DriftSqlType.dateTime, data['${effectivePrefix}phase_start_date']),
+      startDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}start_date']),
+      endDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}end_date']),
+      yieldGrams: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}yield_grams']),
       waterVolumeLiters: attachedDatabase.typeMapping.read(
           DriftSqlType.double, data['${effectivePrefix}water_volume_liters'])!,
       nutrientBrand: $PlantsTable.$converternutrientBrand.fromSql(
@@ -249,6 +290,9 @@ class Plant extends DataClass implements Insertable<Plant> {
   final String name;
   final PlantPhase currentPhase;
   final DateTime? phaseStartDate;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final double? yieldGrams;
   final double waterVolumeLiters;
   final NutrientBrand nutrientBrand;
   final PlantType type;
@@ -263,6 +307,9 @@ class Plant extends DataClass implements Insertable<Plant> {
       required this.name,
       required this.currentPhase,
       this.phaseStartDate,
+      this.startDate,
+      this.endDate,
+      this.yieldGrams,
       required this.waterVolumeLiters,
       required this.nutrientBrand,
       required this.type,
@@ -283,6 +330,15 @@ class Plant extends DataClass implements Insertable<Plant> {
     }
     if (!nullToAbsent || phaseStartDate != null) {
       map['phase_start_date'] = Variable<DateTime>(phaseStartDate);
+    }
+    if (!nullToAbsent || startDate != null) {
+      map['start_date'] = Variable<DateTime>(startDate);
+    }
+    if (!nullToAbsent || endDate != null) {
+      map['end_date'] = Variable<DateTime>(endDate);
+    }
+    if (!nullToAbsent || yieldGrams != null) {
+      map['yield_grams'] = Variable<double>(yieldGrams);
     }
     map['water_volume_liters'] = Variable<double>(waterVolumeLiters);
     {
@@ -311,6 +367,15 @@ class Plant extends DataClass implements Insertable<Plant> {
       phaseStartDate: phaseStartDate == null && nullToAbsent
           ? const Value.absent()
           : Value(phaseStartDate),
+      startDate: startDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(startDate),
+      endDate: endDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(endDate),
+      yieldGrams: yieldGrams == null && nullToAbsent
+          ? const Value.absent()
+          : Value(yieldGrams),
       waterVolumeLiters: Value(waterVolumeLiters),
       nutrientBrand: Value(nutrientBrand),
       type: Value(type),
@@ -334,6 +399,9 @@ class Plant extends DataClass implements Insertable<Plant> {
       currentPhase: $PlantsTable.$convertercurrentPhase
           .fromJson(serializer.fromJson<int>(json['currentPhase'])),
       phaseStartDate: serializer.fromJson<DateTime?>(json['phaseStartDate']),
+      startDate: serializer.fromJson<DateTime?>(json['startDate']),
+      endDate: serializer.fromJson<DateTime?>(json['endDate']),
+      yieldGrams: serializer.fromJson<double?>(json['yieldGrams']),
       waterVolumeLiters: serializer.fromJson<double>(json['waterVolumeLiters']),
       nutrientBrand: $PlantsTable.$converternutrientBrand
           .fromJson(serializer.fromJson<int>(json['nutrientBrand'])),
@@ -357,6 +425,9 @@ class Plant extends DataClass implements Insertable<Plant> {
       'currentPhase': serializer.toJson<int>(
           $PlantsTable.$convertercurrentPhase.toJson(currentPhase)),
       'phaseStartDate': serializer.toJson<DateTime?>(phaseStartDate),
+      'startDate': serializer.toJson<DateTime?>(startDate),
+      'endDate': serializer.toJson<DateTime?>(endDate),
+      'yieldGrams': serializer.toJson<double?>(yieldGrams),
       'waterVolumeLiters': serializer.toJson<double>(waterVolumeLiters),
       'nutrientBrand': serializer.toJson<int>(
           $PlantsTable.$converternutrientBrand.toJson(nutrientBrand)),
@@ -376,6 +447,9 @@ class Plant extends DataClass implements Insertable<Plant> {
           String? name,
           PlantPhase? currentPhase,
           Value<DateTime?> phaseStartDate = const Value.absent(),
+          Value<DateTime?> startDate = const Value.absent(),
+          Value<DateTime?> endDate = const Value.absent(),
+          Value<double?> yieldGrams = const Value.absent(),
           double? waterVolumeLiters,
           NutrientBrand? nutrientBrand,
           PlantType? type,
@@ -391,6 +465,9 @@ class Plant extends DataClass implements Insertable<Plant> {
         currentPhase: currentPhase ?? this.currentPhase,
         phaseStartDate:
             phaseStartDate.present ? phaseStartDate.value : this.phaseStartDate,
+        startDate: startDate.present ? startDate.value : this.startDate,
+        endDate: endDate.present ? endDate.value : this.endDate,
+        yieldGrams: yieldGrams.present ? yieldGrams.value : this.yieldGrams,
         waterVolumeLiters: waterVolumeLiters ?? this.waterVolumeLiters,
         nutrientBrand: nutrientBrand ?? this.nutrientBrand,
         type: type ?? this.type,
@@ -413,6 +490,10 @@ class Plant extends DataClass implements Insertable<Plant> {
       phaseStartDate: data.phaseStartDate.present
           ? data.phaseStartDate.value
           : this.phaseStartDate,
+      startDate: data.startDate.present ? data.startDate.value : this.startDate,
+      endDate: data.endDate.present ? data.endDate.value : this.endDate,
+      yieldGrams:
+          data.yieldGrams.present ? data.yieldGrams.value : this.yieldGrams,
       waterVolumeLiters: data.waterVolumeLiters.present
           ? data.waterVolumeLiters.value
           : this.waterVolumeLiters,
@@ -445,6 +526,9 @@ class Plant extends DataClass implements Insertable<Plant> {
           ..write('name: $name, ')
           ..write('currentPhase: $currentPhase, ')
           ..write('phaseStartDate: $phaseStartDate, ')
+          ..write('startDate: $startDate, ')
+          ..write('endDate: $endDate, ')
+          ..write('yieldGrams: $yieldGrams, ')
           ..write('waterVolumeLiters: $waterVolumeLiters, ')
           ..write('nutrientBrand: $nutrientBrand, ')
           ..write('type: $type, ')
@@ -464,6 +548,9 @@ class Plant extends DataClass implements Insertable<Plant> {
       name,
       currentPhase,
       phaseStartDate,
+      startDate,
+      endDate,
+      yieldGrams,
       waterVolumeLiters,
       nutrientBrand,
       type,
@@ -481,6 +568,9 @@ class Plant extends DataClass implements Insertable<Plant> {
           other.name == this.name &&
           other.currentPhase == this.currentPhase &&
           other.phaseStartDate == this.phaseStartDate &&
+          other.startDate == this.startDate &&
+          other.endDate == this.endDate &&
+          other.yieldGrams == this.yieldGrams &&
           other.waterVolumeLiters == this.waterVolumeLiters &&
           other.nutrientBrand == this.nutrientBrand &&
           other.type == this.type &&
@@ -497,6 +587,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
   final Value<String> name;
   final Value<PlantPhase> currentPhase;
   final Value<DateTime?> phaseStartDate;
+  final Value<DateTime?> startDate;
+  final Value<DateTime?> endDate;
+  final Value<double?> yieldGrams;
   final Value<double> waterVolumeLiters;
   final Value<NutrientBrand> nutrientBrand;
   final Value<PlantType> type;
@@ -511,6 +604,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     this.name = const Value.absent(),
     this.currentPhase = const Value.absent(),
     this.phaseStartDate = const Value.absent(),
+    this.startDate = const Value.absent(),
+    this.endDate = const Value.absent(),
+    this.yieldGrams = const Value.absent(),
     this.waterVolumeLiters = const Value.absent(),
     this.nutrientBrand = const Value.absent(),
     this.type = const Value.absent(),
@@ -526,6 +622,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     required String name,
     required PlantPhase currentPhase,
     this.phaseStartDate = const Value.absent(),
+    this.startDate = const Value.absent(),
+    this.endDate = const Value.absent(),
+    this.yieldGrams = const Value.absent(),
     required double waterVolumeLiters,
     required NutrientBrand nutrientBrand,
     required PlantType type,
@@ -548,6 +647,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     Expression<String>? name,
     Expression<int>? currentPhase,
     Expression<DateTime>? phaseStartDate,
+    Expression<DateTime>? startDate,
+    Expression<DateTime>? endDate,
+    Expression<double>? yieldGrams,
     Expression<double>? waterVolumeLiters,
     Expression<int>? nutrientBrand,
     Expression<int>? type,
@@ -563,6 +665,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       if (name != null) 'name': name,
       if (currentPhase != null) 'current_phase': currentPhase,
       if (phaseStartDate != null) 'phase_start_date': phaseStartDate,
+      if (startDate != null) 'start_date': startDate,
+      if (endDate != null) 'end_date': endDate,
+      if (yieldGrams != null) 'yield_grams': yieldGrams,
       if (waterVolumeLiters != null) 'water_volume_liters': waterVolumeLiters,
       if (nutrientBrand != null) 'nutrient_brand': nutrientBrand,
       if (type != null) 'type': type,
@@ -581,6 +686,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       Value<String>? name,
       Value<PlantPhase>? currentPhase,
       Value<DateTime?>? phaseStartDate,
+      Value<DateTime?>? startDate,
+      Value<DateTime?>? endDate,
+      Value<double?>? yieldGrams,
       Value<double>? waterVolumeLiters,
       Value<NutrientBrand>? nutrientBrand,
       Value<PlantType>? type,
@@ -595,6 +703,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       name: name ?? this.name,
       currentPhase: currentPhase ?? this.currentPhase,
       phaseStartDate: phaseStartDate ?? this.phaseStartDate,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      yieldGrams: yieldGrams ?? this.yieldGrams,
       waterVolumeLiters: waterVolumeLiters ?? this.waterVolumeLiters,
       nutrientBrand: nutrientBrand ?? this.nutrientBrand,
       type: type ?? this.type,
@@ -622,6 +733,15 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     }
     if (phaseStartDate.present) {
       map['phase_start_date'] = Variable<DateTime>(phaseStartDate.value);
+    }
+    if (startDate.present) {
+      map['start_date'] = Variable<DateTime>(startDate.value);
+    }
+    if (endDate.present) {
+      map['end_date'] = Variable<DateTime>(endDate.value);
+    }
+    if (yieldGrams.present) {
+      map['yield_grams'] = Variable<double>(yieldGrams.value);
     }
     if (waterVolumeLiters.present) {
       map['water_volume_liters'] = Variable<double>(waterVolumeLiters.value);
@@ -663,6 +783,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
           ..write('name: $name, ')
           ..write('currentPhase: $currentPhase, ')
           ..write('phaseStartDate: $phaseStartDate, ')
+          ..write('startDate: $startDate, ')
+          ..write('endDate: $endDate, ')
+          ..write('yieldGrams: $yieldGrams, ')
           ..write('waterVolumeLiters: $waterVolumeLiters, ')
           ..write('nutrientBrand: $nutrientBrand, ')
           ..write('type: $type, ')
@@ -1608,6 +1731,9 @@ typedef $$PlantsTableCreateCompanionBuilder = PlantsCompanion Function({
   required String name,
   required PlantPhase currentPhase,
   Value<DateTime?> phaseStartDate,
+  Value<DateTime?> startDate,
+  Value<DateTime?> endDate,
+  Value<double?> yieldGrams,
   required double waterVolumeLiters,
   required NutrientBrand nutrientBrand,
   required PlantType type,
@@ -1623,6 +1749,9 @@ typedef $$PlantsTableUpdateCompanionBuilder = PlantsCompanion Function({
   Value<String> name,
   Value<PlantPhase> currentPhase,
   Value<DateTime?> phaseStartDate,
+  Value<DateTime?> startDate,
+  Value<DateTime?> endDate,
+  Value<double?> yieldGrams,
   Value<double> waterVolumeLiters,
   Value<NutrientBrand> nutrientBrand,
   Value<PlantType> type,
@@ -1655,6 +1784,9 @@ class $$PlantsTableTableManager extends RootTableManager<
             Value<String> name = const Value.absent(),
             Value<PlantPhase> currentPhase = const Value.absent(),
             Value<DateTime?> phaseStartDate = const Value.absent(),
+            Value<DateTime?> startDate = const Value.absent(),
+            Value<DateTime?> endDate = const Value.absent(),
+            Value<double?> yieldGrams = const Value.absent(),
             Value<double> waterVolumeLiters = const Value.absent(),
             Value<NutrientBrand> nutrientBrand = const Value.absent(),
             Value<PlantType> type = const Value.absent(),
@@ -1670,6 +1802,9 @@ class $$PlantsTableTableManager extends RootTableManager<
             name: name,
             currentPhase: currentPhase,
             phaseStartDate: phaseStartDate,
+            startDate: startDate,
+            endDate: endDate,
+            yieldGrams: yieldGrams,
             waterVolumeLiters: waterVolumeLiters,
             nutrientBrand: nutrientBrand,
             type: type,
@@ -1685,6 +1820,9 @@ class $$PlantsTableTableManager extends RootTableManager<
             required String name,
             required PlantPhase currentPhase,
             Value<DateTime?> phaseStartDate = const Value.absent(),
+            Value<DateTime?> startDate = const Value.absent(),
+            Value<DateTime?> endDate = const Value.absent(),
+            Value<double?> yieldGrams = const Value.absent(),
             required double waterVolumeLiters,
             required NutrientBrand nutrientBrand,
             required PlantType type,
@@ -1700,6 +1838,9 @@ class $$PlantsTableTableManager extends RootTableManager<
             name: name,
             currentPhase: currentPhase,
             phaseStartDate: phaseStartDate,
+            startDate: startDate,
+            endDate: endDate,
+            yieldGrams: yieldGrams,
             waterVolumeLiters: waterVolumeLiters,
             nutrientBrand: nutrientBrand,
             type: type,
@@ -1735,6 +1876,21 @@ class $$PlantsTableFilterComposer
 
   ColumnFilters<DateTime> get phaseStartDate => $state.composableBuilder(
       column: $state.table.phaseStartDate,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get startDate => $state.composableBuilder(
+      column: $state.table.startDate,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get endDate => $state.composableBuilder(
+      column: $state.table.endDate,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<double> get yieldGrams => $state.composableBuilder(
+      column: $state.table.yieldGrams,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1821,6 +1977,21 @@ class $$PlantsTableOrderingComposer
 
   ColumnOrderings<DateTime> get phaseStartDate => $state.composableBuilder(
       column: $state.table.phaseStartDate,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get startDate => $state.composableBuilder(
+      column: $state.table.startDate,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get endDate => $state.composableBuilder(
+      column: $state.table.endDate,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<double> get yieldGrams => $state.composableBuilder(
+      column: $state.table.yieldGrams,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

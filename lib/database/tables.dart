@@ -21,6 +21,11 @@ class Plants extends Table {
 
   IntColumn get currentPhase => intEnum<PlantPhase>()();
   DateTimeColumn get phaseStartDate => dateTime().nullable()();
+  
+  // Neu: für Archiv/Stats
+  DateTimeColumn get startDate => dateTime().nullable()();
+  DateTimeColumn get endDate => dateTime().nullable()();
+  RealColumn get yieldGrams => real().nullable()();
 
   RealColumn get waterVolumeLiters => real()();
   IntColumn get nutrientBrand => intEnum<NutrientBrand>()();

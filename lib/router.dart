@@ -7,6 +7,9 @@ import 'screens/tent_setup_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/add_plant_screen.dart';
 import 'screens/checkin_screen.dart';
+import 'screens/harvest_wizard_screen.dart';
+import 'screens/finish_wizard_screen.dart';
+import 'screens/archive_screen.dart';
 import 'screens/germination_wizard_screen.dart';
 import 'models/plant.dart';
 import 'screens/ppfd_meter_screen.dart';
@@ -65,6 +68,26 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/',
         builder: (context, state) => const DashboardScreen(),
+      ),
+      GoRoute(
+        path: '/harvest_wizard',
+        builder: (context, state) {
+          final plantIdStr = state.uri.queryParameters['plantId'];
+          final plantId = plantIdStr != null ? int.tryParse(plantIdStr) : null;
+          return HarvestWizardScreen(plantId: plantId ?? 0);
+        },
+      ),
+      GoRoute(
+        path: '/finish_wizard',
+        builder: (context, state) {
+          final plantIdStr = state.uri.queryParameters['plantId'];
+          final plantId = plantIdStr != null ? int.tryParse(plantIdStr) : null;
+          return FinishWizardScreen(plantId: plantId ?? 0);
+        },
+      ),
+      GoRoute(
+        path: '/archive',
+        builder: (context, state) => const ArchiveScreen(),
       ),
       GoRoute(
         path: '/add_plant',

@@ -2751,6 +2751,264 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Ich sehe echte Probleme'**
   String get checkinAutumnProblems;
+
+  /// No description provided for @harvestWizardPrepTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Erntevorbereitung'**
+  String get harvestWizardPrepTitle;
+
+  /// No description provided for @harvestWizardPrepDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Es ist soweit! Bevor wir die Pflanze fällen, bereite deinen Arbeitsplatz vor. Du brauchst eine scharfe, saubere Ernteschere, Einweghandschuhe und Reinigungsalkohol.'**
+  String get harvestWizardPrepDesc;
+
+  /// No description provided for @harvestWizardPrepTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Das Harz der Blüten klebt extrem. Trage unbedingt Handschuhe und reinige die Schere zwischendurch mit Alkohol.'**
+  String get harvestWizardPrepTip;
+
+  /// No description provided for @harvestWizardPrepDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum Sauberkeit?'**
+  String get harvestWizardPrepDeepDiveTitle;
+
+  /// No description provided for @harvestWizardPrepDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Eine unsaubere Schere kann Schmutz oder Pilzsporen in die frischen Schnittstellen tragen. Das Harz (Trichome) enthält die gesamten Wirkstoffe – Handschuhe verhindern klebrige Hände.'**
+  String get harvestWizardPrepDeepDiveDesc;
+
+  /// No description provided for @harvestWizardCutTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Pflanze fällen'**
+  String get harvestWizardCutTitle;
+
+  /// No description provided for @harvestWizardCutDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Schneide die Pflanze am Hauptstamm knapp über dem Topf ab. Hänge sie danach als Ganzes kopfüber auf. Ist sie zu groß, hänge sie Ast für Ast auf.'**
+  String get harvestWizardCutDesc;
+
+  /// No description provided for @harvestWizardCutTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Nutze Kleiderbügel, Gartendraht oder ein Trockennetz, um die Äste in deinem Zelt aufzuhängen.'**
+  String get harvestWizardCutTip;
+
+  /// No description provided for @harvestWizardCutDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum kopfüber ins Zelt?'**
+  String get harvestWizardCutDeepDiveTitle;
+
+  /// No description provided for @harvestWizardCutDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Kopfüber trocknen die Pflanzen gleichmäßiger. Das Zelt ist der perfekte Ort dafür, da der Aktivkohlefilter den starken Geruch neutralisiert.'**
+  String get harvestWizardCutDeepDiveDesc;
+
+  /// No description provided for @harvestWizardTrimTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Blätter entfernen (Trimmen)'**
+  String get harvestWizardTrimTitle;
+
+  /// No description provided for @harvestWizardTrimDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Entferne jetzt alle großen Sonnensegel. Die kleinen harzigen Blätter an den Blüten (Zuckerblätter) lässt du für den Trocknungsprozess am besten dran (Dry Trim).'**
+  String get harvestWizardTrimDesc;
+
+  /// No description provided for @harvestWizardTrimTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Hebe die harzigen Zuckerblätter später auf! Du kannst daraus nach der Trocknung Tee, Butter oder Extrakte herstellen.'**
+  String get harvestWizardTrimTip;
+
+  /// No description provided for @harvestWizardTrimDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum Dry Trim?'**
+  String get harvestWizardTrimDeepDiveTitle;
+
+  /// No description provided for @harvestWizardTrimDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Blätter legen sich wie ein Schutzmantel um die Blüte. Das verlangsamt die Trocknung, was Geschmack (Terpene) schützt und ein kratziges Raucherlebnis verhindert.'**
+  String get harvestWizardTrimDeepDiveDesc;
+
+  /// No description provided for @harvestWizardDryingTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Die perfekte Trocknungsumgebung'**
+  String get harvestWizardDryingTitle;
+
+  /// No description provided for @harvestWizardDryingDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Ernte hängt.\n\n• Temperatur: Optimal 18-20°C\n• Luftfeuchtigkeit: 55-60%\n• Licht: Absolute Dunkelheit\n• Umluft: Abluft an, kein direkter Wind'**
+  String get harvestWizardDryingDesc;
+
+  /// No description provided for @harvestWizardDryingTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Die Trocknung dauert meist 7-14 Tage. Sie sind trocken, wenn kleine Äste beim Biegen mit einem \"Knack\" brechen (Snap-Test).'**
+  String get harvestWizardDryingTip;
+
+  /// No description provided for @harvestWizardDryingDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum so langsam?'**
+  String get harvestWizardDryingDeepDiveTitle;
+
+  /// No description provided for @harvestWizardDryingDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Zu schnelles Trocknen zerstört feine Aromen und schließt Chlorophyll ein – das schmeckt nach Heu. Geduld ist hier der Schlüssel zu Top-Qualität.'**
+  String get harvestWizardDryingDeepDiveDesc;
+
+  /// No description provided for @harvestWizardFinishBtn.
+  ///
+  /// In de, this message translates to:
+  /// **'Trocknung starten'**
+  String get harvestWizardFinishBtn;
+
+  /// No description provided for @dashboardDryingFinishedBtn.
+  ///
+  /// In de, this message translates to:
+  /// **'Trocknung abgeschlossen (Snap-Test)'**
+  String get dashboardDryingFinishedBtn;
+
+  /// No description provided for @finishWizardTrimTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Der finale Dry Trim'**
+  String get finishWizardTrimTitle;
+
+  /// No description provided for @finishWizardTrimDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Äste knacken, die Blüten sind trocken! Schneide nun alle verbliebenen, kleinen Zuckerblätter nah an der Blüte ab.'**
+  String get finishWizardTrimDesc;
+
+  /// No description provided for @finishWizardTrimTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Halte die Blüte am Stiel fest, um die Harzdrüsen nicht zu zerdrücken.'**
+  String get finishWizardTrimTip;
+
+  /// No description provided for @finishWizardTrimDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum jetzt trimmen?'**
+  String get finishWizardTrimDeepDiveTitle;
+
+  /// No description provided for @finishWizardTrimDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Nach der langsamen Trocknung lassen sich die Zuckerblätter leicht abschneiden. Ohne Blätter schmeckt der Rauch weicher.'**
+  String get finishWizardTrimDeepDiveDesc;
+
+  /// No description provided for @finishWizardWeighTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Wiegen & Abschluss'**
+  String get finishWizardWeighTitle;
+
+  /// No description provided for @finishWizardWeighDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Deine Ernte ist fertig getrimmt! Wiege jetzt deine Ausbeute und trage sie hier ein, um diesen Grow erfolgreich abzuschließen.'**
+  String get finishWizardWeighDesc;
+
+  /// No description provided for @finishWizardWeighInputLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Ertrag (in Gramm)'**
+  String get finishWizardWeighInputLabel;
+
+  /// No description provided for @finishWizardWeighTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Das Gewicht der getrockneten Blüten ist etwa 75-80% geringer als direkt nach der Ernte.'**
+  String get finishWizardWeighTip;
+
+  /// No description provided for @finishWizardWeighDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Warum wiegen?'**
+  String get finishWizardWeighDeepDiveTitle;
+
+  /// No description provided for @finishWizardWeighDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'So kannst du bei jedem Grow deine Fortschritte tracken und sehen, ob Anpassungen an Licht oder Nährstoffen einen Unterschied gemacht haben.'**
+  String get finishWizardWeighDeepDiveDesc;
+
+  /// No description provided for @finishWizardCuringTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Das Curing (Aushärten)'**
+  String get finishWizardCuringTitle;
+
+  /// No description provided for @finishWizardCuringDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Pack die Blüten jetzt in luftdichte Gläser (am besten mit 58-62% Feuchtigkeitspack). Öffne die Gläser in den ersten 1-2 Wochen täglich für 15 Minuten.'**
+  String get finishWizardCuringDesc;
+
+  /// No description provided for @finishWizardCuringTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Curing verwandelt gutes Gras in absolutes Spitzen-Gras. Es baut letztes Chlorophyll ab.'**
+  String get finishWizardCuringTip;
+
+  /// No description provided for @finishWizardCuringDeepDiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Was passiert beim Curing?'**
+  String get finishWizardCuringDeepDiveTitle;
+
+  /// No description provided for @finishWizardCuringDeepDiveDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Restfeuchtigkeit verteilt sich gleichmäßig. Die Terpene (Aromastoffe) werden konserviert und der Abbau von Zuckerstoffen verhindert, dass der Rauch kratzig wird.'**
+  String get finishWizardCuringDeepDiveDesc;
+
+  /// No description provided for @finishWizardFinishBtn.
+  ///
+  /// In de, this message translates to:
+  /// **'Pflanze archivieren'**
+  String get finishWizardFinishBtn;
+
+  /// No description provided for @archiveTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Archiv'**
+  String get archiveTitle;
+
+  /// No description provided for @archiveYield.
+  ///
+  /// In de, this message translates to:
+  /// **'Ertrag'**
+  String get archiveYield;
+
+  /// No description provided for @archiveDays.
+  ///
+  /// In de, this message translates to:
+  /// **'Tage'**
+  String get archiveDays;
+
+  /// No description provided for @archiveNoPlants.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine archivierten Pflanzen.'**
+  String get archiveNoPlants;
 }
 
 class _AppLocalizationsDelegate

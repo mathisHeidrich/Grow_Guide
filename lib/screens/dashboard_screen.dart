@@ -37,6 +37,11 @@ class DashboardScreen extends ConsumerWidget {
             onPressed: () => context.go('/add_plant'),
           ),
           IconButton(
+            icon: const Icon(Icons.inventory_2, size: 28),
+            tooltip: l10n.archiveTitle,
+            onPressed: () => context.push('/archive'),
+          ),
+          IconButton(
             icon: const Icon(Icons.settings, size: 28),
             tooltip: 'Settings', // Will localize properly later if needed
             onPressed: () => context.push('/settings'),
@@ -125,7 +130,10 @@ class DashboardScreen extends ConsumerWidget {
           final currentDayInPhase =
               plant.getDayInPhase(ref.watch(timeProvider));
 
-          if (plant.currentPhase == PlantPhase.germination) {
+          if (plant.currentPhase == PlantPhase.drying) {
+            btnColor = AppColors.growGreen;
+            btnText = l10n.dashboardDryingFinishedBtn;
+          } else if (plant.currentPhase == PlantPhase.germination) {
             if (!plant.germinationStarted) {
               btnColor = AppColors.growGreen;
               btnText = l10n.dashboardStartGermination;
@@ -234,7 +242,13 @@ class DashboardScreen extends ConsumerWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: InkWell(
-              onTap: () => context.go('/checkin/${plant.id}'),
+              onTap: () {
+                if (plant.currentPhase == PlantPhase.drying) {
+                  context.push('/finish_wizard?plantId=${plant.id}');
+                } else {
+                  context.go('/checkin/${plant.id}');
+                }
+              },
               borderRadius: BorderRadius.circular(16),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

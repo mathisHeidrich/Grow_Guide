@@ -1350,8 +1350,7 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         icon: const Icon(Icons.cut),
         label: Text(l10n.checkinHarvestReady, style: const TextStyle(fontWeight: FontWeight.bold)),
         onPressed: () {
-          // TODO: implement tutorial later, just close for now
-          _completeCheckin();
+          context.pushReplacement('/harvest_wizard?plantId=${widget.plantId}');
         },
       ),
     );
