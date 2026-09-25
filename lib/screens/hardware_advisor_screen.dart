@@ -3,6 +3,7 @@ import '../widgets/tip_formatted_text.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
 import 'package:app/theme/app_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HardwareAdvisorScreen extends StatefulWidget {
   const HardwareAdvisorScreen({super.key});
@@ -25,77 +26,104 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
     }
   }
 
+  Future<void> _launchUrl(String urlString) async {
+    final url = Uri.parse(urlString);
+    if (!await launchUrl(url)) {
+      debugPrint('Could not launch $urlString');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final completeSetUrl = 'https://amazon.de/dp/B000000000'; // Placeholder
 
     // Build the list of hardware items
     final items = [
+      _HardwareItemData(
+        title: l10n.hw_complete_set_title,
+        description: l10n.hw_complete_set_desc,
+        isRequired: true,
+        icon: Icons.star,
+        affiliateLink: completeSetUrl,
+        isCompleteSet: true,
+      ),
       _HardwareItemData(
         title: l10n.hw_grow_tentTitle,
         description: l10n.hw_grow_tentDesc,
         isRequired: true,
         icon: Icons.house,
+        affiliateLink: 'https://amazon.de/dp/B000000001',
       ),
       _HardwareItemData(
         title: l10n.hw_ledTitle,
         description: l10n.hw_ledDesc,
         isRequired: true,
         icon: Icons.lightbulb,
+        affiliateLink: 'https://amazon.de/dp/B000000002',
       ),
       _HardwareItemData(
         title: l10n.hw_exhaustTitle,
         description: l10n.hw_exhaustDesc,
         isRequired: true,
         icon: Icons.air,
+        affiliateLink: 'https://amazon.de/dp/B000000003',
       ),
       _HardwareItemData(
         title: l10n.hw_carbon_filterTitle,
         description: l10n.hw_carbon_filterDesc,
         isRequired: true,
         icon: Icons.filter_alt,
+        affiliateLink: 'https://amazon.de/dp/B000000004',
       ),
       _HardwareItemData(
         title: l10n.hw_circulation_fanTitle,
         description: l10n.hw_circulation_fanDesc,
         isRequired: true,
         icon: Icons.toys,
+        affiliateLink: 'https://amazon.de/dp/B000000005',
       ),
       _HardwareItemData(
         title: l10n.hw_dwc_bucketTitle,
         description: l10n.hw_dwc_bucketDesc,
         isRequired: true,
         icon: Icons.delete,
+        affiliateLink: 'https://amazon.de/dp/B000000006',
       ),
       _HardwareItemData(
         title: l10n.hw_net_potTitle,
         description: l10n.hw_net_potDesc,
         isRequired: true,
         icon: Icons.grid_on,
+        affiliateLink: 'https://amazon.de/dp/B000000007',
       ),
       _HardwareItemData(
         title: l10n.hw_air_pumpTitle,
         description: l10n.hw_air_pumpDesc,
         isRequired: true,
         icon: Icons.bubble_chart,
+        affiliateLink: 'https://amazon.de/dp/B000000008',
       ),
       _HardwareItemData(
         title: l10n.hw_clay_pebblesTitle,
         description: l10n.hw_clay_pebblesDesc,
         isRequired: true,
         icon: Icons.scatter_plot,
+        affiliateLink: 'https://amazon.de/dp/B000000009',
       ),
       _HardwareItemData(
         title: l10n.hw_starter_cubesTitle,
         description: l10n.hw_starter_cubesDesc,
         isRequired: true,
         icon: Icons.crop_square,
+        affiliateLink: 'https://amazon.de/dp/B000000010',
       ),
       _HardwareItemData(
         title: l10n.hw_hydro_nutesTitle,
         description: l10n.hw_hydro_nutesDesc,
         isRequired: true,
         icon: Icons.water_drop,
+        affiliateLink: 'https://amazon.de/dp/B000000011',
       ),
       _HardwareItemData(
         title: l10n.hw_ph_dropsTitle,
@@ -103,12 +131,14 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         isRequired: true,
         proTip: l10n.hw_ph_dropsProTip,
         icon: Icons.science,
+        affiliateLink: 'https://amazon.de/dp/B000000012',
       ),
       _HardwareItemData(
         title: l10n.hw_ec_meterTitle,
         description: l10n.hw_ec_meterDesc,
         isRequired: true,
         icon: Icons.speed,
+        affiliateLink: 'https://amazon.de/dp/B000000013',
       ),
       _HardwareItemData(
         title: l10n.hw_ph_downTitle,
@@ -116,18 +146,21 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         isRequired: true,
         proTip: l10n.hw_ph_downProTip,
         icon: Icons.arrow_downward,
+        affiliateLink: 'https://amazon.de/dp/B000000014',
       ),
       _HardwareItemData(
         title: l10n.hw_ph_upTitle,
         description: l10n.hw_ph_upDesc,
         isRequired: true,
         icon: Icons.arrow_upward,
+        affiliateLink: 'https://amazon.de/dp/B000000015',
       ),
       _HardwareItemData(
         title: l10n.hw_timerTitle,
         description: l10n.hw_timerDesc,
         isRequired: true,
         icon: Icons.timer,
+        affiliateLink: 'https://amazon.de/dp/B000000016',
       ),
       _HardwareItemData(
         title: l10n.hw_second_bucketTitle,
@@ -169,7 +202,10 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
       ),
     ];
 
+    // Sort: Complete set first, then Required, then Upgrade
     items.sort((a, b) {
+      if (a.isCompleteSet) return -1;
+      if (b.isCompleteSet) return 1;
       if (a.isRequired == b.isRequired) return 0;
       return a.isRequired ? -1 : 1;
     });
@@ -180,6 +216,13 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         title: Text(l10n.hardwareAdvisorTitle),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart, color: Colors.orangeAccent),
+            tooltip: l10n.hw_buy_complete_set,
+            onPressed: () => _launchUrl(completeSetUrl),
+          ),
+        ],
       ),
       body: PageView.builder(
         controller: _pageController,
@@ -192,31 +235,58 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: item.isRequired
-                          ? Colors.red.withValues(alpha: 0.2)
-                          : Colors.blue.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: item.isRequired ? Colors.red : Colors.blue,
+                if (!item.isCompleteSet)
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: item.isRequired
+                            ? Colors.red.withValues(alpha: 0.2)
+                            : Colors.blue.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: item.isRequired ? Colors.red : Colors.blue,
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      item.isRequired ? '🔴 PFLICHT' : '🔵 UPGRADE',
-                      style: TextStyle(
-                        color: item.isRequired ? Colors.red : Colors.blue,
-                        fontWeight: FontWeight.bold,
+                      child: Text(
+                        item.isRequired ? '🔴 PFLICHT' : '🔵 UPGRADE',
+                        style: TextStyle(
+                          color: item.isRequired ? Colors.red : Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                if (item.isCompleteSet)
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Colors.orange,
+                        ),
+                      ),
+                      child: const Text(
+                        '⭐ ALL-IN-ONE',
+                        style: TextStyle(
+                          color: Colors.orange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 const Spacer(),
-                Icon(item.icon, size: 120, color: AppColors.growGreen),
+                Icon(
+                  item.icon,
+                  size: 120,
+                  color: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
+                ),
                 const SizedBox(height: 48),
                 Text(
                   item.title,
@@ -234,6 +304,25 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                       ),
                   textAlign: TextAlign.center,
                 ),
+                if (item.affiliateLink != null) ...[
+                  const SizedBox(height: 32),
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: () => _launchUrl(item.affiliateLink!),
+                    icon: const Icon(Icons.shopping_cart),
+                    label: Text(
+                      item.isCompleteSet ? l10n.hw_buy_complete_set : l10n.hw_buy_on_amazon,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  ),
+                ],
                 const Spacer(),
                 Row(
                   children: [
@@ -306,6 +395,8 @@ class _HardwareItemData {
   final bool isRequired;
   final String? proTip;
   final IconData icon;
+  final String? affiliateLink;
+  final bool isCompleteSet;
 
   _HardwareItemData({
     required this.title,
@@ -313,5 +404,7 @@ class _HardwareItemData {
     required this.isRequired,
     this.proTip,
     required this.icon,
+    this.affiliateLink,
+    this.isCompleteSet = false,
   });
 }

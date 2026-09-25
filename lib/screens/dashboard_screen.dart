@@ -37,6 +37,11 @@ class DashboardScreen extends ConsumerWidget {
             onPressed: () => context.go('/add_plant'),
           ),
           IconButton(
+            icon: const Icon(Icons.shopping_cart, size: 28),
+            tooltip: l10n.hardwareAdvisorTitle,
+            onPressed: () => context.push('/hardware_advisor'),
+          ),
+          IconButton(
             icon: const Icon(Icons.inventory_2, size: 28),
             tooltip: l10n.archiveTitle,
             onPressed: () => context.push('/archive'),

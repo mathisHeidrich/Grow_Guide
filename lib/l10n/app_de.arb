@@ -618,5 +618,9 @@
   "plantActionDeleteConfirmTitle": "Pflanze löschen?",
   "plantActionDeleteConfirmText": "Möchtest du diese Pflanze und all ihre Daten wirklich unwiderruflich löschen?",
   "generalCancel": "Abbrechen",
-  "generalDelete": "Löschen"
+  "generalDelete": "Löschen",
+  "hw_buy_on_amazon": "Auf Amazon ansehen",
+  "hw_buy_complete_set": "Komplettes Set kaufen",
+  "hw_complete_set_title": "Das Starter-Set",
+  "hw_complete_set_desc": "Spar dir die Mühe und kaufe alle benötigten Teile für deinen DWC-Grow auf einen Schlag."
 }
