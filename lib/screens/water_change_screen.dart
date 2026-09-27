@@ -12,6 +12,8 @@ class WaterChangeScreen extends StatefulWidget {
 }
 
 class _WaterChangeScreenState extends State<WaterChangeScreen> {
+  int _selectedMethod = 1;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -19,6 +21,7 @@ class _WaterChangeScreenState extends State<WaterChangeScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
+        leading: BackButton(onPressed: () => context.pop()),
         title: Text(l10n.waterChangeTitle),
         actions: [
           IconButton(
@@ -74,93 +77,139 @@ class _WaterChangeScreenState extends State<WaterChangeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Spacer(),
-                  _buildMethodCard(
-                    context,
-                    title: l10n.waterChangeMethod1Title,
-                    content: l10n.waterChangeMethod1Desc,
-                    icon: Icons.waves,
-                    isRecommended: true,
-                  ),
-                  const SizedBox(height: 24),
-                  _buildMethodCard(
-                    context,
-                    title: l10n.waterChangeMethod2Title,
-                    content: l10n.waterChangeMethod2Desc,
-                    icon: Icons.wash,
-                  ),
-                  const Spacer(),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.growGreen,
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildExpandableMethodCard(
+                        context,
+                        methodIndex: 1,
+                        title: l10n.waterChangeMethod1Title,
+                        content: l10n.waterChangeMethod1Desc,
+                        icon: Icons.waves,
+                        isRecommended: true,
                       ),
-                    ),
-                    onPressed: () {
-                      context.pop(true);
-                    },
-                    child: Text(
-                      l10n.waterChangeDone,
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+                      const SizedBox(height: 16),
+                      _buildExpandableMethodCard(
+                        context,
+                        methodIndex: 2,
+                        title: l10n.waterChangeMethod2Title,
+                        content: l10n.waterChangeMethod2Desc,
+                        icon: Icons.wash,
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 24),
-                ],
+                ),
               ),
-            ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.growGreen,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                onPressed: () {
+                  context.pop(true);
+                },
+                child: Text(
+                  l10n.waterChangeDone,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 8),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  Widget _buildMethodCard(
+  Widget _buildExpandableMethodCard(
     BuildContext context, {
+    required int methodIndex,
     required String title,
     required String content,
     required IconData icon,
     bool isRecommended = false,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: isRecommended
-            ? Border.all(color: AppColors.growGreen, width: 2)
-            : null,
-      ),
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(icon,
-                  color: isRecommended ? AppColors.growGreen : Colors.white,
-                  size: 28),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color:
-                            isRecommended ? AppColors.growGreen : Colors.white,
-                      ),
+    final isSelected = _selectedMethod == methodIndex;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedMethod = methodIndex;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: isSelected
+              ? Border.all(color: AppColors.growGreen, width: 2)
+              : Border.all(color: Colors.transparent, width: 2),
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(icon,
+                    color: isSelected ? AppColors.growGreen : Colors.white54,
+                    size: 28),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? (isRecommended ? AppColors.growGreen : Colors.white) : Colors.white54,
+                        ),
+                  ),
+                ),
+                Icon(
+                  isSelected ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                  color: Colors.white54,
+                ),
+              ],
+            ),
+            if (isSelected) ...[
+              const SizedBox(height: 16),
+              Container(
+                width: double.infinity,
+                height: 140,
+                decoration: BoxDecoration(
+                  color: Colors.black26,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.white10),
+                ),
+                child: const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.image_outlined, color: Colors.white24, size: 40),
+                      SizedBox(height: 8),
+                      Text("Bild-Platzhalter", style: TextStyle(color: Colors.white24)),
+                    ],
+                  ),
                 ),
               ),
+              const SizedBox(height: 16),
+              Text(
+                content,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white70,
+                      height: 1.5,
+                    ),
+              ),
             ],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            content,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white70,
-                  height: 1.5,
-                ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

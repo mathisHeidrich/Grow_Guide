@@ -950,18 +950,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get waterChangeTitle => 'Wasserwechsel';
 
   @override
-  String get waterChangeMethod1Title => 'Der wöchentliche Wechsel';
+  String get waterChangeMethod1Title => 'Option 1: Tauchpumpe';
 
   @override
   String get waterChangeMethod1Desc =>
-      '• Wir empfehlen, das Wasser im Tank alle 7 bis 10 Tage komplett auszutauschen.\n• Pumpe das alte Wasser vollständig ab (z.B. mit Tauchpumpe).\n• Fülle frisches, temperiertes und pH-reguliertes Wasser mit Dünger ein.\n\nTIPP: Bereite das Wasser immer in einem zweiten Eimer vor.';
+      '• Pumpe das alte Wasser vollständig ab.\n• Fülle danach frisches Leitungswasser ein.\n\nWICHTIG: Gib jetzt noch keinen Dünger hinzu und passe den pH-Wert noch nicht an. Das erledigen wir im nächsten Schritt.';
 
   @override
-  String get waterChangeMethod2Title => 'Methode 2: Zweiter Eimer';
+  String get waterChangeMethod2Title => 'Option 2: Zweiter Eimer';
 
   @override
   String get waterChangeMethod2Desc =>
-      '• Bereite einen zweiten, sauberen Eimer vor.\n• Hebe den Deckel mitsamt Pflanze hoch und setze ihn auf den zweiten Eimer.\n• Leere und reinige den Haupttank und fülle ihn frisch auf.';
+      '• Bereite einen zweiten, sauberen Eimer mit frischem Leitungswasser vor.\n• Hebe den Deckel mitsamt Pflanze hoch und setze ihn auf den zweiten Eimer.\n\nAuch hier gilt: Noch kein Dünger, keine pH-Anpassung.';
 
   @override
   String get waterChangeDone => 'Wasserwechsel erledigt';
