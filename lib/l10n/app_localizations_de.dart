@@ -435,13 +435,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentIntroDesc =>
-      'Du weißt jetzt alles Wichtige über Hardware und Wasser.\n\nAls Nächstes bauen wir gemeinsam dein Zelt auf. Hast du es schon komplett aufgebaut und willst direkt ins Dashboard, oder sollen wir Schritt für Schritt durchgehen?';
+      'Du hast die Hardware zusammen!\n\nAls Nächstes bauen wir gemeinsam dein Zelt auf. Hast du es schon komplett aufgebaut und willst direkt zum Wasser-Setup, oder sollen wir Schritt für Schritt durchgehen?';
 
   @override
   String get tentIntroNext => 'Zelt gemeinsam aufbauen';
 
   @override
-  String get tentIntroSkip => 'Zelt steht! Zum Dashboard';
+  String get tentIntroSkip => 'Zelt steht! Zum Wasser-Setup';
 
   @override
   String get tentTitle1 => 'Station 1: Der Standplatz';
@@ -541,7 +541,7 @@ class AppLocalizationsDe extends AppLocalizations {
       '• Schalte alle Geräte ein und schließe das Zelt vollständig.\n• Zieht sich die Zelthülle leicht nach innen? (Unterdruck-Check).\n\nTIPP: Schalte das Licht im Raum aus. Dringt aus dem Zelt irgendwo Licht nach außen? Klebe Lecks von innen ab.';
 
   @override
-  String get tentNext10 => 'Setup abgeschlossen!';
+  String get tentNext10 => 'Setup abgeschlossen! Zum Wasser-Setup';
 
   @override
   String get ppfdTitle => 'PPFD Meter';
@@ -840,17 +840,17 @@ class AppLocalizationsDe extends AppLocalizations {
   String get waterSetupStep2Desc => 'Ist Chlor in deinem Leitungswasser?';
 
   @override
-  String get waterSetupChlorineYes => 'Ja';
+  String get waterSetupChlorineYes => 'Ja, es riecht nach Schwimmbad';
 
   @override
-  String get waterSetupChlorineNo => 'Nein';
+  String get waterSetupChlorineNo => 'Nein, es riecht nach nichts';
 
   @override
-  String get waterSetupChlorineUnknown => 'Weiß ich nicht';
+  String get waterSetupChlorineUnknown => 'Ich bin mir unsicher';
 
   @override
   String get waterSetupChlorineFeedback =>
-      'Tipp: Wenn Chlor im Wasser ist, lass dein Leitungswasser immer 24 Stunden in einem Eimer abstehen, bevor du es benutzt. Idealerweise legst du für diese Zeit schon einen Sprudelstein (Luftpumpe) in den Eimer, das treibt das Chlor viel schneller und zuverlässiger aus dem Wasser. Chlor schädigt sonst die Wurzeln!';
+      'TIPP: Lass dein Gießwasser einfach 24 Stunden offen abstehen, bevor du es verwendest (am besten mit einem Sprudelstein). Das Chlor gast dann von alleine aus!';
 
   @override
   String get waterSetupNext => 'Weiter';
@@ -1816,4 +1816,38 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get checkinEcCalibrationTip =>
       'Tipp: Wenn der EC-Wert trotz Wasserwechsel immer noch sehr hoch ist, solltest du dringend dein EC-Messgerät mit Kalibrierflüssigkeit prüfen. Oft ist das Messgerät verstellt.';
+
+  @override
+  String get waterSetupIntroTitle => 'Dein Wasser & der Grund-EC';
+
+  @override
+  String get waterSetupIntroDesc =>
+      'Dein Leitungswasser enthält bereits Mineralien wie Kalzium und Magnesium. Je mehr davon drin ist (hoher Grund-EC), desto weniger \"Platz\" bleibt für deinen tatsächlichen Dünger!\n\nLass uns kurz prüfen, wie dein Wasser beschaffen ist, damit wir später den Dünger perfekt anpassen können.';
+
+  @override
+  String get waterSetupIntroNext => 'Weiter zur EC-Messung';
+
+  @override
+  String get waterSetupEcMeasureTitle => 'Messgerät zücken!';
+
+  @override
+  String get waterSetupEcMeasureDesc =>
+      'Füll ein Glas mit kaltem Leitungswasser und halte dein EC-Messgerät hinein. Welchen Wert zeigt es an?';
+
+  @override
+  String get waterSetupEcMissingBtn => 'Ich habe mein Messgerät noch nicht';
+
+  @override
+  String get waterSetupEcMissingHint =>
+      'Kein Problem! Für die Samen-Keimung brauchst du das Messgerät noch nicht. Schau dir die App in Ruhe an – wir erinnern dich einfach später daran, bevor du das erste Mal Dünger ins Wasser mischst.';
+
+  @override
+  String get waterSetupChlorineTitle => 'Chlor im Leitungswasser';
+
+  @override
+  String get waterSetupChlorineDesc =>
+      'Manche Wasserwerke setzen dem Leitungswasser Chlor zu, um es keimfrei zu halten. Das mögen unsere Pflanzenwurzeln gar nicht.';
+
+  @override
+  String get waterSetupFinish => 'Setup abschließen';
 }

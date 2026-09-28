@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
 import 'package:app/theme/app_colors.dart';
 import '../providers/settings_provider.dart';
+import '../widgets/tip_formatted_text.dart';
 
 class WaterSetupScreen extends ConsumerStatefulWidget {
   final bool isFromSettings;
@@ -14,35 +15,31 @@ class WaterSetupScreen extends ConsumerStatefulWidget {
 }
 
 class _WaterSetupScreenState extends ConsumerState<WaterSetupScreen> {
-  int _currentStep = 0;
+  final PageController _pageController = PageController();
+  
   String? _selectedEc;
-  String? _selectedChlorine;
+  bool _missingMeter = false;
 
-  void _nextStep() {
-    if (_currentStep == 0 && _selectedEc == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Bitte wähle eine Option aus.')),
-      );
-      return;
-    }
-    if (_currentStep == 1 && _selectedChlorine == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Bitte wähle eine Option aus.')),
-      );
-      return;
-    }
-
-    if (_currentStep < 1) {
-      setState(() => _currentStep++);
-    } else {
-      _finishSetup();
-    }
+  void _nextPage() {
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
   }
 
-  Future<void> _finishSetup() async {
-    // Speichere den EC-Wert (Chlor wird absichtlich nicht gespeichert)
+  void _previousPage() {
+    _pageController.previousPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  Future<void> _completeSetup() async {
+    // If the user hasn't selected EC and they clicked "missing meter", save as unknown
+    String? finalEc = _missingMeter ? 'unknown' : _selectedEc;
+    
     await ref.read(settingsNotifierProvider).updateSettings(
-          waterEcLevel: _selectedEc,
+          waterEcLevel: finalEc,
         );
     
     if (!mounted) return;
@@ -50,247 +47,382 @@ class _WaterSetupScreenState extends ConsumerState<WaterSetupScreen> {
     if (widget.isFromSettings) {
       context.pop(); // Zurück zu den Einstellungen
     } else {
-      context.go('/tent_setup');
+      context.go('/'); // End of onboarding, go to Dashboard
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-
+    
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
+      appBar: widget.isFromSettings ? AppBar(
         title: Text(l10n.waterSetupTitle),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: widget.isFromSettings ? const BackButton() : null,
-      ),
+        leading: const BackButton(),
+      ) : null,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Progress Indicator
-              Row(
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            _buildSlide(
+              title: l10n.waterSetupIntroTitle,
+              text: l10n.waterSetupIntroDesc,
+              icon: Icons.water_drop,
+              nextButtonText: l10n.waterSetupIntroNext,
+              onNext: _nextPage,
+            ),
+            _buildEcMeasureSlide(l10n),
+            _buildEcFeedbackSlide(l10n),
+            _buildSlide(
+              title: l10n.waterSetupChlorineTitle,
+              text: l10n.waterSetupChlorineDesc,
+              icon: Icons.science,
+              iconColor: Colors.orangeAccent,
+              nextButtonText: l10n.waterSetupFinish,
+              onNext: _completeSetup,
+              showBack: true,
+              extraWidget: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.orange.withValues(alpha: 0.5)),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 24),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        l10n.waterSetupChlorineFeedback,
+                        style: const TextStyle(color: Colors.white, fontSize: 15, height: 1.4),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEcMeasureSlide(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Expanded(
-                    child: _buildProgressSegment(isActive: true),
+                  const SizedBox(height: 24),
+                  const Icon(Icons.speed, size: 100, color: AppColors.growGreen),
+                  const SizedBox(height: 32),
+                  Text(
+                    l10n.waterSetupEcMeasureTitle,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: _buildProgressSegment(isActive: _currentStep >= 1),
+                  const SizedBox(height: 16),
+                  TipFormattedText(
+                    l10n.waterSetupEcMeasureDesc,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Colors.white70,
+                        ),
+                    textAlign: TextAlign.center,
                   ),
+                  const SizedBox(height: 32),
+                  
+                  _buildSelectionCard(
+                    title: '0.0 - 0.3 (Sehr weich)',
+                    value: 'soft',
+                    groupValue: _selectedEc,
+                    onChanged: (val) {
+                      setState(() {
+                        _selectedEc = val;
+                        _missingMeter = false;
+                      });
+                    },
+                    color: Colors.green,
+                  ),
+                  _buildSelectionCard(
+                    title: '0.4 - 0.6 (Optimal)',
+                    value: 'perfect',
+                    groupValue: _selectedEc,
+                    onChanged: (val) {
+                      setState(() {
+                        _selectedEc = val;
+                        _missingMeter = false;
+                      });
+                    },
+                    color: Colors.greenAccent,
+                  ),
+                  _buildSelectionCard(
+                    title: '0.7 - 0.9 (Hart)',
+                    value: 'hard',
+                    groupValue: _selectedEc,
+                    onChanged: (val) {
+                      setState(() {
+                        _selectedEc = val;
+                        _missingMeter = false;
+                      });
+                    },
+                    color: Colors.orange,
+                  ),
+                  _buildSelectionCard(
+                    title: '> 1.0 (Sehr hart)',
+                    value: 'too_hard',
+                    groupValue: _selectedEc,
+                    onChanged: (val) {
+                      setState(() {
+                        _selectedEc = val;
+                        _missingMeter = false;
+                      });
+                    },
+                    color: Colors.red,
+                  ),
+                  
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _missingMeter ? AppColors.surface : Colors.transparent,
+                      foregroundColor: _missingMeter ? Colors.white : Colors.white70,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: BorderSide(
+                          color: _missingMeter ? Colors.orangeAccent : Colors.white30,
+                          width: _missingMeter ? 2 : 1,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _missingMeter = true;
+                        _selectedEc = null;
+                      });
+                    },
+                    child: Text(
+                      l10n.waterSetupEcMissingBtn,
+                      style: TextStyle(
+                        fontWeight: _missingMeter ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
                 ],
               ),
-              const SizedBox(height: 32),
-              
-              // Step Content
-              Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: _currentStep == 0
-                      ? _buildStep1(l10n)
-                      : _buildStep2(l10n),
-                ),
-              ),
-              
-              // Settings Hint (nur im Onboarding)
-              if (!widget.isFromSettings) ...[
-                const SizedBox(height: 16),
-                Text(
-                  l10n.waterSetupSettingsHint,
-                  style: const TextStyle(
-                    color: Colors.white54,
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-              ],
-              
-              // Next Button
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.growGreen,
-                  foregroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                onPressed: _nextStep,
-                child: Text(
-                  l10n.waterSetupNext,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildProgressSegment({required bool isActive}) {
-    return Container(
-      height: 6,
-      decoration: BoxDecoration(
-        color: isActive ? AppColors.growGreen : AppColors.surface,
-        borderRadius: BorderRadius.circular(3),
-      ),
-    );
-  }
-
-  Widget _buildStep1(AppLocalizations l10n) {
-    return ListView(
-      key: const ValueKey('step1'),
-      children: [
-        Text(
-          l10n.waterSetupStep1Title,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          l10n.waterSetupStep1Desc,
-          style: const TextStyle(color: Colors.white70, fontSize: 16),
-        ),
-        const SizedBox(height: 24),
-        
-        _buildSelectionCard(
-          title: l10n.waterSetupEcSoft,
-          value: 'soft',
-          groupValue: _selectedEc,
-          onChanged: (val) => setState(() => _selectedEc = val),
-          feedback: l10n.waterSetupEcSoftFeedback,
-          color: Colors.green,
-        ),
-        _buildSelectionCard(
-          title: l10n.waterSetupEcPerfect,
-          value: 'perfect',
-          groupValue: _selectedEc,
-          onChanged: (val) => setState(() => _selectedEc = val),
-          feedback: l10n.waterSetupEcPerfectFeedback,
-          color: Colors.greenAccent,
-        ),
-        _buildSelectionCard(
-          title: l10n.waterSetupEcHard,
-          value: 'hard',
-          groupValue: _selectedEc,
-          onChanged: (val) => setState(() => _selectedEc = val),
-          feedback: l10n.waterSetupEcHardFeedback,
-          color: Colors.orange,
-        ),
-        _buildSelectionCard(
-          title: l10n.waterSetupEcTooHard,
-          value: 'too_hard',
-          groupValue: _selectedEc,
-          onChanged: (val) => setState(() => _selectedEc = val),
-          feedback: l10n.waterSetupEcTooHardFeedback,
-          color: Colors.red,
-        ),
-        _buildSelectionCard(
-          title: l10n.waterSetupEcUnknown,
-          value: 'unknown',
-          groupValue: _selectedEc,
-          onChanged: (val) => setState(() => _selectedEc = val),
-          feedback: l10n.waterSetupEcUnknownFeedback,
-          color: Colors.grey,
-        ),
-        
-        const SizedBox(height: 24),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.blue.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          
+          Row(
             children: [
-              const Icon(Icons.info_outline, color: Colors.blue, size: 20),
-              const SizedBox(width: 12),
               Expanded(
-                child: Text(
-                  l10n.waterSetupStep1Tip,
-                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                flex: 1,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    side: const BorderSide(color: Colors.white54),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  onPressed: _previousPage,
+                  child: const Text('Zurück'),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                flex: 2,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.growGreen,
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_selectedEc == null && !_missingMeter) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Bitte wähle einen Wert aus oder klicke "Ich habe mein Messgerät noch nicht".')),
+                      );
+                      return;
+                    }
+                    _nextPage();
+                  },
+                  child: Text(
+                    l10n.waterSetupNext,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
                 ),
               ),
             ],
           ),
-        ),
-        const SizedBox(height: 24),
-      ],
+          const SizedBox(height: 24),
+        ],
+      ),
     );
   }
 
-  Widget _buildStep2(AppLocalizations l10n) {
-    return ListView(
-      key: const ValueKey('step2'),
-      children: [
-        Text(
-          l10n.waterSetupStep2Title,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          l10n.waterSetupStep2Desc,
-          style: const TextStyle(color: Colors.white70, fontSize: 16),
-        ),
-        const SizedBox(height: 24),
-        
-        _buildSelectionCard(
-          title: l10n.waterSetupChlorineYes,
-          value: 'yes',
-          groupValue: _selectedChlorine,
-          onChanged: (val) => setState(() => _selectedChlorine = val),
-        ),
-        _buildSelectionCard(
-          title: l10n.waterSetupChlorineNo,
-          value: 'no',
-          groupValue: _selectedChlorine,
-          onChanged: (val) => setState(() => _selectedChlorine = val),
-        ),
-        _buildSelectionCard(
-          title: l10n.waterSetupChlorineUnknown,
-          value: 'unknown',
-          groupValue: _selectedChlorine,
-          onChanged: (val) => setState(() => _selectedChlorine = val),
-        ),
-        
-        const SizedBox(height: 24),
-        if (_selectedChlorine == 'yes' || _selectedChlorine == 'unknown')
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.orange.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.orange.withValues(alpha: 0.5)),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 24),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    l10n.waterSetupChlorineFeedback,
-                    style: const TextStyle(color: Colors.white, fontSize: 15, height: 1.4),
+  Widget _buildEcFeedbackSlide(AppLocalizations l10n) {
+    String title = '';
+    String text = '';
+    IconData icon = Icons.info_outline;
+    Color iconColor = AppColors.growGreen;
+
+    if (_missingMeter) {
+      title = "Alles klar!";
+      text = l10n.waterSetupEcMissingHint;
+      icon = Icons.hourglass_empty;
+      iconColor = Colors.orangeAccent;
+    } else {
+      switch (_selectedEc) {
+        case 'soft':
+          title = "Sehr weiches Wasser";
+          text = l10n.waterSetupEcSoftFeedback;
+          icon = Icons.water;
+          iconColor = Colors.blue;
+          break;
+        case 'perfect':
+          title = "Optimaler EC-Wert";
+          text = l10n.waterSetupEcPerfectFeedback;
+          icon = Icons.star;
+          iconColor = Colors.greenAccent;
+          break;
+        case 'hard':
+          title = "Hartes Wasser";
+          text = l10n.waterSetupEcHardFeedback;
+          icon = Icons.warning_amber_rounded;
+          iconColor = Colors.orange;
+          break;
+        case 'too_hard':
+          title = "Sehr hartes Wasser";
+          text = l10n.waterSetupEcTooHardFeedback;
+          icon = Icons.error_outline;
+          iconColor = Colors.red;
+          break;
+        default:
+          title = "Dein Wasser";
+          text = "";
+      }
+    }
+
+    return _buildSlide(
+      title: title,
+      text: text,
+      icon: icon,
+      iconColor: iconColor,
+      nextButtonText: l10n.waterSetupNext,
+      onNext: _nextPage,
+      showBack: true,
+    );
+  }
+
+  Widget _buildSlide({
+    required String title,
+    required String text,
+    required IconData icon,
+    Color iconColor = AppColors.growGreen,
+    required String nextButtonText,
+    required VoidCallback onNext,
+    bool showBack = false,
+    Widget? extraWidget,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 24),
+                  Icon(icon, size: 100, color: iconColor),
+                  const SizedBox(height: 32),
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                    textAlign: TextAlign.center,
                   ),
-                ),
-              ],
+                  const SizedBox(height: 24),
+                  TipFormattedText(
+                    text,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Colors.white70,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                  if (extraWidget != null) ...[
+                    const SizedBox(height: 32),
+                    extraWidget,
+                  ],
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
-      ],
+          Row(
+            children: [
+              if (showBack)
+                Expanded(
+                  flex: 1,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      side: const BorderSide(color: Colors.white54),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: _previousPage,
+                    child: const Text('Zurück'),
+                  ),
+                ),
+              if (showBack) const SizedBox(width: 16),
+              Expanded(
+                flex: 2,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.growGreen,
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  onPressed: onNext,
+                  child: Text(
+                    nextButtonText,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+        ],
+      ),
     );
   }
 
@@ -299,7 +431,6 @@ class _WaterSetupScreenState extends ConsumerState<WaterSetupScreen> {
     required String value,
     required String? groupValue,
     required ValueChanged<String?> onChanged,
-    String? feedback,
     Color? color,
   }) {
     final isSelected = value == groupValue;
@@ -320,39 +451,23 @@ class _WaterSetupScreenState extends ConsumerState<WaterSetupScreen> {
               width: 2,
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Row(
-                children: [
-                  Icon(
-                    isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-                    color: isSelected ? primaryColor : Colors.white54,
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
+              Icon(
+                isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                color: isSelected ? primaryColor : Colors.white54,
               ),
-              if (isSelected && feedback != null) ...[
-                const SizedBox(height: 12),
-                Text(
-                  feedback,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                    height: 1.4,
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    color: Colors.white,
                   ),
                 ),
-              ],
+              ),
             ],
           ),
         ),

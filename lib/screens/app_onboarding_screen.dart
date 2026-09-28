@@ -130,7 +130,7 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
           ),
           const SizedBox(height: 24),
           Text(
-            "Bevor wir loslegen, schauen wir uns an, was du für deinen Grow brauchst.",
+            "Lass uns kurz herausfinden, wo du stehst, damit wir die App für dich anpassen können.",
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),
@@ -146,9 +146,9 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            onPressed: () => context.go('/hardware_advisor'),
+            onPressed: () => context.go('/experience_assessment'),
             child: const Text(
-              "Weiter zum Hardware-Ratgeber",
+              "Weiter",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),

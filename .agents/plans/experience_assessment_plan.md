@@ -1,48 +1,28 @@
-# Plan: Onboarding Experience Assessment
+# Plan: Onboarding Experience Assessment & Contextual Learning
 
 ## Ziel
-Nutzer im Onboarding nach ihrem Erfahrungsstand fragen und die darauf folgenden Erklärungen, den Hardware-Ratgeber sowie zukünftige Tutorials (z.B. Zelt- und Wasser-Setup) an dieses Level anpassen.
+Den Nutzer beim ersten App-Start nach seinem Erfahrungslevel fragen, ohne ihn danach mit langen Text-Wüsten zu überfordern. Die App soll auf "Learning by Doing" setzen: Erklärungen und Hintergrundwissen werden kontextbezogen genau dann vermittelt, wenn der Nutzer die entsprechende Aktion ausführt (z.B. beim täglichen Check-in).
 
-## 1. Szenarien & Informationsbedarf (Brainstorming)
-
-### Level 1: Absoluter Anfänger
-- **Profil:** Hat noch nie Pflanzen angebaut, keine Ahnung von DWC.
-- **Bedarf:** 
-  - **Deep-Dive Intro:** Wie funktioniert eine Pflanze? (Lichtbedarf, Photosynthese-Basics). Was ist Deep Water Culture einfach erklärt? (Wurzeln im Wasser, Sauerstoffstein).
-  - **Hardware:** Braucht die komplette Erklärung (wie in Option 2 gebaut), inkl. Basis-Ausstattung (Zelt, Abluft).
-  - **Ton:** Sehr ermutigend, keine Fachbegriffe ohne Erklärung.
-
-### Level 2: Erde-Umsteiger (Erfahren mit Pflanzen, neu bei DWC)
-- **Profil:** Kennt sich mit Lichtzyklus (18/6, 12/12) und Zeltklima aus, hat aber noch nie Hydroponik gemacht.
-- **Bedarf:**
-  - **DWC Transition Guide:** Fokus auf die Unterschiede zur Erde. (Fehlender Puffer der Erde, direkte Nährstoffaufnahme, EC- und pH-Werte sind kritisch).
-  - **Hardware:** Fokus auf DWC-spezifische Hardware (pH/EC-Messgerät, Luftpumpe, Hydro-Dünger). Zelt und Licht können oft übersprungen werden.
-  - **Ton:** Fokussiert auf Hydro-Besonderheiten.
-
-### Level 3: DWC-Erfahren (Zweiter Versuch / Pro)
-- **Profil:** Hat DWC schon gemacht, vielleicht Rückschläge gehabt oder sucht nur ein Tracking-Tool.
-- **Bedarf:**
-  - **Deep-Dive Intro:** Komplett überspringen.
-  - **Hardware:** Nur eine kompakte Checkliste anzeigen oder komplett überspringen.
-  - **Fokus:** Eher auf Trouble-Shooting, Warnungen vor Wurzelfäule (Wassertemperatur!) und direkte Nutzung des Dashboards.
+## 1. Die Erfahrungs-Level
+- **Anfänger:** Braucht detaillierte Erklärungen zum "Warum" (z.B. warum pH-Wert wichtig ist), aber häppchenweise im Alltag.
+- **Erde-Umsteiger:** Braucht den Vergleich zu Erde (z.B. "Hier gibt es keinen Puffer, Nährstoffe wirken sofort").
+- **DWC-Erfahren:** Braucht kaum Theorie, Fokus auf Effizienz und Troubleshooting.
 
 ## 2. Technische Umsetzung (Proposed Changes)
 
-1. **Datenmodell erweitern (`lib/models/app_settings.dart` & `lib/providers/database_provider.dart`):**
-   - Neues Feld `experienceLevel` in den AppSettings (Enum: `beginner`, `soil`, `dwc_experienced`, `unspecified`).
-
+### Phase 1: Die Abfrage (Onboarding)
+1. **Datenbank & Settings:** 
+   - `lib/models/app_settings.dart`: Neues Feld `experienceLevel` (z.B. String `beginner`, `soil`, `pro`).
 2. **Neuer Screen (`lib/screens/experience_assessment_screen.dart`):**
-   - Wird nach den ersten 4 generellen Slides (oder anstelle von Slide 4) eingeschoben.
-   - Stellt die Frage: "Wie viel Erfahrung hast du bereits?" mit 3 schönen Auswahl-Karten.
+   - Wird in den Onboarding-Flow integriert (z.B. direkt nach den Willkommens-Slides).
+   - Ein simpler, schöner Screen mit 3 Karten zur Auswahl.
+3. **Flow-Anpassung:**
+   - Onboarding bleibt super kurz! Nach der Auswahl geht es direkt weiter. Keine "Deep Dive" Theorie-Screens im Onboarding.
 
-3. **Adaptiver Flow (Router & Onboarding Logik):**
-   - **Beginner:** Sieht nach der Auswahl einen neuen Screen `DeepDiveIntroScreen` (oder Erweiterung des Onboardings), danach den vollen Hardware-Ratgeber.
-   - **Soil:** Sieht `HydroTransitionScreen` (Erde vs Wasser), dann gefilterten Hardware-Ratgeber.
-   - **DWC Experienced:** Geht direkt aufs Dashboard oder zu einer kurzen Setup-Checkliste.
-
-4. **Inhalte anpassen (Texte):**
-   - `.arb` Dateien um die neuen Fragestellungen und Erklärungen ergänzen.
-
-## Open Questions für den Nutzer
-- Sollen wir für den Anfang erst einmal nur den Flow so verzweigen, dass wir je nach Level unterschiedliche Info-Screens (Deep Dive vs. Transition Guide) vorschalten, bevor es in den (ggf. gekürzten) Hardware-Ratgeber geht?
-- Oder sollen die restlichen Steps (Zelt, Wasser) auch komplett umgeschrieben werden für die Level?
+### Phase 2: Contextual Learning (Learning by Doing)
+1. **Tägliche Check-ins & Setup:**
+   - In den Screens (z.B. `WaterSetupScreen`, `CheckinScreen`, `PhAdjustScreen`) lesen wir das `experienceLevel` aus.
+   - **Anfänger** sehen eine kleine, freundliche Info-Box ("Wusstest du schon: Der pH-Wert...").
+   - **Pros** sehen nur die Eingabefelder.
+2. **Wissensvermittlung während der Fahrt:**
+   - Wenn ein Anfänger z.B. seinen ersten EC-Wert misst, erklären wir ihm genau in diesem Moment, was der EC-Wert eigentlich misst.

@@ -871,7 +871,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentIntroDesc.
   ///
   /// In de, this message translates to:
-  /// **'Du weißt jetzt alles Wichtige über Hardware und Wasser.\n\nAls Nächstes bauen wir gemeinsam dein Zelt auf. Hast du es schon komplett aufgebaut und willst direkt ins Dashboard, oder sollen wir Schritt für Schritt durchgehen?'**
+  /// **'Du hast die Hardware zusammen!\n\nAls Nächstes bauen wir gemeinsam dein Zelt auf. Hast du es schon komplett aufgebaut und willst direkt zum Wasser-Setup, oder sollen wir Schritt für Schritt durchgehen?'**
   String get tentIntroDesc;
 
   /// No description provided for @tentIntroNext.
@@ -883,7 +883,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentIntroSkip.
   ///
   /// In de, this message translates to:
-  /// **'Zelt steht! Zum Dashboard'**
+  /// **'Zelt steht! Zum Wasser-Setup'**
   String get tentIntroSkip;
 
   /// No description provided for @tentTitle1.
@@ -1063,7 +1063,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentNext10.
   ///
   /// In de, this message translates to:
-  /// **'Setup abgeschlossen!'**
+  /// **'Setup abgeschlossen! Zum Wasser-Setup'**
   String get tentNext10;
 
   /// No description provided for @ppfdTitle.
@@ -1597,25 +1597,25 @@ abstract class AppLocalizations {
   /// No description provided for @waterSetupChlorineYes.
   ///
   /// In de, this message translates to:
-  /// **'Ja'**
+  /// **'Ja, es riecht nach Schwimmbad'**
   String get waterSetupChlorineYes;
 
   /// No description provided for @waterSetupChlorineNo.
   ///
   /// In de, this message translates to:
-  /// **'Nein'**
+  /// **'Nein, es riecht nach nichts'**
   String get waterSetupChlorineNo;
 
   /// No description provided for @waterSetupChlorineUnknown.
   ///
   /// In de, this message translates to:
-  /// **'Weiß ich nicht'**
+  /// **'Ich bin mir unsicher'**
   String get waterSetupChlorineUnknown;
 
   /// No description provided for @waterSetupChlorineFeedback.
   ///
   /// In de, this message translates to:
-  /// **'Tipp: Wenn Chlor im Wasser ist, lass dein Leitungswasser immer 24 Stunden in einem Eimer abstehen, bevor du es benutzt. Idealerweise legst du für diese Zeit schon einen Sprudelstein (Luftpumpe) in den Eimer, das treibt das Chlor viel schneller und zuverlässiger aus dem Wasser. Chlor schädigt sonst die Wurzeln!'**
+  /// **'TIPP: Lass dein Gießwasser einfach 24 Stunden offen abstehen, bevor du es verwendest (am besten mit einem Sprudelstein). Das Chlor gast dann von alleine aus!'**
   String get waterSetupChlorineFeedback;
 
   /// No description provided for @waterSetupNext.
@@ -3285,6 +3285,66 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Tipp: Wenn der EC-Wert trotz Wasserwechsel immer noch sehr hoch ist, solltest du dringend dein EC-Messgerät mit Kalibrierflüssigkeit prüfen. Oft ist das Messgerät verstellt.'**
   String get checkinEcCalibrationTip;
+
+  /// No description provided for @waterSetupIntroTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Wasser & der Grund-EC'**
+  String get waterSetupIntroTitle;
+
+  /// No description provided for @waterSetupIntroDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Dein Leitungswasser enthält bereits Mineralien wie Kalzium und Magnesium. Je mehr davon drin ist (hoher Grund-EC), desto weniger \"Platz\" bleibt für deinen tatsächlichen Dünger!\n\nLass uns kurz prüfen, wie dein Wasser beschaffen ist, damit wir später den Dünger perfekt anpassen können.'**
+  String get waterSetupIntroDesc;
+
+  /// No description provided for @waterSetupIntroNext.
+  ///
+  /// In de, this message translates to:
+  /// **'Weiter zur EC-Messung'**
+  String get waterSetupIntroNext;
+
+  /// No description provided for @waterSetupEcMeasureTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Messgerät zücken!'**
+  String get waterSetupEcMeasureTitle;
+
+  /// No description provided for @waterSetupEcMeasureDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Füll ein Glas mit kaltem Leitungswasser und halte dein EC-Messgerät hinein. Welchen Wert zeigt es an?'**
+  String get waterSetupEcMeasureDesc;
+
+  /// No description provided for @waterSetupEcMissingBtn.
+  ///
+  /// In de, this message translates to:
+  /// **'Ich habe mein Messgerät noch nicht'**
+  String get waterSetupEcMissingBtn;
+
+  /// No description provided for @waterSetupEcMissingHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Kein Problem! Für die Samen-Keimung brauchst du das Messgerät noch nicht. Schau dir die App in Ruhe an – wir erinnern dich einfach später daran, bevor du das erste Mal Dünger ins Wasser mischst.'**
+  String get waterSetupEcMissingHint;
+
+  /// No description provided for @waterSetupChlorineTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Chlor im Leitungswasser'**
+  String get waterSetupChlorineTitle;
+
+  /// No description provided for @waterSetupChlorineDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Manche Wasserwerke setzen dem Leitungswasser Chlor zu, um es keimfrei zu halten. Das mögen unsere Pflanzenwurzeln gar nicht.'**
+  String get waterSetupChlorineDesc;
+
+  /// No description provided for @waterSetupFinish.
+  ///
+  /// In de, this message translates to:
+  /// **'Setup abschließen'**
+  String get waterSetupFinish;
 }
 
 class _AppLocalizationsDelegate

@@ -44,7 +44,7 @@ class _TentSetupScreenState extends ConsumerState<TentSetupScreen> {
     }
 
     if (!mounted) return;
-    context.go('/'); // Go to dashboard
+    context.go('/water_setup'); // Go to water setup
   }
 
   @override

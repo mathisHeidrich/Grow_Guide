@@ -14,6 +14,7 @@ import 'screens/germination_wizard_screen.dart';
 import 'models/plant.dart';
 import 'screens/ppfd_meter_screen.dart';
 import 'screens/hardware_advisor_screen.dart';
+import 'screens/experience_assessment_screen.dart';
 import 'screens/water_setup_screen.dart';
 import 'screens/water_change_screen.dart';
 import 'screens/problem_diagnosis_screen.dart';
@@ -36,6 +37,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       final isAllowedPath = state.uri.path == '/onboarding' ||
           state.uri.path == '/hardware_advisor' ||
+          state.uri.path == '/experience_assessment' ||
           state.uri.path == '/water_setup' ||
           state.uri.path == '/tent_setup';
 
@@ -52,6 +54,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/onboarding',
         builder: (context, state) => const AppOnboardingScreen(),
+      ),
+      GoRoute(
+        path: '/experience_assessment',
+        builder: (context, state) => const ExperienceAssessmentScreen(),
       ),
       GoRoute(
         path: '/hardware_advisor',
