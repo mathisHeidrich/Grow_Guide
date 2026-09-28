@@ -413,7 +413,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc9 =>
-      '• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer (ca. 150-200 µmol/m²/s an der Spitze).\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.';
+      '• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer.\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.';
 
   @override
   String get germinationNext9 => 'Keimung abschließen';
@@ -923,7 +923,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinEcMeasureDesc =>
-      '• Miss den EC-Wert und den pH-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage beide Werte hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.';
+      '• Miss den EC-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage den Wert hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.';
 
   @override
   String get checkinNutrientTitle => 'Dünger hinzufügen';
@@ -1806,4 +1806,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get hw_buy_idea_list => 'Ideenliste auf Amazon ansehen';
+
+  @override
+  String get actionDoneMeasureAgain => 'Erledigt, neu messen';
+
+  @override
+  String get actionFullWaterChangeDone => 'Komplett gewechselt, neu messen';
+
+  @override
+  String get checkinEcCalibrationTip =>
+      'Tipp: Wenn der EC-Wert trotz Wasserwechsel immer noch sehr hoch ist, solltest du dringend dein EC-Messgerät mit Kalibrierflüssigkeit prüfen. Oft ist das Messgerät verstellt.';
 }

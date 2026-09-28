@@ -37,10 +37,14 @@ When the user requests changes to the App itself (UI, UX, features, logic):
 - **DOMAIN:** "Grow Guide" - step-by-step tutorial app for cannabis cultivation (DWC).
 - **UI/THEMING:** Dark mode by default (Scaffold: `#121212`, Cards: `#1E1E1E`, Primary: `#00E676`). Use `Theme.of(context)`.
 
-## 6. Implementation & Teamwork
+## 6. Implementation, QA & Teamwork
 - **USE SUB-AGENTS:** Do not implement everything yourself. Delegate parallel tasks to sub-agents.
+- **AUTONOMOUS QA (MANDATORY):** Before presenting a finished feature to the user, you MUST run the autonomous QA workflow (see `autonomous-qa` skill). 
+  1. Brainstorm edge cases & UX gaps.
+  2. Auto-generate a Playbook in `.agents/playbooks/`.
+  3. Execute the Playbook (logic, states, and visual UX/UI validation).
+  4. Fix any found issues autonomously.
 - **QUALITY CHECKS:** Run lint, type check, and build after features are done.
-- **AUTOMATED TESTING:** Test autonomously using Puppeteer MCP (`flutter run -t lib/main_test_env.dart -d web-server --web-renderer html --web-port 8080`). Use hot reload ('r').
 - **CODE REVIEW:** Search for dead code or unneeded complexity with a sub-agent.
 
 ## 7. App Texte & Copywriting

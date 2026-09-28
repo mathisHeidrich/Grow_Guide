@@ -167,7 +167,7 @@
   "germinationDesc8": "• Fülle deinen DWC-Eimer mit Wasser (pH 5.8). Gib noch keinen Dünger hinzu.\n• Der Wasserstand sollte etwa 1 bis 2 cm unter dem Boden des Netztopfs enden. Das Wasser darf die Steinwolle nicht berühren.\n• Hänge den Netztopf ein und schalte die Luftpumpe auf 100% ein.\n\nTIPP: Die platzenden Blubberblasen spritzen kleine Wassertropfen an den Netztopf. Das reicht völlig aus, um die Steinwolle feucht zu halten.",
   "germinationNext8": "Eimer & Klima bereit",
   "germinationTitle9": "Sanftes Licht",
-  "germinationDesc9": "• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer (ca. 150-200 µmol/m²/s an der Spitze).\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.",
+  "germinationDesc9": "• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer.\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.",
   "germinationNext9": "Keimung abschließen",
   "germinationToDashboard": "Zum Dashboard",
   "germinationSeedClosed": "Geschlossen",
@@ -351,7 +351,7 @@
   "checkinWaterLevelLabel": "Nachgefüllte Liter",
   "checkinWaterLevelSkip": "Kein Wasser nachgefüllt",
   "checkinEcMeasureTitle": "Messwerte eintragen",
-  "checkinEcMeasureDesc": "• Miss den EC-Wert und den pH-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage beide Werte hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.",
+  "checkinEcMeasureDesc": "• Miss den EC-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage den Wert hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.",
   "checkinNutrientTitle": "Dünger hinzufügen",
   "checkinNutrientDesc": "• Basierend auf deinem nachgefüllten Wasser und den aktuellen Werten benötigst du heute die folgenden Mengen.\n• Gib die Dünger nacheinander in den Eimer und rühre gut um.\n\nTIPP: Mische pure Dünger niemals unverdünnt direkt zusammen.",
   "checkinNutrientGrow": "Grow: {amount} ml",
@@ -646,5 +646,8 @@
   "hw_complete_set_budget_desc": "Perfekt für den Start mit schmalem Geldbeutel. Enthält:\n• 60x60cm Zelt\n• 100W LED Panel\n• Leiser Rohrventilator + AKF\n• Zeitschaltuhr & Thermometer",
   "hw_complete_set_balanced_desc": "Der Sweetspot für Hobby-Grower. Enthält:\n• 80x80cm Marken-Zelt\n• 200W Samsung LM301 LED\n• Flüsterleiser EC-Ventilator + AKF\n• Umluft-Ventilator",
   "hw_complete_set_premium_desc": "Maximaler Ertrag und komplett lautlos. Enthält:\n• 100x100cm Premium-Zelt\n• 300W High-End LED (mit UV/IR)\n• Smart-gesteuerte Abluft\n• Komplettes Zubehör-Paket",
-  "hw_buy_idea_list": "Ideenliste auf Amazon ansehen"
+  "hw_buy_idea_list": "Ideenliste auf Amazon ansehen",
+  "actionDoneMeasureAgain": "Erledigt, neu messen",
+  "actionFullWaterChangeDone": "Komplett gewechselt, neu messen",
+  "checkinEcCalibrationTip": "Tipp: Wenn der EC-Wert trotz Wasserwechsel immer noch sehr hoch ist, solltest du dringend dein EC-Messgerät mit Kalibrierflüssigkeit prüfen. Oft ist das Messgerät verstellt."
 }

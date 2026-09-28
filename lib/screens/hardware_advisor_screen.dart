@@ -22,7 +22,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      context.go('/water_guide');
+      context.go('/onboarding');
     }
   }
 
@@ -364,74 +364,10 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                 ),
                 if (item.isCompleteSet && item.options.isNotEmpty) ...[
                   const SizedBox(height: 24),
-                  ...item.options.map((opt) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
-                    child: Card(
-                      color: AppColors.surface,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        side: BorderSide(color: Colors.orangeAccent.withValues(alpha: 0.5), width: 1.5),
-                      ),
-                      margin: EdgeInsets.zero,
-                      child: Theme(
-                        data: Theme.of(context).copyWith(
-                          dividerColor: Colors.transparent,
-                        ),
-                        child: ExpansionTile(
-                          iconColor: Colors.orangeAccent,
-                          collapsedIconColor: Colors.orangeAccent,
-                          title: Row(
-                            children: [
-                              const Icon(Icons.star_border, color: Colors.orangeAccent, size: 20),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  opt.name,
-                                  style: const TextStyle(
-                                    color: Colors.orangeAccent,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  if (opt.description != null)
-                                    Text(
-                                      opt.description!,
-                                      style: const TextStyle(color: Colors.white70, fontSize: 14),
-                                    ),
-                                  const SizedBox(height: 16),
-                                  ElevatedButton.icon(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.orange,
-                                      foregroundColor: Colors.black,
-                                      padding: const EdgeInsets.symmetric(vertical: 12),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    ),
-                                    onPressed: () => _launchUrl(opt.url),
-                                    icon: const Icon(Icons.shopping_cart, size: 20),
-                                    label: Text(
-                                      l10n.hw_buy_idea_list,
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )),
+                  CompleteSetOptionsList(
+                    options: item.options,
+                    onLaunchUrl: _launchUrl,
+                  ),
                 ],
                 if (!item.isCompleteSet && item.options.isNotEmpty) ...[
                   const SizedBox(height: 24),
@@ -540,7 +476,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                         onPressed: () => _nextPage(items.length),
                         child: Text(
                           index == items.length - 1
-                              ? 'Weiter zur Wasser-Masterclass'
+                              ? 'Zurück zum Onboarding'
                               : 'Weiter',
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
@@ -587,4 +523,120 @@ class _HardwareItemData {
     this.options = const [],
     this.isCompleteSet = false,
   });
+}
+
+class CompleteSetOptionsList extends StatefulWidget {
+  final List<HardwareProductOption> options;
+  final void Function(String url) onLaunchUrl;
+
+  const CompleteSetOptionsList({
+    super.key,
+    required this.options,
+    required this.onLaunchUrl,
+  });
+
+  @override
+  State<CompleteSetOptionsList> createState() => _CompleteSetOptionsListState();
+}
+
+class _CompleteSetOptionsListState extends State<CompleteSetOptionsList> {
+  late List<ExpansionTileController> _controllers;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllers = List.generate(widget.options.length, (_) => ExpansionTileController());
+  }
+
+  void _handleExpansion(int index, bool isExpanded) {
+    if (isExpanded) {
+      for (int i = 0; i < _controllers.length; i++) {
+        if (i != index && _controllers[i].isExpanded) {
+          _controllers[i].collapse();
+        }
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Column(
+      children: widget.options.asMap().entries.map((entry) {
+        final index = entry.key;
+        final opt = entry.value;
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: Card(
+            color: AppColors.surface,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(
+                  color: Colors.orangeAccent.withValues(alpha: 0.5), width: 1.5),
+            ),
+            margin: EdgeInsets.zero,
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                dividerColor: Colors.transparent,
+              ),
+              child: ExpansionTile(
+                controller: _controllers[index],
+                onExpansionChanged: (expanded) => _handleExpansion(index, expanded),
+                iconColor: Colors.orangeAccent,
+                collapsedIconColor: Colors.orangeAccent,
+                title: Row(
+                  children: [
+                    const Icon(Icons.star_border, color: Colors.orangeAccent, size: 20),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        opt.name,
+                        style: const TextStyle(
+                          color: Colors.orangeAccent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        if (opt.description != null)
+                          Text(
+                            opt.description!,
+                            style: const TextStyle(color: Colors.white70, fontSize: 14),
+                          ),
+                        const SizedBox(height: 16),
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange,
+                            foregroundColor: Colors.black,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () => widget.onLaunchUrl(opt.url),
+                          icon: const Icon(Icons.shopping_cart, size: 20),
+                          label: Text(
+                            l10n.hw_buy_idea_list,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
 }

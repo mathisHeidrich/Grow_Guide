@@ -829,7 +829,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc9.
   ///
   /// In de, this message translates to:
-  /// **'• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer (ca. 150-200 µmol/m²/s an der Spitze).\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.'**
+  /// **'• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer.\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.'**
   String get germinationDesc9;
 
   /// No description provided for @germinationNext9.
@@ -1747,7 +1747,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinEcMeasureDesc.
   ///
   /// In de, this message translates to:
-  /// **'• Miss den EC-Wert und den pH-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage beide Werte hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.'**
+  /// **'• Miss den EC-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage den Wert hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.'**
   String get checkinEcMeasureDesc;
 
   /// No description provided for @checkinNutrientTitle.
@@ -3267,6 +3267,24 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Ideenliste auf Amazon ansehen'**
   String get hw_buy_idea_list;
+
+  /// No description provided for @actionDoneMeasureAgain.
+  ///
+  /// In de, this message translates to:
+  /// **'Erledigt, neu messen'**
+  String get actionDoneMeasureAgain;
+
+  /// No description provided for @actionFullWaterChangeDone.
+  ///
+  /// In de, this message translates to:
+  /// **'Komplett gewechselt, neu messen'**
+  String get actionFullWaterChangeDone;
+
+  /// No description provided for @checkinEcCalibrationTip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Wenn der EC-Wert trotz Wasserwechsel immer noch sehr hoch ist, solltest du dringend dein EC-Messgerät mit Kalibrierflüssigkeit prüfen. Oft ist das Messgerät verstellt.'**
+  String get checkinEcCalibrationTip;
 }
 
 class _AppLocalizationsDelegate

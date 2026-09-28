@@ -70,6 +70,25 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
     return false;
   }
 
+  bool _passedIntervalInPhase(DateTime? phaseStartDate, DateTime? lastLogDate, DateTime now, int intervalDays) {
+    if (phaseStartDate == null) return false;
+    final start = DateTime(phaseStartDate.year, phaseStartDate.month, phaseStartDate.day);
+    final today = DateTime(now.year, now.month, now.day);
+    final last = lastLogDate != null 
+        ? DateTime(lastLogDate.year, lastLogDate.month, lastLogDate.day)
+        : start;
+        
+    int lastDays = last.difference(start).inDays;
+    int todayDays = today.difference(start).inDays;
+    
+    if (todayDays <= lastDays) return false;
+    
+    for (int i = lastDays + 1; i <= todayDays; i++) {
+      if (i > 0 && i % intervalDays == 0) return true;
+    }
+    return false;
+  }
+
   Future<void> _loadData() async {
     final db = ref.read(databaseProvider).db;
     final plant = await (db.select(db.plants)
@@ -117,8 +136,20 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       
 
       final referenceDate = lastLog?.timestamp ?? plant.phaseStartDate;
-      bool lampCheck = _passedWeekday(referenceDate, now, DateTime.wednesday);
-      bool ventCheck = _passedWeekday(referenceDate, now, DateTime.sunday);
+      
+      bool lampCheck = false;
+      bool ventCheck = false;
+      
+      bool isStretch = plant.currentPhase == PlantPhase.flower && plant.getDayInPhase(now) <= 21;
+      
+      if (isStretch) {
+        bool stretchCheck = _passedIntervalInPhase(plant.phaseStartDate, referenceDate, now, 3);
+        lampCheck = stretchCheck;
+        ventCheck = stretchCheck;
+      } else {
+        lampCheck = _passedWeekday(referenceDate, now, DateTime.wednesday);
+        ventCheck = _passedWeekday(referenceDate, now, DateTime.sunday);
+      }
 
       bool flowerTrans = false;
       if (plant.currentPhase == PlantPhase.veg && plant.getDayInPhase(now) >= 21) {
@@ -178,6 +209,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
         timestamp: ref.read(timeProvider),
         ec: _inputEc != null ? drift.Value(_inputEc!) : const drift.Value.absent(),
         ppfd: _inputPpfd != null ? drift.Value(_inputPpfd!) : const drift.Value.absent(),
+        isWaterChange: drift.Value(_isWaterChange),
+        waterAdded: _inputWaterAdded != null ? drift.Value(_inputWaterAdded!) : const drift.Value.absent(),
       ),
     );
 

@@ -10,7 +10,7 @@ import '../models/plant.dart';
 import 'package:app/l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
 import '../services/nutrient_service.dart';
-import 'package:app/theme/app_colors.dart';
+import '../database/database.dart';
 
 class EcAdjustScreen extends ConsumerStatefulWidget {
   final int plantId;
@@ -22,6 +22,9 @@ class EcAdjustScreen extends ConsumerStatefulWidget {
 
 class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
   Plant? _plant;
+  LogEntry? _lastWcLog;
+  final TextEditingController _ecController = TextEditingController();
+  int _partialWaterChangesCount = 0;
   double? _inputEc;
   bool _isSaved = false;
 
@@ -31,14 +34,33 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
     _loadPlant();
   }
 
+  @override
+  void dispose() {
+    _ecController.dispose();
+    super.dispose();
+  }
+
   Future<void> _loadPlant() async {
     final db = ref.read(databaseProvider).db;
     final plant = await (db.select(db.plants)
           ..where((tbl) => tbl.id.equals(widget.plantId)))
         .getSingleOrNull();
+
+    final lastWcLog = await (db.select(db.logEntries)
+          ..where((tbl) =>
+              tbl.plantId.equals(widget.plantId) &
+              tbl.isWaterChange.equals(true))
+          ..orderBy([
+            (t) => drift.OrderingTerm(
+                expression: t.timestamp, mode: drift.OrderingMode.desc)
+          ])
+          ..limit(1))
+        .getSingleOrNull();
+
     if (mounted) {
       setState(() {
         _plant = plant;
+        _lastWcLog = lastWcLog;
       });
     }
   }
@@ -91,21 +113,33 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
     double targetEc = schedule.getTargetEc(_plant!.currentPhase, weekIndex);
 
     bool isEcTooHigh = false;
+    bool isExtremelyHigh = false;
+    bool isWaterOld = false;
     bool hasNutrientsToAdd = false;
     List<NutrientAmount> nutrientsToAdd = [];
 
     if (_inputEc != null) {
       isEcTooHigh = _inputEc! > (targetEc + 0.3);
-      final nutes = NutrientService.calculateNutrients(
-          brand: _plant!.nutrientBrand,
-          phase: _plant!.currentPhase, 
-          weekIndex: weekIndex,
-          waterAddedLiters: 0, // standalone adjust assumes no new water added, just fixing current
-          totalVolumeLiters: _plant!.waterVolumeLiters,
-          currentEc: _inputEc!,
-      );
-      nutrientsToAdd = nutes.nutrients.where((n) => n.amountMl >= 0.1).toList();
-      hasNutrientsToAdd = nutrientsToAdd.isNotEmpty;
+      isExtremelyHigh = _inputEc! - targetEc > 0.8;
+      
+      final now = ref.read(timeProvider);
+      final referenceDate = _lastWcLog?.timestamp ?? _plant!.phaseStartDate;
+      if (referenceDate != null && now.difference(referenceDate).inDays >= 7) {
+        isWaterOld = true;
+      }
+
+      if (!isEcTooHigh) {
+        final nutes = NutrientService.calculateNutrients(
+            brand: _plant!.nutrientBrand,
+            phase: _plant!.currentPhase, 
+            weekIndex: weekIndex,
+            waterAddedLiters: 0,
+            totalVolumeLiters: _plant!.waterVolumeLiters,
+            currentEc: _inputEc!,
+        );
+        nutrientsToAdd = nutes.nutrients.where((n) => n.amountMl >= 0.1).toList();
+        hasNutrientsToAdd = nutrientsToAdd.isNotEmpty;
+      }
     }
 
     return SingleChildScrollView(
@@ -124,6 +158,7 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
               textAlign: TextAlign.center),
           const SizedBox(height: 32),
           TextFormField(
+            controller: _ecController,
             decoration: InputDecoration(
                 labelText: l10n.checkinEcLabel,
                 border: const OutlineInputBorder()),
@@ -147,9 +182,40 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
                     const Icon(Icons.warning, color: Colors.redAccent, size: 40),
                     const SizedBox(height: 8),
                     Text(
-                      l10n.checkinEcTooHighPartial,
+                      (_partialWaterChangesCount > 0 || isWaterOld || isExtremelyHigh)
+                          ? l10n.checkinEcTooHighFull
+                          : l10n.checkinEcTooHighPartial,
                       style: const TextStyle(color: Colors.redAccent, fontSize: 16),
                       textAlign: TextAlign.center
+                    ),
+                    if (_partialWaterChangesCount > 0) ...[
+                      const SizedBox(height: 12),
+                      TipFormattedText(
+                        l10n.checkinEcCalibrationTip,
+                        style: const TextStyle(color: Colors.orangeAccent, fontSize: 14),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _partialWaterChangesCount++;
+                          _ecController.clear();
+                          _inputEc = null;
+                        });
+                      },
+                      child: Text(
+                        (_partialWaterChangesCount > 0 || isWaterOld || isExtremelyHigh)
+                            ? l10n.actionFullWaterChangeDone
+                            : l10n.actionDoneMeasureAgain,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ],
                 ),
@@ -190,14 +256,15 @@ class _EcAdjustScreenState extends ConsumerState<EcAdjustScreen> {
             ],
             
             const SizedBox(height: 32),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.growGreen,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              ),
-              onPressed: _saveLog,
+            if (!isEcTooHigh)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.growGreen,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+                onPressed: _saveLog,
               child: Text(l10n.checkinSaveValues,
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
