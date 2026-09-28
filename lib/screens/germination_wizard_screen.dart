@@ -49,7 +49,7 @@ class _GerminationWizardScreenState
             referenceDate != null ? now.difference(referenceDate).inHours : 0;
 
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (elapsedHours < 12) {
+          if (elapsedHours < 24) {
             _pageController.jumpToPage(3);
           } else {
             _pageController.jumpToPage(4);
