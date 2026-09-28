@@ -286,7 +286,7 @@ class _GerminationWizardScreenState
             rightImagePath: "assets/images/seed_opened.jpg",
             leftTitle: "Noch zu",
             rightTitle: "Wurzel sichtbar",
-            leftSubtitle: "Weiter warten",
+            leftSubtitle: "Auch einpflanzen",
             rightSubtitle: "Einpflanzen",
             backButton: OutlinedButton(
               style: OutlinedButton.styleFrom(
@@ -296,7 +296,7 @@ class _GerminationWizardScreenState
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16)),
               ),
-              onPressed: () => _jumpToPage(4),
+              onPressed: () => context.go('/'),
               child: Text(l10n.checkinBack),
             ),
             onConfirm: (index) {
