@@ -3243,6 +3243,30 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Zum Produkt'**
   String get hw_option_standard;
+
+  /// No description provided for @hw_complete_set_budget_desc.
+  ///
+  /// In de, this message translates to:
+  /// **'Perfekt für den Start mit schmalem Geldbeutel. Enthält:\n• 60x60cm Zelt\n• 100W LED Panel\n• Leiser Rohrventilator + AKF\n• Zeitschaltuhr & Thermometer'**
+  String get hw_complete_set_budget_desc;
+
+  /// No description provided for @hw_complete_set_balanced_desc.
+  ///
+  /// In de, this message translates to:
+  /// **'Der Sweetspot für Hobby-Grower. Enthält:\n• 80x80cm Marken-Zelt\n• 200W Samsung LM301 LED\n• Flüsterleiser EC-Ventilator + AKF\n• Umluft-Ventilator'**
+  String get hw_complete_set_balanced_desc;
+
+  /// No description provided for @hw_complete_set_premium_desc.
+  ///
+  /// In de, this message translates to:
+  /// **'Maximaler Ertrag und komplett lautlos. Enthält:\n• 100x100cm Premium-Zelt\n• 300W High-End LED (mit UV/IR)\n• Smart-gesteuerte Abluft\n• Komplettes Zubehör-Paket'**
+  String get hw_complete_set_premium_desc;
+
+  /// No description provided for @hw_buy_idea_list.
+  ///
+  /// In de, this message translates to:
+  /// **'Ideenliste auf Amazon ansehen'**
+  String get hw_buy_idea_list;
 }
 
 class _AppLocalizationsDelegate

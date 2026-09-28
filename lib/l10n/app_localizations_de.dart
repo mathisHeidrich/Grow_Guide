@@ -1791,4 +1791,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get hw_option_standard => 'Zum Produkt';
+
+  @override
+  String get hw_complete_set_budget_desc =>
+      'Perfekt für den Start mit schmalem Geldbeutel. Enthält:\n• 60x60cm Zelt\n• 100W LED Panel\n• Leiser Rohrventilator + AKF\n• Zeitschaltuhr & Thermometer';
+
+  @override
+  String get hw_complete_set_balanced_desc =>
+      'Der Sweetspot für Hobby-Grower. Enthält:\n• 80x80cm Marken-Zelt\n• 200W Samsung LM301 LED\n• Flüsterleiser EC-Ventilator + AKF\n• Umluft-Ventilator';
+
+  @override
+  String get hw_complete_set_premium_desc =>
+      'Maximaler Ertrag und komplett lautlos. Enthält:\n• 100x100cm Premium-Zelt\n• 300W High-End LED (mit UV/IR)\n• Smart-gesteuerte Abluft\n• Komplettes Zubehör-Paket';
+
+  @override
+  String get hw_buy_idea_list => 'Ideenliste auf Amazon ansehen';
 }
