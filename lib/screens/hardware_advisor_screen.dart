@@ -36,94 +36,132 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final completeSetUrl = 'https://amazon.de/dp/B000000000'; // Placeholder
 
     // Build the list of hardware items
     final items = [
       _HardwareItemData(
-        title: l10n.hw_complete_set_title,
-        description: l10n.hw_complete_set_desc,
+        title: l10n.hw_complete_sets_main_title,
+        description: l10n.hw_complete_sets_main_desc,
         isRequired: true,
         icon: Icons.star,
-        affiliateLink: completeSetUrl,
         isCompleteSet: true,
+        options: [
+          HardwareProductOption(name: l10n.hw_complete_set_budget_name, url: 'https://amazon.de/dp/B000000000'),
+          HardwareProductOption(name: l10n.hw_complete_set_balanced_name, url: 'https://amazon.de/dp/B000000000'),
+          HardwareProductOption(name: l10n.hw_complete_set_premium_name, url: 'https://amazon.de/dp/B000000000'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_grow_tentTitle,
         description: l10n.hw_grow_tentDesc,
         isRequired: true,
         icon: Icons.house,
-        affiliateLink: 'https://amazon.de/dp/B000000001',
+        buyingGuideText: l10n.hw_buying_guide_tent,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_budget, url: 'https://amazon.de/dp/B000000001'),
+          HardwareProductOption(name: l10n.hw_option_premium, url: 'https://amazon.de/dp/B000000001'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_ledTitle,
         description: l10n.hw_ledDesc,
         isRequired: true,
         icon: Icons.lightbulb,
-        affiliateLink: 'https://amazon.de/dp/B000000002',
+        buyingGuideText: l10n.hw_buying_guide_led,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_budget, url: 'https://amazon.de/dp/B000000002'),
+          HardwareProductOption(name: l10n.hw_option_premium, url: 'https://amazon.de/dp/B000000002'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_exhaustTitle,
         description: l10n.hw_exhaustDesc,
         isRequired: true,
         icon: Icons.air,
-        affiliateLink: 'https://amazon.de/dp/B000000003',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000003'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_carbon_filterTitle,
         description: l10n.hw_carbon_filterDesc,
         isRequired: true,
         icon: Icons.filter_alt,
-        affiliateLink: 'https://amazon.de/dp/B000000004',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000004'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_circulation_fanTitle,
         description: l10n.hw_circulation_fanDesc,
         isRequired: true,
         icon: Icons.toys,
-        affiliateLink: 'https://amazon.de/dp/B000000005',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000005'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_dwc_bucketTitle,
         description: l10n.hw_dwc_bucketDesc,
         isRequired: true,
         icon: Icons.delete,
-        affiliateLink: 'https://amazon.de/dp/B000000006',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000006'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_net_potTitle,
         description: l10n.hw_net_potDesc,
         isRequired: true,
         icon: Icons.grid_on,
-        affiliateLink: 'https://amazon.de/dp/B000000007',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000007'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_air_pumpTitle,
         description: l10n.hw_air_pumpDesc,
         isRequired: true,
         icon: Icons.bubble_chart,
-        affiliateLink: 'https://amazon.de/dp/B000000008',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000008'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_clay_pebblesTitle,
         description: l10n.hw_clay_pebblesDesc,
         isRequired: true,
         icon: Icons.scatter_plot,
-        affiliateLink: 'https://amazon.de/dp/B000000009',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000009'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_starter_cubesTitle,
         description: l10n.hw_starter_cubesDesc,
         isRequired: true,
         icon: Icons.crop_square,
-        affiliateLink: 'https://amazon.de/dp/B000000010',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000010'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_hydro_nutesTitle,
         description: l10n.hw_hydro_nutesDesc,
         isRequired: true,
         icon: Icons.water_drop,
-        affiliateLink: 'https://amazon.de/dp/B000000011',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000011'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_ph_dropsTitle,
@@ -131,14 +169,20 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         isRequired: true,
         proTip: l10n.hw_ph_dropsProTip,
         icon: Icons.science,
-        affiliateLink: 'https://amazon.de/dp/B000000012',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000012'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_ec_meterTitle,
         description: l10n.hw_ec_meterDesc,
         isRequired: true,
         icon: Icons.speed,
-        affiliateLink: 'https://amazon.de/dp/B000000013',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000013'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_ph_downTitle,
@@ -146,21 +190,30 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         isRequired: true,
         proTip: l10n.hw_ph_downProTip,
         icon: Icons.arrow_downward,
-        affiliateLink: 'https://amazon.de/dp/B000000014',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000014'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_ph_upTitle,
         description: l10n.hw_ph_upDesc,
         isRequired: true,
         icon: Icons.arrow_upward,
-        affiliateLink: 'https://amazon.de/dp/B000000015',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000015'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_timerTitle,
         description: l10n.hw_timerDesc,
         isRequired: true,
         icon: Icons.timer,
-        affiliateLink: 'https://amazon.de/dp/B000000016',
+        buyingGuideText: l10n.hw_buying_guide_generic,
+        options: [
+          HardwareProductOption(name: l10n.hw_option_standard, url: 'https://amazon.de/dp/B000000016'),
+        ],
       ),
       _HardwareItemData(
         title: l10n.hw_second_bucketTitle,
@@ -216,13 +269,6 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         title: Text(l10n.hardwareAdvisorTitle),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart, color: Colors.orangeAccent),
-            tooltip: l10n.hw_buy_complete_set,
-            onPressed: () => _launchUrl(completeSetUrl),
-          ),
-        ],
       ),
       body: PageView.builder(
         controller: _pageController,
@@ -284,10 +330,10 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                 const Spacer(),
                 Icon(
                   item.icon,
-                  size: 120,
+                  size: 100,
                   color: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 32),
                 Text(
                   item.title,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -296,7 +342,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                       ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 TipFormattedText(
                   item.proTip != null ? '${item.description}\n\n${item.proTip}' : item.description,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -304,22 +350,86 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
                       ),
                   textAlign: TextAlign.center,
                 ),
-                if (item.affiliateLink != null) ...[
-                  const SizedBox(height: 32),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                if (item.isCompleteSet && item.options.isNotEmpty) ...[
+                  const SizedBox(height: 24),
+                  ...item.options.map((opt) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12.0),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        foregroundColor: Colors.orangeAccent,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: const BorderSide(color: Colors.orangeAccent, width: 1.5),
+                        ),
+                      ),
+                      onPressed: () => _launchUrl(opt.url),
+                      icon: const Icon(Icons.star_border),
+                      label: Text(
+                        opt.name,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),
-                    onPressed: () => _launchUrl(item.affiliateLink!),
-                    icon: const Icon(Icons.shopping_cart),
-                    label: Text(
-                      item.isCompleteSet ? l10n.hw_buy_complete_set : l10n.hw_buy_on_amazon,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
+                ],
+                if (!item.isCompleteSet && item.options.isNotEmpty) ...[
+                  const SizedBox(height: 24),
+                  Card(
+                    color: AppColors.surface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
+                    ),
+                    margin: EdgeInsets.zero,
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        dividerColor: Colors.transparent,
+                      ),
+                      child: ExpansionTile(
+                        iconColor: AppColors.growGreen,
+                        collapsedIconColor: Colors.white70,
+                        title: Text(
+                          l10n.hw_buying_guide_title,
+                          style: const TextStyle(
+                            color: AppColors.growGreen,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                if (item.buyingGuideText != null)
+                                  Text(
+                                    item.buyingGuideText!,
+                                    style: const TextStyle(color: Colors.white70, fontSize: 14),
+                                  ),
+                                const SizedBox(height: 16),
+                                ...item.options.map((opt) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: OutlinedButton.icon(
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: Colors.white,
+                                      side: BorderSide(color: Colors.white.withValues(alpha: 0.2)),
+                                      padding: const EdgeInsets.symmetric(vertical: 12),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                    onPressed: () => _launchUrl(opt.url),
+                                    icon: const Icon(Icons.shopping_cart_outlined, size: 20),
+                                    label: Text(opt.name),
+                                  ),
+                                )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -389,13 +499,21 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
   }
 }
 
+class HardwareProductOption {
+  final String name;
+  final String url;
+
+  HardwareProductOption({required this.name, required this.url});
+}
+
 class _HardwareItemData {
   final String title;
   final String description;
   final bool isRequired;
   final String? proTip;
   final IconData icon;
-  final String? affiliateLink;
+  final String? buyingGuideText;
+  final List<HardwareProductOption> options;
   final bool isCompleteSet;
 
   _HardwareItemData({
@@ -404,7 +522,8 @@ class _HardwareItemData {
     required this.isRequired,
     this.proTip,
     required this.icon,
-    this.affiliateLink,
+    this.buyingGuideText,
+    this.options = const [],
     this.isCompleteSet = false,
   });
 }

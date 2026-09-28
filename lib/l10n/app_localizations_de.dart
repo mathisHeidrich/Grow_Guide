@@ -1750,4 +1750,45 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get hw_complete_set_desc =>
       'Spar dir die Mühe und kaufe alle benötigten Teile für deinen DWC-Grow auf einen Schlag.';
+
+  @override
+  String get hw_buying_guide_title =>
+      '💡 Worauf beim Kauf achten & Empfehlungen';
+
+  @override
+  String get hw_buying_guide_generic =>
+      'Tipp: Achte auf gute Qualität und lies dir Bewertungen durch, bevor du dich entscheidest.';
+
+  @override
+  String get hw_buying_guide_tent =>
+      'Achte auf eine starke Reflexionsfläche (Mylar) und dicke Zeltwände (mindestens 600D), damit kein Störlicht eindringt.';
+
+  @override
+  String get hw_buying_guide_led =>
+      'Pflanzen brauchen Licht! Achte auf ein Vollspektrum und effiziente Chips (z.B. Samsung LM301).';
+
+  @override
+  String get hw_complete_set_budget_name => '🥉 Low Budget Setup';
+
+  @override
+  String get hw_complete_set_balanced_name => '🥈 Preis-Leistungs-Sieger';
+
+  @override
+  String get hw_complete_set_premium_name => '🥇 Premium Setup';
+
+  @override
+  String get hw_complete_sets_main_title => 'Starter-Sets (Empfohlen)';
+
+  @override
+  String get hw_complete_sets_main_desc =>
+      'Spar dir die Recherche und das Vergleichen. Wir haben komplette Ideenlisten für dich zusammengestellt, die perfekt für DWC funktionieren. Wähle dein Budget:';
+
+  @override
+  String get hw_option_budget => 'Budget Option ansehen';
+
+  @override
+  String get hw_option_premium => 'Premium Option ansehen';
+
+  @override
+  String get hw_option_standard => 'Zum Produkt';
 }

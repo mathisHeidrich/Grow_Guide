@@ -630,5 +630,17 @@
   "hw_buy_on_amazon": "Auf Amazon ansehen",
   "hw_buy_complete_set": "Komplettes Set kaufen",
   "hw_complete_set_title": "Das Starter-Set",
-  "hw_complete_set_desc": "Spar dir die Mühe und kaufe alle benötigten Teile für deinen DWC-Grow auf einen Schlag."
+  "hw_complete_set_desc": "Spar dir die Mühe und kaufe alle benötigten Teile für deinen DWC-Grow auf einen Schlag.",
+  "hw_buying_guide_title": "💡 Worauf beim Kauf achten & Empfehlungen",
+  "hw_buying_guide_generic": "Tipp: Achte auf gute Qualität und lies dir Bewertungen durch, bevor du dich entscheidest.",
+  "hw_buying_guide_tent": "Achte auf eine starke Reflexionsfläche (Mylar) und dicke Zeltwände (mindestens 600D), damit kein Störlicht eindringt.",
+  "hw_buying_guide_led": "Pflanzen brauchen Licht! Achte auf ein Vollspektrum und effiziente Chips (z.B. Samsung LM301).",
+  "hw_complete_set_budget_name": "🥉 Low Budget Setup",
+  "hw_complete_set_balanced_name": "🥈 Preis-Leistungs-Sieger",
+  "hw_complete_set_premium_name": "🥇 Premium Setup",
+  "hw_complete_sets_main_title": "Starter-Sets (Empfohlen)",
+  "hw_complete_sets_main_desc": "Spar dir die Recherche und das Vergleichen. Wir haben komplette Ideenlisten für dich zusammengestellt, die perfekt für DWC funktionieren. Wähle dein Budget:",
+  "hw_option_budget": "Budget Option ansehen",
+  "hw_option_premium": "Premium Option ansehen",
+  "hw_option_standard": "Zum Produkt"
 }
