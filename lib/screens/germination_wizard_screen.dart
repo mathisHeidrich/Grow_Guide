@@ -288,17 +288,7 @@ class _GerminationWizardScreenState
             rightTitle: "Wurzel sichtbar",
             leftSubtitle: "Auch einpflanzen",
             rightSubtitle: "Einpflanzen",
-            backButton: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                side: const BorderSide(color: Colors.white54),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-              ),
-              onPressed: () => context.go('/'),
-              child: Text(l10n.checkinBack),
-            ),
+            
             onConfirm: (index) {
               if (index == 0) {
                 setState(() => _seedOpened = false);
