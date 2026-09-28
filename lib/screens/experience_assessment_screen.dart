@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
 import 'package:app/theme/app_colors.dart';
 import '../providers/database_provider.dart';
+import 'package:drift/drift.dart' as drift;
 
 class ExperienceAssessmentScreen extends ConsumerStatefulWidget {
   const ExperienceAssessmentScreen({super.key});
@@ -23,7 +24,7 @@ class _ExperienceAssessmentScreenState extends ConsumerState<ExperienceAssessmen
     
     if (settings != null) {
       await db.update(db.appSettingsTable).replace(
-        settings.copyWith(experienceLevel: _selectedLevel),
+        settings.copyWith(experienceLevel: drift.Value(_selectedLevel)),
       );
     }
     
