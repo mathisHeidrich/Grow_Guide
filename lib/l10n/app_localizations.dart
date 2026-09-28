@@ -1498,101 +1498,137 @@ abstract class AppLocalizations {
   /// **'Um den perfekten Erntezeitpunkt (Trichome) zu bestimmen.'**
   String get hw_loupeDesc;
 
-  /// No description provided for @waterGuideTitle.
+  /// No description provided for @waterSetupTitle.
   ///
   /// In de, this message translates to:
-  /// **'Wasser-Masterclass'**
-  String get waterGuideTitle;
+  /// **'Wasser-Check'**
+  String get waterSetupTitle;
 
-  /// No description provided for @waterGuideChap1Title.
+  /// No description provided for @waterSetupStep1Title.
   ///
   /// In de, this message translates to:
-  /// **'Die Regeln des Wasserwechsels'**
-  String get waterGuideChap1Title;
+  /// **'Der Start-EC (Grund-EC)'**
+  String get waterSetupStep1Title;
 
-  /// No description provided for @waterGuideChap1Desc.
+  /// No description provided for @waterSetupStep1Desc.
   ///
   /// In de, this message translates to:
-  /// **'Pflanzen scheiden Toxine aus und Salze stauen sich an (EC-Creep). Ein wöchentlicher Wechsel stabilisiert den pH-Wert und die Nährstoffaufnahme.\n\nNutze den 2-Eimer-Wechsel-Trick in der Vegi oder eine kleine Tauchpumpe.'**
-  String get waterGuideChap1Desc;
+  /// **'Wie hart ist dein Leitungswasser?'**
+  String get waterSetupStep1Desc;
 
-  /// No description provided for @waterGuideChap2Title.
+  /// No description provided for @waterSetupStep1Tip.
   ///
   /// In de, this message translates to:
-  /// **'Dein Leitungswasser (Der Start-EC)'**
-  String get waterGuideChap2Title;
+  /// **'Tipp: Suche online nach \'Wasserwerte [Deine Stadt]\', um den Trinkwasserbericht deines Versorgers zu finden. Dort steht der Grund-EC-Wert (oder die \'elektrische Leitfähigkeit\').'**
+  String get waterSetupStep1Tip;
 
-  /// No description provided for @waterGuideChap2Desc.
+  /// No description provided for @waterSetupEcSoft.
   ///
   /// In de, this message translates to:
-  /// **'Wie hart ist dein Leitungswasser? Suche online nach \'Wasserwerte [Dein Wohnort]\', um den Bericht deines Versorgers zu finden, und prüfe den Grund-EC-Wert (ohne Dünger).'**
-  String get waterGuideChap2Desc;
+  /// **'0.0 - 0.2 (Sehr weich)'**
+  String get waterSetupEcSoft;
 
-  /// No description provided for @waterGuideEc0_2.
+  /// No description provided for @waterSetupEcSoftFeedback.
   ///
   /// In de, this message translates to:
-  /// **'EC 0.0 - 0.2 (Sehr weich)'**
-  String get waterGuideEc0_2;
+  /// **'Nahezu salzfrei. Du MUSST CalMag (Calcium/Magnesium) hinzufügen, bis der EC ca. 0.4 erreicht, bevor der Dünger beigemischt wird.'**
+  String get waterSetupEcSoftFeedback;
 
-  /// No description provided for @waterGuideEc0_2Desc.
+  /// No description provided for @waterSetupEcPerfect.
   ///
   /// In de, this message translates to:
-  /// **'Nahezu salzfrei. Du MUSST CalMag (Calcium/Magnesium) hinzufügen, bis der EC ca. 0.4 erreicht, bevor der Hauptdünger beigemischt wird.'**
-  String get waterGuideEc0_2Desc;
+  /// **'0.2 - 0.4 (Perfektes Wasser)'**
+  String get waterSetupEcPerfect;
 
-  /// No description provided for @waterGuideEc0_4.
-  ///
-  /// In de, this message translates to:
-  /// **'EC 0.2 - 0.4 (Perfektes Wasser)'**
-  String get waterGuideEc0_4;
-
-  /// No description provided for @waterGuideEc0_4Desc.
+  /// No description provided for @waterSetupEcPerfectFeedback.
   ///
   /// In de, this message translates to:
   /// **'Jackpot! Das ideale Leitungswasser. Kein zusätzliches CalMag nötig.'**
-  String get waterGuideEc0_4Desc;
+  String get waterSetupEcPerfectFeedback;
 
-  /// No description provided for @waterGuideEc0_7.
+  /// No description provided for @waterSetupEcHard.
   ///
   /// In de, this message translates to:
-  /// **'EC 0.5 - 0.7 (Hartes Wasser)'**
-  String get waterGuideEc0_7;
+  /// **'0.5 - 0.7 (Hartes Wasser)'**
+  String get waterSetupEcHard;
 
-  /// No description provided for @waterGuideEc0_7Desc.
+  /// No description provided for @waterSetupEcHardFeedback.
   ///
   /// In de, this message translates to:
-  /// **'Viel Calcium. Kein CalMag nutzen! Nutze speziellen Hard-Water-Dünger und wechsle den Tank strikt wöchentlich.\n\nPro-Tipp: Wenn nur Magnesium fehlt, füge reines Bittersalz (0,1-0,3 g/L) hinzu.'**
-  String get waterGuideEc0_7Desc;
+  /// **'Kein CalMag nutzen! Nutze \'Hard-Water\'-Dünger. Wenn nur Magnesium fehlt, nutze reines Bittersalz (0,1-0,3 g/L).'**
+  String get waterSetupEcHardFeedback;
 
-  /// No description provided for @waterGuideEcHard.
+  /// No description provided for @waterSetupEcTooHard.
   ///
   /// In de, this message translates to:
-  /// **'EC > 0.7 (Sehr hart / Salzig)'**
-  String get waterGuideEcHard;
+  /// **'> 0.7 (Sehr hart / Salzig)'**
+  String get waterSetupEcTooHard;
 
-  /// No description provided for @waterGuideEcHardDesc.
+  /// No description provided for @waterSetupEcTooHardFeedback.
   ///
   /// In de, this message translates to:
-  /// **'Ungeeignet für DWC! Zwingend aufbereiten.\n\nAchte im Wasserbericht auch auf Natrium (< 50 mg/L) und Chlorid (< 70 mg/L).'**
-  String get waterGuideEcHardDesc;
+  /// **'Ungeeignet für DWC! Zwingend aufbereiten: Mische 50/50 mit destilliertem Wasser (Cut-Trick) oder nutze eine Umkehrosmose-Anlage.'**
+  String get waterSetupEcTooHardFeedback;
 
-  /// No description provided for @waterGuideChap3Title.
+  /// No description provided for @waterSetupEcUnknown.
   ///
   /// In de, this message translates to:
-  /// **'Wasser aufbereiten'**
-  String get waterGuideChap3Title;
+  /// **'Weiß ich (noch) nicht'**
+  String get waterSetupEcUnknown;
 
-  /// No description provided for @waterGuideChap3Desc.
+  /// No description provided for @waterSetupEcUnknownFeedback.
   ///
   /// In de, this message translates to:
-  /// **'• Der Cut-Trick: Mische hartes Wasser 50/50 mit destilliertem Wasser.\n• Tischfilter (Brita) bringen nichts für den EC-Wert.\n• Umkehrosmose: Die beste Langzeitlösung.\n• Chlor ausgasen: Leitungswasser 24-48h abstehen lassen, bevor man es benutzt!'**
-  String get waterGuideChap3Desc;
+  /// **'Kein Problem! Suche im Internet einfach nach \'Wasserwerte [Deine Stadt]\'. Dort steht der Grund-EC-Wert (oder die \'elektrische Leitfähigkeit\'). Du kannst diesen Schritt später in den Einstellungen nachholen.'**
+  String get waterSetupEcUnknownFeedback;
 
-  /// No description provided for @waterGuideNext.
+  /// No description provided for @waterSetupStep2Title.
   ///
   /// In de, this message translates to:
-  /// **'Verstanden, weiter!'**
-  String get waterGuideNext;
+  /// **'Der Chlor-Check'**
+  String get waterSetupStep2Title;
+
+  /// No description provided for @waterSetupStep2Desc.
+  ///
+  /// In de, this message translates to:
+  /// **'Ist Chlor in deinem Leitungswasser?'**
+  String get waterSetupStep2Desc;
+
+  /// No description provided for @waterSetupChlorineYes.
+  ///
+  /// In de, this message translates to:
+  /// **'Ja'**
+  String get waterSetupChlorineYes;
+
+  /// No description provided for @waterSetupChlorineNo.
+  ///
+  /// In de, this message translates to:
+  /// **'Nein'**
+  String get waterSetupChlorineNo;
+
+  /// No description provided for @waterSetupChlorineUnknown.
+  ///
+  /// In de, this message translates to:
+  /// **'Weiß ich nicht'**
+  String get waterSetupChlorineUnknown;
+
+  /// No description provided for @waterSetupChlorineFeedback.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Wenn Chlor im Wasser ist, lass dein Leitungswasser immer 24 Stunden in einem Eimer abstehen, bevor du es benutzt. Idealerweise legst du für diese Zeit schon einen Sprudelstein (Luftpumpe) in den Eimer, das treibt das Chlor viel schneller und zuverlässiger aus dem Wasser. Chlor schädigt sonst die Wurzeln!'**
+  String get waterSetupChlorineFeedback;
+
+  /// No description provided for @waterSetupNext.
+  ///
+  /// In de, this message translates to:
+  /// **'Weiter'**
+  String get waterSetupNext;
+
+  /// No description provided for @waterSetupSettingsHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Falls du umziehst oder deine Werte später eintragen willst, kannst du diesen Wasser-Check jederzeit in den Einstellungen neu starten.'**
+  String get waterSetupSettingsHint;
 
   /// No description provided for @plantStatusAllOk.
   ///
@@ -2301,6 +2337,18 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Einstellungen'**
   String get settingsTitle;
+
+  /// No description provided for @settingsSetup.
+  ///
+  /// In de, this message translates to:
+  /// **'Setup & Assistenten'**
+  String get settingsSetup;
+
+  /// No description provided for @settingsRestartWaterSetup.
+  ///
+  /// In de, this message translates to:
+  /// **'Wasser-Check neu starten'**
+  String get settingsRestartWaterSetup;
 
   /// No description provided for @settingsAppearance.
   ///

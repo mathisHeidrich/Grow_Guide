@@ -14,7 +14,7 @@ import 'screens/germination_wizard_screen.dart';
 import 'models/plant.dart';
 import 'screens/ppfd_meter_screen.dart';
 import 'screens/hardware_advisor_screen.dart';
-import 'screens/water_guide_screen.dart';
+import 'screens/water_setup_screen.dart';
 import 'screens/water_change_screen.dart';
 import 'screens/problem_diagnosis_screen.dart';
 import 'screens/problem_detail_screen.dart';
@@ -36,7 +36,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       final isAllowedPath = state.uri.path == '/onboarding' ||
           state.uri.path == '/hardware_advisor' ||
-          state.uri.path == '/water_guide' ||
+          state.uri.path == '/water_setup' ||
           state.uri.path == '/tent_setup';
 
       if (!hasCompletedOnboarding && !isAllowedPath) {
@@ -58,8 +58,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const HardwareAdvisorScreen(),
       ),
       GoRoute(
-        path: '/water_guide',
-        builder: (context, state) => const WaterGuideScreen(),
+        path: '/water_setup',
+        builder: (context, state) => const WaterSetupScreen(),
       ),
       GoRoute(
         path: '/tent_setup',

@@ -76,6 +76,7 @@ class AppSettingsTable extends Table {
       text().withDefault(const Constant('ec'))(); // 'ec', 'ppm500', 'ppm700'
   TextColumn get checkinFrequency => text()
       .withDefault(const Constant('daily'))(); // 'daily', 'every_2_days', 'weekly', 'off'
+  TextColumn get waterEcLevel => text().nullable()(); // 'soft', 'perfect', 'hard', 'too_hard', 'unknown'
 
   @override
   Set<Column> get primaryKey => {id};

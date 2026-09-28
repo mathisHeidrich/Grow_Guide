@@ -22,7 +22,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      context.go('/water_guide');
+      context.go('/water_setup');
     }
   }
 

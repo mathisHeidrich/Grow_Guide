@@ -23,6 +23,7 @@ class SettingsNotifier {
     String? temperatureUnit,
     String? conductivityUnit,
     String? checkinFrequency,
+    String? waterEcLevel,
   }) async {
     await dbService.db.update(dbService.db.appSettingsTable).write(
           AppSettingsTableCompanion(
@@ -41,6 +42,9 @@ class SettingsNotifier {
             checkinFrequency: checkinFrequency == null
                 ? const Value.absent()
                 : Value(checkinFrequency),
+            waterEcLevel: waterEcLevel == null
+                ? const Value.absent()
+                : Value(waterEcLevel),
           ),
         );
 

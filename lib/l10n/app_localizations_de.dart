@@ -786,59 +786,78 @@ class AppLocalizationsDe extends AppLocalizations {
       'Um den perfekten Erntezeitpunkt (Trichome) zu bestimmen.';
 
   @override
-  String get waterGuideTitle => 'Wasser-Masterclass';
+  String get waterSetupTitle => 'Wasser-Check';
 
   @override
-  String get waterGuideChap1Title => 'Die Regeln des Wasserwechsels';
+  String get waterSetupStep1Title => 'Der Start-EC (Grund-EC)';
 
   @override
-  String get waterGuideChap1Desc =>
-      'Pflanzen scheiden Toxine aus und Salze stauen sich an (EC-Creep). Ein wöchentlicher Wechsel stabilisiert den pH-Wert und die Nährstoffaufnahme.\n\nNutze den 2-Eimer-Wechsel-Trick in der Vegi oder eine kleine Tauchpumpe.';
+  String get waterSetupStep1Desc => 'Wie hart ist dein Leitungswasser?';
 
   @override
-  String get waterGuideChap2Title => 'Dein Leitungswasser (Der Start-EC)';
+  String get waterSetupStep1Tip =>
+      'Tipp: Suche online nach \'Wasserwerte [Deine Stadt]\', um den Trinkwasserbericht deines Versorgers zu finden. Dort steht der Grund-EC-Wert (oder die \'elektrische Leitfähigkeit\').';
 
   @override
-  String get waterGuideChap2Desc =>
-      'Wie hart ist dein Leitungswasser? Suche online nach \'Wasserwerte [Dein Wohnort]\', um den Bericht deines Versorgers zu finden, und prüfe den Grund-EC-Wert (ohne Dünger).';
+  String get waterSetupEcSoft => '0.0 - 0.2 (Sehr weich)';
 
   @override
-  String get waterGuideEc0_2 => 'EC 0.0 - 0.2 (Sehr weich)';
+  String get waterSetupEcSoftFeedback =>
+      'Nahezu salzfrei. Du MUSST CalMag (Calcium/Magnesium) hinzufügen, bis der EC ca. 0.4 erreicht, bevor der Dünger beigemischt wird.';
 
   @override
-  String get waterGuideEc0_2Desc =>
-      'Nahezu salzfrei. Du MUSST CalMag (Calcium/Magnesium) hinzufügen, bis der EC ca. 0.4 erreicht, bevor der Hauptdünger beigemischt wird.';
+  String get waterSetupEcPerfect => '0.2 - 0.4 (Perfektes Wasser)';
 
   @override
-  String get waterGuideEc0_4 => 'EC 0.2 - 0.4 (Perfektes Wasser)';
-
-  @override
-  String get waterGuideEc0_4Desc =>
+  String get waterSetupEcPerfectFeedback =>
       'Jackpot! Das ideale Leitungswasser. Kein zusätzliches CalMag nötig.';
 
   @override
-  String get waterGuideEc0_7 => 'EC 0.5 - 0.7 (Hartes Wasser)';
+  String get waterSetupEcHard => '0.5 - 0.7 (Hartes Wasser)';
 
   @override
-  String get waterGuideEc0_7Desc =>
-      'Viel Calcium. Kein CalMag nutzen! Nutze speziellen Hard-Water-Dünger und wechsle den Tank strikt wöchentlich.\n\nPro-Tipp: Wenn nur Magnesium fehlt, füge reines Bittersalz (0,1-0,3 g/L) hinzu.';
+  String get waterSetupEcHardFeedback =>
+      'Kein CalMag nutzen! Nutze \'Hard-Water\'-Dünger. Wenn nur Magnesium fehlt, nutze reines Bittersalz (0,1-0,3 g/L).';
 
   @override
-  String get waterGuideEcHard => 'EC > 0.7 (Sehr hart / Salzig)';
+  String get waterSetupEcTooHard => '> 0.7 (Sehr hart / Salzig)';
 
   @override
-  String get waterGuideEcHardDesc =>
-      'Ungeeignet für DWC! Zwingend aufbereiten.\n\nAchte im Wasserbericht auch auf Natrium (< 50 mg/L) und Chlorid (< 70 mg/L).';
+  String get waterSetupEcTooHardFeedback =>
+      'Ungeeignet für DWC! Zwingend aufbereiten: Mische 50/50 mit destilliertem Wasser (Cut-Trick) oder nutze eine Umkehrosmose-Anlage.';
 
   @override
-  String get waterGuideChap3Title => 'Wasser aufbereiten';
+  String get waterSetupEcUnknown => 'Weiß ich (noch) nicht';
 
   @override
-  String get waterGuideChap3Desc =>
-      '• Der Cut-Trick: Mische hartes Wasser 50/50 mit destilliertem Wasser.\n• Tischfilter (Brita) bringen nichts für den EC-Wert.\n• Umkehrosmose: Die beste Langzeitlösung.\n• Chlor ausgasen: Leitungswasser 24-48h abstehen lassen, bevor man es benutzt!';
+  String get waterSetupEcUnknownFeedback =>
+      'Kein Problem! Suche im Internet einfach nach \'Wasserwerte [Deine Stadt]\'. Dort steht der Grund-EC-Wert (oder die \'elektrische Leitfähigkeit\'). Du kannst diesen Schritt später in den Einstellungen nachholen.';
 
   @override
-  String get waterGuideNext => 'Verstanden, weiter!';
+  String get waterSetupStep2Title => 'Der Chlor-Check';
+
+  @override
+  String get waterSetupStep2Desc => 'Ist Chlor in deinem Leitungswasser?';
+
+  @override
+  String get waterSetupChlorineYes => 'Ja';
+
+  @override
+  String get waterSetupChlorineNo => 'Nein';
+
+  @override
+  String get waterSetupChlorineUnknown => 'Weiß ich nicht';
+
+  @override
+  String get waterSetupChlorineFeedback =>
+      'Tipp: Wenn Chlor im Wasser ist, lass dein Leitungswasser immer 24 Stunden in einem Eimer abstehen, bevor du es benutzt. Idealerweise legst du für diese Zeit schon einen Sprudelstein (Luftpumpe) in den Eimer, das treibt das Chlor viel schneller und zuverlässiger aus dem Wasser. Chlor schädigt sonst die Wurzeln!';
+
+  @override
+  String get waterSetupNext => 'Weiter';
+
+  @override
+  String get waterSetupSettingsHint =>
+      'Tipp: Falls du umziehst oder deine Werte später eintragen willst, kannst du diesen Wasser-Check jederzeit in den Einstellungen neu starten.';
 
   @override
   String get plantStatusAllOk => 'Alles im grünen Bereich';
@@ -1256,6 +1275,12 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsTitle => 'Einstellungen';
+
+  @override
+  String get settingsSetup => 'Setup & Assistenten';
+
+  @override
+  String get settingsRestartWaterSetup => 'Wasser-Check neu starten';
 
   @override
   String get settingsAppearance => 'Erscheinungsbild';

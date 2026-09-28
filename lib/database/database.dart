@@ -12,7 +12,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.connection);
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration {
@@ -25,6 +25,9 @@ class AppDatabase extends _$AppDatabase {
           await m.addColumn(plants, plants.startDate);
           await m.addColumn(plants, plants.endDate);
           await m.addColumn(plants, plants.yieldGrams);
+        }
+        if (from < 3) {
+          await m.addColumn(appSettingsTable, appSettingsTable.waterEcLevel);
         }
       },
     );

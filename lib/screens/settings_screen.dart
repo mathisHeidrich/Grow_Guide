@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/settings_provider.dart';
 import 'package:app/l10n/app_localizations.dart';
+import 'water_setup_screen.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -55,7 +56,7 @@ class SettingsScreen extends ConsumerWidget {
               ListTile(
                 title: Text(l10n.settingsVolumeUnit),
                 trailing: DropdownButton<String>(
-                  value: settings.volumeUnit ?? 'l',
+                  value: settings.volumeUnit,
                   onChanged: (val) {
                     if (val != null) notifier.updateSettings(volumeUnit: val);
                   },
@@ -74,7 +75,7 @@ class SettingsScreen extends ConsumerWidget {
               ListTile(
                 title: Text(l10n.settingsTempUnit),
                 trailing: DropdownButton<String>(
-                  value: settings.temperatureUnit ?? 'c',
+                  value: settings.temperatureUnit,
                   onChanged: (val) {
                     if (val != null) notifier.updateSettings(temperatureUnit: val);
                   },
@@ -93,7 +94,7 @@ class SettingsScreen extends ConsumerWidget {
               ListTile(
                 title: Text(l10n.settingsCondUnit),
                 trailing: DropdownButton<String>(
-                  value: settings.conductivityUnit ?? 'ec',
+                  value: settings.conductivityUnit,
                   onChanged: (val) {
                     if (val != null) notifier.updateSettings(conductivityUnit: val);
                   },
@@ -143,6 +144,19 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ],
                 ),
+              ),
+              const Divider(),
+              _buildSectionHeader(context, l10n.settingsSetup),
+              ListTile(
+                title: Text(l10n.settingsRestartWaterSetup),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const WaterSetupScreen(isFromSettings: true),
+                    ),
+                  );
+                },
               ),
               const Divider(),
               _buildSectionHeader(context, l10n.settingsDangerZone),
