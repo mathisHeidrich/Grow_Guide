@@ -44,8 +44,7 @@ class _GerminationWizardScreenState
 
       if (_plant!.germinationStarted) {
         final now = ref.read(timeProvider);
-        final referenceDate =
-            _plant!.lastGerminationCheck ?? _plant!.phaseStartDate;
+        final referenceDate = _plant!.phaseStartDate;
         final elapsedHours =
             referenceDate != null ? now.difference(referenceDate).inHours : 0;
 
@@ -188,8 +187,8 @@ class _GerminationWizardScreenState
                   title: l10n.germinationTitle5,
                   text: l10n.germinationDesc5,
                   icon: Icons.timelapse,
-                  nextButtonText: l10n.germinationToDashboard,
-                  onNext: _markRootChecked,
+                  nextButtonText: l10n.germinationNext1, // "Weiter"
+                  onNext: _nextPage,
                   showBack: true,
                   onBack: () => _jumpToPage(4),
                   infoTitle: isBeginner ? l10n.germinationDeepDive5Title : null,
