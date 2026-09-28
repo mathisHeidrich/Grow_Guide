@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import '../widgets/image_selection_card.dart';
-
 import '../widgets/tip_formatted_text.dart';
+import '../widgets/did_you_know_card.dart';
 import 'package:drift/drift.dart' as drift;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/time_provider.dart';
-
 import '../providers/database_provider.dart';
+import '../providers/settings_provider.dart';
 import 'package:app/l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
-import 'package:app/theme/app_colors.dart';
 
 class GerminationWizardScreen extends ConsumerStatefulWidget {
   final int plantId;
@@ -124,11 +123,13 @@ class _GerminationWizardScreenState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final settingsAsync = ref.watch(settingsProvider);
+    final isBeginner = settingsAsync.value?.experienceLevel == 'beginner';
+
     if (_plant == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    // Simple implementation of the germination flow
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -137,110 +138,103 @@ class _GerminationWizardScreenState
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.germinationTitle1,
-                      text: l10n.germinationDesc1,
-                      icon: Icons.local_drink,
-                      nextButtonText: l10n.germinationNext1,
-                      onNext: _nextPage,
-                    ),
-                    l10n.germinationDeepDive1Title,
-                    l10n.germinationDeepDive1Text),
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.germinationTitle1b,
-                      text: l10n.germinationDesc1b,
-                      icon: Icons.science,
-                      nextButtonText: l10n.germinationNext1b,
-                      onNext: _nextPage,
-                      showBack: true,
-                    ),
-                    l10n.germinationDeepDive1bTitle,
-                    l10n.germinationDeepDive1bText),
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.germinationTitle2,
-                      text: l10n.germinationDesc2,
-                      icon: Icons.nightlight_round,
-                      nextButtonText: l10n.germinationNext2,
-                      onNext: _nextPage,
-                      showBack: true,
-                    ),
-                    l10n.germinationDeepDive2Title,
-                    l10n.germinationDeepDive2Text),
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.germinationTitle3,
-                      text: l10n.germinationDesc3,
-                      icon: Icons.hourglass_empty,
-                      nextButtonText: l10n.germinationToDashboard,
-                      onNext: _finishPart1,
-                      showBack: true,
-                    ),
-                    l10n.germinationDeepDive3Title,
-                    l10n.germinationDeepDive3Text),
+                _buildSlide(
+                  title: l10n.germinationTitle1,
+                  text: l10n.germinationDesc1,
+                  icon: Icons.local_drink,
+                  nextButtonText: l10n.germinationNext1,
+                  onNext: _nextPage,
+                  infoTitle: isBeginner ? l10n.germinationDeepDive1Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive1Text : null,
+                ),
+                _buildSlide(
+                  title: l10n.germinationTitle1b,
+                  text: l10n.germinationDesc1b,
+                  icon: Icons.science,
+                  nextButtonText: l10n.germinationNext1b,
+                  onNext: _nextPage,
+                  showBack: true,
+                  infoTitle: isBeginner ? l10n.germinationDeepDive1bTitle : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive1bText : null,
+                ),
+                _buildSlide(
+                  title: l10n.germinationTitle2,
+                  text: l10n.germinationDesc2,
+                  icon: Icons.nightlight_round,
+                  nextButtonText: l10n.germinationNext2,
+                  onNext: _nextPage,
+                  showBack: true,
+                  infoTitle: isBeginner ? l10n.germinationDeepDive2Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive2Text : null,
+                ),
+                _buildSlide(
+                  title: l10n.germinationTitle3,
+                  text: l10n.germinationDesc3,
+                  icon: Icons.hourglass_empty,
+                  nextButtonText: l10n.germinationToDashboard,
+                  onNext: _finishPart1,
+                  showBack: true,
+                  infoTitle: isBeginner ? l10n.germinationDeepDive3Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive3Text : null,
+                ),
                 // Wurzel Check (Index 4)
-                _wrapWithInfo(
-                    _buildRootCheckSlide(l10n),
-                    l10n.germinationDeepDive4Title,
-                    l10n.germinationDeepDive4Text),
+                _buildRootCheckSlide(
+                  l10n,
+                  infoTitle: isBeginner ? l10n.germinationDeepDive4Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive4Text : null,
+                ),
                 // Geduld! (Index 5)
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.germinationTitle5,
-                      text: l10n.germinationDesc5,
-                      icon: Icons.timelapse,
-                      nextButtonText: l10n.germinationToDashboard,
-                      onNext: _markRootChecked,
-                      showBack: true,
-                      onBack: () => _jumpToPage(4),
-                    ),
-                    l10n.germinationDeepDive5Title,
-                    l10n.germinationDeepDive5Text),
+                _buildSlide(
+                  title: l10n.germinationTitle5,
+                  text: l10n.germinationDesc5,
+                  icon: Icons.timelapse,
+                  nextButtonText: l10n.germinationToDashboard,
+                  onNext: _markRootChecked,
+                  showBack: true,
+                  onBack: () => _jumpToPage(4),
+                  infoTitle: isBeginner ? l10n.germinationDeepDive5Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive5Text : null,
+                ),
                 // Einzug in die Steinwolle (Index 6)
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.germinationTitle6,
-                      text: l10n.germinationDesc6,
-                      icon: Icons.eco,
-                      nextButtonText: l10n.germinationNext6,
-                      onNext: _nextPage,
-                      showBack: true,
-                      onBack: () => _jumpToPage(4),
-                    ),
-                    l10n.germinationDeepDive6Title,
-                    l10n.germinationDeepDive6Text),
-                // Netztopf (Index 6)
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.germinationTitle7,
-                      text: l10n.germinationDesc7,
-                      icon: Icons.kitchen,
-                      nextButtonText: l10n.germinationNext7,
-                      onNext: _nextPage,
-                      showBack: true,
-                    ),
-                    l10n.germinationDeepDive7Title,
-                    l10n.germinationDeepDive7Text),
-                // Finale (Index 7)
-                // Eimer (Index 7)
-                _wrapWithInfo(
-                    _buildSlide(
-                      title: l10n.germinationTitle8,
-                      text: l10n.germinationDesc8,
-                      icon: Icons.waves,
-                      nextButtonText: l10n.germinationNext8,
-                      onNext: _nextPage,
-                      showBack: true,
-                    ),
-                    l10n.germinationDeepDive8Title,
-                    l10n.germinationDeepDive8Text),
-                // Licht (Index 8)
-                _wrapWithInfo(
-                    _buildLightSlide(l10n),
-                    l10n.germinationDeepDive9Title,
-                    l10n.germinationDeepDive9Text),
+                _buildSlide(
+                  title: l10n.germinationTitle6,
+                  text: l10n.germinationDesc6,
+                  icon: Icons.eco,
+                  nextButtonText: l10n.germinationNext6,
+                  onNext: _nextPage,
+                  showBack: true,
+                  onBack: () => _jumpToPage(4),
+                  infoTitle: isBeginner ? l10n.germinationDeepDive6Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive6Text : null,
+                ),
+                // Netztopf (Index 7)
+                _buildSlide(
+                  title: l10n.germinationTitle7,
+                  text: l10n.germinationDesc7,
+                  icon: Icons.kitchen,
+                  nextButtonText: l10n.germinationNext7,
+                  onNext: _nextPage,
+                  showBack: true,
+                  infoTitle: isBeginner ? l10n.germinationDeepDive7Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive7Text : null,
+                ),
+                // Eimer (Index 8)
+                _buildSlide(
+                  title: l10n.germinationTitle8,
+                  text: l10n.germinationDesc8,
+                  icon: Icons.waves,
+                  nextButtonText: l10n.germinationNext8,
+                  onNext: _nextPage,
+                  showBack: true,
+                  infoTitle: isBeginner ? l10n.germinationDeepDive8Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive8Text : null,
+                ),
+                // Licht (Index 9)
+                _buildLightSlide(
+                  l10n,
+                  infoTitle: isBeginner ? l10n.germinationDeepDive9Title : null,
+                  infoText: isBeginner ? l10n.germinationDeepDive9Text : null,
+                ),
               ],
             ),
             Positioned(
@@ -257,73 +251,11 @@ class _GerminationWizardScreenState
     );
   }
 
-  Widget _wrapWithInfo(Widget child, String title, String text) {
-    return Stack(
-      children: [
-        child,
-        Positioned(
-          top: 16,
-          left: 16,
-          child: IconButton(
-            icon:
-                const Icon(Icons.info_outline, color: Colors.white54, size: 32),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                backgroundColor: AppColors.surface,
-                isScrollControlled: true,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                ),
-                builder: (context) => Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: SafeArea(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                        const SizedBox(height: 16),
-                        Text(text,
-                            style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.white70,
-                                height: 1.5)),
-                        const SizedBox(height: 24),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.growGreen,
-                              foregroundColor: Colors.black,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)),
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                            child: Text(AppLocalizations.of(context)!.generalUnderstood,
-                                style: const TextStyle(fontWeight: FontWeight.bold)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRootCheckSlide(AppLocalizations l10n) {
+  Widget _buildRootCheckSlide(
+    AppLocalizations l10n, {
+    String? infoTitle,
+    String? infoText,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -347,6 +279,8 @@ class _GerminationWizardScreenState
                 ),
             textAlign: TextAlign.center,
           ),
+          if (infoTitle != null && infoText != null)
+            DidYouKnowCard(title: infoTitle, text: infoText),
           const Spacer(),
           ImageSelectionCard(
             leftImagePath: "assets/images/seed_closed.jpg",
@@ -381,7 +315,11 @@ class _GerminationWizardScreenState
     );
   }
 
-  Widget _buildLightSlide(AppLocalizations l10n) {
+  Widget _buildLightSlide(
+    AppLocalizations l10n, {
+    String? infoTitle,
+    String? infoText,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -400,6 +338,8 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
+          if (infoTitle != null && infoText != null)
+            DidYouKnowCard(title: infoTitle, text: infoText),
           Container(
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
@@ -508,6 +448,8 @@ class _GerminationWizardScreenState
     VoidCallback? onBack,
     String? altButtonText,
     VoidCallback? onAlt,
+    String? infoTitle,
+    String? infoText,
   }) {
     final l10n = AppLocalizations.of(context)!;
     return Padding(
@@ -535,6 +477,8 @@ class _GerminationWizardScreenState
                 ),
             textAlign: TextAlign.center,
           ),
+          if (infoTitle != null && infoText != null)
+            DidYouKnowCard(title: infoTitle, text: infoText),
           const Spacer(),
           if (altButtonText != null && onAlt != null) ...[
             OutlinedButton(

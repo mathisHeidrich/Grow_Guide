@@ -30,7 +30,7 @@ Die Intensität und Art der Erklärungen richtet sich nach dem ausgewählten `ex
 *Der Wechsel des Lichtzyklus und die Blütenbildung.*
 - **Umstellung auf 12/12:** Warum blüht Cannabis erst, wenn die Nächte länger werden? (Photoperiodismus).
 - **Blüte Woche 2 (Stretch):** Warum wächst die Pflanze plötzlich extrem in die Höhe?
-- **Blüte Woche 4 (Defoliation/Entlauben):** Warum schneiden wir untere Blätter ab? (Licht an die Main-Buds, Schimmelprävention durch besseren Airflow).
+
 - **Blüte Woche 7 (Herbst & Flush):** Warum werden die Blätter jetzt gelb? Warum geben wir am Ende nur noch Wasser? (Spülen für besseren Geschmack).
 
 ### 4. Ernte, Trocknung & Curing (Wizards)
@@ -43,7 +43,7 @@ Die Intensität und Art der Erklärungen richtet sich nach dem ausgewählten `ex
 1. **Der "Wusstest du schon?"-Block (DidYouKnowCard):**
    - Wir bauen ein neues, wiederverwendbares Widget (`DidYouKnowCard`).
    - Wenn `userExperienceLevel == beginner`, wird diese Karte prominent in den jeweiligen Flow (z.B. zwischen die Eingabefelder im Check-in) eingebaut.
-   - Sie ist einklappbar, aber standardmäßig ausgeklappt, wenn sie das erste Mal an diesem Tag / in dieser Phase gezeigt wird.
+   - Sie ist NICHT einklappbar, sondern steht fest im UI, damit sie gelesen wird, wenn sie das erste Mal an diesem Tag / in dieser Phase gezeigt wird.
 2. **Flagging im Backend:**
    - Wir können im `LogEntry` oder `Plant` Modell speichern, welche "Lektionen" der Nutzer schon gesehen hat (z.B. `hasSeenPhLesson = true`), damit wir ihn an Tag 10 nicht nochmal mit der pH-Erklärung nerven.
    - Alternativ verknüpfen wir die Lektionen strikt an die Tage im aktuellen Stadium (`if currentDayInPhase == 1 -> show PhLesson`).
