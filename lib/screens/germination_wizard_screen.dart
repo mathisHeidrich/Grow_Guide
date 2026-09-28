@@ -232,7 +232,7 @@ class _GerminationWizardScreenState
     );
   }
 
-  Widget _buildLightSlide(
+    Widget _buildLightSlide(
     AppLocalizations l10n, {
     String? infoTitle,
     String? infoText,
@@ -255,8 +255,14 @@ class _GerminationWizardScreenState
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          if (infoTitle != null && infoText != null)
-            DidYouKnowCard(title: infoTitle, text: infoText),
+          TipFormattedText(
+            l10n.germinationDesc9,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.white70,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
           Container(
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
@@ -282,14 +288,6 @@ class _GerminationWizardScreenState
                 ),
               ])),
           const SizedBox(height: 24),
-          TipFormattedText(
-            l10n.germinationDesc9,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Colors.white70,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blueAccent,
@@ -312,6 +310,10 @@ class _GerminationWizardScreenState
               }
             },
           ),
+          if (infoTitle != null && infoText != null) ...[
+            const SizedBox(height: 24),
+            DidYouKnowCard(title: infoTitle, text: infoText),
+          ],
           const Spacer(),
           Row(
             children: [
@@ -354,8 +356,7 @@ class _GerminationWizardScreenState
       ),
     );
   }
-
-  Widget _buildSlide({
+Widget _buildSlide({
     required String title,
     required String text,
     required IconData icon,
