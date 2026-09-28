@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/image_selection_card.dart';
+
 import '../widgets/tip_formatted_text.dart';
 import '../widgets/did_you_know_card.dart';
 import 'package:drift/drift.dart' as drift;
@@ -176,25 +176,7 @@ class _GerminationWizardScreenState
                   infoTitle: isBeginner ? l10n.germinationDeepDive3Title : null,
                   infoText: isBeginner ? l10n.germinationDeepDive3Text : null,
                 ),
-                // Wurzel Check (Index 4)
-                _buildRootCheckSlide(
-                  l10n,
-                  infoTitle: isBeginner ? l10n.germinationDeepDive4Title : null,
-                  infoText: isBeginner ? l10n.germinationDeepDive4Text : null,
-                ),
-                // Geduld! (Index 5)
-                _buildSlide(
-                  title: l10n.germinationTitle5,
-                  text: l10n.germinationDesc5,
-                  icon: Icons.timelapse,
-                  nextButtonText: l10n.germinationNext1, // "Weiter"
-                  onNext: _nextPage,
-                  showBack: true,
-                  onBack: () => _jumpToPage(4),
-                  infoTitle: isBeginner ? l10n.germinationDeepDive5Title : null,
-                  infoText: isBeginner ? l10n.germinationDeepDive5Text : null,
-                ),
-                // Einzug in die Steinwolle (Index 6)
+                // Einzug in die Steinwolle (Index 4)
                 _buildSlide(
                   title: l10n.germinationTitle6,
                   text: l10n.germinationDesc6,
@@ -202,7 +184,7 @@ class _GerminationWizardScreenState
                   nextButtonText: l10n.germinationNext6,
                   onNext: _nextPage,
                   showBack: true,
-                  onBack: () => _jumpToPage(4),
+                  onBack: () => context.go('/'),
                   infoTitle: isBeginner ? l10n.germinationDeepDive6Title : null,
                   infoText: isBeginner ? l10n.germinationDeepDive6Text : null,
                 ),
@@ -246,60 +228,6 @@ class _GerminationWizardScreenState
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildRootCheckSlide(
-    AppLocalizations l10n, {
-    String? infoTitle,
-    String? infoText,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Spacer(),
-          Text(
-            l10n.germinationTitle4,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
-          TipFormattedText(
-            l10n.germinationDesc4,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Colors.white70,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          if (infoTitle != null && infoText != null)
-            DidYouKnowCard(title: infoTitle, text: infoText),
-          const Spacer(),
-          ImageSelectionCard(
-            leftImagePath: "assets/images/seed_closed.jpg",
-            rightImagePath: "assets/images/seed_opened.jpg",
-            leftTitle: "Noch zu",
-            rightTitle: "Wurzel sichtbar",
-            leftSubtitle: "Auch einpflanzen",
-            rightSubtitle: "Einpflanzen",
-            
-            onConfirm: (index) {
-              if (index == 0) {
-                setState(() => _seedOpened = false);
-                _jumpToPage(5);
-              } else {
-                setState(() => _seedOpened = true);
-                _jumpToPage(6);
-              }
-            },
-          ),
-        ],
       ),
     );
   }
