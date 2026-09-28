@@ -27,6 +27,7 @@ class _GerminationWizardScreenState
   Plant? _plant;
   bool? _seedOpened;
   double? _inputPpfd;
+  bool _isResumed = false;
 
   @override
   void initState() {
@@ -43,6 +44,7 @@ class _GerminationWizardScreenState
       setState(() => _plant = plant);
 
       if (_plant!.germinationStarted) {
+        setState(() => _isResumed = true);
         final now = ref.read(timeProvider);
         final referenceDate = _plant!.phaseStartDate;
         final elapsedHours =
@@ -172,7 +174,7 @@ class _GerminationWizardScreenState
                   icon: Icons.hourglass_empty,
                   nextButtonText: l10n.germinationToDashboard,
                   onNext: _finishPart1,
-                  showBack: true,
+                  showBack: !_isResumed,
                   infoTitle: isBeginner ? l10n.germinationDeepDive3Title : null,
                   infoText: isBeginner ? l10n.germinationDeepDive3Text : null,
                 ),
