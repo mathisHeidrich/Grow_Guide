@@ -3123,6 +3123,78 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Spar dir die Mühe und kaufe alle benötigten Teile für deinen DWC-Grow auf einen Schlag.'**
   String get hw_complete_set_desc;
+
+  /// No description provided for @hw_buying_guide_title.
+  ///
+  /// In de, this message translates to:
+  /// **'💡 Worauf beim Kauf achten & Empfehlungen'**
+  String get hw_buying_guide_title;
+
+  /// No description provided for @hw_buying_guide_generic.
+  ///
+  /// In de, this message translates to:
+  /// **'Tipp: Achte auf gute Qualität und lies dir Bewertungen durch, bevor du dich entscheidest.'**
+  String get hw_buying_guide_generic;
+
+  /// No description provided for @hw_buying_guide_tent.
+  ///
+  /// In de, this message translates to:
+  /// **'Achte auf eine starke Reflexionsfläche (Mylar) und dicke Zeltwände (mindestens 600D), damit kein Störlicht eindringt.'**
+  String get hw_buying_guide_tent;
+
+  /// No description provided for @hw_buying_guide_led.
+  ///
+  /// In de, this message translates to:
+  /// **'Pflanzen brauchen Licht! Achte auf ein Vollspektrum und effiziente Chips (z.B. Samsung LM301).'**
+  String get hw_buying_guide_led;
+
+  /// No description provided for @hw_complete_set_budget_name.
+  ///
+  /// In de, this message translates to:
+  /// **'🥉 Low Budget Setup'**
+  String get hw_complete_set_budget_name;
+
+  /// No description provided for @hw_complete_set_balanced_name.
+  ///
+  /// In de, this message translates to:
+  /// **'🥈 Preis-Leistungs-Sieger'**
+  String get hw_complete_set_balanced_name;
+
+  /// No description provided for @hw_complete_set_premium_name.
+  ///
+  /// In de, this message translates to:
+  /// **'🥇 Premium Setup'**
+  String get hw_complete_set_premium_name;
+
+  /// No description provided for @hw_complete_sets_main_title.
+  ///
+  /// In de, this message translates to:
+  /// **'Starter-Sets (Empfohlen)'**
+  String get hw_complete_sets_main_title;
+
+  /// No description provided for @hw_complete_sets_main_desc.
+  ///
+  /// In de, this message translates to:
+  /// **'Spar dir die Recherche und das Vergleichen. Wir haben komplette Ideenlisten für dich zusammengestellt, die perfekt für DWC funktionieren. Wähle dein Budget:'**
+  String get hw_complete_sets_main_desc;
+
+  /// No description provided for @hw_option_budget.
+  ///
+  /// In de, this message translates to:
+  /// **'Budget Option ansehen'**
+  String get hw_option_budget;
+
+  /// No description provided for @hw_option_premium.
+  ///
+  /// In de, this message translates to:
+  /// **'Premium Option ansehen'**
+  String get hw_option_premium;
+
+  /// No description provided for @hw_option_standard.
+  ///
+  /// In de, this message translates to:
+  /// **'Zum Produkt'**
+  String get hw_option_standard;
 }
 
 class _AppLocalizationsDelegate
