@@ -13,19 +13,6 @@ class HardwareAdvisorScreen extends StatefulWidget {
 }
 
 class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
-  final PageController _pageController = PageController();
-
-  void _nextPage(int totalPages) {
-    if (_pageController.page!.toInt() < totalPages - 1) {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    } else {
-      context.go('/onboarding');
-    }
-  }
-
   Future<void> _launchUrl(String urlString) async {
     final url = Uri.parse(urlString);
     if (!await launchUrl(url)) {
@@ -282,214 +269,243 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: PageView.builder(
-        controller: _pageController,
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          return Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                if (!item.isCompleteSet)
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: item.isRequired
-                            ? Colors.red.withValues(alpha: 0.2)
-                            : Colors.blue.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: item.isRequired ? Colors.red : Colors.blue,
-                        ),
-                      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                itemCount: items.length + 1, // +1 for the intro header
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 24.0, top: 8.0),
                       child: Text(
-                        item.isRequired ? '🔴 PFLICHT' : '🔵 UPGRADE',
-                        style: TextStyle(
-                          color: item.isRequired ? Colors.red : Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                if (item.isCompleteSet)
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.orange.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.orange,
-                        ),
-                      ),
-                      child: const Text(
-                        '⭐ ALL-IN-ONE',
-                        style: TextStyle(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                const Spacer(),
-                Icon(
-                  item.icon,
-                  size: 100,
-                  color: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
-                ),
-                const SizedBox(height: 32),
-                Text(
-                  item.title,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                TipFormattedText(
-                  item.proTip != null ? '${item.description}\n\n${item.proTip}' : item.description,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.white70,
-                      ),
-                  textAlign: TextAlign.center,
-                ),
-                if (item.isCompleteSet && item.options.isNotEmpty) ...[
-                  const SizedBox(height: 24),
-                  CompleteSetOptionsList(
-                    options: item.options,
-                    onLaunchUrl: _launchUrl,
-                  ),
-                ],
-                if (!item.isCompleteSet && item.options.isNotEmpty) ...[
-                  const SizedBox(height: 24),
-                  Card(
-                    color: AppColors.surface,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
-                    ),
-                    margin: EdgeInsets.zero,
-                    child: Theme(
-                      data: Theme.of(context).copyWith(
-                        dividerColor: Colors.transparent,
-                      ),
-                      child: ExpansionTile(
-                        iconColor: AppColors.growGreen,
-                        collapsedIconColor: Colors.white70,
-                        title: Text(
-                          l10n.hw_buying_guide_title,
-                          style: const TextStyle(
-                            color: AppColors.growGreen,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                if (item.buyingGuideText != null)
-                                  Text(
-                                    item.buyingGuideText!,
-                                    style: const TextStyle(color: Colors.white70, fontSize: 14),
-                                  ),
-                                const SizedBox(height: 16),
-                                ...item.options.map((opt) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: OutlinedButton.icon(
-                                    style: OutlinedButton.styleFrom(
-                                      foregroundColor: Colors.white,
-                                      side: BorderSide(color: Colors.white.withValues(alpha: 0.2)),
-                                      padding: const EdgeInsets.symmetric(vertical: 12),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                    ),
-                                    onPressed: () => _launchUrl(opt.url),
-                                    icon: const Icon(Icons.shopping_cart_outlined, size: 20),
-                                    label: Text(opt.name),
-                                  ),
-                                )),
-                              ],
+                        "Hier ist alles, was du für deinen DWC-Grow benötigst. Scrolle durch die Liste, um dir einen Überblick zu verschaffen.",
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.white70,
                             ),
-                          ),
-                        ],
+                        textAlign: TextAlign.center,
+                      ),
+                    );
+                  }
+                  
+                  final item = items[index - 1];
+                  return _HardwareItemCard(
+                    item: item,
+                    onLaunchUrl: _launchUrl,
+                  );
+                },
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.5),
+                    blurRadius: 10,
+                    offset: const Offset(0, -5),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.growGreen,
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        side: const BorderSide(color: AppColors.growGreen, width: 2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      onPressed: () => context.go('/onboarding'),
+                      child: const Text(
+                        'Zurück',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.growGreen,
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      onPressed: () => context.go('/tent_setup'),
+                      child: const Text(
+                        'Weiter zum Zeltaufbau',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                 ],
-                const Spacer(),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: AppColors.growGreen,
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            side: const BorderSide(
-                                color: AppColors.growGreen, width: 2),
-                          ),
-                        ),
-                        onPressed: () {
-                          if (_pageController.page != null &&
-                              _pageController.page!.toInt() > 0) {
-                            _pageController.previousPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                          } else {
-                            if (context.canPop()) {
-                              context.pop();
-                            }
-                          }
-                        },
-                        child: const Icon(Icons.arrow_back),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      flex: 3,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.growGreen,
-                          foregroundColor: Colors.black,
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                        onPressed: () => _nextPage(items.length),
-                        child: Text(
-                          index == items.length - 1
-                              ? 'Zurück zum Onboarding'
-                              : 'Weiter',
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _HardwareItemCard extends StatelessWidget {
+  final _HardwareItemData item;
+  final void Function(String) onLaunchUrl;
+
+  const _HardwareItemCard({
+    required this.item,
+    required this.onLaunchUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      color: AppColors.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: item.isCompleteSet 
+            ? Colors.orangeAccent.withValues(alpha: 0.5) 
+            : Colors.transparent,
+          width: item.isCompleteSet ? 1.5 : 0,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: item.isCompleteSet 
+                      ? Colors.orangeAccent.withValues(alpha: 0.1) 
+                      : AppColors.growGreen.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    item.icon,
+                    size: 32,
+                    color: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
+                  ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Badge
+                      if (item.isCompleteSet)
+                        _buildBadge('⭐ ALL-IN-ONE', Colors.orange)
+                      else if (item.isRequired)
+                        _buildBadge('🔴 PFLICHT', Colors.red)
+                      else
+                        _buildBadge('🔵 UPGRADE', Colors.blue),
+                      
+                      const SizedBox(height: 8),
+                      Text(
+                        item.title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          );
-        },
+            const SizedBox(height: 12),
+            TipFormattedText(
+              item.proTip != null ? '${item.description}\n\n${item.proTip}' : item.description,
+              style: const TextStyle(color: Colors.white70, fontSize: 14),
+            ),
+            
+            if (item.options.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              Theme(
+                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  iconColor: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
+                  collapsedIconColor: Colors.white70,
+                  title: Text(
+                    item.isCompleteSet ? l10n.hw_buy_idea_list : l10n.hw_buying_guide_title,
+                    style: TextStyle(
+                      color: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  children: [
+                    if (item.buyingGuideText != null) ...[
+                      Text(
+                        item.buyingGuideText!,
+                        style: const TextStyle(color: Colors.white70, fontSize: 13),
+                      ),
+                      const SizedBox(height: 12),
+                    ],
+                    ...item.options.map((opt) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: OutlinedButton.icon(
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          side: BorderSide(color: Colors.white.withValues(alpha: 0.2)),
+                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          alignment: Alignment.centerLeft,
+                        ),
+                        onPressed: () => onLaunchUrl(opt.url),
+                        icon: const Icon(Icons.shopping_cart_outlined, size: 20),
+                        label: Text(
+                          opt.name,
+                          style: const TextStyle(overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                    )),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBadge(String text, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.2),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color, width: 1),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: color,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -523,120 +539,4 @@ class _HardwareItemData {
     this.options = const [],
     this.isCompleteSet = false,
   });
-}
-
-class CompleteSetOptionsList extends StatefulWidget {
-  final List<HardwareProductOption> options;
-  final void Function(String url) onLaunchUrl;
-
-  const CompleteSetOptionsList({
-    super.key,
-    required this.options,
-    required this.onLaunchUrl,
-  });
-
-  @override
-  State<CompleteSetOptionsList> createState() => _CompleteSetOptionsListState();
-}
-
-class _CompleteSetOptionsListState extends State<CompleteSetOptionsList> {
-  late List<ExpansionTileController> _controllers;
-
-  @override
-  void initState() {
-    super.initState();
-    _controllers = List.generate(widget.options.length, (_) => ExpansionTileController());
-  }
-
-  void _handleExpansion(int index, bool isExpanded) {
-    if (isExpanded) {
-      for (int i = 0; i < _controllers.length; i++) {
-        if (i != index && _controllers[i].isExpanded) {
-          _controllers[i].collapse();
-        }
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return Column(
-      children: widget.options.asMap().entries.map((entry) {
-        final index = entry.key;
-        final opt = entry.value;
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 12.0),
-          child: Card(
-            color: AppColors.surface,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-              side: BorderSide(
-                  color: Colors.orangeAccent.withValues(alpha: 0.5), width: 1.5),
-            ),
-            margin: EdgeInsets.zero,
-            child: Theme(
-              data: Theme.of(context).copyWith(
-                dividerColor: Colors.transparent,
-              ),
-              child: ExpansionTile(
-                controller: _controllers[index],
-                onExpansionChanged: (expanded) => _handleExpansion(index, expanded),
-                iconColor: Colors.orangeAccent,
-                collapsedIconColor: Colors.orangeAccent,
-                title: Row(
-                  children: [
-                    const Icon(Icons.star_border, color: Colors.orangeAccent, size: 20),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        opt.name,
-                        style: const TextStyle(
-                          color: Colors.orangeAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        if (opt.description != null)
-                          Text(
-                            opt.description!,
-                            style: const TextStyle(color: Colors.white70, fontSize: 14),
-                          ),
-                        const SizedBox(height: 16),
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange,
-                            foregroundColor: Colors.black,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: () => widget.onLaunchUrl(opt.url),
-                          icon: const Icon(Icons.shopping_cart, size: 20),
-                          label: Text(
-                            l10n.hw_buy_idea_list,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
 }
