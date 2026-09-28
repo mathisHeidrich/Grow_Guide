@@ -16,6 +16,7 @@ class TestScenario {
   final DateTime startTime;
   final List<PlantsCompanion> plants;
   final bool hasCompletedOnboarding;
+  final String experienceLevel;
 
   TestScenario({
     required this.type,
@@ -24,6 +25,7 @@ class TestScenario {
     required this.startTime,
     required this.plants,
     this.hasCompletedOnboarding = true,
+    this.experienceLevel = 'beginner',
   });
 
   static List<TestScenario> get all => [
