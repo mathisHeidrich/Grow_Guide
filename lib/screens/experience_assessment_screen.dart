@@ -51,6 +51,7 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
                         yieldText: l10n.growLevel1Yield,
                         effortText: l10n.growLevel1Effort,
                         methodsText: l10n.growLevel1Methods,
+                        nutrientsText: l10n.growLevel1Nutrients,
                         icon: Icons.eco_outlined,
                       ),
                     ),
@@ -62,6 +63,7 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
                         yieldText: l10n.growLevel2Yield,
                         effortText: l10n.growLevel2Effort,
                         methodsText: l10n.growLevel2Methods,
+                        nutrientsText: l10n.growLevel2Nutrients,
                         icon: Icons.science_outlined,
                       ),
                     ),
@@ -98,6 +100,7 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
     required String yieldText,
     required String effortText,
     required String methodsText,
+    required String nutrientsText,
     required IconData icon,
   }) {
     return Container(
@@ -146,6 +149,8 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
             _buildFeatureRow(Icons.schedule, effortText),
             const SizedBox(height: 12),
             _buildFeatureRow(Icons.build_circle_outlined, methodsText),
+            const SizedBox(height: 12),
+            _buildFeatureRow(Icons.water_drop_outlined, nutrientsText),
           ],
         ),
       ),

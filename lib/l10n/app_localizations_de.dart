@@ -1869,13 +1869,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get growLevel1Subtitle => 'Leichter Einstieg';
 
   @override
-  String get growLevel1Yield => '~50-80g Ertrag';
+  String get growLevel1Yield => '~50-80g pro Pflanze';
 
   @override
   String get growLevel1Effort => 'Niedrig (~1h/Woche)';
 
   @override
-  String get growLevel1Methods => 'LST & Basis-Dünger';
+  String get growLevel1Methods => 'LST (Runterbinden)';
+
+  @override
+  String get growLevel1Nutrients => 'Einfacher Basis-Dünger';
 
   @override
   String get growLevel2 => 'Level 2';
@@ -1888,13 +1891,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get growLevel2Subtitle => 'Maximales Potenzial';
 
   @override
-  String get growLevel2Yield => '~100-150g+ Ertrag';
+  String get growLevel2Yield => '1-1.5g pro Watt (~150g+)';
 
   @override
   String get growLevel2Effort => 'Hoch (~3h/Woche)';
 
   @override
-  String get growLevel2Methods => 'ScrOG & Booster';
+  String get growLevel2Methods => 'ScrOG & Defoliation';
+
+  @override
+  String get growLevel2Nutrients => 'Exakter EC & Booster';
 
   @override
   String get addPlantSectionGrowLevel => '7. Grow Level';

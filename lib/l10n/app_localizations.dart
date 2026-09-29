@@ -3379,7 +3379,7 @@ abstract class AppLocalizations {
   /// No description provided for @growLevel1Yield.
   ///
   /// In de, this message translates to:
-  /// **'~50-80g Ertrag'**
+  /// **'~50-80g pro Pflanze'**
   String get growLevel1Yield;
 
   /// No description provided for @growLevel1Effort.
@@ -3391,8 +3391,14 @@ abstract class AppLocalizations {
   /// No description provided for @growLevel1Methods.
   ///
   /// In de, this message translates to:
-  /// **'LST & Basis-Dünger'**
+  /// **'LST (Runterbinden)'**
   String get growLevel1Methods;
+
+  /// No description provided for @growLevel1Nutrients.
+  ///
+  /// In de, this message translates to:
+  /// **'Einfacher Basis-Dünger'**
+  String get growLevel1Nutrients;
 
   /// No description provided for @growLevel2.
   ///
@@ -3415,7 +3421,7 @@ abstract class AppLocalizations {
   /// No description provided for @growLevel2Yield.
   ///
   /// In de, this message translates to:
-  /// **'~100-150g+ Ertrag'**
+  /// **'1-1.5g pro Watt (~150g+)'**
   String get growLevel2Yield;
 
   /// No description provided for @growLevel2Effort.
@@ -3427,8 +3433,14 @@ abstract class AppLocalizations {
   /// No description provided for @growLevel2Methods.
   ///
   /// In de, this message translates to:
-  /// **'ScrOG & Booster'**
+  /// **'ScrOG & Defoliation'**
   String get growLevel2Methods;
+
+  /// No description provided for @growLevel2Nutrients.
+  ///
+  /// In de, this message translates to:
+  /// **'Exakter EC & Booster'**
+  String get growLevel2Nutrients;
 
   /// No description provided for @addPlantSectionGrowLevel.
   ///
