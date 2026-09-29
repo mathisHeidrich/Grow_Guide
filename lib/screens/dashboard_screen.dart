@@ -309,12 +309,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           .watchSingleOrNull(),
       builder: (context, snapshot) {
         final lastLog = snapshot.data;
+        final l10n = AppLocalizations.of(context)!;
         Color statusColor = AppColors.growGreen;
+        String actionText = l10n.plantStatusAllOk;
         final currentDayInPhase = plant.getDayInPhase(ref.watch(timeProvider));
 
         if (plant.currentPhase == PlantPhase.germination) {
           if (!plant.germinationStarted) {
-            statusColor = AppColors.growGreen; // Need to start
+            statusColor = AppColors.growGreen;
+            actionText = l10n.dashboardStartGermination;
           } else {
             final now = ref.watch(timeProvider);
             final referenceDate = plant.phaseStartDate;
@@ -322,13 +325,16 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 ? now.difference(referenceDate).inHours
                 : 0;
             if (elapsedHours < 24) {
-              statusColor = AppColors.growGreen; // Waiting, technically OK
+              statusColor = AppColors.growGreen;
+              actionText = l10n.dashboardWaitGermination;
             } else {
-              statusColor = AppColors.warningAmber; // Check root!
+              statusColor = AppColors.warningAmber;
+              actionText = l10n.dashboardCheckRoot;
             }
           }
         } else if (plant.currentPhase == PlantPhase.drying) {
           statusColor = AppColors.growGreen;
+          actionText = l10n.dashboardDryingFinishedBtn;
         } else {
           bool isOverdue = false;
           bool isWarning = false;
@@ -361,8 +367,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
           if (isOverdue) {
             statusColor = AppColors.errorRed;
+            actionText = l10n.plantStatusOverdue;
           } else if (isWarning) {
             statusColor = AppColors.warningAmber;
+            actionText = l10n.plantStatusCheckRecommended;
           }
         }
 
@@ -408,6 +416,21 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     fontSize: 12,
                   ),
                   maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(height: 4),
+              SizedBox(
+                width: 80,
+                child: Text(
+                  actionText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: statusColor,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
