@@ -1866,11 +1866,35 @@ class AppLocalizationsDe extends AppLocalizations {
       'Leichter Einstieg. ~50-80g Ertrag. Aufwand: Niedrig (~1h pro Woche). Methoden: LST (Runterbinden) & Defoliation. Basis-Dünger.';
 
   @override
+  String get growLevel1Subtitle => 'Leichter Einstieg';
+
+  @override
+  String get growLevel1Yield => '~50-80g Ertrag';
+
+  @override
+  String get growLevel1Effort => 'Niedrig (~1h/Woche)';
+
+  @override
+  String get growLevel1Methods => 'LST & Basis-Dünger';
+
+  @override
   String get growLevel2 => 'Level 2';
 
   @override
   String get growLevel2Desc =>
       'Maximales Potenzial. ~100-150g+ Ertrag. Aufwand: Hoch (~3h pro Woche). Methoden: ScrOG, präzises PH/EC-Management, CalMag & Booster.';
+
+  @override
+  String get growLevel2Subtitle => 'Maximales Potenzial';
+
+  @override
+  String get growLevel2Yield => '~100-150g+ Ertrag';
+
+  @override
+  String get growLevel2Effort => 'Hoch (~3h/Woche)';
+
+  @override
+  String get growLevel2Methods => 'ScrOG & Booster';
 
   @override
   String get addPlantSectionGrowLevel => '7. Grow Level';

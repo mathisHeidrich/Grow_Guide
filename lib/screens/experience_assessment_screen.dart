@@ -47,7 +47,10 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
                     Expanded(
                       child: _buildInfoCard(
                         title: l10n.growLevel1,
-                        description: l10n.growLevel1Desc,
+                        subtitle: l10n.growLevel1Subtitle,
+                        yieldText: l10n.growLevel1Yield,
+                        effortText: l10n.growLevel1Effort,
+                        methodsText: l10n.growLevel1Methods,
                         icon: Icons.eco_outlined,
                       ),
                     ),
@@ -55,7 +58,10 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
                     Expanded(
                       child: _buildInfoCard(
                         title: l10n.growLevel2,
-                        description: l10n.growLevel2Desc,
+                        subtitle: l10n.growLevel2Subtitle,
+                        yieldText: l10n.growLevel2Yield,
+                        effortText: l10n.growLevel2Effort,
+                        methodsText: l10n.growLevel2Methods,
                         icon: Icons.science_outlined,
                       ),
                     ),
@@ -88,7 +94,10 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
 
   Widget _buildInfoCard({
     required String title,
-    required String description,
+    required String subtitle,
+    required String yieldText,
+    required String effortText,
+    required String methodsText,
     required IconData icon,
   }) {
     return Container(
@@ -121,19 +130,45 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Text(
-              description,
+              subtitle,
               style: const TextStyle(
                 fontSize: 14,
-                color: Colors.white70,
-                height: 1.4,
+                fontWeight: FontWeight.w500,
+                color: AppColors.growGreen,
               ),
               textAlign: TextAlign.center,
             ),
+            const SizedBox(height: 20),
+            _buildFeatureRow(Icons.scale, yieldText),
+            const SizedBox(height: 12),
+            _buildFeatureRow(Icons.schedule, effortText),
+            const SizedBox(height: 12),
+            _buildFeatureRow(Icons.build_circle_outlined, methodsText),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildFeatureRow(IconData icon, String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, size: 18, color: Colors.white54),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 13,
+              color: Colors.white70,
+              height: 1.3,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
