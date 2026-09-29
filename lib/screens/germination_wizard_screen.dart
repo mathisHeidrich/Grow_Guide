@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/time_provider.dart';
 import '../providers/database_provider.dart';
-import '../providers/settings_provider.dart';
+
 import 'package:app/l10n/app_localizations.dart';
 import '../models/plant.dart';
 import '../theme/app_colors.dart';
@@ -124,12 +124,12 @@ class _GerminationWizardScreenState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final settingsAsync = ref.watch(settingsProvider);
-    final isBeginner = settingsAsync.value?.experienceLevel == 'beginner';
 
     if (_plant == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+
+    final isBeginner = _plant!.growLevel == 'level1';
 
     return Scaffold(
       body: SafeArea(

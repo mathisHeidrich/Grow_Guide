@@ -116,6 +116,12 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
   late final GeneratedColumn<DateTime> lastGerminationCheck =
       GeneratedColumn<DateTime>('last_germination_check', aliasedName, true,
           type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _growLevelMeta =
+      const VerificationMeta('growLevel');
+  @override
+  late final GeneratedColumn<String> growLevel = GeneratedColumn<String>(
+      'grow_level', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -133,7 +139,8 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
         plantsUnderLamp,
         rootsReachedWater,
         germinationStarted,
-        lastGerminationCheck
+        lastGerminationCheck,
+        growLevel
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -225,6 +232,10 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
           lastGerminationCheck.isAcceptableOrUnknown(
               data['last_germination_check']!, _lastGerminationCheckMeta));
     }
+    if (data.containsKey('grow_level')) {
+      context.handle(_growLevelMeta,
+          growLevel.isAcceptableOrUnknown(data['grow_level']!, _growLevelMeta));
+    }
     return context;
   }
 
@@ -269,6 +280,8 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
       lastGerminationCheck: attachedDatabase.typeMapping.read(
           DriftSqlType.dateTime,
           data['${effectivePrefix}last_germination_check']),
+      growLevel: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}grow_level']),
     );
   }
 
@@ -302,6 +315,7 @@ class Plant extends DataClass implements Insertable<Plant> {
   final bool rootsReachedWater;
   final bool germinationStarted;
   final DateTime? lastGerminationCheck;
+  final String? growLevel;
   const Plant(
       {required this.id,
       required this.name,
@@ -318,7 +332,8 @@ class Plant extends DataClass implements Insertable<Plant> {
       required this.plantsUnderLamp,
       required this.rootsReachedWater,
       required this.germinationStarted,
-      this.lastGerminationCheck});
+      this.lastGerminationCheck,
+      this.growLevel});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -356,6 +371,9 @@ class Plant extends DataClass implements Insertable<Plant> {
     if (!nullToAbsent || lastGerminationCheck != null) {
       map['last_germination_check'] = Variable<DateTime>(lastGerminationCheck);
     }
+    if (!nullToAbsent || growLevel != null) {
+      map['grow_level'] = Variable<String>(growLevel);
+    }
     return map;
   }
 
@@ -387,6 +405,9 @@ class Plant extends DataClass implements Insertable<Plant> {
       lastGerminationCheck: lastGerminationCheck == null && nullToAbsent
           ? const Value.absent()
           : Value(lastGerminationCheck),
+      growLevel: growLevel == null && nullToAbsent
+          ? const Value.absent()
+          : Value(growLevel),
     );
   }
 
@@ -414,6 +435,7 @@ class Plant extends DataClass implements Insertable<Plant> {
       germinationStarted: serializer.fromJson<bool>(json['germinationStarted']),
       lastGerminationCheck:
           serializer.fromJson<DateTime?>(json['lastGerminationCheck']),
+      growLevel: serializer.fromJson<String?>(json['growLevel']),
     );
   }
   @override
@@ -439,6 +461,7 @@ class Plant extends DataClass implements Insertable<Plant> {
       'germinationStarted': serializer.toJson<bool>(germinationStarted),
       'lastGerminationCheck':
           serializer.toJson<DateTime?>(lastGerminationCheck),
+      'growLevel': serializer.toJson<String?>(growLevel),
     };
   }
 
@@ -458,7 +481,8 @@ class Plant extends DataClass implements Insertable<Plant> {
           int? plantsUnderLamp,
           bool? rootsReachedWater,
           bool? germinationStarted,
-          Value<DateTime?> lastGerminationCheck = const Value.absent()}) =>
+          Value<DateTime?> lastGerminationCheck = const Value.absent(),
+          Value<String?> growLevel = const Value.absent()}) =>
       Plant(
         id: id ?? this.id,
         name: name ?? this.name,
@@ -479,6 +503,7 @@ class Plant extends DataClass implements Insertable<Plant> {
         lastGerminationCheck: lastGerminationCheck.present
             ? lastGerminationCheck.value
             : this.lastGerminationCheck,
+        growLevel: growLevel.present ? growLevel.value : this.growLevel,
       );
   Plant copyWithCompanion(PlantsCompanion data) {
     return Plant(
@@ -516,6 +541,7 @@ class Plant extends DataClass implements Insertable<Plant> {
       lastGerminationCheck: data.lastGerminationCheck.present
           ? data.lastGerminationCheck.value
           : this.lastGerminationCheck,
+      growLevel: data.growLevel.present ? data.growLevel.value : this.growLevel,
     );
   }
 
@@ -537,7 +563,8 @@ class Plant extends DataClass implements Insertable<Plant> {
           ..write('plantsUnderLamp: $plantsUnderLamp, ')
           ..write('rootsReachedWater: $rootsReachedWater, ')
           ..write('germinationStarted: $germinationStarted, ')
-          ..write('lastGerminationCheck: $lastGerminationCheck')
+          ..write('lastGerminationCheck: $lastGerminationCheck, ')
+          ..write('growLevel: $growLevel')
           ..write(')'))
         .toString();
   }
@@ -559,7 +586,8 @@ class Plant extends DataClass implements Insertable<Plant> {
       plantsUnderLamp,
       rootsReachedWater,
       germinationStarted,
-      lastGerminationCheck);
+      lastGerminationCheck,
+      growLevel);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -579,7 +607,8 @@ class Plant extends DataClass implements Insertable<Plant> {
           other.plantsUnderLamp == this.plantsUnderLamp &&
           other.rootsReachedWater == this.rootsReachedWater &&
           other.germinationStarted == this.germinationStarted &&
-          other.lastGerminationCheck == this.lastGerminationCheck);
+          other.lastGerminationCheck == this.lastGerminationCheck &&
+          other.growLevel == this.growLevel);
 }
 
 class PlantsCompanion extends UpdateCompanion<Plant> {
@@ -599,6 +628,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
   final Value<bool> rootsReachedWater;
   final Value<bool> germinationStarted;
   final Value<DateTime?> lastGerminationCheck;
+  final Value<String?> growLevel;
   const PlantsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -616,6 +646,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     this.rootsReachedWater = const Value.absent(),
     this.germinationStarted = const Value.absent(),
     this.lastGerminationCheck = const Value.absent(),
+    this.growLevel = const Value.absent(),
   });
   PlantsCompanion.insert({
     this.id = const Value.absent(),
@@ -634,6 +665,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     this.rootsReachedWater = const Value.absent(),
     this.germinationStarted = const Value.absent(),
     this.lastGerminationCheck = const Value.absent(),
+    this.growLevel = const Value.absent(),
   })  : name = Value(name),
         currentPhase = Value(currentPhase),
         waterVolumeLiters = Value(waterVolumeLiters),
@@ -659,6 +691,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     Expression<bool>? rootsReachedWater,
     Expression<bool>? germinationStarted,
     Expression<DateTime>? lastGerminationCheck,
+    Expression<String>? growLevel,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -678,6 +711,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       if (germinationStarted != null) 'germination_started': germinationStarted,
       if (lastGerminationCheck != null)
         'last_germination_check': lastGerminationCheck,
+      if (growLevel != null) 'grow_level': growLevel,
     });
   }
 
@@ -697,7 +731,8 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       Value<int>? plantsUnderLamp,
       Value<bool>? rootsReachedWater,
       Value<bool>? germinationStarted,
-      Value<DateTime?>? lastGerminationCheck}) {
+      Value<DateTime?>? lastGerminationCheck,
+      Value<String?>? growLevel}) {
     return PlantsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -715,6 +750,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       rootsReachedWater: rootsReachedWater ?? this.rootsReachedWater,
       germinationStarted: germinationStarted ?? this.germinationStarted,
       lastGerminationCheck: lastGerminationCheck ?? this.lastGerminationCheck,
+      growLevel: growLevel ?? this.growLevel,
     );
   }
 
@@ -773,6 +809,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       map['last_germination_check'] =
           Variable<DateTime>(lastGerminationCheck.value);
     }
+    if (growLevel.present) {
+      map['grow_level'] = Variable<String>(growLevel.value);
+    }
     return map;
   }
 
@@ -794,7 +833,8 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
           ..write('plantsUnderLamp: $plantsUnderLamp, ')
           ..write('rootsReachedWater: $rootsReachedWater, ')
           ..write('germinationStarted: $germinationStarted, ')
-          ..write('lastGerminationCheck: $lastGerminationCheck')
+          ..write('lastGerminationCheck: $lastGerminationCheck, ')
+          ..write('growLevel: $growLevel')
           ..write(')'))
         .toString();
   }
@@ -1299,12 +1339,6 @@ class $AppSettingsTableTable extends AppSettingsTable
   late final GeneratedColumn<String> waterEcLevel = GeneratedColumn<String>(
       'water_ec_level', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _experienceLevelMeta =
-      const VerificationMeta('experienceLevel');
-  @override
-  late final GeneratedColumn<String> experienceLevel = GeneratedColumn<String>(
-      'experience_level', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -1316,8 +1350,7 @@ class $AppSettingsTableTable extends AppSettingsTable
         temperatureUnit,
         conductivityUnit,
         checkinFrequency,
-        waterEcLevel,
-        experienceLevel
+        waterEcLevel
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -1382,12 +1415,6 @@ class $AppSettingsTableTable extends AppSettingsTable
           waterEcLevel.isAcceptableOrUnknown(
               data['water_ec_level']!, _waterEcLevelMeta));
     }
-    if (data.containsKey('experience_level')) {
-      context.handle(
-          _experienceLevelMeta,
-          experienceLevel.isAcceptableOrUnknown(
-              data['experience_level']!, _experienceLevelMeta));
-    }
     return context;
   }
 
@@ -1419,8 +1446,6 @@ class $AppSettingsTableTable extends AppSettingsTable
           DriftSqlType.string, data['${effectivePrefix}checkin_frequency'])!,
       waterEcLevel: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}water_ec_level']),
-      experienceLevel: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}experience_level']),
     );
   }
 
@@ -1441,7 +1466,6 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
   final String conductivityUnit;
   final String checkinFrequency;
   final String? waterEcLevel;
-  final String? experienceLevel;
   const AppSettings(
       {required this.id,
       required this.hasCompletedOnboarding,
@@ -1452,8 +1476,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       required this.temperatureUnit,
       required this.conductivityUnit,
       required this.checkinFrequency,
-      this.waterEcLevel,
-      this.experienceLevel});
+      this.waterEcLevel});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1470,9 +1493,6 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
     map['checkin_frequency'] = Variable<String>(checkinFrequency);
     if (!nullToAbsent || waterEcLevel != null) {
       map['water_ec_level'] = Variable<String>(waterEcLevel);
-    }
-    if (!nullToAbsent || experienceLevel != null) {
-      map['experience_level'] = Variable<String>(experienceLevel);
     }
     return map;
   }
@@ -1493,9 +1513,6 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       waterEcLevel: waterEcLevel == null && nullToAbsent
           ? const Value.absent()
           : Value(waterEcLevel),
-      experienceLevel: experienceLevel == null && nullToAbsent
-          ? const Value.absent()
-          : Value(experienceLevel),
     );
   }
 
@@ -1515,7 +1532,6 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       conductivityUnit: serializer.fromJson<String>(json['conductivityUnit']),
       checkinFrequency: serializer.fromJson<String>(json['checkinFrequency']),
       waterEcLevel: serializer.fromJson<String?>(json['waterEcLevel']),
-      experienceLevel: serializer.fromJson<String?>(json['experienceLevel']),
     );
   }
   @override
@@ -1532,7 +1548,6 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       'conductivityUnit': serializer.toJson<String>(conductivityUnit),
       'checkinFrequency': serializer.toJson<String>(checkinFrequency),
       'waterEcLevel': serializer.toJson<String?>(waterEcLevel),
-      'experienceLevel': serializer.toJson<String?>(experienceLevel),
     };
   }
 
@@ -1546,8 +1561,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
           String? temperatureUnit,
           String? conductivityUnit,
           String? checkinFrequency,
-          Value<String?> waterEcLevel = const Value.absent(),
-          Value<String?> experienceLevel = const Value.absent()}) =>
+          Value<String?> waterEcLevel = const Value.absent()}) =>
       AppSettings(
         id: id ?? this.id,
         hasCompletedOnboarding:
@@ -1562,9 +1576,6 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
         checkinFrequency: checkinFrequency ?? this.checkinFrequency,
         waterEcLevel:
             waterEcLevel.present ? waterEcLevel.value : this.waterEcLevel,
-        experienceLevel: experienceLevel.present
-            ? experienceLevel.value
-            : this.experienceLevel,
       );
   AppSettings copyWithCompanion(AppSettingsTableCompanion data) {
     return AppSettings(
@@ -1591,9 +1602,6 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       waterEcLevel: data.waterEcLevel.present
           ? data.waterEcLevel.value
           : this.waterEcLevel,
-      experienceLevel: data.experienceLevel.present
-          ? data.experienceLevel.value
-          : this.experienceLevel,
     );
   }
 
@@ -1609,8 +1617,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
           ..write('temperatureUnit: $temperatureUnit, ')
           ..write('conductivityUnit: $conductivityUnit, ')
           ..write('checkinFrequency: $checkinFrequency, ')
-          ..write('waterEcLevel: $waterEcLevel, ')
-          ..write('experienceLevel: $experienceLevel')
+          ..write('waterEcLevel: $waterEcLevel')
           ..write(')'))
         .toString();
   }
@@ -1626,8 +1633,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
       temperatureUnit,
       conductivityUnit,
       checkinFrequency,
-      waterEcLevel,
-      experienceLevel);
+      waterEcLevel);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1641,8 +1647,7 @@ class AppSettings extends DataClass implements Insertable<AppSettings> {
           other.temperatureUnit == this.temperatureUnit &&
           other.conductivityUnit == this.conductivityUnit &&
           other.checkinFrequency == this.checkinFrequency &&
-          other.waterEcLevel == this.waterEcLevel &&
-          other.experienceLevel == this.experienceLevel);
+          other.waterEcLevel == this.waterEcLevel);
 }
 
 class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
@@ -1656,7 +1661,6 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
   final Value<String> conductivityUnit;
   final Value<String> checkinFrequency;
   final Value<String?> waterEcLevel;
-  final Value<String?> experienceLevel;
   const AppSettingsTableCompanion({
     this.id = const Value.absent(),
     this.hasCompletedOnboarding = const Value.absent(),
@@ -1668,7 +1672,6 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     this.conductivityUnit = const Value.absent(),
     this.checkinFrequency = const Value.absent(),
     this.waterEcLevel = const Value.absent(),
-    this.experienceLevel = const Value.absent(),
   });
   AppSettingsTableCompanion.insert({
     this.id = const Value.absent(),
@@ -1681,7 +1684,6 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     this.conductivityUnit = const Value.absent(),
     this.checkinFrequency = const Value.absent(),
     this.waterEcLevel = const Value.absent(),
-    this.experienceLevel = const Value.absent(),
   });
   static Insertable<AppSettings> custom({
     Expression<int>? id,
@@ -1694,7 +1696,6 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     Expression<String>? conductivityUnit,
     Expression<String>? checkinFrequency,
     Expression<String>? waterEcLevel,
-    Expression<String>? experienceLevel,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1709,7 +1710,6 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
       if (conductivityUnit != null) 'conductivity_unit': conductivityUnit,
       if (checkinFrequency != null) 'checkin_frequency': checkinFrequency,
       if (waterEcLevel != null) 'water_ec_level': waterEcLevel,
-      if (experienceLevel != null) 'experience_level': experienceLevel,
     });
   }
 
@@ -1723,8 +1723,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
       Value<String>? temperatureUnit,
       Value<String>? conductivityUnit,
       Value<String>? checkinFrequency,
-      Value<String?>? waterEcLevel,
-      Value<String?>? experienceLevel}) {
+      Value<String?>? waterEcLevel}) {
     return AppSettingsTableCompanion(
       id: id ?? this.id,
       hasCompletedOnboarding:
@@ -1738,7 +1737,6 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
       conductivityUnit: conductivityUnit ?? this.conductivityUnit,
       checkinFrequency: checkinFrequency ?? this.checkinFrequency,
       waterEcLevel: waterEcLevel ?? this.waterEcLevel,
-      experienceLevel: experienceLevel ?? this.experienceLevel,
     );
   }
 
@@ -1777,9 +1775,6 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
     if (waterEcLevel.present) {
       map['water_ec_level'] = Variable<String>(waterEcLevel.value);
     }
-    if (experienceLevel.present) {
-      map['experience_level'] = Variable<String>(experienceLevel.value);
-    }
     return map;
   }
 
@@ -1795,8 +1790,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
           ..write('temperatureUnit: $temperatureUnit, ')
           ..write('conductivityUnit: $conductivityUnit, ')
           ..write('checkinFrequency: $checkinFrequency, ')
-          ..write('waterEcLevel: $waterEcLevel, ')
-          ..write('experienceLevel: $experienceLevel')
+          ..write('waterEcLevel: $waterEcLevel')
           ..write(')'))
         .toString();
   }
@@ -1834,6 +1828,7 @@ typedef $$PlantsTableCreateCompanionBuilder = PlantsCompanion Function({
   Value<bool> rootsReachedWater,
   Value<bool> germinationStarted,
   Value<DateTime?> lastGerminationCheck,
+  Value<String?> growLevel,
 });
 typedef $$PlantsTableUpdateCompanionBuilder = PlantsCompanion Function({
   Value<int> id,
@@ -1852,6 +1847,7 @@ typedef $$PlantsTableUpdateCompanionBuilder = PlantsCompanion Function({
   Value<bool> rootsReachedWater,
   Value<bool> germinationStarted,
   Value<DateTime?> lastGerminationCheck,
+  Value<String?> growLevel,
 });
 
 class $$PlantsTableTableManager extends RootTableManager<
@@ -1887,6 +1883,7 @@ class $$PlantsTableTableManager extends RootTableManager<
             Value<bool> rootsReachedWater = const Value.absent(),
             Value<bool> germinationStarted = const Value.absent(),
             Value<DateTime?> lastGerminationCheck = const Value.absent(),
+            Value<String?> growLevel = const Value.absent(),
           }) =>
               PlantsCompanion(
             id: id,
@@ -1905,6 +1902,7 @@ class $$PlantsTableTableManager extends RootTableManager<
             rootsReachedWater: rootsReachedWater,
             germinationStarted: germinationStarted,
             lastGerminationCheck: lastGerminationCheck,
+            growLevel: growLevel,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -1923,6 +1921,7 @@ class $$PlantsTableTableManager extends RootTableManager<
             Value<bool> rootsReachedWater = const Value.absent(),
             Value<bool> germinationStarted = const Value.absent(),
             Value<DateTime?> lastGerminationCheck = const Value.absent(),
+            Value<String?> growLevel = const Value.absent(),
           }) =>
               PlantsCompanion.insert(
             id: id,
@@ -1941,6 +1940,7 @@ class $$PlantsTableTableManager extends RootTableManager<
             rootsReachedWater: rootsReachedWater,
             germinationStarted: germinationStarted,
             lastGerminationCheck: lastGerminationCheck,
+            growLevel: growLevel,
           ),
         ));
 }
@@ -2031,6 +2031,11 @@ class $$PlantsTableFilterComposer
 
   ColumnFilters<DateTime> get lastGerminationCheck => $state.composableBuilder(
       column: $state.table.lastGerminationCheck,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get growLevel => $state.composableBuilder(
+      column: $state.table.growLevel,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -2131,6 +2136,11 @@ class $$PlantsTableOrderingComposer
           column: $state.table.lastGerminationCheck,
           builder: (column, joinBuilders) =>
               ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get growLevel => $state.composableBuilder(
+      column: $state.table.growLevel,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 typedef $$LogEntriesTableCreateCompanionBuilder = LogEntriesCompanion Function({
@@ -2327,7 +2337,6 @@ typedef $$AppSettingsTableTableCreateCompanionBuilder
   Value<String> conductivityUnit,
   Value<String> checkinFrequency,
   Value<String?> waterEcLevel,
-  Value<String?> experienceLevel,
 });
 typedef $$AppSettingsTableTableUpdateCompanionBuilder
     = AppSettingsTableCompanion Function({
@@ -2341,7 +2350,6 @@ typedef $$AppSettingsTableTableUpdateCompanionBuilder
   Value<String> conductivityUnit,
   Value<String> checkinFrequency,
   Value<String?> waterEcLevel,
-  Value<String?> experienceLevel,
 });
 
 class $$AppSettingsTableTableTableManager extends RootTableManager<
@@ -2372,7 +2380,6 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             Value<String> conductivityUnit = const Value.absent(),
             Value<String> checkinFrequency = const Value.absent(),
             Value<String?> waterEcLevel = const Value.absent(),
-            Value<String?> experienceLevel = const Value.absent(),
           }) =>
               AppSettingsTableCompanion(
             id: id,
@@ -2385,7 +2392,6 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             conductivityUnit: conductivityUnit,
             checkinFrequency: checkinFrequency,
             waterEcLevel: waterEcLevel,
-            experienceLevel: experienceLevel,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -2398,7 +2404,6 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             Value<String> conductivityUnit = const Value.absent(),
             Value<String> checkinFrequency = const Value.absent(),
             Value<String?> waterEcLevel = const Value.absent(),
-            Value<String?> experienceLevel = const Value.absent(),
           }) =>
               AppSettingsTableCompanion.insert(
             id: id,
@@ -2411,7 +2416,6 @@ class $$AppSettingsTableTableTableManager extends RootTableManager<
             conductivityUnit: conductivityUnit,
             checkinFrequency: checkinFrequency,
             waterEcLevel: waterEcLevel,
-            experienceLevel: experienceLevel,
           ),
         ));
 }
@@ -2468,11 +2472,6 @@ class $$AppSettingsTableTableFilterComposer
       column: $state.table.waterEcLevel,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get experienceLevel => $state.composableBuilder(
-      column: $state.table.experienceLevel,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$AppSettingsTableTableOrderingComposer
@@ -2525,11 +2524,6 @@ class $$AppSettingsTableTableOrderingComposer
 
   ColumnOrderings<String> get waterEcLevel => $state.composableBuilder(
       column: $state.table.waterEcLevel,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get experienceLevel => $state.composableBuilder(
-      column: $state.table.experienceLevel,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

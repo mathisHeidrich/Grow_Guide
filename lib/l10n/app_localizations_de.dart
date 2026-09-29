@@ -1852,32 +1852,32 @@ class AppLocalizationsDe extends AppLocalizations {
   String get waterSetupFinish => 'Setup abschließen';
 
   @override
-  String get experienceTitle => 'Wie viel Erfahrung hast du?';
+  String get growLevelTitle => 'Die Grow Levels';
 
   @override
-  String get experienceDesc =>
-      'Wir passen die App an dein Vorwissen an, damit du genau die Infos bekommst, die du brauchst.';
+  String get growLevelDesc =>
+      'Damit du sofort einschätzen kannst, was auf dich zukommt, teilen wir jeden Grow in eines von zwei Levels ein.';
 
   @override
-  String get experienceLevelBeginner => 'Absoluter Anfänger';
+  String get growLevel1 => 'Level 1';
 
   @override
-  String get experienceLevelBeginnerDesc =>
-      'Noch nie Pflanzen angebaut. Ich brauche das volle Programm.';
+  String get growLevel1Desc =>
+      'Leichter Einstieg. ~50-80g Ertrag. Aufwand: Niedrig (~1h pro Woche). Methoden: LST (Runterbinden) & Defoliation. Basis-Dünger.';
 
   @override
-  String get experienceLevelSoil => 'Erde-Umsteiger';
+  String get growLevel2 => 'Level 2';
 
   @override
-  String get experienceLevelSoilDesc =>
-      'Ich kenne mich mit Pflanzen aus, aber Deep Water Culture ist neu für mich.';
+  String get growLevel2Desc =>
+      'Maximales Potenzial. ~100-150g+ Ertrag. Aufwand: Hoch (~3h pro Woche). Methoden: ScrOG, präzises PH/EC-Management, CalMag & Booster.';
 
   @override
-  String get experienceLevelPro => 'DWC-Erfahren';
+  String get addPlantSectionGrowLevel => '7. Grow Level';
 
   @override
-  String get experienceLevelProDesc =>
-      'Ich habe schon in Wasser angebaut und brauche kaum Theorie.';
+  String get addPlantGrowLevelDesc =>
+      'Wähle das Ziel-Level für diesen Durchgang.';
 
   @override
   String get checkinOptionalEcLabel => 'Neuer EC-Wert (optional)';

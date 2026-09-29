@@ -41,6 +41,8 @@ class Plants extends Table {
   BoolColumn get germinationStarted =>
       boolean().withDefault(const Constant(false))();
   DateTimeColumn get lastGerminationCheck => dateTime().nullable()();
+
+  TextColumn get growLevel => text().nullable()(); // 'level1', 'level2'
 }
 
 @DataClassName('LogEntry')
@@ -77,7 +79,6 @@ class AppSettingsTable extends Table {
   TextColumn get checkinFrequency => text()
       .withDefault(const Constant('daily'))(); // 'daily', 'every_2_days', 'weekly', 'off'
   TextColumn get waterEcLevel => text().nullable()();
-  TextColumn get experienceLevel => text().nullable()(); // 'soft', 'perfect', 'hard', 'too_hard', 'unknown'
 
   @override
   Set<Column> get primaryKey => {id};

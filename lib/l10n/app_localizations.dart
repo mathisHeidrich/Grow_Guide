@@ -3346,53 +3346,53 @@ abstract class AppLocalizations {
   /// **'Setup abschließen'**
   String get waterSetupFinish;
 
-  /// No description provided for @experienceTitle.
+  /// No description provided for @growLevelTitle.
   ///
   /// In de, this message translates to:
-  /// **'Wie viel Erfahrung hast du?'**
-  String get experienceTitle;
+  /// **'Die Grow Levels'**
+  String get growLevelTitle;
 
-  /// No description provided for @experienceDesc.
+  /// No description provided for @growLevelDesc.
   ///
   /// In de, this message translates to:
-  /// **'Wir passen die App an dein Vorwissen an, damit du genau die Infos bekommst, die du brauchst.'**
-  String get experienceDesc;
+  /// **'Damit du sofort einschätzen kannst, was auf dich zukommt, teilen wir jeden Grow in eines von zwei Levels ein.'**
+  String get growLevelDesc;
 
-  /// No description provided for @experienceLevelBeginner.
+  /// No description provided for @growLevel1.
   ///
   /// In de, this message translates to:
-  /// **'Absoluter Anfänger'**
-  String get experienceLevelBeginner;
+  /// **'Level 1'**
+  String get growLevel1;
 
-  /// No description provided for @experienceLevelBeginnerDesc.
+  /// No description provided for @growLevel1Desc.
   ///
   /// In de, this message translates to:
-  /// **'Noch nie Pflanzen angebaut. Ich brauche das volle Programm.'**
-  String get experienceLevelBeginnerDesc;
+  /// **'Leichter Einstieg. ~50-80g Ertrag. Aufwand: Niedrig (~1h pro Woche). Methoden: LST (Runterbinden) & Defoliation. Basis-Dünger.'**
+  String get growLevel1Desc;
 
-  /// No description provided for @experienceLevelSoil.
+  /// No description provided for @growLevel2.
   ///
   /// In de, this message translates to:
-  /// **'Erde-Umsteiger'**
-  String get experienceLevelSoil;
+  /// **'Level 2'**
+  String get growLevel2;
 
-  /// No description provided for @experienceLevelSoilDesc.
+  /// No description provided for @growLevel2Desc.
   ///
   /// In de, this message translates to:
-  /// **'Ich kenne mich mit Pflanzen aus, aber Deep Water Culture ist neu für mich.'**
-  String get experienceLevelSoilDesc;
+  /// **'Maximales Potenzial. ~100-150g+ Ertrag. Aufwand: Hoch (~3h pro Woche). Methoden: ScrOG, präzises PH/EC-Management, CalMag & Booster.'**
+  String get growLevel2Desc;
 
-  /// No description provided for @experienceLevelPro.
+  /// No description provided for @addPlantSectionGrowLevel.
   ///
   /// In de, this message translates to:
-  /// **'DWC-Erfahren'**
-  String get experienceLevelPro;
+  /// **'7. Grow Level'**
+  String get addPlantSectionGrowLevel;
 
-  /// No description provided for @experienceLevelProDesc.
+  /// No description provided for @addPlantGrowLevelDesc.
   ///
   /// In de, this message translates to:
-  /// **'Ich habe schon in Wasser angebaut und brauche kaum Theorie.'**
-  String get experienceLevelProDesc;
+  /// **'Wähle das Ziel-Level für diesen Durchgang.'**
+  String get addPlantGrowLevelDesc;
 
   /// No description provided for @checkinOptionalEcLabel.
   ///

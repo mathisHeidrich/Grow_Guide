@@ -3,39 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:app/l10n/app_localizations.dart';
 import 'package:app/theme/app_colors.dart';
-import '../providers/database_provider.dart';
-import 'package:drift/drift.dart' as drift;
 
-class ExperienceAssessmentScreen extends ConsumerStatefulWidget {
+class ExperienceAssessmentScreen extends ConsumerWidget {
   const ExperienceAssessmentScreen({super.key});
 
   @override
-  ConsumerState<ExperienceAssessmentScreen> createState() => _ExperienceAssessmentScreenState();
-}
-
-class _ExperienceAssessmentScreenState extends ConsumerState<ExperienceAssessmentScreen> {
-  String? _selectedLevel;
-
-  Future<void> _saveAndContinue() async {
-    if (_selectedLevel == null) return;
-    
-    final db = ref.read(databaseProvider).db;
-    final settings = await (db.select(db.appSettingsTable)..where((tbl) => tbl.id.equals(1))).getSingleOrNull();
-    
-    if (settings != null) {
-      await db.update(db.appSettingsTable).replace(
-        settings.copyWith(experienceLevel: drift.Value(_selectedLevel)),
-      );
-    }
-    
-    if (!mounted) return;
-    
-    // Nach der Auswahl geht es direkt in den Hardware-Ratgeber
-    context.go('/hardware_advisor');
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     
     return Scaffold(
@@ -47,10 +20,10 @@ class _ExperienceAssessmentScreenState extends ConsumerState<ExperienceAssessmen
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 24),
-              const Icon(Icons.psychology, size: 80, color: AppColors.growGreen),
+              const Icon(Icons.school_outlined, size: 80, color: AppColors.growGreen),
               const SizedBox(height: 32),
               Text(
-                l10n.experienceTitle,
+                l10n.growLevelTitle,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -59,7 +32,7 @@ class _ExperienceAssessmentScreenState extends ConsumerState<ExperienceAssessmen
               ),
               const SizedBox(height: 16),
               Text(
-                l10n.experienceDesc,
+                l10n.growLevelDesc,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Colors.white70,
                     ),
@@ -70,24 +43,15 @@ class _ExperienceAssessmentScreenState extends ConsumerState<ExperienceAssessmen
               Expanded(
                 child: ListView(
                   children: [
-                    _buildOption(
-                      id: 'beginner',
-                      title: l10n.experienceLevelBeginner,
-                      description: l10n.experienceLevelBeginnerDesc,
+                    _buildInfoCard(
+                      title: l10n.growLevel1,
+                      description: l10n.growLevel1Desc,
                       icon: Icons.eco_outlined,
                     ),
                     const SizedBox(height: 16),
-                    _buildOption(
-                      id: 'soil',
-                      title: l10n.experienceLevelSoil,
-                      description: l10n.experienceLevelSoilDesc,
-                      icon: Icons.yard_outlined,
-                    ),
-                    const SizedBox(height: 16),
-                    _buildOption(
-                      id: 'pro',
-                      title: l10n.experienceLevelPro,
-                      description: l10n.experienceLevelProDesc,
+                    _buildInfoCard(
+                      title: l10n.growLevel2,
+                      description: l10n.growLevel2Desc,
                       icon: Icons.science_outlined,
                     ),
                   ],
@@ -103,10 +67,10 @@ class _ExperienceAssessmentScreenState extends ConsumerState<ExperienceAssessmen
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                onPressed: _selectedLevel == null ? null : _saveAndContinue,
-                child: const Text(
-                  "Weiter",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                onPressed: () => context.go('/hardware_advisor'),
+                child: Text(
+                  l10n.generalUnderstood,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -116,62 +80,55 @@ class _ExperienceAssessmentScreenState extends ConsumerState<ExperienceAssessmen
     );
   }
 
-  Widget _buildOption({
-    required String id,
+  Widget _buildInfoCard({
     required String title,
     required String description,
     required IconData icon,
   }) {
-    final isSelected = _selectedLevel == id;
-    
-    return InkWell(
-      onTap: () => setState(() => _selectedLevel = id),
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: isSelected 
-              ? AppColors.growGreen.withValues(alpha: 0.1) 
-              : AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: isSelected ? AppColors.growGreen : Colors.transparent,
-            width: 2,
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.transparent,
+          width: 2,
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            icon,
+            size: 40,
+            color: AppColors.growGreen,
           ),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              size: 40,
-              color: isSelected ? AppColors.growGreen : Colors.white54,
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: isSelected ? Colors.white : Colors.white70,
-                    ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: isSelected ? Colors.white70 : Colors.white54,
-                    ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70,
+                    height: 1.4,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
