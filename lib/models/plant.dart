@@ -1,7 +1,7 @@
 export '../database/tables.dart';
 import '../database/tables.dart';
 export '../database/database.dart'
-    show Plant, LogEntry, PlantsCompanion, LogEntriesCompanion;
+    show Plant, Tent, LogEntry, PlantsCompanion, TentsCompanion, LogEntriesCompanion;
 
 // removed unused import
 import '../database/database.dart';

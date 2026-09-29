@@ -3,6 +3,310 @@
 part of 'database.dart';
 
 // ignore_for_file: type=lint
+class $TentsTable extends Tents with TableInfo<$TentsTable, Tent> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TentsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _lampWattageMeta =
+      const VerificationMeta('lampWattage');
+  @override
+  late final GeneratedColumn<int> lampWattage = GeneratedColumn<int>(
+      'lamp_wattage', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _lampTypeMeta =
+      const VerificationMeta('lampType');
+  @override
+  late final GeneratedColumn<String> lampType = GeneratedColumn<String>(
+      'lamp_type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _lightScheduleMeta =
+      const VerificationMeta('lightSchedule');
+  @override
+  late final GeneratedColumn<String> lightSchedule = GeneratedColumn<String>(
+      'light_schedule', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('18/6'));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, name, lampWattage, lampType, lightSchedule];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'tents';
+  @override
+  VerificationContext validateIntegrity(Insertable<Tent> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('lamp_wattage')) {
+      context.handle(
+          _lampWattageMeta,
+          lampWattage.isAcceptableOrUnknown(
+              data['lamp_wattage']!, _lampWattageMeta));
+    } else if (isInserting) {
+      context.missing(_lampWattageMeta);
+    }
+    if (data.containsKey('lamp_type')) {
+      context.handle(_lampTypeMeta,
+          lampType.isAcceptableOrUnknown(data['lamp_type']!, _lampTypeMeta));
+    } else if (isInserting) {
+      context.missing(_lampTypeMeta);
+    }
+    if (data.containsKey('light_schedule')) {
+      context.handle(
+          _lightScheduleMeta,
+          lightSchedule.isAcceptableOrUnknown(
+              data['light_schedule']!, _lightScheduleMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Tent map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Tent(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      lampWattage: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}lamp_wattage'])!,
+      lampType: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}lamp_type'])!,
+      lightSchedule: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}light_schedule'])!,
+    );
+  }
+
+  @override
+  $TentsTable createAlias(String alias) {
+    return $TentsTable(attachedDatabase, alias);
+  }
+}
+
+class Tent extends DataClass implements Insertable<Tent> {
+  final int id;
+  final String name;
+  final int lampWattage;
+  final String lampType;
+  final String lightSchedule;
+  const Tent(
+      {required this.id,
+      required this.name,
+      required this.lampWattage,
+      required this.lampType,
+      required this.lightSchedule});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    map['lamp_wattage'] = Variable<int>(lampWattage);
+    map['lamp_type'] = Variable<String>(lampType);
+    map['light_schedule'] = Variable<String>(lightSchedule);
+    return map;
+  }
+
+  TentsCompanion toCompanion(bool nullToAbsent) {
+    return TentsCompanion(
+      id: Value(id),
+      name: Value(name),
+      lampWattage: Value(lampWattage),
+      lampType: Value(lampType),
+      lightSchedule: Value(lightSchedule),
+    );
+  }
+
+  factory Tent.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return Tent(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      lampWattage: serializer.fromJson<int>(json['lampWattage']),
+      lampType: serializer.fromJson<String>(json['lampType']),
+      lightSchedule: serializer.fromJson<String>(json['lightSchedule']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'lampWattage': serializer.toJson<int>(lampWattage),
+      'lampType': serializer.toJson<String>(lampType),
+      'lightSchedule': serializer.toJson<String>(lightSchedule),
+    };
+  }
+
+  Tent copyWith(
+          {int? id,
+          String? name,
+          int? lampWattage,
+          String? lampType,
+          String? lightSchedule}) =>
+      Tent(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        lampWattage: lampWattage ?? this.lampWattage,
+        lampType: lampType ?? this.lampType,
+        lightSchedule: lightSchedule ?? this.lightSchedule,
+      );
+  Tent copyWithCompanion(TentsCompanion data) {
+    return Tent(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      lampWattage:
+          data.lampWattage.present ? data.lampWattage.value : this.lampWattage,
+      lampType: data.lampType.present ? data.lampType.value : this.lampType,
+      lightSchedule: data.lightSchedule.present
+          ? data.lightSchedule.value
+          : this.lightSchedule,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('Tent(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('lampWattage: $lampWattage, ')
+          ..write('lampType: $lampType, ')
+          ..write('lightSchedule: $lightSchedule')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, name, lampWattage, lampType, lightSchedule);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Tent &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.lampWattage == this.lampWattage &&
+          other.lampType == this.lampType &&
+          other.lightSchedule == this.lightSchedule);
+}
+
+class TentsCompanion extends UpdateCompanion<Tent> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<int> lampWattage;
+  final Value<String> lampType;
+  final Value<String> lightSchedule;
+  const TentsCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.lampWattage = const Value.absent(),
+    this.lampType = const Value.absent(),
+    this.lightSchedule = const Value.absent(),
+  });
+  TentsCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    required int lampWattage,
+    required String lampType,
+    this.lightSchedule = const Value.absent(),
+  })  : name = Value(name),
+        lampWattage = Value(lampWattage),
+        lampType = Value(lampType);
+  static Insertable<Tent> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<int>? lampWattage,
+    Expression<String>? lampType,
+    Expression<String>? lightSchedule,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (lampWattage != null) 'lamp_wattage': lampWattage,
+      if (lampType != null) 'lamp_type': lampType,
+      if (lightSchedule != null) 'light_schedule': lightSchedule,
+    });
+  }
+
+  TentsCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? name,
+      Value<int>? lampWattage,
+      Value<String>? lampType,
+      Value<String>? lightSchedule}) {
+    return TentsCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      lampWattage: lampWattage ?? this.lampWattage,
+      lampType: lampType ?? this.lampType,
+      lightSchedule: lightSchedule ?? this.lightSchedule,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (lampWattage.present) {
+      map['lamp_wattage'] = Variable<int>(lampWattage.value);
+    }
+    if (lampType.present) {
+      map['lamp_type'] = Variable<String>(lampType.value);
+    }
+    if (lightSchedule.present) {
+      map['light_schedule'] = Variable<String>(lightSchedule.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TentsCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('lampWattage: $lampWattage, ')
+          ..write('lampType: $lampType, ')
+          ..write('lightSchedule: $lightSchedule')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
   @override
   final GeneratedDatabase attachedDatabase;
@@ -17,6 +321,14 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
       requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _tentIdMeta = const VerificationMeta('tentId');
+  @override
+  late final GeneratedColumn<int> tentId = GeneratedColumn<int>(
+      'tent_id', aliasedName, true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES tents (id)'));
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -72,24 +384,6 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
       GeneratedColumn<int>('type', aliasedName, false,
               type: DriftSqlType.int, requiredDuringInsert: true)
           .withConverter<PlantType>($PlantsTable.$convertertype);
-  static const VerificationMeta _lampWattageMeta =
-      const VerificationMeta('lampWattage');
-  @override
-  late final GeneratedColumn<int> lampWattage = GeneratedColumn<int>(
-      'lamp_wattage', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _lampTypeMeta =
-      const VerificationMeta('lampType');
-  @override
-  late final GeneratedColumn<String> lampType = GeneratedColumn<String>(
-      'lamp_type', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _plantsUnderLampMeta =
-      const VerificationMeta('plantsUnderLamp');
-  @override
-  late final GeneratedColumn<int> plantsUnderLamp = GeneratedColumn<int>(
-      'plants_under_lamp', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _rootsReachedWaterMeta =
       const VerificationMeta('rootsReachedWater');
   @override
@@ -125,6 +419,7 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
   @override
   List<GeneratedColumn> get $columns => [
         id,
+        tentId,
         name,
         currentPhase,
         phaseStartDate,
@@ -134,9 +429,6 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
         waterVolumeLiters,
         nutrientBrand,
         type,
-        lampWattage,
-        lampType,
-        plantsUnderLamp,
         rootsReachedWater,
         germinationStarted,
         lastGerminationCheck,
@@ -154,6 +446,10 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('tent_id')) {
+      context.handle(_tentIdMeta,
+          tentId.isAcceptableOrUnknown(data['tent_id']!, _tentIdMeta));
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -192,28 +488,6 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
     }
     context.handle(_nutrientBrandMeta, const VerificationResult.success());
     context.handle(_typeMeta, const VerificationResult.success());
-    if (data.containsKey('lamp_wattage')) {
-      context.handle(
-          _lampWattageMeta,
-          lampWattage.isAcceptableOrUnknown(
-              data['lamp_wattage']!, _lampWattageMeta));
-    } else if (isInserting) {
-      context.missing(_lampWattageMeta);
-    }
-    if (data.containsKey('lamp_type')) {
-      context.handle(_lampTypeMeta,
-          lampType.isAcceptableOrUnknown(data['lamp_type']!, _lampTypeMeta));
-    } else if (isInserting) {
-      context.missing(_lampTypeMeta);
-    }
-    if (data.containsKey('plants_under_lamp')) {
-      context.handle(
-          _plantsUnderLampMeta,
-          plantsUnderLamp.isAcceptableOrUnknown(
-              data['plants_under_lamp']!, _plantsUnderLampMeta));
-    } else if (isInserting) {
-      context.missing(_plantsUnderLampMeta);
-    }
     if (data.containsKey('roots_reached_water')) {
       context.handle(
           _rootsReachedWaterMeta,
@@ -247,6 +521,8 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
     return Plant(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      tentId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}tent_id']),
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       currentPhase: $PlantsTable.$convertercurrentPhase.fromSql(attachedDatabase
@@ -267,12 +543,6 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
               DriftSqlType.int, data['${effectivePrefix}nutrient_brand'])!),
       type: $PlantsTable.$convertertype.fromSql(attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}type'])!),
-      lampWattage: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}lamp_wattage'])!,
-      lampType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}lamp_type'])!,
-      plantsUnderLamp: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}plants_under_lamp'])!,
       rootsReachedWater: attachedDatabase.typeMapping.read(
           DriftSqlType.bool, data['${effectivePrefix}roots_reached_water'])!,
       germinationStarted: attachedDatabase.typeMapping.read(
@@ -300,6 +570,7 @@ class $PlantsTable extends Plants with TableInfo<$PlantsTable, Plant> {
 
 class Plant extends DataClass implements Insertable<Plant> {
   final int id;
+  final int? tentId;
   final String name;
   final PlantPhase currentPhase;
   final DateTime? phaseStartDate;
@@ -309,15 +580,13 @@ class Plant extends DataClass implements Insertable<Plant> {
   final double waterVolumeLiters;
   final NutrientBrand nutrientBrand;
   final PlantType type;
-  final int lampWattage;
-  final String lampType;
-  final int plantsUnderLamp;
   final bool rootsReachedWater;
   final bool germinationStarted;
   final DateTime? lastGerminationCheck;
   final String? growLevel;
   const Plant(
       {required this.id,
+      this.tentId,
       required this.name,
       required this.currentPhase,
       this.phaseStartDate,
@@ -327,9 +596,6 @@ class Plant extends DataClass implements Insertable<Plant> {
       required this.waterVolumeLiters,
       required this.nutrientBrand,
       required this.type,
-      required this.lampWattage,
-      required this.lampType,
-      required this.plantsUnderLamp,
       required this.rootsReachedWater,
       required this.germinationStarted,
       this.lastGerminationCheck,
@@ -338,6 +604,9 @@ class Plant extends DataClass implements Insertable<Plant> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
+    if (!nullToAbsent || tentId != null) {
+      map['tent_id'] = Variable<int>(tentId);
+    }
     map['name'] = Variable<String>(name);
     {
       map['current_phase'] = Variable<int>(
@@ -363,9 +632,6 @@ class Plant extends DataClass implements Insertable<Plant> {
     {
       map['type'] = Variable<int>($PlantsTable.$convertertype.toSql(type));
     }
-    map['lamp_wattage'] = Variable<int>(lampWattage);
-    map['lamp_type'] = Variable<String>(lampType);
-    map['plants_under_lamp'] = Variable<int>(plantsUnderLamp);
     map['roots_reached_water'] = Variable<bool>(rootsReachedWater);
     map['germination_started'] = Variable<bool>(germinationStarted);
     if (!nullToAbsent || lastGerminationCheck != null) {
@@ -380,6 +646,8 @@ class Plant extends DataClass implements Insertable<Plant> {
   PlantsCompanion toCompanion(bool nullToAbsent) {
     return PlantsCompanion(
       id: Value(id),
+      tentId:
+          tentId == null && nullToAbsent ? const Value.absent() : Value(tentId),
       name: Value(name),
       currentPhase: Value(currentPhase),
       phaseStartDate: phaseStartDate == null && nullToAbsent
@@ -397,9 +665,6 @@ class Plant extends DataClass implements Insertable<Plant> {
       waterVolumeLiters: Value(waterVolumeLiters),
       nutrientBrand: Value(nutrientBrand),
       type: Value(type),
-      lampWattage: Value(lampWattage),
-      lampType: Value(lampType),
-      plantsUnderLamp: Value(plantsUnderLamp),
       rootsReachedWater: Value(rootsReachedWater),
       germinationStarted: Value(germinationStarted),
       lastGerminationCheck: lastGerminationCheck == null && nullToAbsent
@@ -416,6 +681,7 @@ class Plant extends DataClass implements Insertable<Plant> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Plant(
       id: serializer.fromJson<int>(json['id']),
+      tentId: serializer.fromJson<int?>(json['tentId']),
       name: serializer.fromJson<String>(json['name']),
       currentPhase: $PlantsTable.$convertercurrentPhase
           .fromJson(serializer.fromJson<int>(json['currentPhase'])),
@@ -428,9 +694,6 @@ class Plant extends DataClass implements Insertable<Plant> {
           .fromJson(serializer.fromJson<int>(json['nutrientBrand'])),
       type: $PlantsTable.$convertertype
           .fromJson(serializer.fromJson<int>(json['type'])),
-      lampWattage: serializer.fromJson<int>(json['lampWattage']),
-      lampType: serializer.fromJson<String>(json['lampType']),
-      plantsUnderLamp: serializer.fromJson<int>(json['plantsUnderLamp']),
       rootsReachedWater: serializer.fromJson<bool>(json['rootsReachedWater']),
       germinationStarted: serializer.fromJson<bool>(json['germinationStarted']),
       lastGerminationCheck:
@@ -443,6 +706,7 @@ class Plant extends DataClass implements Insertable<Plant> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
+      'tentId': serializer.toJson<int?>(tentId),
       'name': serializer.toJson<String>(name),
       'currentPhase': serializer.toJson<int>(
           $PlantsTable.$convertercurrentPhase.toJson(currentPhase)),
@@ -454,9 +718,6 @@ class Plant extends DataClass implements Insertable<Plant> {
       'nutrientBrand': serializer.toJson<int>(
           $PlantsTable.$converternutrientBrand.toJson(nutrientBrand)),
       'type': serializer.toJson<int>($PlantsTable.$convertertype.toJson(type)),
-      'lampWattage': serializer.toJson<int>(lampWattage),
-      'lampType': serializer.toJson<String>(lampType),
-      'plantsUnderLamp': serializer.toJson<int>(plantsUnderLamp),
       'rootsReachedWater': serializer.toJson<bool>(rootsReachedWater),
       'germinationStarted': serializer.toJson<bool>(germinationStarted),
       'lastGerminationCheck':
@@ -467,6 +728,7 @@ class Plant extends DataClass implements Insertable<Plant> {
 
   Plant copyWith(
           {int? id,
+          Value<int?> tentId = const Value.absent(),
           String? name,
           PlantPhase? currentPhase,
           Value<DateTime?> phaseStartDate = const Value.absent(),
@@ -476,15 +738,13 @@ class Plant extends DataClass implements Insertable<Plant> {
           double? waterVolumeLiters,
           NutrientBrand? nutrientBrand,
           PlantType? type,
-          int? lampWattage,
-          String? lampType,
-          int? plantsUnderLamp,
           bool? rootsReachedWater,
           bool? germinationStarted,
           Value<DateTime?> lastGerminationCheck = const Value.absent(),
           Value<String?> growLevel = const Value.absent()}) =>
       Plant(
         id: id ?? this.id,
+        tentId: tentId.present ? tentId.value : this.tentId,
         name: name ?? this.name,
         currentPhase: currentPhase ?? this.currentPhase,
         phaseStartDate:
@@ -495,9 +755,6 @@ class Plant extends DataClass implements Insertable<Plant> {
         waterVolumeLiters: waterVolumeLiters ?? this.waterVolumeLiters,
         nutrientBrand: nutrientBrand ?? this.nutrientBrand,
         type: type ?? this.type,
-        lampWattage: lampWattage ?? this.lampWattage,
-        lampType: lampType ?? this.lampType,
-        plantsUnderLamp: plantsUnderLamp ?? this.plantsUnderLamp,
         rootsReachedWater: rootsReachedWater ?? this.rootsReachedWater,
         germinationStarted: germinationStarted ?? this.germinationStarted,
         lastGerminationCheck: lastGerminationCheck.present
@@ -508,6 +765,7 @@ class Plant extends DataClass implements Insertable<Plant> {
   Plant copyWithCompanion(PlantsCompanion data) {
     return Plant(
       id: data.id.present ? data.id.value : this.id,
+      tentId: data.tentId.present ? data.tentId.value : this.tentId,
       name: data.name.present ? data.name.value : this.name,
       currentPhase: data.currentPhase.present
           ? data.currentPhase.value
@@ -526,12 +784,6 @@ class Plant extends DataClass implements Insertable<Plant> {
           ? data.nutrientBrand.value
           : this.nutrientBrand,
       type: data.type.present ? data.type.value : this.type,
-      lampWattage:
-          data.lampWattage.present ? data.lampWattage.value : this.lampWattage,
-      lampType: data.lampType.present ? data.lampType.value : this.lampType,
-      plantsUnderLamp: data.plantsUnderLamp.present
-          ? data.plantsUnderLamp.value
-          : this.plantsUnderLamp,
       rootsReachedWater: data.rootsReachedWater.present
           ? data.rootsReachedWater.value
           : this.rootsReachedWater,
@@ -549,6 +801,7 @@ class Plant extends DataClass implements Insertable<Plant> {
   String toString() {
     return (StringBuffer('Plant(')
           ..write('id: $id, ')
+          ..write('tentId: $tentId, ')
           ..write('name: $name, ')
           ..write('currentPhase: $currentPhase, ')
           ..write('phaseStartDate: $phaseStartDate, ')
@@ -558,9 +811,6 @@ class Plant extends DataClass implements Insertable<Plant> {
           ..write('waterVolumeLiters: $waterVolumeLiters, ')
           ..write('nutrientBrand: $nutrientBrand, ')
           ..write('type: $type, ')
-          ..write('lampWattage: $lampWattage, ')
-          ..write('lampType: $lampType, ')
-          ..write('plantsUnderLamp: $plantsUnderLamp, ')
           ..write('rootsReachedWater: $rootsReachedWater, ')
           ..write('germinationStarted: $germinationStarted, ')
           ..write('lastGerminationCheck: $lastGerminationCheck, ')
@@ -572,6 +822,7 @@ class Plant extends DataClass implements Insertable<Plant> {
   @override
   int get hashCode => Object.hash(
       id,
+      tentId,
       name,
       currentPhase,
       phaseStartDate,
@@ -581,9 +832,6 @@ class Plant extends DataClass implements Insertable<Plant> {
       waterVolumeLiters,
       nutrientBrand,
       type,
-      lampWattage,
-      lampType,
-      plantsUnderLamp,
       rootsReachedWater,
       germinationStarted,
       lastGerminationCheck,
@@ -593,6 +841,7 @@ class Plant extends DataClass implements Insertable<Plant> {
       identical(this, other) ||
       (other is Plant &&
           other.id == this.id &&
+          other.tentId == this.tentId &&
           other.name == this.name &&
           other.currentPhase == this.currentPhase &&
           other.phaseStartDate == this.phaseStartDate &&
@@ -602,9 +851,6 @@ class Plant extends DataClass implements Insertable<Plant> {
           other.waterVolumeLiters == this.waterVolumeLiters &&
           other.nutrientBrand == this.nutrientBrand &&
           other.type == this.type &&
-          other.lampWattage == this.lampWattage &&
-          other.lampType == this.lampType &&
-          other.plantsUnderLamp == this.plantsUnderLamp &&
           other.rootsReachedWater == this.rootsReachedWater &&
           other.germinationStarted == this.germinationStarted &&
           other.lastGerminationCheck == this.lastGerminationCheck &&
@@ -613,6 +859,7 @@ class Plant extends DataClass implements Insertable<Plant> {
 
 class PlantsCompanion extends UpdateCompanion<Plant> {
   final Value<int> id;
+  final Value<int?> tentId;
   final Value<String> name;
   final Value<PlantPhase> currentPhase;
   final Value<DateTime?> phaseStartDate;
@@ -622,15 +869,13 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
   final Value<double> waterVolumeLiters;
   final Value<NutrientBrand> nutrientBrand;
   final Value<PlantType> type;
-  final Value<int> lampWattage;
-  final Value<String> lampType;
-  final Value<int> plantsUnderLamp;
   final Value<bool> rootsReachedWater;
   final Value<bool> germinationStarted;
   final Value<DateTime?> lastGerminationCheck;
   final Value<String?> growLevel;
   const PlantsCompanion({
     this.id = const Value.absent(),
+    this.tentId = const Value.absent(),
     this.name = const Value.absent(),
     this.currentPhase = const Value.absent(),
     this.phaseStartDate = const Value.absent(),
@@ -640,9 +885,6 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     this.waterVolumeLiters = const Value.absent(),
     this.nutrientBrand = const Value.absent(),
     this.type = const Value.absent(),
-    this.lampWattage = const Value.absent(),
-    this.lampType = const Value.absent(),
-    this.plantsUnderLamp = const Value.absent(),
     this.rootsReachedWater = const Value.absent(),
     this.germinationStarted = const Value.absent(),
     this.lastGerminationCheck = const Value.absent(),
@@ -650,6 +892,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
   });
   PlantsCompanion.insert({
     this.id = const Value.absent(),
+    this.tentId = const Value.absent(),
     required String name,
     required PlantPhase currentPhase,
     this.phaseStartDate = const Value.absent(),
@@ -659,9 +902,6 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     required double waterVolumeLiters,
     required NutrientBrand nutrientBrand,
     required PlantType type,
-    required int lampWattage,
-    required String lampType,
-    required int plantsUnderLamp,
     this.rootsReachedWater = const Value.absent(),
     this.germinationStarted = const Value.absent(),
     this.lastGerminationCheck = const Value.absent(),
@@ -670,12 +910,10 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
         currentPhase = Value(currentPhase),
         waterVolumeLiters = Value(waterVolumeLiters),
         nutrientBrand = Value(nutrientBrand),
-        type = Value(type),
-        lampWattage = Value(lampWattage),
-        lampType = Value(lampType),
-        plantsUnderLamp = Value(plantsUnderLamp);
+        type = Value(type);
   static Insertable<Plant> custom({
     Expression<int>? id,
+    Expression<int>? tentId,
     Expression<String>? name,
     Expression<int>? currentPhase,
     Expression<DateTime>? phaseStartDate,
@@ -685,9 +923,6 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     Expression<double>? waterVolumeLiters,
     Expression<int>? nutrientBrand,
     Expression<int>? type,
-    Expression<int>? lampWattage,
-    Expression<String>? lampType,
-    Expression<int>? plantsUnderLamp,
     Expression<bool>? rootsReachedWater,
     Expression<bool>? germinationStarted,
     Expression<DateTime>? lastGerminationCheck,
@@ -695,6 +930,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
+      if (tentId != null) 'tent_id': tentId,
       if (name != null) 'name': name,
       if (currentPhase != null) 'current_phase': currentPhase,
       if (phaseStartDate != null) 'phase_start_date': phaseStartDate,
@@ -704,9 +940,6 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       if (waterVolumeLiters != null) 'water_volume_liters': waterVolumeLiters,
       if (nutrientBrand != null) 'nutrient_brand': nutrientBrand,
       if (type != null) 'type': type,
-      if (lampWattage != null) 'lamp_wattage': lampWattage,
-      if (lampType != null) 'lamp_type': lampType,
-      if (plantsUnderLamp != null) 'plants_under_lamp': plantsUnderLamp,
       if (rootsReachedWater != null) 'roots_reached_water': rootsReachedWater,
       if (germinationStarted != null) 'germination_started': germinationStarted,
       if (lastGerminationCheck != null)
@@ -717,6 +950,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
 
   PlantsCompanion copyWith(
       {Value<int>? id,
+      Value<int?>? tentId,
       Value<String>? name,
       Value<PlantPhase>? currentPhase,
       Value<DateTime?>? phaseStartDate,
@@ -726,15 +960,13 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       Value<double>? waterVolumeLiters,
       Value<NutrientBrand>? nutrientBrand,
       Value<PlantType>? type,
-      Value<int>? lampWattage,
-      Value<String>? lampType,
-      Value<int>? plantsUnderLamp,
       Value<bool>? rootsReachedWater,
       Value<bool>? germinationStarted,
       Value<DateTime?>? lastGerminationCheck,
       Value<String?>? growLevel}) {
     return PlantsCompanion(
       id: id ?? this.id,
+      tentId: tentId ?? this.tentId,
       name: name ?? this.name,
       currentPhase: currentPhase ?? this.currentPhase,
       phaseStartDate: phaseStartDate ?? this.phaseStartDate,
@@ -744,9 +976,6 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       waterVolumeLiters: waterVolumeLiters ?? this.waterVolumeLiters,
       nutrientBrand: nutrientBrand ?? this.nutrientBrand,
       type: type ?? this.type,
-      lampWattage: lampWattage ?? this.lampWattage,
-      lampType: lampType ?? this.lampType,
-      plantsUnderLamp: plantsUnderLamp ?? this.plantsUnderLamp,
       rootsReachedWater: rootsReachedWater ?? this.rootsReachedWater,
       germinationStarted: germinationStarted ?? this.germinationStarted,
       lastGerminationCheck: lastGerminationCheck ?? this.lastGerminationCheck,
@@ -759,6 +988,9 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
     final map = <String, Expression>{};
     if (id.present) {
       map['id'] = Variable<int>(id.value);
+    }
+    if (tentId.present) {
+      map['tent_id'] = Variable<int>(tentId.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
@@ -790,15 +1022,6 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
       map['type'] =
           Variable<int>($PlantsTable.$convertertype.toSql(type.value));
     }
-    if (lampWattage.present) {
-      map['lamp_wattage'] = Variable<int>(lampWattage.value);
-    }
-    if (lampType.present) {
-      map['lamp_type'] = Variable<String>(lampType.value);
-    }
-    if (plantsUnderLamp.present) {
-      map['plants_under_lamp'] = Variable<int>(plantsUnderLamp.value);
-    }
     if (rootsReachedWater.present) {
       map['roots_reached_water'] = Variable<bool>(rootsReachedWater.value);
     }
@@ -819,6 +1042,7 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
   String toString() {
     return (StringBuffer('PlantsCompanion(')
           ..write('id: $id, ')
+          ..write('tentId: $tentId, ')
           ..write('name: $name, ')
           ..write('currentPhase: $currentPhase, ')
           ..write('phaseStartDate: $phaseStartDate, ')
@@ -828,9 +1052,6 @@ class PlantsCompanion extends UpdateCompanion<Plant> {
           ..write('waterVolumeLiters: $waterVolumeLiters, ')
           ..write('nutrientBrand: $nutrientBrand, ')
           ..write('type: $type, ')
-          ..write('lampWattage: $lampWattage, ')
-          ..write('lampType: $lampType, ')
-          ..write('plantsUnderLamp: $plantsUnderLamp, ')
           ..write('rootsReachedWater: $rootsReachedWater, ')
           ..write('germinationStarted: $germinationStarted, ')
           ..write('lastGerminationCheck: $lastGerminationCheck, ')
@@ -1799,6 +2020,7 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettings> {
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
+  late final $TentsTable tents = $TentsTable(this);
   late final $PlantsTable plants = $PlantsTable(this);
   late final $LogEntriesTable logEntries = $LogEntriesTable(this);
   late final $AppSettingsTableTable appSettingsTable =
@@ -1808,11 +2030,145 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [plants, logEntries, appSettingsTable];
+      [tents, plants, logEntries, appSettingsTable];
+}
+
+typedef $$TentsTableCreateCompanionBuilder = TentsCompanion Function({
+  Value<int> id,
+  required String name,
+  required int lampWattage,
+  required String lampType,
+  Value<String> lightSchedule,
+});
+typedef $$TentsTableUpdateCompanionBuilder = TentsCompanion Function({
+  Value<int> id,
+  Value<String> name,
+  Value<int> lampWattage,
+  Value<String> lampType,
+  Value<String> lightSchedule,
+});
+
+class $$TentsTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $TentsTable,
+    Tent,
+    $$TentsTableFilterComposer,
+    $$TentsTableOrderingComposer,
+    $$TentsTableCreateCompanionBuilder,
+    $$TentsTableUpdateCompanionBuilder> {
+  $$TentsTableTableManager(_$AppDatabase db, $TentsTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$TentsTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$TentsTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<int> lampWattage = const Value.absent(),
+            Value<String> lampType = const Value.absent(),
+            Value<String> lightSchedule = const Value.absent(),
+          }) =>
+              TentsCompanion(
+            id: id,
+            name: name,
+            lampWattage: lampWattage,
+            lampType: lampType,
+            lightSchedule: lightSchedule,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String name,
+            required int lampWattage,
+            required String lampType,
+            Value<String> lightSchedule = const Value.absent(),
+          }) =>
+              TentsCompanion.insert(
+            id: id,
+            name: name,
+            lampWattage: lampWattage,
+            lampType: lampType,
+            lightSchedule: lightSchedule,
+          ),
+        ));
+}
+
+class $$TentsTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $TentsTable> {
+  $$TentsTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get lampWattage => $state.composableBuilder(
+      column: $state.table.lampWattage,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get lampType => $state.composableBuilder(
+      column: $state.table.lampType,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get lightSchedule => $state.composableBuilder(
+      column: $state.table.lightSchedule,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ComposableFilter plantsRefs(
+      ComposableFilter Function($$PlantsTableFilterComposer f) f) {
+    final $$PlantsTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $state.db.plants,
+        getReferencedColumn: (t) => t.tentId,
+        builder: (joinBuilder, parentComposers) => $$PlantsTableFilterComposer(
+            ComposerState(
+                $state.db, $state.db.plants, joinBuilder, parentComposers)));
+    return f(composer);
+  }
+}
+
+class $$TentsTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $TentsTable> {
+  $$TentsTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get lampWattage => $state.composableBuilder(
+      column: $state.table.lampWattage,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get lampType => $state.composableBuilder(
+      column: $state.table.lampType,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get lightSchedule => $state.composableBuilder(
+      column: $state.table.lightSchedule,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 typedef $$PlantsTableCreateCompanionBuilder = PlantsCompanion Function({
   Value<int> id,
+  Value<int?> tentId,
   required String name,
   required PlantPhase currentPhase,
   Value<DateTime?> phaseStartDate,
@@ -1822,9 +2178,6 @@ typedef $$PlantsTableCreateCompanionBuilder = PlantsCompanion Function({
   required double waterVolumeLiters,
   required NutrientBrand nutrientBrand,
   required PlantType type,
-  required int lampWattage,
-  required String lampType,
-  required int plantsUnderLamp,
   Value<bool> rootsReachedWater,
   Value<bool> germinationStarted,
   Value<DateTime?> lastGerminationCheck,
@@ -1832,6 +2185,7 @@ typedef $$PlantsTableCreateCompanionBuilder = PlantsCompanion Function({
 });
 typedef $$PlantsTableUpdateCompanionBuilder = PlantsCompanion Function({
   Value<int> id,
+  Value<int?> tentId,
   Value<String> name,
   Value<PlantPhase> currentPhase,
   Value<DateTime?> phaseStartDate,
@@ -1841,9 +2195,6 @@ typedef $$PlantsTableUpdateCompanionBuilder = PlantsCompanion Function({
   Value<double> waterVolumeLiters,
   Value<NutrientBrand> nutrientBrand,
   Value<PlantType> type,
-  Value<int> lampWattage,
-  Value<String> lampType,
-  Value<int> plantsUnderLamp,
   Value<bool> rootsReachedWater,
   Value<bool> germinationStarted,
   Value<DateTime?> lastGerminationCheck,
@@ -1868,6 +2219,7 @@ class $$PlantsTableTableManager extends RootTableManager<
               $$PlantsTableOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
+            Value<int?> tentId = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<PlantPhase> currentPhase = const Value.absent(),
             Value<DateTime?> phaseStartDate = const Value.absent(),
@@ -1877,9 +2229,6 @@ class $$PlantsTableTableManager extends RootTableManager<
             Value<double> waterVolumeLiters = const Value.absent(),
             Value<NutrientBrand> nutrientBrand = const Value.absent(),
             Value<PlantType> type = const Value.absent(),
-            Value<int> lampWattage = const Value.absent(),
-            Value<String> lampType = const Value.absent(),
-            Value<int> plantsUnderLamp = const Value.absent(),
             Value<bool> rootsReachedWater = const Value.absent(),
             Value<bool> germinationStarted = const Value.absent(),
             Value<DateTime?> lastGerminationCheck = const Value.absent(),
@@ -1887,6 +2236,7 @@ class $$PlantsTableTableManager extends RootTableManager<
           }) =>
               PlantsCompanion(
             id: id,
+            tentId: tentId,
             name: name,
             currentPhase: currentPhase,
             phaseStartDate: phaseStartDate,
@@ -1896,9 +2246,6 @@ class $$PlantsTableTableManager extends RootTableManager<
             waterVolumeLiters: waterVolumeLiters,
             nutrientBrand: nutrientBrand,
             type: type,
-            lampWattage: lampWattage,
-            lampType: lampType,
-            plantsUnderLamp: plantsUnderLamp,
             rootsReachedWater: rootsReachedWater,
             germinationStarted: germinationStarted,
             lastGerminationCheck: lastGerminationCheck,
@@ -1906,6 +2253,7 @@ class $$PlantsTableTableManager extends RootTableManager<
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
+            Value<int?> tentId = const Value.absent(),
             required String name,
             required PlantPhase currentPhase,
             Value<DateTime?> phaseStartDate = const Value.absent(),
@@ -1915,9 +2263,6 @@ class $$PlantsTableTableManager extends RootTableManager<
             required double waterVolumeLiters,
             required NutrientBrand nutrientBrand,
             required PlantType type,
-            required int lampWattage,
-            required String lampType,
-            required int plantsUnderLamp,
             Value<bool> rootsReachedWater = const Value.absent(),
             Value<bool> germinationStarted = const Value.absent(),
             Value<DateTime?> lastGerminationCheck = const Value.absent(),
@@ -1925,6 +2270,7 @@ class $$PlantsTableTableManager extends RootTableManager<
           }) =>
               PlantsCompanion.insert(
             id: id,
+            tentId: tentId,
             name: name,
             currentPhase: currentPhase,
             phaseStartDate: phaseStartDate,
@@ -1934,9 +2280,6 @@ class $$PlantsTableTableManager extends RootTableManager<
             waterVolumeLiters: waterVolumeLiters,
             nutrientBrand: nutrientBrand,
             type: type,
-            lampWattage: lampWattage,
-            lampType: lampType,
-            plantsUnderLamp: plantsUnderLamp,
             rootsReachedWater: rootsReachedWater,
             germinationStarted: germinationStarted,
             lastGerminationCheck: lastGerminationCheck,
@@ -2004,21 +2347,6 @@ class $$PlantsTableFilterComposer
               column,
               joinBuilders: joinBuilders));
 
-  ColumnFilters<int> get lampWattage => $state.composableBuilder(
-      column: $state.table.lampWattage,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get lampType => $state.composableBuilder(
-      column: $state.table.lampType,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get plantsUnderLamp => $state.composableBuilder(
-      column: $state.table.plantsUnderLamp,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
   ColumnFilters<bool> get rootsReachedWater => $state.composableBuilder(
       column: $state.table.rootsReachedWater,
       builder: (column, joinBuilders) =>
@@ -2038,6 +2366,18 @@ class $$PlantsTableFilterComposer
       column: $state.table.growLevel,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  $$TentsTableFilterComposer get tentId {
+    final $$TentsTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.tentId,
+        referencedTable: $state.db.tents,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) => $$TentsTableFilterComposer(
+            ComposerState(
+                $state.db, $state.db.tents, joinBuilder, parentComposers)));
+    return composer;
+  }
 
   ComposableFilter logEntriesRefs(
       ComposableFilter Function($$LogEntriesTableFilterComposer f) f) {
@@ -2106,21 +2446,6 @@ class $$PlantsTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<int> get lampWattage => $state.composableBuilder(
-      column: $state.table.lampWattage,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get lampType => $state.composableBuilder(
-      column: $state.table.lampType,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get plantsUnderLamp => $state.composableBuilder(
-      column: $state.table.plantsUnderLamp,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
   ColumnOrderings<bool> get rootsReachedWater => $state.composableBuilder(
       column: $state.table.rootsReachedWater,
       builder: (column, joinBuilders) =>
@@ -2141,6 +2466,18 @@ class $$PlantsTableOrderingComposer
       column: $state.table.growLevel,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  $$TentsTableOrderingComposer get tentId {
+    final $$TentsTableOrderingComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.tentId,
+        referencedTable: $state.db.tents,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) => $$TentsTableOrderingComposer(
+            ComposerState(
+                $state.db, $state.db.tents, joinBuilder, parentComposers)));
+    return composer;
+  }
 }
 
 typedef $$LogEntriesTableCreateCompanionBuilder = LogEntriesCompanion Function({
@@ -2531,6 +2868,8 @@ class $$AppSettingsTableTableOrderingComposer
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
+  $$TentsTableTableManager get tents =>
+      $$TentsTableTableManager(_db, _db.tents);
   $$PlantsTableTableManager get plants =>
       $$PlantsTableTableManager(_db, _db.plants);
   $$LogEntriesTableTableManager get logEntries =>

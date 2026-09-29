@@ -4,7 +4,7 @@ import 'connection.dart';
 
 part 'database.g.dart';
 
-@DriftDatabase(tables: [Plants, LogEntries, AppSettingsTable])
+@DriftDatabase(tables: [Tents, Plants, LogEntries, AppSettingsTable])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(openConnection());
 
@@ -12,7 +12,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.connection);
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 6;
 
   @override
   MigrationStrategy get migration {
@@ -34,6 +34,34 @@ class AppDatabase extends _$AppDatabase {
         }
         if (from < 5) {
           await m.addColumn(plants, plants.growLevel);
+        }
+        if (from < 6) {
+          await m.createTable(tents);
+          
+          final oldPlants = await customSelect('SELECT lamp_wattage, lamp_type FROM plants LIMIT 1').get();
+          int wattage = 150;
+          String type = 'LED';
+          if (oldPlants.isNotEmpty) {
+            final w = oldPlants.first.read<int?>('lamp_wattage');
+            final t = oldPlants.first.read<String?>('lamp_type');
+            if (w != null) wattage = w;
+            if (t != null) type = t;
+          }
+          
+          final tentId = await into(tents).insert(
+            TentsCompanion.insert(
+              name: 'Mein Zelt',
+              lampWattage: wattage,
+              lampType: type,
+            ),
+          );
+
+          await m.alterTable(TableMigration(
+            plants,
+            columnTransformer: {
+              plants.tentId: Variable<int>(tentId),
+            },
+          ));
         }
       },
     );

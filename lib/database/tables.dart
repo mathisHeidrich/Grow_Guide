@@ -14,9 +14,19 @@ enum NutrientBrand { cannaAqua, ta, advancedNutrients, plagron }
 
 enum PlantType { photo, auto }
 
+@DataClassName('Tent')
+class Tents extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get name => text()();
+  IntColumn get lampWattage => integer()();
+  TextColumn get lampType => text()();
+  TextColumn get lightSchedule => text().withDefault(const Constant('18/6'))();
+}
+
 @DataClassName('Plant')
 class Plants extends Table {
   IntColumn get id => integer().autoIncrement()();
+  IntColumn get tentId => integer().nullable().references(Tents, #id)();
   TextColumn get name => text()();
 
   IntColumn get currentPhase => intEnum<PlantPhase>()();
@@ -30,10 +40,6 @@ class Plants extends Table {
   RealColumn get waterVolumeLiters => real()();
   IntColumn get nutrientBrand => intEnum<NutrientBrand>()();
   IntColumn get type => intEnum<PlantType>()();
-
-  IntColumn get lampWattage => integer()();
-  TextColumn get lampType => text()();
-  IntColumn get plantsUnderLamp => integer()();
 
   BoolColumn get rootsReachedWater =>
       boolean().withDefault(const Constant(false))();
