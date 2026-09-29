@@ -1900,7 +1900,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get growLevel2Methods => 'ScrOG & Defoliation';
 
   @override
-  String get growLevel2Nutrients => 'Exakter EC & Booster';
+  String get growLevel2Nutrients => 'CalMag & Booster';
 
   @override
   String get addPlantSectionGrowLevel => '7. Grow Level';

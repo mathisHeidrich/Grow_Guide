@@ -3439,7 +3439,7 @@ abstract class AppLocalizations {
   /// No description provided for @growLevel2Nutrients.
   ///
   /// In de, this message translates to:
-  /// **'Exakter EC & Booster'**
+  /// **'CalMag & Booster'**
   String get growLevel2Nutrients;
 
   /// No description provided for @addPlantSectionGrowLevel.
