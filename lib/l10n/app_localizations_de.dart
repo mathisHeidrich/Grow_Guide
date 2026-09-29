@@ -92,7 +92,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dashboardStartGermination => 'Keimung starten';
 
   @override
-  String get dashboardWaitGermination => 'Warten (12-24h)';
+  String get dashboardWaitGermination => 'Warten (24h)';
 
   @override
   String get dashboardCheckRoot => 'Wurzel prüfen';
@@ -231,7 +231,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinHealthDesc =>
-      '• Wirf einen genauen Blick auf die Blätter deiner Pflanze.\n• Achte auf schlaff hängende Blätter, braune Flecken oder stark nach oben eingerollte Ränder.\n\nTIPP: Wenn die Blätter minimal nach oben zeigen (\'Praying Leaves\'), ist die Pflanze extrem glücklich.';
+      '• Wirf einen genauen Blick auf die Blätter deiner Pflanze.\n• Achte auf schlaff hängende Blätter, braune Flecken oder stark nach oben eingerollte Ränder.\n• Wenn die Blätter minimal nach oben zeigen (\'Praying Leaves\'), ist die Pflanze extrem glücklich.';
 
   @override
   String get checkinHealthNext => 'Sieht gut aus';
@@ -257,7 +257,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinWateringDesc =>
-      '• Da die Wurzeln das Wasser noch nicht erreicht haben, helfe etwas nach.\n• Nimm einen kleinen Becher und gieße etwas Wasser *aus dem Eimer* vorsichtig um den Stamm über den Blähton.\n\nTIPP: Nutze ausschließlich das Wasser, das ohnehin schon im Eimer ist. Füge kein neues Wasser von außen hinzu.';
+      '• Da die Wurzeln das Wasser noch nicht erreicht haben, helfe etwas nach.\n• Nimm einen kleinen Becher und gieße etwas Wasser *aus dem Eimer* vorsichtig um den Stamm über den Blähton.\n• Nutze ausschließlich das Wasser, das ohnehin schon im Eimer ist. Füge kein neues Wasser von außen hinzu.';
 
   @override
   String get checkinAdjustTitle => 'Werte anpassen';
@@ -299,7 +299,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinLampMeasureInstruction =>
-      '• Die Pflanze wächst jeden Tag näher an die Lampe heran.\n• Lege ein Stück Papier (80g) als Diffusor über die Frontkamera.\n• Halte das Handy genau auf Höhe der obersten Blätter und richte es zur Lampe.\n\nTIPP: Nutze immer Papier als Diffusor, sonst sind die Werte völlig unbrauchbar.';
+      '• Die Pflanze wächst jeden Tag näher an die Lampe heran.\n• Lege ein Stück Papier (80g) als Diffusor über die Frontkamera.\n• Halte das Handy genau auf Höhe der obersten Blätter und richte es zur Lampe.\n• Nutze immer Papier als Diffusor, sonst sind die Werte völlig unbrauchbar.';
 
   @override
   String get checkinLampTargetPpfdLabel => 'Zielbereich';
@@ -320,7 +320,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc1 =>
-      '• Fülle ein kleines Glas mit handwarmem Wasser.\n• Lass deinen Samen sanft hineinfallen. Er wird zunächst an der Oberfläche schwimmen.\n\nTIPP: Berühre den Samen so wenig wie möglich mit den Fingern. Nutze eine Pinzette.';
+      '• Fülle ein kleines Glas mit handwarmem Wasser.\n• Lass deinen Samen sanft hineinfallen. Er wird zunächst an der Oberfläche schwimmen.\n• Berühre den Samen so wenig wie möglich mit den Fingern. Nutze eine Pinzette.';
 
   @override
   String get germinationNext1 => 'Erledigt & Weiter';
@@ -330,7 +330,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc1b =>
-      '• Fülle eine Schüssel mit Wasser und miss den pH-Wert.\n• Senke den pH-Wert mit pH-Down tröpfchenweise auf etwa 5.5 ab.\n• Lege deinen Steinwollwürfel hinein und lass ihn mindestens 12 Stunden einweichen.\n\nTIPP: Drücke die Steinwolle niemals wie einen Schwamm aus. Das zerstört ihre innere Struktur.';
+      '• Fülle eine Schüssel mit Wasser und miss den pH-Wert.\n• Senke den pH-Wert mit pH-Down tröpfchenweise auf etwa 5.5 ab.\n• Lege deinen Steinwollwürfel hinein und lass ihn für die nächsten 24 Stunden einweichen.\n• Drücke die Steinwolle niemals wie einen Schwamm aus. Das zerstört ihre innere Struktur.';
 
   @override
   String get germinationNext1b => 'Steinwolle weicht ein';
@@ -340,7 +340,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc2 =>
-      '• Stelle das Wasserglas an einen warmen (ca. 22-25°C), absolut dunklen Ort.\n• Ein Küchenschrank eignet sich hierfür hervorragend.\n\nTIPP: Markiere das Glas, damit niemand aus Versehen das Wasser wegschüttet.';
+      '• Stelle das Wasserglas an einen warmen (ca. 22-25°C), absolut dunklen Ort.\n• Ein Küchenschrank eignet sich hierfür hervorragend.\n• Markiere das Glas, damit niemand aus Versehen das Wasser wegschüttet.';
 
   @override
   String get germinationNext2 => 'Ab in den Schrank';
@@ -350,17 +350,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc3 =>
-      '• Lass den Samen nun für 12 bis 24 Stunden im Glas ruhen.\n• Hol das Glas aus dem Schrank und prüfe vorsichtig: Ist die Samenschale leicht aufgeplatzt und zeigt sich eine kleine, weiße Wurzelspitze?';
+      '• Lass den Samen nun für exakt 24 Stunden im Glas ruhen.\n• Hol das Glas dann aus dem Schrank und prüfe vorsichtig: Ist die Samenschale leicht aufgeplatzt und zeigt sich eine kleine, weiße Wurzelspitze?';
 
   @override
   String get germinationNext3 => 'Wurzel prüfen';
 
   @override
-  String get germinationTitle4 => 'Noch geschlossen';
+  String get germinationTitle4 => 'Wurzel-Check';
 
   @override
   String get germinationDesc4 =>
-      '• Der Samen ist noch komplett geschlossen.\n• Gib ihm noch etwas Zeit im Dunkeln.\n\nTIPP: Manche Samen benötigen bis zu 48 oder 72 Stunden. Geduld ist jetzt wichtig.';
+      'Prüfe den Samen in deinem Wasserglas ganz vorsichtig.\n\nZeigt sich bereits eine kleine, weiße Wurzelspitze oder ist die Schale noch komplett verschlossen?';
 
   @override
   String get germinationNext4 => 'Wurzel ist da!';
@@ -369,11 +369,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get germinationAlt4 => 'Noch geschlossen';
 
   @override
-  String get germinationTitle5 => 'Geduld!';
+  String get germinationTitle5 => 'Ab in die Steinwolle!';
 
   @override
   String get germinationDesc5 =>
-      '• Der Samen ist noch komplett geschlossen.\n• Gib ihm noch etwas Zeit im Dunkeln.\n\nTIPP: Manche Samen benötigen bis zu 48 oder 72 Stunden. Geduld ist jetzt wichtig.';
+      'Auch wenn der Samen noch komplett geschlossen ist, darf er nicht länger als 24 Stunden im Wasser bleiben (Ertrinkungsgefahr).\n\nWir setzen ihn jetzt einfach ungeschlüpft in den Steinwollwürfel. Dort hat er Feuchtigkeit und Sauerstoff, um in den nächsten Tagen in Ruhe weiter zu keimen.';
 
   @override
   String get germinationNext5 => 'Wurzel prüfen';
@@ -383,7 +383,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc6 =>
-      '• Nimm den eingeweichten Steinwollwürfel aus dem Wasser.\n• Setze den Samen etwa 1 bis 2 cm tief in das Loch des Würfels.\n• WICHTIG: Die weiße Wurzelspitze muss strikt nach unten zeigen.\n\nTIPP: Verschließe das Loch oben ganz leicht, indem du ein winziges Stückchen Steinwolle vom Rand darüber zupfst. So bleibt es innen dunkel.';
+      '• Nimm den Steinwollwürfel aus dem Wasser.\n• Zeigt der Samen schon eine weiße Wurzel, setze ihn mit der Spitze nach unten ca. 0,5 bis 1 cm tief in das Loch.\n• Ist der Samen noch zu, setze ihn am besten mit dem spitzen Ende nach unten (oder einfach seitlich liegend) ca. 0,5 bis 1 cm tief hinein.\n• Verschließe das Loch oben ganz leicht, indem du ein winziges Stückchen Steinwolle vom Rand darüber zupfst. So bleibt es innen dunkel und feucht.';
 
   @override
   String get germinationNext6 => 'Samen ist eingepflanzt';
@@ -393,7 +393,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc7 =>
-      '• Spüle deinen Blähton extrem gründlich unter fließendem Wasser ab, bis das Wasser klar bleibt.\n• Setze den Steinwollwürfel mittig in deinen Netztopf.\n• Fülle den restlichen Platz vorsichtig mit dem gewaschenen Blähton auf.\n\nTIPP: Achte darauf, dass die oberste Schicht der Steinwolle leicht vom Blähton bedeckt ist, um Algenbildung zu verhindern.';
+      '• Spüle deinen Blähton extrem gründlich unter fließendem Wasser ab, bis das Wasser klar bleibt.\n• Setze den Steinwollwürfel mittig in deinen Netztopf.\n• Fülle den restlichen Platz vorsichtig mit dem gewaschenen Blähton auf.\n• Achte darauf, dass die oberste Schicht der Steinwolle leicht vom Blähton bedeckt ist, um Algenbildung zu verhindern.';
 
   @override
   String get germinationNext7 => 'Im Netztopf gesichert';
@@ -403,7 +403,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc8 =>
-      '• Fülle deinen DWC-Eimer mit Wasser (pH 5.8). Gib noch keinen Dünger hinzu.\n• Der Wasserstand sollte etwa 1 bis 2 cm unter dem Boden des Netztopfs enden. Das Wasser darf die Steinwolle nicht berühren.\n• Hänge den Netztopf ein und schalte die Luftpumpe auf 100% ein.\n\nTIPP: Die platzenden Blubberblasen spritzen kleine Wassertropfen an den Netztopf. Das reicht völlig aus, um die Steinwolle feucht zu halten.';
+      '• Fülle deinen DWC-Eimer mit Wasser (pH 5.8). Gib noch keinen Dünger hinzu.\n• Der Wasserstand sollte etwa 1 bis 2 cm unter dem Boden des Netztopfs enden. Das Wasser darf die Steinwolle nicht berühren.\n• Hänge den Netztopf ein und schalte die Luftpumpe auf 100% ein.\n• Die platzenden Blubberblasen spritzen kleine Wassertropfen an den Netztopf. Das reicht völlig aus, um die Steinwolle feucht zu halten.';
 
   @override
   String get germinationNext8 => 'Eimer & Klima bereit';
@@ -413,13 +413,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get germinationDesc9 =>
-      '• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer.\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.';
+      '• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer.\n• Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.';
 
   @override
   String get germinationNext9 => 'Keimung abschließen';
 
   @override
-  String get germinationToDashboard => 'Zum Dashboard';
+  String get germinationToDashboard => 'Später fortsetzen';
 
   @override
   String get germinationSeedClosed => 'Geschlossen';
@@ -431,7 +431,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get germinationNextButton => 'Weiter';
 
   @override
-  String get tentIntroTitle => 'Wissen & Hardware gecheckt!';
+  String get tentIntroTitle => 'Zelt aufbauen';
 
   @override
   String get tentIntroDesc =>
@@ -448,7 +448,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentDesc1 =>
-      '• Wähle einen Ort in der Nähe eines Fensters.\n• Baue das Metallgerüst auf und ziehe die Zelthülle darüber.\n• Lege die wasserdichte Einlegewanne auf den Zeltboden.\n\nTIPP: Der Zeltboden muss absolut wasserdicht sein. Bei Hydroponik kann immer mal ein Tropfen daneben gehen.';
+      '• Wähle einen Ort in der Nähe eines Fensters.\n• Baue das Metallgerüst auf und ziehe die Zelthülle darüber.\n• Lege die wasserdichte Einlegewanne auf den Zeltboden.\n• Der Zeltboden muss absolut wasserdicht sein. Bei Hydroponik kann immer mal ein Tropfen daneben gehen.';
 
   @override
   String get tentNext1 => 'Zelt steht & ist isoliert';
@@ -458,7 +458,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentDesc2 =>
-      '• Hänge den Aktivkohlefilter (AKF) und den Rohrventilator ganz oben unter die Zeltdecke.\n• Verbinde beide luftdicht miteinander.\n\nTIPP: Nutze großzügig Panzertape oder starke Schlauchklemmen. Jeder Millimeter, der nicht dicht ist, lässt später ungefilterten Geruch entweichen.';
+      '• Hänge den Aktivkohlefilter (AKF) und den Rohrventilator ganz oben unter die Zeltdecke.\n• Verbinde beide luftdicht miteinander.\n• Nutze großzügig Panzertape oder starke Schlauchklemmen. Jeder Millimeter, der nicht dicht ist, lässt später ungefilterten Geruch entweichen.';
 
   @override
   String get tentNext2 => 'Abluft hängt sicher';
@@ -478,7 +478,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentDesc4 =>
-      '• Hänge deine LED-Lampe mittig im Zelt auf.\n• Verwende stufenlos verstellbare Seilzugratschen (Rope Ratchets), keine starren Ketten.\n\nTIPP: Wenn deine Lampe ein externes Netzteil (Driver) hat, montiere es außerhalb des Zeltes. Das erspart dir im Sommer Hitze.';
+      '• Hänge deine LED-Lampe mittig im Zelt auf.\n• Verwende stufenlos verstellbare Seilzugratschen (Rope Ratchets), keine starren Ketten.\n• Wenn deine Lampe ein externes Netzteil (Driver) hat, montiere es außerhalb des Zeltes. Das erspart dir im Sommer Hitze.';
 
   @override
   String get tentNext4 => 'Lampe hängt';
@@ -488,7 +488,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentDesc5 =>
-      '• Befestige deine Umluft-Ventilatoren an den Eckstangen.\n• Richte sie so aus, dass sie später über und unter dem Blätterdach wehen.\n\nTIPP: Richte den Luftstrom niemals direkt auf eine junge Pflanze. Das führt zu massivem Windbrand.';
+      '• Befestige deine Umluft-Ventilatoren an den Eckstangen.\n• Richte sie so aus, dass sie später über und unter dem Blätterdach wehen.\n• Richte den Luftstrom niemals direkt auf eine junge Pflanze. Das führt zu massivem Windbrand.';
 
   @override
   String get tentNext5 => 'Ventilatoren montiert';
@@ -508,7 +508,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentDesc7 =>
-      '• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n\nTIPP: WICHTIG: Die Luftpumpe MUSS immer außerhalb des Zeltes stehen und am besten höher als der Wasserspiegel! Fällt der Strom aus, kann das Wasser sonst durch den Schlauch in die Pumpe laufen.';
+      '• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n• WICHTIG: Die Luftpumpe MUSS immer außerhalb des Zeltes stehen und am besten höher als der Wasserspiegel! Fällt der Strom aus, kann das Wasser sonst durch den Schlauch in die Pumpe laufen.';
 
   @override
   String get tentNext7 => 'Pumpe platziert';
@@ -518,7 +518,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentDesc8 =>
-      '• Führe alle Kabel sauber durch die vorgesehenen Öffnungen nach draußen.\n\nTIPP: Lege unter keinen Umständen Mehrfachsteckdosen auf den Zeltboden. Wasser und Strom sind lebensgefährlich.';
+      '• Führe alle Kabel sauber durch die vorgesehenen Öffnungen nach draußen.\n• Lege unter keinen Umständen Mehrfachsteckdosen auf den Zeltboden. Wasser und Strom sind lebensgefährlich.';
 
   @override
   String get tentNext8 => 'Kabel verlegt';
@@ -538,7 +538,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tentDesc10 =>
-      '• Schalte alle Geräte ein und schließe das Zelt vollständig.\n• Zieht sich die Zelthülle leicht nach innen? (Unterdruck-Check).\n\nTIPP: Schalte das Licht im Raum aus. Dringt aus dem Zelt irgendwo Licht nach außen? Klebe Lecks von innen ab.';
+      '• Schalte alle Geräte ein und schließe das Zelt vollständig.\n• Zieht sich die Zelthülle leicht nach innen? (Unterdruck-Check).\n• Schalte das Licht im Raum aus. Dringt aus dem Zelt irgendwo Licht nach außen? Klebe Lecks von innen ab.';
 
   @override
   String get tentNext10 => 'Setup abgeschlossen! Zum Wasser-Setup';
@@ -817,14 +817,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get waterSetupEcHardFeedback =>
-      'Kein CalMag nutzen! Nutze \'Hard-Water\'-Dünger. Wenn nur Magnesium fehlt, nutze reines Bittersalz (0,1-0,3 g/L).';
+      'Dein Wasser hat bereits sehr viele Mineralien. Nutze auf keinen Fall CalMag! Am besten nutzt du einen speziellen \'Hard Water\'-Dünger (z.B. Canna Aqua Hard Water oder T.A. Tripart Hard Water). Alternativ kannst du dein Leitungswasser einfach mit destilliertem Wasser (aus dem Baumarkt/Drogerie) mischen, um den Basis-EC zu senken. Dann kannst du auch normalen Dünger nutzen.';
 
   @override
   String get waterSetupEcTooHard => '> 0.7 (Sehr hart / Salzig)';
 
   @override
   String get waterSetupEcTooHardFeedback =>
-      'Ungeeignet für DWC! Zwingend aufbereiten: Mische 50/50 mit destilliertem Wasser (Cut-Trick) oder nutze eine Umkehrosmose-Anlage.';
+      'Hier sind so viele Fremdsalze im Wasser, dass kaum noch Platz für deinen Dünger bleibt. Ungeeignet für DWC! Lösung: Du musst es strecken. Mische dein Leitungswasser großzügig mit destilliertem Wasser oder Wasser aus einer Umkehrosmose-Anlage, bis der Basis-EC unter 0.5 fällt.';
 
   @override
   String get waterSetupEcUnknown => 'Weiß ich (noch) nicht';
@@ -850,7 +850,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get waterSetupChlorineFeedback =>
-      'TIPP: Lass dein Gießwasser einfach 24 Stunden offen abstehen, bevor du es verwendest (am besten mit einem Sprudelstein). Das Chlor gast dann von alleine aus!';
+      'Lass dein Gießwasser einfach 24 Stunden offen abstehen, bevor du es verwendest (am besten mit einem Sprudelstein). Das Chlor gast dann von alleine aus!';
 
   @override
   String get waterSetupNext => 'Weiter';
@@ -910,7 +910,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinWaterLevelDesc =>
-      '• Prüfe den Wasserstand im Eimer.\n• Ist er gesunken, fülle ihn mit klarem Leitungswasser wieder auf, bis das Wasser 1-2 cm unter dem Netztopf steht.\n• Trage hier ein, wie viele Liter du genau nachgefüllt hast.\n\nTIPP: Mache eine Markierung für die optimale Füllhöhe an den Eimer.';
+      '• Prüfe den Wasserstand im Eimer.\n• Ist er gesunken, fülle ihn mit klarem Leitungswasser wieder auf, bis das Wasser 1-2 cm unter dem Netztopf steht.\n• Trage hier ein, wie viele Liter du genau nachgefüllt hast.\n• Mache eine Markierung für die optimale Füllhöhe an den Eimer.';
 
   @override
   String get checkinWaterLevelLabel => 'Nachgefüllte Liter';
@@ -923,14 +923,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinEcMeasureDesc =>
-      '• Miss den EC-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage den Wert hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.';
+      '• Miss den EC-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage den Wert hier exakt ein.\n• Rühre das Wasser vor der Messung kurz um.';
 
   @override
   String get checkinNutrientTitle => 'Dünger hinzufügen';
 
   @override
   String get checkinNutrientDesc =>
-      '• Basierend auf deinem nachgefüllten Wasser und den aktuellen Werten benötigst du heute die folgenden Mengen.\n• Gib die Dünger nacheinander in den Eimer und rühre gut um.\n\nTIPP: Mische pure Dünger niemals unverdünnt direkt zusammen.';
+      '• Basierend auf deinem nachgefüllten Wasser und den aktuellen Werten benötigst du heute die folgenden Mengen.\n• Gib die Dünger nacheinander in den Eimer und rühre gut um.\n• Mische pure Dünger niemals unverdünnt direkt zusammen.';
 
   @override
   String checkinNutrientGrow(String amount) {
@@ -963,7 +963,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinPhAdjustDesc =>
-      '• Dein Zielbereich liegt bei 5.5 bis 6.5.\n• Ist dein gemessener Wert zu hoch, gib tröpfchenweise pH-Down hinzu.\n• Rühre um, warte eine Minute und miss erneut.\n\nTIPP: pH-Down besteht meist aus konzentrierter Säure. Wenige Tropfen verändern den Wert massiv. Arbeite extrem vorsichtig.';
+      '• Dein Zielbereich liegt bei 5.5 bis 6.5.\n• Ist dein gemessener Wert zu hoch, gib tröpfchenweise pH-Down hinzu.\n• Rühre um, warte eine Minute und miss erneut.\n• pH-Down besteht meist aus konzentrierter Säure. Wenige Tropfen verändern den Wert massiv. Arbeite extrem vorsichtig.';
 
   @override
   String get waterChangeTitle => 'Wasserwechsel';
@@ -1261,7 +1261,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinVentilatorDesc =>
-      'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?\n\nTIPP: Richte den Luftstrom niemals direkt auf die Pflanzen. Ein starrer Luftstrom führt zu Windbrand und trocknet die Blätter aus.';
+      'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?\n• Richte den Luftstrom niemals direkt auf die Pflanzen. Ein starrer Luftstrom führt zu Windbrand und trocknet die Blätter aus.';
 
   @override
   String get checkinVentilatorNext => 'Sieht gut aus';
@@ -1850,4 +1850,32 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get waterSetupFinish => 'Setup abschließen';
+
+  @override
+  String get experienceTitle => 'Wie viel Erfahrung hast du?';
+
+  @override
+  String get experienceDesc =>
+      'Wir passen die App an dein Vorwissen an, damit du genau die Infos bekommst, die du brauchst.';
+
+  @override
+  String get experienceLevelBeginner => 'Absoluter Anfänger';
+
+  @override
+  String get experienceLevelBeginnerDesc =>
+      'Noch nie Pflanzen angebaut. Ich brauche das volle Programm.';
+
+  @override
+  String get experienceLevelSoil => 'Erde-Umsteiger';
+
+  @override
+  String get experienceLevelSoilDesc =>
+      'Ich kenne mich mit Pflanzen aus, aber Deep Water Culture ist neu für mich.';
+
+  @override
+  String get experienceLevelPro => 'DWC-Erfahren';
+
+  @override
+  String get experienceLevelProDesc =>
+      'Ich habe schon in Wasser angebaut und brauche kaum Theorie.';
 }

@@ -247,7 +247,7 @@ abstract class AppLocalizations {
   /// No description provided for @dashboardWaitGermination.
   ///
   /// In de, this message translates to:
-  /// **'Warten (12-24h)'**
+  /// **'Warten (24h)'**
   String get dashboardWaitGermination;
 
   /// No description provided for @dashboardCheckRoot.
@@ -499,7 +499,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinHealthDesc.
   ///
   /// In de, this message translates to:
-  /// **'• Wirf einen genauen Blick auf die Blätter deiner Pflanze.\n• Achte auf schlaff hängende Blätter, braune Flecken oder stark nach oben eingerollte Ränder.\n\nTIPP: Wenn die Blätter minimal nach oben zeigen (\'Praying Leaves\'), ist die Pflanze extrem glücklich.'**
+  /// **'• Wirf einen genauen Blick auf die Blätter deiner Pflanze.\n• Achte auf schlaff hängende Blätter, braune Flecken oder stark nach oben eingerollte Ränder.\n• Wenn die Blätter minimal nach oben zeigen (\'Praying Leaves\'), ist die Pflanze extrem glücklich.'**
   String get checkinHealthDesc;
 
   /// No description provided for @checkinHealthNext.
@@ -547,7 +547,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinWateringDesc.
   ///
   /// In de, this message translates to:
-  /// **'• Da die Wurzeln das Wasser noch nicht erreicht haben, helfe etwas nach.\n• Nimm einen kleinen Becher und gieße etwas Wasser *aus dem Eimer* vorsichtig um den Stamm über den Blähton.\n\nTIPP: Nutze ausschließlich das Wasser, das ohnehin schon im Eimer ist. Füge kein neues Wasser von außen hinzu.'**
+  /// **'• Da die Wurzeln das Wasser noch nicht erreicht haben, helfe etwas nach.\n• Nimm einen kleinen Becher und gieße etwas Wasser *aus dem Eimer* vorsichtig um den Stamm über den Blähton.\n• Nutze ausschließlich das Wasser, das ohnehin schon im Eimer ist. Füge kein neues Wasser von außen hinzu.'**
   String get checkinWateringDesc;
 
   /// No description provided for @checkinAdjustTitle.
@@ -625,7 +625,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinLampMeasureInstruction.
   ///
   /// In de, this message translates to:
-  /// **'• Die Pflanze wächst jeden Tag näher an die Lampe heran.\n• Lege ein Stück Papier (80g) als Diffusor über die Frontkamera.\n• Halte das Handy genau auf Höhe der obersten Blätter und richte es zur Lampe.\n\nTIPP: Nutze immer Papier als Diffusor, sonst sind die Werte völlig unbrauchbar.'**
+  /// **'• Die Pflanze wächst jeden Tag näher an die Lampe heran.\n• Lege ein Stück Papier (80g) als Diffusor über die Frontkamera.\n• Halte das Handy genau auf Höhe der obersten Blätter und richte es zur Lampe.\n• Nutze immer Papier als Diffusor, sonst sind die Werte völlig unbrauchbar.'**
   String get checkinLampMeasureInstruction;
 
   /// No description provided for @checkinLampTargetPpfdLabel.
@@ -661,7 +661,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc1.
   ///
   /// In de, this message translates to:
-  /// **'• Fülle ein kleines Glas mit handwarmem Wasser.\n• Lass deinen Samen sanft hineinfallen. Er wird zunächst an der Oberfläche schwimmen.\n\nTIPP: Berühre den Samen so wenig wie möglich mit den Fingern. Nutze eine Pinzette.'**
+  /// **'• Fülle ein kleines Glas mit handwarmem Wasser.\n• Lass deinen Samen sanft hineinfallen. Er wird zunächst an der Oberfläche schwimmen.\n• Berühre den Samen so wenig wie möglich mit den Fingern. Nutze eine Pinzette.'**
   String get germinationDesc1;
 
   /// No description provided for @germinationNext1.
@@ -679,7 +679,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc1b.
   ///
   /// In de, this message translates to:
-  /// **'• Fülle eine Schüssel mit Wasser und miss den pH-Wert.\n• Senke den pH-Wert mit pH-Down tröpfchenweise auf etwa 5.5 ab.\n• Lege deinen Steinwollwürfel hinein und lass ihn mindestens 12 Stunden einweichen.\n\nTIPP: Drücke die Steinwolle niemals wie einen Schwamm aus. Das zerstört ihre innere Struktur.'**
+  /// **'• Fülle eine Schüssel mit Wasser und miss den pH-Wert.\n• Senke den pH-Wert mit pH-Down tröpfchenweise auf etwa 5.5 ab.\n• Lege deinen Steinwollwürfel hinein und lass ihn für die nächsten 24 Stunden einweichen.\n• Drücke die Steinwolle niemals wie einen Schwamm aus. Das zerstört ihre innere Struktur.'**
   String get germinationDesc1b;
 
   /// No description provided for @germinationNext1b.
@@ -697,7 +697,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc2.
   ///
   /// In de, this message translates to:
-  /// **'• Stelle das Wasserglas an einen warmen (ca. 22-25°C), absolut dunklen Ort.\n• Ein Küchenschrank eignet sich hierfür hervorragend.\n\nTIPP: Markiere das Glas, damit niemand aus Versehen das Wasser wegschüttet.'**
+  /// **'• Stelle das Wasserglas an einen warmen (ca. 22-25°C), absolut dunklen Ort.\n• Ein Küchenschrank eignet sich hierfür hervorragend.\n• Markiere das Glas, damit niemand aus Versehen das Wasser wegschüttet.'**
   String get germinationDesc2;
 
   /// No description provided for @germinationNext2.
@@ -715,7 +715,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc3.
   ///
   /// In de, this message translates to:
-  /// **'• Lass den Samen nun für 12 bis 24 Stunden im Glas ruhen.\n• Hol das Glas aus dem Schrank und prüfe vorsichtig: Ist die Samenschale leicht aufgeplatzt und zeigt sich eine kleine, weiße Wurzelspitze?'**
+  /// **'• Lass den Samen nun für exakt 24 Stunden im Glas ruhen.\n• Hol das Glas dann aus dem Schrank und prüfe vorsichtig: Ist die Samenschale leicht aufgeplatzt und zeigt sich eine kleine, weiße Wurzelspitze?'**
   String get germinationDesc3;
 
   /// No description provided for @germinationNext3.
@@ -727,13 +727,13 @@ abstract class AppLocalizations {
   /// No description provided for @germinationTitle4.
   ///
   /// In de, this message translates to:
-  /// **'Noch geschlossen'**
+  /// **'Wurzel-Check'**
   String get germinationTitle4;
 
   /// No description provided for @germinationDesc4.
   ///
   /// In de, this message translates to:
-  /// **'• Der Samen ist noch komplett geschlossen.\n• Gib ihm noch etwas Zeit im Dunkeln.\n\nTIPP: Manche Samen benötigen bis zu 48 oder 72 Stunden. Geduld ist jetzt wichtig.'**
+  /// **'Prüfe den Samen in deinem Wasserglas ganz vorsichtig.\n\nZeigt sich bereits eine kleine, weiße Wurzelspitze oder ist die Schale noch komplett verschlossen?'**
   String get germinationDesc4;
 
   /// No description provided for @germinationNext4.
@@ -751,13 +751,13 @@ abstract class AppLocalizations {
   /// No description provided for @germinationTitle5.
   ///
   /// In de, this message translates to:
-  /// **'Geduld!'**
+  /// **'Ab in die Steinwolle!'**
   String get germinationTitle5;
 
   /// No description provided for @germinationDesc5.
   ///
   /// In de, this message translates to:
-  /// **'• Der Samen ist noch komplett geschlossen.\n• Gib ihm noch etwas Zeit im Dunkeln.\n\nTIPP: Manche Samen benötigen bis zu 48 oder 72 Stunden. Geduld ist jetzt wichtig.'**
+  /// **'Auch wenn der Samen noch komplett geschlossen ist, darf er nicht länger als 24 Stunden im Wasser bleiben (Ertrinkungsgefahr).\n\nWir setzen ihn jetzt einfach ungeschlüpft in den Steinwollwürfel. Dort hat er Feuchtigkeit und Sauerstoff, um in den nächsten Tagen in Ruhe weiter zu keimen.'**
   String get germinationDesc5;
 
   /// No description provided for @germinationNext5.
@@ -775,7 +775,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc6.
   ///
   /// In de, this message translates to:
-  /// **'• Nimm den eingeweichten Steinwollwürfel aus dem Wasser.\n• Setze den Samen etwa 1 bis 2 cm tief in das Loch des Würfels.\n• WICHTIG: Die weiße Wurzelspitze muss strikt nach unten zeigen.\n\nTIPP: Verschließe das Loch oben ganz leicht, indem du ein winziges Stückchen Steinwolle vom Rand darüber zupfst. So bleibt es innen dunkel.'**
+  /// **'• Nimm den Steinwollwürfel aus dem Wasser.\n• Zeigt der Samen schon eine weiße Wurzel, setze ihn mit der Spitze nach unten ca. 0,5 bis 1 cm tief in das Loch.\n• Ist der Samen noch zu, setze ihn am besten mit dem spitzen Ende nach unten (oder einfach seitlich liegend) ca. 0,5 bis 1 cm tief hinein.\n• Verschließe das Loch oben ganz leicht, indem du ein winziges Stückchen Steinwolle vom Rand darüber zupfst. So bleibt es innen dunkel und feucht.'**
   String get germinationDesc6;
 
   /// No description provided for @germinationNext6.
@@ -793,7 +793,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc7.
   ///
   /// In de, this message translates to:
-  /// **'• Spüle deinen Blähton extrem gründlich unter fließendem Wasser ab, bis das Wasser klar bleibt.\n• Setze den Steinwollwürfel mittig in deinen Netztopf.\n• Fülle den restlichen Platz vorsichtig mit dem gewaschenen Blähton auf.\n\nTIPP: Achte darauf, dass die oberste Schicht der Steinwolle leicht vom Blähton bedeckt ist, um Algenbildung zu verhindern.'**
+  /// **'• Spüle deinen Blähton extrem gründlich unter fließendem Wasser ab, bis das Wasser klar bleibt.\n• Setze den Steinwollwürfel mittig in deinen Netztopf.\n• Fülle den restlichen Platz vorsichtig mit dem gewaschenen Blähton auf.\n• Achte darauf, dass die oberste Schicht der Steinwolle leicht vom Blähton bedeckt ist, um Algenbildung zu verhindern.'**
   String get germinationDesc7;
 
   /// No description provided for @germinationNext7.
@@ -811,7 +811,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc8.
   ///
   /// In de, this message translates to:
-  /// **'• Fülle deinen DWC-Eimer mit Wasser (pH 5.8). Gib noch keinen Dünger hinzu.\n• Der Wasserstand sollte etwa 1 bis 2 cm unter dem Boden des Netztopfs enden. Das Wasser darf die Steinwolle nicht berühren.\n• Hänge den Netztopf ein und schalte die Luftpumpe auf 100% ein.\n\nTIPP: Die platzenden Blubberblasen spritzen kleine Wassertropfen an den Netztopf. Das reicht völlig aus, um die Steinwolle feucht zu halten.'**
+  /// **'• Fülle deinen DWC-Eimer mit Wasser (pH 5.8). Gib noch keinen Dünger hinzu.\n• Der Wasserstand sollte etwa 1 bis 2 cm unter dem Boden des Netztopfs enden. Das Wasser darf die Steinwolle nicht berühren.\n• Hänge den Netztopf ein und schalte die Luftpumpe auf 100% ein.\n• Die platzenden Blubberblasen spritzen kleine Wassertropfen an den Netztopf. Das reicht völlig aus, um die Steinwolle feucht zu halten.'**
   String get germinationDesc8;
 
   /// No description provided for @germinationNext8.
@@ -829,7 +829,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationDesc9.
   ///
   /// In de, this message translates to:
-  /// **'• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer.\n\nTIPP: Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.'**
+  /// **'• Sämlinge vertragen noch kein starkes Licht.\n• Hänge die Lampe hoch auf und dimme sie stark herunter.\n• Nutze den eingebauten PPFD-Messer.\n• Wenn es in deinem Zelt zu kalt ist (<22°C), hänge die Lampe etwas höher und drehe sie stärker auf, um ihre Abwärme als Heizung zu nutzen.'**
   String get germinationDesc9;
 
   /// No description provided for @germinationNext9.
@@ -841,7 +841,7 @@ abstract class AppLocalizations {
   /// No description provided for @germinationToDashboard.
   ///
   /// In de, this message translates to:
-  /// **'Zum Dashboard'**
+  /// **'Später fortsetzen'**
   String get germinationToDashboard;
 
   /// No description provided for @germinationSeedClosed.
@@ -865,7 +865,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentIntroTitle.
   ///
   /// In de, this message translates to:
-  /// **'Wissen & Hardware gecheckt!'**
+  /// **'Zelt aufbauen'**
   String get tentIntroTitle;
 
   /// No description provided for @tentIntroDesc.
@@ -895,7 +895,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc1.
   ///
   /// In de, this message translates to:
-  /// **'• Wähle einen Ort in der Nähe eines Fensters.\n• Baue das Metallgerüst auf und ziehe die Zelthülle darüber.\n• Lege die wasserdichte Einlegewanne auf den Zeltboden.\n\nTIPP: Der Zeltboden muss absolut wasserdicht sein. Bei Hydroponik kann immer mal ein Tropfen daneben gehen.'**
+  /// **'• Wähle einen Ort in der Nähe eines Fensters.\n• Baue das Metallgerüst auf und ziehe die Zelthülle darüber.\n• Lege die wasserdichte Einlegewanne auf den Zeltboden.\n• Der Zeltboden muss absolut wasserdicht sein. Bei Hydroponik kann immer mal ein Tropfen daneben gehen.'**
   String get tentDesc1;
 
   /// No description provided for @tentNext1.
@@ -913,7 +913,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc2.
   ///
   /// In de, this message translates to:
-  /// **'• Hänge den Aktivkohlefilter (AKF) und den Rohrventilator ganz oben unter die Zeltdecke.\n• Verbinde beide luftdicht miteinander.\n\nTIPP: Nutze großzügig Panzertape oder starke Schlauchklemmen. Jeder Millimeter, der nicht dicht ist, lässt später ungefilterten Geruch entweichen.'**
+  /// **'• Hänge den Aktivkohlefilter (AKF) und den Rohrventilator ganz oben unter die Zeltdecke.\n• Verbinde beide luftdicht miteinander.\n• Nutze großzügig Panzertape oder starke Schlauchklemmen. Jeder Millimeter, der nicht dicht ist, lässt später ungefilterten Geruch entweichen.'**
   String get tentDesc2;
 
   /// No description provided for @tentNext2.
@@ -949,7 +949,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc4.
   ///
   /// In de, this message translates to:
-  /// **'• Hänge deine LED-Lampe mittig im Zelt auf.\n• Verwende stufenlos verstellbare Seilzugratschen (Rope Ratchets), keine starren Ketten.\n\nTIPP: Wenn deine Lampe ein externes Netzteil (Driver) hat, montiere es außerhalb des Zeltes. Das erspart dir im Sommer Hitze.'**
+  /// **'• Hänge deine LED-Lampe mittig im Zelt auf.\n• Verwende stufenlos verstellbare Seilzugratschen (Rope Ratchets), keine starren Ketten.\n• Wenn deine Lampe ein externes Netzteil (Driver) hat, montiere es außerhalb des Zeltes. Das erspart dir im Sommer Hitze.'**
   String get tentDesc4;
 
   /// No description provided for @tentNext4.
@@ -967,7 +967,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc5.
   ///
   /// In de, this message translates to:
-  /// **'• Befestige deine Umluft-Ventilatoren an den Eckstangen.\n• Richte sie so aus, dass sie später über und unter dem Blätterdach wehen.\n\nTIPP: Richte den Luftstrom niemals direkt auf eine junge Pflanze. Das führt zu massivem Windbrand.'**
+  /// **'• Befestige deine Umluft-Ventilatoren an den Eckstangen.\n• Richte sie so aus, dass sie später über und unter dem Blätterdach wehen.\n• Richte den Luftstrom niemals direkt auf eine junge Pflanze. Das führt zu massivem Windbrand.'**
   String get tentDesc5;
 
   /// No description provided for @tentNext5.
@@ -1003,7 +1003,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc7.
   ///
   /// In de, this message translates to:
-  /// **'• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n\nTIPP: WICHTIG: Die Luftpumpe MUSS immer außerhalb des Zeltes stehen und am besten höher als der Wasserspiegel! Fällt der Strom aus, kann das Wasser sonst durch den Schlauch in die Pumpe laufen.'**
+  /// **'• Positioniere die Luftpumpe außerhalb des Zeltes.\n• Führe den Luftschlauch zum Ausströmerstein im Eimer.\n• WICHTIG: Die Luftpumpe MUSS immer außerhalb des Zeltes stehen und am besten höher als der Wasserspiegel! Fällt der Strom aus, kann das Wasser sonst durch den Schlauch in die Pumpe laufen.'**
   String get tentDesc7;
 
   /// No description provided for @tentNext7.
@@ -1021,7 +1021,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc8.
   ///
   /// In de, this message translates to:
-  /// **'• Führe alle Kabel sauber durch die vorgesehenen Öffnungen nach draußen.\n\nTIPP: Lege unter keinen Umständen Mehrfachsteckdosen auf den Zeltboden. Wasser und Strom sind lebensgefährlich.'**
+  /// **'• Führe alle Kabel sauber durch die vorgesehenen Öffnungen nach draußen.\n• Lege unter keinen Umständen Mehrfachsteckdosen auf den Zeltboden. Wasser und Strom sind lebensgefährlich.'**
   String get tentDesc8;
 
   /// No description provided for @tentNext8.
@@ -1057,7 +1057,7 @@ abstract class AppLocalizations {
   /// No description provided for @tentDesc10.
   ///
   /// In de, this message translates to:
-  /// **'• Schalte alle Geräte ein und schließe das Zelt vollständig.\n• Zieht sich die Zelthülle leicht nach innen? (Unterdruck-Check).\n\nTIPP: Schalte das Licht im Raum aus. Dringt aus dem Zelt irgendwo Licht nach außen? Klebe Lecks von innen ab.'**
+  /// **'• Schalte alle Geräte ein und schließe das Zelt vollständig.\n• Zieht sich die Zelthülle leicht nach innen? (Unterdruck-Check).\n• Schalte das Licht im Raum aus. Dringt aus dem Zelt irgendwo Licht nach außen? Klebe Lecks von innen ab.'**
   String get tentDesc10;
 
   /// No description provided for @tentNext10.
@@ -1555,7 +1555,7 @@ abstract class AppLocalizations {
   /// No description provided for @waterSetupEcHardFeedback.
   ///
   /// In de, this message translates to:
-  /// **'Kein CalMag nutzen! Nutze \'Hard-Water\'-Dünger. Wenn nur Magnesium fehlt, nutze reines Bittersalz (0,1-0,3 g/L).'**
+  /// **'Dein Wasser hat bereits sehr viele Mineralien. Nutze auf keinen Fall CalMag! Am besten nutzt du einen speziellen \'Hard Water\'-Dünger (z.B. Canna Aqua Hard Water oder T.A. Tripart Hard Water). Alternativ kannst du dein Leitungswasser einfach mit destilliertem Wasser (aus dem Baumarkt/Drogerie) mischen, um den Basis-EC zu senken. Dann kannst du auch normalen Dünger nutzen.'**
   String get waterSetupEcHardFeedback;
 
   /// No description provided for @waterSetupEcTooHard.
@@ -1567,7 +1567,7 @@ abstract class AppLocalizations {
   /// No description provided for @waterSetupEcTooHardFeedback.
   ///
   /// In de, this message translates to:
-  /// **'Ungeeignet für DWC! Zwingend aufbereiten: Mische 50/50 mit destilliertem Wasser (Cut-Trick) oder nutze eine Umkehrosmose-Anlage.'**
+  /// **'Hier sind so viele Fremdsalze im Wasser, dass kaum noch Platz für deinen Dünger bleibt. Ungeeignet für DWC! Lösung: Du musst es strecken. Mische dein Leitungswasser großzügig mit destilliertem Wasser oder Wasser aus einer Umkehrosmose-Anlage, bis der Basis-EC unter 0.5 fällt.'**
   String get waterSetupEcTooHardFeedback;
 
   /// No description provided for @waterSetupEcUnknown.
@@ -1615,7 +1615,7 @@ abstract class AppLocalizations {
   /// No description provided for @waterSetupChlorineFeedback.
   ///
   /// In de, this message translates to:
-  /// **'TIPP: Lass dein Gießwasser einfach 24 Stunden offen abstehen, bevor du es verwendest (am besten mit einem Sprudelstein). Das Chlor gast dann von alleine aus!'**
+  /// **'Lass dein Gießwasser einfach 24 Stunden offen abstehen, bevor du es verwendest (am besten mit einem Sprudelstein). Das Chlor gast dann von alleine aus!'**
   String get waterSetupChlorineFeedback;
 
   /// No description provided for @waterSetupNext.
@@ -1723,7 +1723,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinWaterLevelDesc.
   ///
   /// In de, this message translates to:
-  /// **'• Prüfe den Wasserstand im Eimer.\n• Ist er gesunken, fülle ihn mit klarem Leitungswasser wieder auf, bis das Wasser 1-2 cm unter dem Netztopf steht.\n• Trage hier ein, wie viele Liter du genau nachgefüllt hast.\n\nTIPP: Mache eine Markierung für die optimale Füllhöhe an den Eimer.'**
+  /// **'• Prüfe den Wasserstand im Eimer.\n• Ist er gesunken, fülle ihn mit klarem Leitungswasser wieder auf, bis das Wasser 1-2 cm unter dem Netztopf steht.\n• Trage hier ein, wie viele Liter du genau nachgefüllt hast.\n• Mache eine Markierung für die optimale Füllhöhe an den Eimer.'**
   String get checkinWaterLevelDesc;
 
   /// No description provided for @checkinWaterLevelLabel.
@@ -1747,7 +1747,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinEcMeasureDesc.
   ///
   /// In de, this message translates to:
-  /// **'• Miss den EC-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage den Wert hier exakt ein.\n\nTIPP: Rühre das Wasser vor der Messung kurz um.'**
+  /// **'• Miss den EC-Wert direkt im Eimerwasser (nachdem du aufgefüllt hast).\n• Trage den Wert hier exakt ein.\n• Rühre das Wasser vor der Messung kurz um.'**
   String get checkinEcMeasureDesc;
 
   /// No description provided for @checkinNutrientTitle.
@@ -1759,7 +1759,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinNutrientDesc.
   ///
   /// In de, this message translates to:
-  /// **'• Basierend auf deinem nachgefüllten Wasser und den aktuellen Werten benötigst du heute die folgenden Mengen.\n• Gib die Dünger nacheinander in den Eimer und rühre gut um.\n\nTIPP: Mische pure Dünger niemals unverdünnt direkt zusammen.'**
+  /// **'• Basierend auf deinem nachgefüllten Wasser und den aktuellen Werten benötigst du heute die folgenden Mengen.\n• Gib die Dünger nacheinander in den Eimer und rühre gut um.\n• Mische pure Dünger niemals unverdünnt direkt zusammen.'**
   String get checkinNutrientDesc;
 
   /// No description provided for @checkinNutrientGrow.
@@ -1807,7 +1807,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinPhAdjustDesc.
   ///
   /// In de, this message translates to:
-  /// **'• Dein Zielbereich liegt bei 5.5 bis 6.5.\n• Ist dein gemessener Wert zu hoch, gib tröpfchenweise pH-Down hinzu.\n• Rühre um, warte eine Minute und miss erneut.\n\nTIPP: pH-Down besteht meist aus konzentrierter Säure. Wenige Tropfen verändern den Wert massiv. Arbeite extrem vorsichtig.'**
+  /// **'• Dein Zielbereich liegt bei 5.5 bis 6.5.\n• Ist dein gemessener Wert zu hoch, gib tröpfchenweise pH-Down hinzu.\n• Rühre um, warte eine Minute und miss erneut.\n• pH-Down besteht meist aus konzentrierter Säure. Wenige Tropfen verändern den Wert massiv. Arbeite extrem vorsichtig.'**
   String get checkinPhAdjustDesc;
 
   /// No description provided for @waterChangeTitle.
@@ -2311,7 +2311,7 @@ abstract class AppLocalizations {
   /// No description provided for @checkinVentilatorDesc.
   ///
   /// In de, this message translates to:
-  /// **'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?\n\nTIPP: Richte den Luftstrom niemals direkt auf die Pflanzen. Ein starrer Luftstrom führt zu Windbrand und trocknet die Blätter aus.'**
+  /// **'Laufen deine Umluft-Ventilatoren und sind sie richtig positioniert?\n• Richte den Luftstrom niemals direkt auf die Pflanzen. Ein starrer Luftstrom führt zu Windbrand und trocknet die Blätter aus.'**
   String get checkinVentilatorDesc;
 
   /// No description provided for @checkinVentilatorNext.
@@ -3345,6 +3345,54 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Setup abschließen'**
   String get waterSetupFinish;
+
+  /// No description provided for @experienceTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Wie viel Erfahrung hast du?'**
+  String get experienceTitle;
+
+  /// No description provided for @experienceDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Wir passen die App an dein Vorwissen an, damit du genau die Infos bekommst, die du brauchst.'**
+  String get experienceDesc;
+
+  /// No description provided for @experienceLevelBeginner.
+  ///
+  /// In de, this message translates to:
+  /// **'Absoluter Anfänger'**
+  String get experienceLevelBeginner;
+
+  /// No description provided for @experienceLevelBeginnerDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch nie Pflanzen angebaut. Ich brauche das volle Programm.'**
+  String get experienceLevelBeginnerDesc;
+
+  /// No description provided for @experienceLevelSoil.
+  ///
+  /// In de, this message translates to:
+  /// **'Erde-Umsteiger'**
+  String get experienceLevelSoil;
+
+  /// No description provided for @experienceLevelSoilDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Ich kenne mich mit Pflanzen aus, aber Deep Water Culture ist neu für mich.'**
+  String get experienceLevelSoilDesc;
+
+  /// No description provided for @experienceLevelPro.
+  ///
+  /// In de, this message translates to:
+  /// **'DWC-Erfahren'**
+  String get experienceLevelPro;
+
+  /// No description provided for @experienceLevelProDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Ich habe schon in Wasser angebaut und brauche kaum Theorie.'**
+  String get experienceLevelProDesc;
 }
 
 class _AppLocalizationsDelegate
