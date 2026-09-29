@@ -38,6 +38,8 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
   PlantPhase _currentPhase = PlantPhase.germination;
   final _dayInPhaseController = TextEditingController(text: '1');
 
+  String _growLevel = 'level1';
+
   final List<double> _volumeOptions = [10.0, 15.0, 20.0, 25.0, 30.0];
   final List<int> _wattageOptions = [100, 150, 200, 300, 400];
   final List<int> _plantsOptions = [1, 2, 3, 4];
@@ -78,6 +80,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
           lampType: _lampType,
           lampWattage: finalWattage,
           plantsUnderLamp: finalPlants,
+          growLevel: drift.Value(_growLevel),
         ));
 
     if (mounted) {
@@ -324,6 +327,28 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                 validator: (val) =>
                     val == null || val.isEmpty ? l10n.addPlantRequired : null,
               ),
+              const SizedBox(height: 32),
+              _buildSectionTitle(l10n.addPlantSectionGrowLevel),
+              Text(l10n.addPlantGrowLevelDesc,
+                  style: const TextStyle(color: AppColors.textSecondary)),
+              const SizedBox(height: 12),
+              Column(
+                children: [
+                  _buildGrowLevelOption(
+                    id: 'level1',
+                    title: l10n.growLevel1,
+                    description: l10n.growLevel1Desc,
+                    icon: Icons.eco_outlined,
+                  ),
+                  const SizedBox(height: 16),
+                  _buildGrowLevelOption(
+                    id: 'level2',
+                    title: l10n.growLevel2,
+                    description: l10n.growLevel2Desc,
+                    icon: Icons.science_outlined,
+                  ),
+                ],
+              ),
               const SizedBox(height: 48),
               SizedBox(
                 width: double.infinity,
@@ -365,6 +390,68 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
           .textTheme
           .titleLarge
           ?.copyWith(fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget _buildGrowLevelOption({
+    required String id,
+    required String title,
+    required String description,
+    required IconData icon,
+  }) {
+    final isSelected = _growLevel == id;
+
+    return InkWell(
+      onTap: () => setState(() => _growLevel = id),
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColors.growGreen.withValues(alpha: 0.1)
+              : AppColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected ? AppColors.growGreen : Colors.transparent,
+            width: 2,
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              icon,
+              size: 40,
+              color: isSelected ? AppColors.growGreen : Colors.white54,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: isSelected ? Colors.white : Colors.white70,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isSelected ? Colors.white70 : Colors.white54,
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -12,7 +12,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.connection);
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration {
@@ -30,7 +30,10 @@ class AppDatabase extends _$AppDatabase {
           await m.addColumn(appSettingsTable, appSettingsTable.waterEcLevel);
         }
         if (from < 4) {
-          await m.addColumn(appSettingsTable, appSettingsTable.experienceLevel);
+          await m.issueCustomQuery('ALTER TABLE app_settings ADD COLUMN experience_level TEXT;');
+        }
+        if (from < 5) {
+          await m.addColumn(plants, plants.growLevel);
         }
       },
     );

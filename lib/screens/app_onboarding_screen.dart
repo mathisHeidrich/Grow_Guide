@@ -130,7 +130,7 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
           ),
           const SizedBox(height: 24),
           Text(
-            "Lass uns kurz herausfinden, wo du stehst, damit wir die App für dich anpassen können.",
+            "Bevor es losgeht, erklären wir dir unsere zwei Grow Levels, damit du genau weißt, was auf dich zukommt.",
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.white70,
                 ),

@@ -17,7 +17,6 @@ class MockDatabaseService extends DatabaseService {
     await db.into(db.appSettingsTable).insert(
           AppSettingsTableCompanion.insert(
             hasCompletedOnboarding: Value(scenario.hasCompletedOnboarding),
-            experienceLevel: Value(scenario.experienceLevel),
           ),
         );
 
