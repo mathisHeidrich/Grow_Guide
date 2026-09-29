@@ -46,9 +46,8 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
               title: l10n.onboardingTitle3,
               text: l10n.onboardingText3,
               buttonText: l10n.onboardingStartButton,
-              onButtonPressed: _nextPage,
+              onButtonPressed: () => context.go('/experience_assessment'),
             ),
-            _buildFinalSlide(),
           ],
         ),
       ),
@@ -101,55 +100,6 @@ class _AppOnboardingScreenState extends ConsumerState<AppOnboardingScreen> {
             child: Text(
               buttonText,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(height: 24),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFinalSlide() {
-    final l10n = AppLocalizations.of(context)!;
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Spacer(),
-          const Icon(Icons.handyman, size: 120, color: AppColors.growGreen),
-          const SizedBox(height: 48),
-          Text(
-            l10n.onboardingFinalTitle,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
-          Text(
-            "Bevor es losgeht, erklären wir dir unsere zwei Grow Levels, damit du genau weißt, was auf dich zukommt.",
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Colors.white70,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          const Spacer(),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.growGreen,
-              foregroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            onPressed: () => context.go('/experience_assessment'),
-            child: const Text(
-              "Weiter",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           const SizedBox(height: 24),

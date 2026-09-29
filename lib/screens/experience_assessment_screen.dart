@@ -41,23 +41,29 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
               const SizedBox(height: 48),
               
               Expanded(
-                child: ListView(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    _buildInfoCard(
-                      title: l10n.growLevel1,
-                      description: l10n.growLevel1Desc,
-                      icon: Icons.eco_outlined,
+                    Expanded(
+                      child: _buildInfoCard(
+                        title: l10n.growLevel1,
+                        description: l10n.growLevel1Desc,
+                        icon: Icons.eco_outlined,
+                      ),
                     ),
-                    const SizedBox(height: 16),
-                    _buildInfoCard(
-                      title: l10n.growLevel2,
-                      description: l10n.growLevel2Desc,
-                      icon: Icons.science_outlined,
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _buildInfoCard(
+                        title: l10n.growLevel2,
+                        description: l10n.growLevel2Desc,
+                        icon: Icons.science_outlined,
+                      ),
                     ),
                   ],
                 ),
               ),
               
+              const SizedBox(height: 24),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.growGreen,
@@ -86,7 +92,7 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
     required IconData icon,
   }) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(16),
@@ -95,40 +101,38 @@ class ExperienceAssessmentScreen extends ConsumerWidget {
           width: 2,
         ),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            icon,
-            size: 40,
-            color: AppColors.growGreen,
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70,
-                    height: 1.4,
-                  ),
-                ),
-              ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 40,
+              color: AppColors.growGreen,
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              description,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.white70,
+                height: 1.4,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
