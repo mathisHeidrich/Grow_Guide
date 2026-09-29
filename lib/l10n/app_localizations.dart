@@ -3370,6 +3370,30 @@ abstract class AppLocalizations {
   /// **'Leichter Einstieg. ~50-80g Ertrag. Aufwand: Niedrig (~1h pro Woche). Methoden: LST (Runterbinden) & Defoliation. Basis-Dünger.'**
   String get growLevel1Desc;
 
+  /// No description provided for @growLevel1Subtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Leichter Einstieg'**
+  String get growLevel1Subtitle;
+
+  /// No description provided for @growLevel1Yield.
+  ///
+  /// In de, this message translates to:
+  /// **'~50-80g Ertrag'**
+  String get growLevel1Yield;
+
+  /// No description provided for @growLevel1Effort.
+  ///
+  /// In de, this message translates to:
+  /// **'Niedrig (~1h/Woche)'**
+  String get growLevel1Effort;
+
+  /// No description provided for @growLevel1Methods.
+  ///
+  /// In de, this message translates to:
+  /// **'LST & Basis-Dünger'**
+  String get growLevel1Methods;
+
   /// No description provided for @growLevel2.
   ///
   /// In de, this message translates to:
@@ -3381,6 +3405,30 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Maximales Potenzial. ~100-150g+ Ertrag. Aufwand: Hoch (~3h pro Woche). Methoden: ScrOG, präzises PH/EC-Management, CalMag & Booster.'**
   String get growLevel2Desc;
+
+  /// No description provided for @growLevel2Subtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Maximales Potenzial'**
+  String get growLevel2Subtitle;
+
+  /// No description provided for @growLevel2Yield.
+  ///
+  /// In de, this message translates to:
+  /// **'~100-150g+ Ertrag'**
+  String get growLevel2Yield;
+
+  /// No description provided for @growLevel2Effort.
+  ///
+  /// In de, this message translates to:
+  /// **'Hoch (~3h/Woche)'**
+  String get growLevel2Effort;
+
+  /// No description provided for @growLevel2Methods.
+  ///
+  /// In de, this message translates to:
+  /// **'ScrOG & Booster'**
+  String get growLevel2Methods;
 
   /// No description provided for @addPlantSectionGrowLevel.
   ///
