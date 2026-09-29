@@ -1878,4 +1878,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get experienceLevelProDesc =>
       'Ich habe schon in Wasser angebaut und brauche kaum Theorie.';
+
+  @override
+  String get checkinOptionalEcLabel => 'Neuer EC-Wert (optional)';
+
+  @override
+  String get checkinOptionalPhLabel => 'Neuer pH-Wert (optional)';
 }

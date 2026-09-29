@@ -30,6 +30,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
 
   double? _inputEc;
   double? _inputPpfd;
+  double? _inputPostEc;
+  double? _inputPostPh;
   double? _inputWaterAdded;
   bool _isWaterChange = false;
   bool _needsWaterChange = false;
@@ -207,7 +209,8 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
       LogEntriesCompanion.insert(
         plantId: _plant!.id,
         timestamp: ref.read(timeProvider),
-        ec: _inputEc != null ? drift.Value(_inputEc!) : const drift.Value.absent(),
+        ec: (_inputPostEc ?? _inputEc) != null ? drift.Value(_inputPostEc ?? _inputEc!) : const drift.Value.absent(),
+        ph: _inputPostPh != null ? drift.Value(_inputPostPh!) : const drift.Value.absent(),
         ppfd: _inputPpfd != null ? drift.Value(_inputPpfd!) : const drift.Value.absent(),
         isWaterChange: drift.Value(_isWaterChange),
         waterAdded: _inputWaterAdded != null ? drift.Value(_inputWaterAdded!) : const drift.Value.absent(),
@@ -949,6 +952,16 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
                     ?.copyWith(color: Colors.white70),
                 textAlign: TextAlign.center),
           ],
+
+          const SizedBox(height: 16),
+          TextFormField(
+            decoration: InputDecoration(
+                labelText: l10n.checkinOptionalEcLabel,
+                border: const OutlineInputBorder()),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            onChanged: (val) =>
+                _inputPostEc = double.tryParse(val.replaceAll(',', '.')),
+          ),
           const Spacer(),
           Row(
             children: [
@@ -990,6 +1003,16 @@ class _CheckinScreenState extends ConsumerState<CheckinScreen> {
               textAlign: TextAlign.center),
           const SizedBox(height: 24),
 
+
+          const SizedBox(height: 16),
+          TextFormField(
+            decoration: InputDecoration(
+                labelText: l10n.checkinOptionalPhLabel,
+                border: const OutlineInputBorder()),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            onChanged: (val) =>
+                _inputPostPh = double.tryParse(val.replaceAll(',', '.')),
+          ),
           const Spacer(),
           Row(
             children: [

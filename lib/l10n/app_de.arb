@@ -667,5 +667,7 @@
   "experienceLevelSoil": "Erde-Umsteiger",
   "experienceLevelSoilDesc": "Ich kenne mich mit Pflanzen aus, aber Deep Water Culture ist neu für mich.",
   "experienceLevelPro": "DWC-Erfahren",
-  "experienceLevelProDesc": "Ich habe schon in Wasser angebaut und brauche kaum Theorie."
+  "experienceLevelProDesc": "Ich habe schon in Wasser angebaut und brauche kaum Theorie.",
+  "checkinOptionalEcLabel": "Neuer EC-Wert (optional)",
+  "checkinOptionalPhLabel": "Neuer pH-Wert (optional)"
 }

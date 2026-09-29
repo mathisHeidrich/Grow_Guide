@@ -3393,6 +3393,18 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Ich habe schon in Wasser angebaut und brauche kaum Theorie.'**
   String get experienceLevelProDesc;
+
+  /// No description provided for @checkinOptionalEcLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Neuer EC-Wert (optional)'**
+  String get checkinOptionalEcLabel;
+
+  /// No description provided for @checkinOptionalPhLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Neuer pH-Wert (optional)'**
+  String get checkinOptionalPhLabel;
 }
 
 class _AppLocalizationsDelegate
