@@ -231,7 +231,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
       _HardwareItemData(
         title: l10n.hw_thermo_hygroTitle,
         description: l10n.hw_thermo_hygroDesc,
-        isRequired: false,
+        isRequired: true,
         icon: Icons.thermostat,
       ),
 
@@ -417,11 +417,7 @@ class _HardwareItemCard extends StatelessWidget {
                         runSpacing: 4,
                         children: [
                           if (item.isCompleteSet)
-                            _buildBadge('⭐ ALL-IN-ONE', Colors.orange)
-                          else if (item.isRequired)
-                            _buildBadge('🔴 PFLICHT', Colors.red)
-                          else
-                            _buildBadge('🔵 UPGRADE', Colors.blue),
+                            _buildBadge('⭐ ALL-IN-ONE', Colors.orange),
                           if (item.requiredLevel == 2)
                             _buildBadge('🚀 LEVEL 2 PRO', Colors.purpleAccent),
                         ],
