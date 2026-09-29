@@ -1908,4 +1908,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkinOptionalPhLabel => 'Neuer pH-Wert (optional)';
+
+  @override
+  String get hw_scrog_netTitle => 'ScrOG-Netz (Screen of Green)';
+
+  @override
+  String get hw_scrog_netDesc =>
+      'Ein Netz zum Herunterbinden der Pflanzen. So bekommt jeder Trieb maximales Licht und du steigerst den Ertrag massiv.';
 }

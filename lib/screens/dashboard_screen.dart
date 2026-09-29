@@ -265,13 +265,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
             ),
             TextButton.icon(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text(
-                        'Zelt-Aktionen kommen bald (z.B. Wasserwechsel für alle).')));
-              },
-              icon: const Icon(Icons.bolt, size: 18),
-              label: const Text('Zelt-Aktion ausführen'),
+              onPressed: () => _showEditTentDialog(tent),
+              icon: const Icon(Icons.settings, size: 18),
+              label: const Text('Zelt & Umgebung verwalten'),
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.growGreen,
                 textStyle:

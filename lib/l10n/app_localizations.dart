@@ -3453,6 +3453,18 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Neuer pH-Wert (optional)'**
   String get checkinOptionalPhLabel;
+
+  /// No description provided for @hw_scrog_netTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'ScrOG-Netz (Screen of Green)'**
+  String get hw_scrog_netTitle;
+
+  /// No description provided for @hw_scrog_netDesc.
+  ///
+  /// In de, this message translates to:
+  /// **'Ein Netz zum Herunterbinden der Pflanzen. So bekommt jeder Trieb maximales Licht und du steigerst den Ertrag massiv.'**
+  String get hw_scrog_netDesc;
 }
 
 class _AppLocalizationsDelegate

@@ -217,14 +217,14 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
       _HardwareItemData(
         title: l10n.hw_second_bucketTitle,
         description: l10n.hw_second_bucketDesc,
-        isRequired: false,
+        isRequired: true,
         proTip: l10n.hw_second_bucketProTip,
         icon: Icons.delete_outline,
       ),
       _HardwareItemData(
         title: l10n.hw_water_pumpTitle,
         description: l10n.hw_water_pumpDesc,
-        isRequired: false,
+        isRequired: true,
         proTip: l10n.hw_water_pumpProTip,
         icon: Icons.water,
       ),
@@ -234,12 +234,7 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         isRequired: false,
         icon: Icons.thermostat,
       ),
-      _HardwareItemData(
-        title: l10n.hw_chillerTitle,
-        description: l10n.hw_chillerDesc,
-        isRequired: false,
-        icon: Icons.ac_unit,
-      ),
+
       _HardwareItemData(
         title: l10n.hw_scissorsTitle,
         description: l10n.hw_scissorsDesc,
@@ -251,6 +246,13 @@ class _HardwareAdvisorScreenState extends State<HardwareAdvisorScreen> {
         description: l10n.hw_loupeDesc,
         isRequired: true,
         icon: Icons.search,
+      ),
+      _HardwareItemData(
+        title: l10n.hw_scrog_netTitle,
+        description: l10n.hw_scrog_netDesc,
+        isRequired: true,
+        icon: Icons.grid_4x4,
+        requiredLevel: 2,
       ),
     ];
 
@@ -409,13 +411,21 @@ class _HardwareItemCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Badge
-                      if (item.isCompleteSet)
-                        _buildBadge('⭐ ALL-IN-ONE', Colors.orange)
-                      else if (item.isRequired)
-                        _buildBadge('🔴 PFLICHT', Colors.red)
-                      else
-                        _buildBadge('🔵 UPGRADE', Colors.blue),
+                      // Badges
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        children: [
+                          if (item.isCompleteSet)
+                            _buildBadge('⭐ ALL-IN-ONE', Colors.orange)
+                          else if (item.isRequired)
+                            _buildBadge('🔴 PFLICHT', Colors.red)
+                          else
+                            _buildBadge('🔵 UPGRADE', Colors.blue),
+                          if (item.requiredLevel == 2)
+                            _buildBadge('🚀 LEVEL 2 PRO', Colors.purpleAccent),
+                        ],
+                      ),
                       
                       const SizedBox(height: 8),
                       Text(
@@ -528,6 +538,7 @@ class _HardwareItemData {
   final String? buyingGuideText;
   final List<HardwareProductOption> options;
   final bool isCompleteSet;
+  final int requiredLevel;
 
   _HardwareItemData({
     required this.title,
@@ -538,5 +549,6 @@ class _HardwareItemData {
     this.buyingGuideText,
     this.options = const [],
     this.isCompleteSet = false,
+    this.requiredLevel = 1,
   });
 }
