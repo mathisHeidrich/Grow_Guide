@@ -1869,7 +1869,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get growLevel1Subtitle => 'Leichter Einstieg';
 
   @override
-  String get growLevel1Yield => '~50-80g pro Pflanze';
+  String get growLevel1Yield => '~50-80g (ca. 0.8g pro Watt)';
 
   @override
   String get growLevel1Effort => 'Niedrig (~1h/Woche)';
@@ -1891,7 +1891,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get growLevel2Subtitle => 'Maximales Potenzial';
 
   @override
-  String get growLevel2Yield => '1-1.5g pro Watt (~150g+)';
+  String get growLevel2Yield => '~150g+ (ca. 1.5g pro Watt)';
 
   @override
   String get growLevel2Effort => 'Hoch (~3h/Woche)';
