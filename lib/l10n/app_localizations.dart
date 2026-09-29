@@ -3379,7 +3379,7 @@ abstract class AppLocalizations {
   /// No description provided for @growLevel1Yield.
   ///
   /// In de, this message translates to:
-  /// **'~50-80g pro Pflanze'**
+  /// **'~50-80g (ca. 0.8g pro Watt)'**
   String get growLevel1Yield;
 
   /// No description provided for @growLevel1Effort.
@@ -3421,7 +3421,7 @@ abstract class AppLocalizations {
   /// No description provided for @growLevel2Yield.
   ///
   /// In de, this message translates to:
-  /// **'1-1.5g pro Watt (~150g+)'**
+  /// **'~150g+ (ca. 1.5g pro Watt)'**
   String get growLevel2Yield;
 
   /// No description provided for @growLevel2Effort.
