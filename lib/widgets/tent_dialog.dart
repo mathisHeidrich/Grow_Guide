@@ -25,7 +25,7 @@ class _TentDialogState extends State<TentDialog> {
     _name = widget.existingTent?.name ?? '';
     _wattage = widget.existingTent?.lampWattage ?? 150;
     _lampType = widget.existingTent?.lampType ?? 'LED';
-    _lightSchedule = widget.existingTent?.lightSchedule ?? '18/6';
+    _lightSchedule = widget.existingTent?.lightSchedule ?? 'Aus';
   }
 
   @override
@@ -52,21 +52,27 @@ class _TentDialogState extends State<TentDialog> {
                     val == null || val.isEmpty ? 'Bitte eingeben' : null,
                 onSaved: (val) => _name = val!,
               ),
-              const SizedBox(height: 16),
-              const Text('Lichtzyklus',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              SegmentedButton<String>(
-                segments: const [
-                  ButtonSegment(value: '18/6', label: Text('18/6 (Veg)')),
-                  ButtonSegment(value: '12/12', label: Text('12/12 (Blüte)')),
-                  ButtonSegment(value: '24/0', label: Text('24/0 (Auto)')),
-                ],
-                selected: {_lightSchedule},
-                onSelectionChanged: (Set<String> newSelection) {
-                  setState(() => _lightSchedule = newSelection.first);
-                },
-              ),
+              if (widget.existingTent != null) ...[
+                const SizedBox(height: 16),
+                const Text('Lichtzyklus',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SegmentedButton<String>(
+                    segments: const [
+                      ButtonSegment(value: 'Aus', label: Text('Aus')),
+                      ButtonSegment(value: '18/6', label: Text('18/6')),
+                      ButtonSegment(value: '12/12', label: Text('12/12')),
+                      ButtonSegment(value: '24/0', label: Text('24/0')),
+                    ],
+                    selected: {_lightSchedule},
+                    onSelectionChanged: (Set<String> newSelection) {
+                      setState(() => _lightSchedule = newSelection.first);
+                    },
+                  ),
+                ),
+              ],
               const SizedBox(height: 16),
               const Text('Lampentyp',
                   style: TextStyle(fontWeight: FontWeight.bold)),
