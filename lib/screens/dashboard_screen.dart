@@ -254,9 +254,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white54)),
             )
-          else
+          else ...[
             Padding(
-              padding: const EdgeInsets.only(bottom: 32.0, left: 16, right: 16),
+              padding: const EdgeInsets.only(bottom: 16.0, left: 16, right: 16),
               child: Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 24,
@@ -264,6 +264,22 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 children: plants.map((p) => _buildVisualPlant(p)).toList(),
               ),
             ),
+            TextButton.icon(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text(
+                        'Zelt-Aktionen kommen bald (z.B. Wasserwechsel für alle).')));
+              },
+              icon: const Icon(Icons.bolt, size: 18),
+              label: const Text('Zelt-Aktion ausführen'),
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.growGreen,
+                textStyle:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
         ],
       ),
     );
