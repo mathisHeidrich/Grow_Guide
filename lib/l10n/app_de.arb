@@ -669,5 +669,7 @@
   "addPlantSectionGrowLevel": "7. Grow Level",
   "addPlantGrowLevelDesc": "Wähle das Ziel-Level für diesen Durchgang.",
   "checkinOptionalEcLabel": "Neuer EC-Wert (optional)",
-  "checkinOptionalPhLabel": "Neuer pH-Wert (optional)"
+  "checkinOptionalPhLabel": "Neuer pH-Wert (optional)",
+  "hw_scrog_netTitle": "ScrOG-Netz (Screen of Green)",
+  "hw_scrog_netDesc": "Ein Netz zum Herunterbinden der Pflanzen. So bekommt jeder Trieb maximales Licht und du steigerst den Ertrag massiv."
 }
