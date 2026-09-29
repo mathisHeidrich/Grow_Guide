@@ -33,6 +33,18 @@ class DashboardScreen extends ConsumerWidget {
             onPressed: () => context.push('/select_plant_for_problem'),
           ),
           IconButton(
+            icon: const Icon(Icons.add_home, size: 28),
+            tooltip: 'Zelt hinzufügen',
+            onPressed: () async {
+              final db = ref.read(databaseProvider).db;
+              await db.into(db.tents).insert(TentsCompanion.insert(
+                    name: 'Neues Zelt',
+                    lampWattage: 200,
+                    lampType: 'LED',
+                  ));
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.add, size: 32),
             onPressed: () => context.go('/add_plant'),
           ),
@@ -53,35 +65,96 @@ class DashboardScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: StreamBuilder<List<Plant>>(
-        stream: db.select(db.plants).watch(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: StreamBuilder<List<Tent>>(
+        stream: db.select(db.tents).watch(),
+        builder: (context, tentSnapshot) {
+          if (tentSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
+          final tents = tentSnapshot.data ?? [];
 
-          final plants = snapshot.data ?? [];
-          final activePlants = plants
-              .where((p) => p.currentPhase != PlantPhase.archived)
-              .toList();
-          final archivedCount = plants.length - activePlants.length;
-
-          if (activePlants.isEmpty) {
-            return _buildEmptyState(context, archivedCount);
-          }
-
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: activePlants.length + (archivedCount > 0 ? 1 : 0),
-            itemBuilder: (context, index) {
-              if (index < activePlants.length) {
-                return _buildPlantCard(context, ref, activePlants[index]);
-              } else {
-                return _buildArchiveButton(context, archivedCount);
+          return StreamBuilder<List<Plant>>(
+            stream: db.select(db.plants).watch(),
+            builder: (context, plantSnapshot) {
+              if (plantSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
               }
+
+              final plants = plantSnapshot.data ?? [];
+              final activePlants = plants
+                  .where((p) => p.currentPhase != PlantPhase.archived)
+                  .toList();
+              final archivedCount = plants.length - activePlants.length;
+
+              if (tents.isEmpty && activePlants.isEmpty) {
+                return _buildEmptyState(context, archivedCount);
+              }
+
+              return ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  for (final tent in tents) ...[
+                    _buildTentHeader(context, tent),
+                    const SizedBox(height: 12),
+                    ...activePlants
+                        .where((p) => p.tentId == tent.id)
+                        .map((p) => _buildPlantCard(context, ref, p)),
+                    const SizedBox(height: 16),
+                  ],
+                  // Plants without a tent (fallback)
+                  ...activePlants
+                      .where((p) => p.tentId == null)
+                      .map((p) => _buildPlantCard(context, ref, p)),
+
+                  if (archivedCount > 0)
+                    _buildArchiveButton(context, archivedCount),
+                ],
+              );
             },
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildTentHeader(BuildContext context, Tent tent) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.growGreen.withOpacity(0.5)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.home, color: AppColors.growGreen),
+              const SizedBox(width: 8),
+              Text(
+                tent.name,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                '${tent.lampWattage}W ${tent.lampType} • ${tent.lightSchedule}',
+                style: const TextStyle(color: AppColors.textSecondary),
+              ),
+              const SizedBox(width: 8),
+              IconButton(
+                icon: const Icon(Icons.edit, size: 20),
+                onPressed: () {
+                  // TODO: Edit Tent
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -281,16 +354,27 @@ class DashboardScreen extends ConsumerWidget {
                                 context: context,
                                 builder: (ctx) => AlertDialog(
                                   backgroundColor: AppColors.surface,
-                                  title: Text(l10n.plantActionDeleteConfirmTitle, style: const TextStyle(color: Colors.white)),
-                                  content: Text(l10n.plantActionDeleteConfirmText, style: const TextStyle(color: Colors.white70)),
+                                  title: Text(
+                                      l10n.plantActionDeleteConfirmTitle,
+                                      style:
+                                          const TextStyle(color: Colors.white)),
+                                  content: Text(
+                                      l10n.plantActionDeleteConfirmText,
+                                      style: const TextStyle(
+                                          color: Colors.white70)),
                                   actions: [
                                     TextButton(
-                                      onPressed: () => Navigator.pop(ctx, false),
-                                      child: Text(l10n.generalCancel, style: const TextStyle(color: Colors.white54)),
+                                      onPressed: () =>
+                                          Navigator.pop(ctx, false),
+                                      child: Text(l10n.generalCancel,
+                                          style: const TextStyle(
+                                              color: Colors.white54)),
                                     ),
                                     TextButton(
                                       onPressed: () => Navigator.pop(ctx, true),
-                                      child: Text(l10n.generalDelete, style: const TextStyle(color: Colors.red)),
+                                      child: Text(l10n.generalDelete,
+                                          style: const TextStyle(
+                                              color: Colors.red)),
                                     ),
                                   ],
                                 ),
@@ -308,7 +392,9 @@ class DashboardScreen extends ConsumerWidget {
                                 children: [
                                   const Icon(Icons.delete, color: Colors.red),
                                   const SizedBox(width: 8),
-                                  Text(l10n.plantActionDelete, style: const TextStyle(color: Colors.red)),
+                                  Text(l10n.plantActionDelete,
+                                      style:
+                                          const TextStyle(color: Colors.red)),
                                 ],
                               ),
                             ),

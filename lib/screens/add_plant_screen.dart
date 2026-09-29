@@ -21,6 +21,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String _name = '';
+  int? _selectedTentId;
 
   double? _waterVolume = 20.0;
   final _customWaterController = TextEditingController();
@@ -28,27 +29,16 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
   NutrientBrand _nutrientBrand = NutrientBrand.cannaAqua;
   PlantType _plantType = PlantType.photo;
 
-  String _lampType = 'LED';
-  int? _lampWattage = 200;
-  final _customWattageController = TextEditingController();
-
-  int? _plantsUnderLamp = 1;
-  final _customPlantsController = TextEditingController();
-
   PlantPhase _currentPhase = PlantPhase.germination;
   final _dayInPhaseController = TextEditingController(text: '1');
 
   String _growLevel = 'level1';
 
   final List<double> _volumeOptions = [10.0, 15.0, 20.0, 25.0, 30.0];
-  final List<int> _wattageOptions = [100, 150, 200, 300, 400];
-  final List<int> _plantsOptions = [1, 2, 3, 4];
 
   @override
   void dispose() {
     _customWaterController.dispose();
-    _customWattageController.dispose();
-    _customPlantsController.dispose();
     _dayInPhaseController.dispose();
     super.dispose();
   }
@@ -61,10 +51,6 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
 
     double finalVolume =
         _waterVolume ?? double.tryParse(_customWaterController.text) ?? 20.0;
-    int finalWattage =
-        _lampWattage ?? int.tryParse(_customWattageController.text) ?? 200;
-    int finalPlants =
-        _plantsUnderLamp ?? int.tryParse(_customPlantsController.text) ?? 1;
     int finalDay = int.tryParse(_dayInPhaseController.text) ?? 1;
 
     final now = ref.read(timeProvider);
@@ -77,9 +63,7 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
           waterVolumeLiters: finalVolume,
           nutrientBrand: _nutrientBrand,
           type: _plantType,
-          lampType: _lampType,
-          lampWattage: finalWattage,
-          plantsUnderLamp: finalPlants,
+          tentId: drift.Value(_selectedTentId),
           growLevel: drift.Value(_growLevel),
         ));
 
@@ -155,12 +139,18 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
               Column(
                 children: NutrientBrand.values.map((brand) {
                   String label = brand.toString().split('.').last;
-                  if (brand == NutrientBrand.cannaAqua) { label = 'Canna Aqua'; }
-                  if (brand == NutrientBrand.ta) { label = 'General Hydroponics'; }
+                  if (brand == NutrientBrand.cannaAqua) {
+                    label = 'Canna Aqua';
+                  }
+                  if (brand == NutrientBrand.ta) {
+                    label = 'General Hydroponics';
+                  }
                   if (brand == NutrientBrand.advancedNutrients) {
                     label = 'Advanced Nutrients';
                   }
-                  if (brand == NutrientBrand.plagron) { label = 'Plagron'; }
+                  if (brand == NutrientBrand.plagron) {
+                    label = 'Plagron';
+                  }
 
                   return RadioListTile<NutrientBrand>(
                     title: Text(label),
@@ -201,87 +191,37 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                 ],
               ),
               const SizedBox(height: 32),
-              _buildSectionTitle(l10n.addPlantSection5),
-              Text(l10n.addPlantLampDesc,
+              _buildSectionTitle('Zelt wählen'), // TODO: l10n
+              Text('In welches Zelt soll diese Pflanze?',
                   style: const TextStyle(color: AppColors.textSecondary)),
               const SizedBox(height: 12),
-              Text(l10n.addPlantLampType,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              Wrap(
-                spacing: 8,
-                children: ['LED', 'NDL', 'CMH']
-                    .map((t) => ChoiceChip(
-                          label: Text(t),
-                          selected: _lampType == t,
-                          selectedColor: AppColors.growGreen,
-                          onSelected: (val) => setState(() => _lampType = t),
-                        ))
-                    .toList(),
-              ),
-              const SizedBox(height: 16),
-              Text(l10n.addPlantLampWattage,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              Wrap(
-                spacing: 8,
-                children: _wattageOptions
-                    .map((w) => ChoiceChip(
-                          label: Text('${w}W'),
-                          selected: _lampWattage == w,
-                          selectedColor: AppColors.growGreen,
-                          onSelected: (val) {
-                            if (val) {
-                              setState(() {
-                                _lampWattage = w;
-                                _customWattageController.clear();
-                              });
-                            }
-                          },
-                        ))
-                    .toList(),
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                controller: _customWattageController,
-                decoration: InputDecoration(
-                  labelText: l10n.addPlantLampCustomWattage,
-                  border: const OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (val) {
-                  if (val.isNotEmpty) setState(() => _lampWattage = null);
-                },
-              ),
-              const SizedBox(height: 16),
-              Text(l10n.addPlantLampCount,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              Wrap(
-                spacing: 8,
-                children: _plantsOptions
-                    .map((p) => ChoiceChip(
-                          label: Text('$p'),
-                          selected: _plantsUnderLamp == p,
-                          selectedColor: AppColors.growGreen,
-                          onSelected: (val) {
-                            if (val) {
-                              setState(() {
-                                _plantsUnderLamp = p;
-                                _customPlantsController.clear();
-                              });
-                            }
-                          },
-                        ))
-                    .toList(),
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                controller: _customPlantsController,
-                decoration: InputDecoration(
-                  labelText: l10n.addPlantLampCustomCount,
-                  border: const OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-                onChanged: (val) {
-                  if (val.isNotEmpty) setState(() => _plantsUnderLamp = null);
+              StreamBuilder<List<Tent>>(
+                stream: ref
+                    .watch(databaseProvider)
+                    .db
+                    .select(ref.watch(databaseProvider).db.tents)
+                    .watch(),
+                builder: (context, snapshot) {
+                  final tents = snapshot.data ?? [];
+                  if (tents.isEmpty)
+                    return const Text(
+                        'Keine Zelte gefunden. Bitte erstelle ein Zelt auf dem Dashboard.');
+                  if (_selectedTentId == null && tents.isNotEmpty) {
+                    Future.microtask(
+                        () => setState(() => _selectedTentId = tents.first.id));
+                  }
+                  return DropdownButtonFormField<int>(
+                    value: _selectedTentId,
+                    decoration:
+                        const InputDecoration(border: OutlineInputBorder()),
+                    items: tents
+                        .map((t) =>
+                            DropdownMenuItem(value: t.id, child: Text(t.name)))
+                        .toList(),
+                    onChanged: (val) => setState(() => _selectedTentId = val),
+                    validator: (val) =>
+                        val == null ? 'Bitte Zelt wählen' : null,
+                  );
                 },
               ),
               const SizedBox(height: 32),
@@ -372,7 +312,8 @@ class _AddPlantScreenState extends ConsumerState<AddPlantScreen> {
                 child: TextButton(
                   onPressed: () => context.go('/'),
                   child: Text(l10n.checkinBack, // using "Zurück" as cancel
-                      style: const TextStyle(color: Colors.white70, fontSize: 16)),
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 16)),
                 ),
               ),
               const SizedBox(height: 24),
