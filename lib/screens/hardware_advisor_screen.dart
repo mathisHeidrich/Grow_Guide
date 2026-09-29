@@ -371,12 +371,33 @@ class _HardwareItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    Widget? trailingWidget;
+    if (item.options.isNotEmpty) {
+      if (item.options.length == 1) {
+        trailingWidget = IconButton(
+          icon: const Icon(Icons.shopping_cart_outlined),
+          color: AppColors.growGreen,
+          onPressed: () => onLaunchUrl(item.options.first.url),
+          tooltip: item.options.first.name,
+        );
+      } else {
+        trailingWidget = PopupMenuButton<String>(
+          icon: const Icon(Icons.shopping_cart_outlined, color: AppColors.growGreen),
+          tooltip: 'Kaufoptionen',
+          onSelected: onLaunchUrl,
+          itemBuilder: (context) => item.options.map((opt) => PopupMenuItem(
+            value: opt.url,
+            child: Text(opt.name),
+          )).toList(),
+        );
+      }
+    }
+
     return Card(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 8),
       color: AppColors.surface,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         side: BorderSide(
           color: item.isCompleteSet 
             ? Colors.orangeAccent.withValues(alpha: 0.5) 
@@ -385,113 +406,58 @@ class _HardwareItemCard extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: item.isCompleteSet 
-                      ? Colors.orangeAccent.withValues(alpha: 0.1) 
-                      : AppColors.growGreen.withValues(alpha: 0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    item.icon,
-                    size: 32,
-                    color: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+          leading: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: item.isCompleteSet 
+                ? Colors.orangeAccent.withValues(alpha: 0.1) 
+                : AppColors.growGreen.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              item.icon,
+              size: 24,
+              color: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
+            ),
+          ),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (item.isCompleteSet || item.requiredLevel == 2)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 4.0),
+                  child: Wrap(
+                    spacing: 4,
+                    runSpacing: 4,
                     children: [
-                      // Badges
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 4,
-                        children: [
-                          if (item.isCompleteSet)
-                            _buildBadge('⭐ ALL-IN-ONE', Colors.orange),
-                          if (item.requiredLevel == 2)
-                            _buildBadge('🚀 LEVEL 2 PRO', Colors.purpleAccent),
-                        ],
-                      ),
-                      
-                      const SizedBox(height: 8),
-                      Text(
-                        item.title,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                      if (item.isCompleteSet)
+                        _buildBadge('⭐ ALL-IN-ONE', Colors.orange),
+                      if (item.requiredLevel == 2)
+                        _buildBadge('🚀 LEVEL 2 PRO', Colors.purpleAccent),
                     ],
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            TipFormattedText(
-              item.proTip != null ? '${item.description}\n\n${item.proTip}' : item.description,
-              style: const TextStyle(color: Colors.white70, fontSize: 14),
-            ),
-            
-            if (item.options.isNotEmpty) ...[
-              const SizedBox(height: 16),
-              Theme(
-                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  tilePadding: EdgeInsets.zero,
-                  iconColor: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
-                  collapsedIconColor: Colors.white70,
-                  title: Text(
-                    item.isCompleteSet ? l10n.hw_buy_idea_list : l10n.hw_buying_guide_title,
-                    style: TextStyle(
-                      color: item.isCompleteSet ? Colors.orangeAccent : AppColors.growGreen,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                  children: [
-                    if (item.buyingGuideText != null) ...[
-                      Text(
-                        item.buyingGuideText!,
-                        style: const TextStyle(color: Colors.white70, fontSize: 13),
-                      ),
-                      const SizedBox(height: 12),
-                    ],
-                    ...item.options.map((opt) => Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: OutlinedButton.icon(
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          side: BorderSide(color: Colors.white.withValues(alpha: 0.2)),
-                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                        onPressed: () => onLaunchUrl(opt.url),
-                        icon: const Icon(Icons.shopping_cart_outlined, size: 20),
-                        label: Text(
-                          opt.name,
-                          style: const TextStyle(overflow: TextOverflow.ellipsis),
-                        ),
-                      ),
-                    )),
-                  ],
+              Text(
+                item.title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
             ],
-          ],
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 4.0),
+            child: TipFormattedText(
+              item.proTip != null ? '${item.description}\n\n${item.proTip}' : item.description,
+              style: const TextStyle(color: Colors.white70, fontSize: 13),
+            ),
+          ),
+          trailing: trailingWidget,
         ),
       ),
     );
@@ -499,17 +465,17 @@ class _HardwareItemCard extends StatelessWidget {
 
   Widget _buildBadge(String text, Color color) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.2),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
         border: Border.all(color: color, width: 1),
       ),
       child: Text(
         text,
         style: TextStyle(
           color: color,
-          fontSize: 10,
+          fontSize: 9,
           fontWeight: FontWeight.bold,
         ),
       ),
